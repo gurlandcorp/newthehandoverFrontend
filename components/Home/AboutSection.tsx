@@ -38,7 +38,7 @@ const AboutSection = () => {
                     </div>
                 </div>
                 <p>
-                Others get indignant when asked for assistance, but we are delighted to help you! HandOver's dedicated resources are on hand to counsel you through every step till you sign the best investment deal. If you need any assistance, you can reach us via phone, email, or live chat. Our customer support team is 24/7 available at your service.
+                Others get indignant when asked for assistance, but we are delighted to help you! HandOver&lsquo;s dedicated resources are on hand to counsel you through every step till you sign the best investment deal. If you need any assistance, you can reach us via phone, email, or live chat. Our customer support team is 24/7 available at your service.
                 </p>
                 <div className="about-button">
                     <Link href={'/contact'} >

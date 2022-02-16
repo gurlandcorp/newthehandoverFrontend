@@ -33,27 +33,27 @@ const Footer = () => {
 									<div className="item-social">
 										<ul>
 											<li>
-												<a href="https://www.facebook.com/" className="mx-1" target="_blank">
+												<a href="https://www.facebook.com/" className="mx-1" target="_blank"  rel="noreferrer">
 													<i className="fab fa-facebook-f"></i>
 												</a>
 											</li>
 											<li>
-												<a href="https://twitter.com/" className="mx-1" target="_blank">
+												<a href="https://twitter.com/" className="mx-1" target="_blank"  rel="noreferrer">
 													<i className="fab fa-twitter"></i>
 												</a>
 											</li>
 											<li>
-												<a href="https://vimeo.com/" className="mx-1" target="_blank">
+												<a href="https://vimeo.com/" className="mx-1" target="_blank"  rel="noreferrer">
 													<i className="fab fa-vimeo-v"></i>
 												</a>
 											</li>
 											<li>
-												<a href="https://www.pinterest.com/" className="mx-1" target="_blank">
+												<a href="https://www.pinterest.com/" className="mx-1" target="_blank"  rel="noreferrer">
 													<i className="fab fa-pinterest-p"></i>
 												</a>
 											</li>
 											<li>
-												<a href="https://web.whatsapp.com/" className="mx-1" target="_blank">
+												<a href="https://web.whatsapp.com/" className="mx-1" target="_blank"  rel="noreferrer">
 													<i className="fab fa-whatsapp"></i>
 												</a>
 											</li>
@@ -112,6 +112,7 @@ const Footer = () => {
 														<a
 															href="https://www.instagram.com/"
 															target="_blank"
+															rel="noreferrer"
 														>
 															<i className="fab fa-instagram"></i>
 														</a>
@@ -135,6 +136,7 @@ const Footer = () => {
 														<a
 															href="https://www.instagram.com/"
 															target="_blank"
+															rel="noreferrer"
 														>
 															<i className="fab fa-instagram"></i>
 														</a>
@@ -158,6 +160,7 @@ const Footer = () => {
 														<a
 															href="https://www.instagram.com/"
 															target="_blank"
+															rel="noreferrer"
 														>
 															<i className="fab fa-instagram"></i>
 														</a>
@@ -181,6 +184,7 @@ const Footer = () => {
 														<a
 															href="https://www.instagram.com/"
 															target="_blank"
+															rel="noreferrer"
 														>
 															<i className="fab fa-instagram"></i>
 														</a>
@@ -204,6 +208,7 @@ const Footer = () => {
 														<a
 															href="https://www.instagram.com/"
 															target="_blank"
+															rel="noreferrer"
 														>
 															<i className="fab fa-instagram"></i>
 														</a>
@@ -228,6 +233,7 @@ const Footer = () => {
 														<a
 															href="https://www.instagram.com/"
 															target="_blank"
+															rel="noreferrer"
 														>
 															<i className="fab fa-instagram"></i>
 														</a>

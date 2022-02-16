@@ -106,7 +106,7 @@ const Index = (props: any) => {
 													}
 												</div>
 											</div>
-											<div className="swiper-slide">
+											{/* <div className="swiper-slide">
 												<div className="feature-img1 zoom-image-hover">
 													<img
 														src="img/blog/product3.jpg"
@@ -116,9 +116,9 @@ const Index = (props: any) => {
 														// height="420"
 													/>
 												</div>
-											</div>
+											</div> */}
 
-											<div className="swiper-slide">
+											{/* <div className="swiper-slide">
 												<div className="feature-img1 zoom-image-hover">
 													<img
 														src="img/blog/product4.jpg"
@@ -127,9 +127,9 @@ const Index = (props: any) => {
 														height="420"
 													/>
 												</div>
-											</div>
+											</div> */}
 
-											<div className="swiper-slide">
+											{/* <div className="swiper-slide">
 												<div className="feature-img1 zoom-image-hover">
 													<img
 														src="img/blog/product5.jpg"
@@ -138,9 +138,9 @@ const Index = (props: any) => {
 														// height="420"
 													/>
 												</div>
-											</div>
+											</div> */}
 
-											<div className="swiper-slide">
+											{/* <div className="swiper-slide">
 												<div className="feature-img1 zoom-image-hover">
 													<img
 														src="img/blog/product6.jpg"
@@ -149,7 +149,7 @@ const Index = (props: any) => {
 														// height="420"
 													/>
 												</div>
-											</div>
+											</div> */}
 										</div>
 									</div>
 								</div>
@@ -437,10 +437,10 @@ const Index = (props: any) => {
 												>
 													<div className="card-body">
 														<div className="item-img">
-															<img
+															{/* <img
 																src="img/figure/floor_plan.jpg"
 																alt="shape"
-															/>
+															/> */}
 														</div>
 													</div>
 												</div>
@@ -480,10 +480,10 @@ const Index = (props: any) => {
 												>
 													<div className="card-body">
 														<div className="item-img">
-															<img
+															{/* <img
 																src="img/figure/floor_plan.jpg"
 																alt="shape"
-															/>
+															/> */}
 														</div>
 													</div>
 												</div>
@@ -533,7 +533,7 @@ const Index = (props: any) => {
 								<div className="widget widget-listing-box1">
 									<h3 className="widget-subtitle">Latest Listing</h3>
 									<div className="item-img">
-										<Link href={'/property/'+props.properties[0]?._id} >
+										<Link href={'/property/'+props.properties[0]?._id} passHref>
 											<Image
 												src={props.properties[0]?.images[0]}
                                                 width={'540px'}

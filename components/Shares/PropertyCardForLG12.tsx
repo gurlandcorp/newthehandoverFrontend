@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import React from 'react'
 
 const PropertyCardForLG12 = (props: any) => {
@@ -9,7 +10,7 @@ const PropertyCardForLG12 = (props: any) => {
             >
                 <div className="item-img">
                     <a href="single-listing1.html">
-                        <img src={props.img} alt="blog" width="250" height="200" />
+                        <Image src={props.img} lazyBoundary='' alt="blog" width="250" height="200" />
                     </a>
                     <div className="item-category-box1">
                         <div className="item-category">For Rent</div>

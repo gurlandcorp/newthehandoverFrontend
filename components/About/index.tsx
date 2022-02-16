@@ -19,7 +19,7 @@ const About = () => {
                         <div className="about-box3 wow fadeInUp" data-wow-delay=".2s">
                             <span className="item-subtitle">About Us</span>
                             <h2 className="item-title">
-                                We're on a Mission to Change View of RealEstate Field.
+                                We&lsquo;re on a Mission to Change View of RealEstate Field.
                             </h2>
                             <p>
                                 when an unknown printer took a galley of type and scrambled it

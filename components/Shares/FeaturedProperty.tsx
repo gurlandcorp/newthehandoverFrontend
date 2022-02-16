@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 
 const FeaturedProperty = (props: any) => {
 
@@ -27,10 +28,11 @@ const FeaturedProperty = (props: any) => {
                                     <div className="item-img">
                                         <Link href={"/property/" + a._id}>
                                             <a href="">
-                                                <img
+                                                <Image
                                                     src={a.images[0]}
                                                     alt="blog"
-                                                    style={{ width: "220px", height: "170px" }}
+                                                    width={'220px'}
+                                                    height={'170px'}
                                                 />
                                             </a>
                                         </Link>
