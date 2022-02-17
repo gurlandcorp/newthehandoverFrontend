@@ -91,7 +91,7 @@ const About = () => {
                                 The Core Company Values Of Our main Goal.
                             </h2>
                             <p>
-                            We know it's special to you — so we do our best to make it a memorable, reliable, and secure real estate experience for you. We, at HandOver, are devoted to providing our clientele access to the latest and most comprehensive pre-sale/off-plan properties listings.
+                            We know it&lsquo;s special to you — so we do our best to make it a memorable, reliable, and secure real estate experience for you. We, at HandOver, are devoted to providing our clientele access to the latest and most comprehensive pre-sale/off-plan properties listings.
                             </p>
                             <div className="skills-wrap-layout-2 counter-appear">
                                 <div className="single-skill">

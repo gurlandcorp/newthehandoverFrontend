@@ -14,6 +14,29 @@ a {
 * {
   box-sizing: border-box;
 } */
+
+/* width */
+::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1; 
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #01a57f;
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #00c194; 
+}
+
 @import "../public/styles.css";
 @import "../public/css/flaticon/font/flaticon.css";
 @import "../public/css/all.min.css";

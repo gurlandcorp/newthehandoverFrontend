@@ -1,10 +1,12 @@
 import Logo from "../../public/logohandover.png";
 import SearchSection from "./SearchSection";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 
 const Header = () => {
+
+	const [activeLink, setActiveLink] = useState('')
 
 	useEffect(()=>{
 		
@@ -36,18 +38,20 @@ const Header = () => {
 									<ul>
 										<li>
 											<Link href={'/'} >
-												<a className="active">Home</a>
+												<a className={`${activeLink=='' ? 'active' : ''}`} onClick={()=>setActiveLink('')}>Home</a>
 											</Link>
 										</li>
 										<li>
-											<Link href={'/about'}
-											> About </Link>
+											<Link href={'/about'} >
+												<a className={`${activeLink=='about' ? 'active' : ''}`} onClick={()=>setActiveLink('about')} >About</a>
+											</Link>
 										</li>
 										<li>
-											<Link href={'/properties'}
-											> All Property </Link>
+											<Link href={'/properties'} >
+												<a className={`${activeLink=='properties' ? 'active' : ''}`} onClick={()=>setActiveLink('properties')}>All Property</a>
+											</Link>
 										</li>
-										<li className="hide-on-desktop-menu">
+										{/* <li className="hide-on-desktop-menu">
 											<a href="index.html">Pages</a>
 											<ul>
 												<li>
@@ -66,11 +70,13 @@ const Header = () => {
 													<a href="contact.html">Contact</a>
 												</li>
 											</ul>
-										</li>
+										</li> */}
 										<li>
 											<Link href={'/contact'}
 											>
+												<a className={`${activeLink=='contact' ? 'active' : ''}`} onClick={()=>setActiveLink('contact')}>
 												Contact
+												</a>
 											</Link>
 										</li>
 									</ul>

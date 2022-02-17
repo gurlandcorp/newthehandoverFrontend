@@ -374,6 +374,7 @@ export default Properties
 
 export async function getServerSideProps(context: any) {
     // Fetch data from external API
+	// console.log(context.query)
     const res = await fetch(`${process.env.API_URL}/property/sort/desc`)
     const data = await res.json()
   

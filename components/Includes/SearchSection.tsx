@@ -1,10 +1,23 @@
+import Link from "next/link";
+import { useRouter } from "next/router";
+import { useContext } from "react";
+import { MainContext } from "../../context/MainContext";
+
 const SearchSection = () => {
+
+    const {search, setSearch} = useContext(MainContext)
+    const router = useRouter()
+    const searchSubmit = (e: any) => {
+        e.preventDefault()
+        router.push(`properties?propertyType=${search.property_type}&city=${search.city}&text=${search.text}`)
+    }
+
     return (
         <div id="header-bottombar" className="header-bottombar-area">
             <div className="container">
                 <div className="row align-items-center">
                     <div className="col-xl-9 col-lg-9">
-                        <form action="index4.html" className="map-form">
+                        <form className="map-form" onSubmit={(e)=>searchSubmit(e)}>
                         <div className="row">
                             <div className="col-lg-4 pl-15 pr-0">
                                 <div className="control-style">
@@ -12,26 +25,27 @@ const SearchSection = () => {
                                     type="text"
                                     className="form-control"
                                     placeholder="What are you looking for?"
+                                    onChange={(e)=>setSearch({...search, text: e.target.value})}
                                     />
                                 </div>
                             </div>
                             <div className="col-lg-4 pl-15 pr-0">
                                 <div className="rld-single-select mt-0">
-                                    <select className="select single-select mr-0 rounded" >
-                                        <option value="1">Property Type</option>
-                                        <option value="2">Family House</option>
-                                        <option value="3">Apartment</option>
-                                        <option value="3">Condo</option>
+                                    <select className="select single-select mr-0 rounded" onChange={(e)=>setSearch({...search, property_type: e.target.value})} >
+                                        <option value="">Property Type</option>
+                                        <option value="Family House">Family House</option>
+                                        <option value="Apartment">Apartment</option>
+                                        <option value="Condo">Condo</option>
                                     </select>
                                 </div>
                             </div>
                             <div className="col-lg-4 pl-15">
                             <div className="rld-single-select mt-0">
-                                <select className="select single-select mr-0 rounded" >
-                                    <option value="1">All Cities</option>
-                                    <option value="2">Los Angeles</option>
-                                    <option value="3">Chicago</option>
-                                    <option value="3">Philadelphia</option>
+                                <select className="select single-select mr-0 rounded" onChange={(e)=>setSearch({...search, city: e.target.value})} >
+                                    <option value="">All Cities</option>
+                                    <option value="Los Angeles">Los Angeles</option>
+                                    <option value="Chicago">Chicago</option>
+                                    <option value="Philadelphia">Philadelphia</option>
                                 </select>
                             </div>
                             </div>
@@ -50,10 +64,7 @@ const SearchSection = () => {
                                     </span>
                                 </div>
                                 <div className="filter-button">
-                                    <a
-                                    href="single-listing1.html"
-                                    className="filter-btn1 search-btn"
-                                    >
+                                    <a className="filter-btn1 search-btn" onClick={(e)=>searchSubmit(e)} >
                                     <span>Search</span>
                                     <i className="fas fa-search" />
                                     </a>
