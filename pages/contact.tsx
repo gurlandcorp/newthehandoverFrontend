@@ -3,6 +3,7 @@ import { NextPage } from 'next'
 import Image from 'next/image';
 import React, { useState } from 'react'
 import contactImg from "../public/assets/img/blog/contact01.jpg";
+import styles from "./styles/Contact.module.css"
 
 const Contact: NextPage = () => {
     const initialSate = {
@@ -44,12 +45,13 @@ const Contact: NextPage = () => {
 					<div className="col-lg-12">
 						<div className="contact-box1">
 							<div className="contact-img">
-								<Image
-									src={contactImg.src}
-									alt="contact"
-									height="502"
-									width="607"
-								/>
+								<iframe
+								src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d116878.45300534296!2d90.4195470442074!3d23.731268144494663!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sbd!4v1635221509729!5m2!1sen!2sbd"
+								width="600"
+								height="550"
+								// style="border:0;"
+								allowFullScreen={false}
+								loading="lazy" ></iframe>
 							</div>
 							<div className="contact-content">
 								<h3 className="contact-title">Office Information</h3>
@@ -72,27 +74,27 @@ const Contact: NextPage = () => {
 								<div className="social-box">
 									<div className="item-lebel">Social Share :</div>
 									<ul className="item-social">
-										<li>
+										<li className='mx-1'>
 											<a href="https://www.facebook.com/">
 												<i className="fab fa-facebook-f"></i>
 											</a>
 										</li>
-										<li>
+										<li className='mx-1'>
 											<a href="https://twitter.com/">
 												<i className="fab fa-twitter"></i>
 											</a>
 										</li>
-										<li>
+										<li className='mx-1'>
 											<a href="https://vimeo.com/">
 												<i className="fab fa-vimeo-v"></i>
 											</a>
 										</li>
-										<li>
+										<li className='mx-1'>
 											<a href="https://www.pinterest.com/">
 												<i className="fab fa-pinterest-p"></i>
 											</a>
 										</li>
-										<li>
+										<li className='mx-1'>
 											<a href="https://web.whatsapp.com/">
 												<i className="fab fa-whatsapp"></i>
 											</a>
@@ -111,14 +113,28 @@ const Contact: NextPage = () => {
 				<div className="row">
 					<div className="col-lg-12">
 						<div className="contact-box2">
-							<iframe
-								src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d116878.45300534296!2d90.4195470442074!3d23.731268144494663!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sbd!4v1635221509729!5m2!1sen!2sbd"
-								width="600"
-								height="550"
-								// style="border:0;"
-								allowFullScreen={false}
-								loading="lazy"
-							></iframe>
+							<div className={`${styles.contactNeedHelp}`}>
+							<h3 className="contact-title">Need help with something?</h3>
+							<p>Others get indignant when asked for assistance, but we are delighted to help you! HandOver's dedicated resources are on hand to counsel you through every step till you sign the best investment deal. If you need any assistance, you can reach us via phone, email, or live chat. Our customer support team is 24/7 available at your service.</p>
+								{/* <Image
+									src={contactImg.src}
+									alt="contact"
+									height="502"
+									width="607"
+								/> */}
+								{/* <iframe
+									src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d116878.45300534296!2d90.4195470442074!3d23.731268144494663!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sbd!4v1635221509729!5m2!1sen!2sbd"
+									width="600"
+									height="550"
+									// style="border:0;"
+									allowFullScreen={false}
+									loading="lazy"
+								></iframe> */}
+								
+								{/* <div className=''>
+									<p>Others get indignant when asked for assistance, but we are delighted to help you! HandOver's dedicated resources are on hand to counsel you through every step till you sign the best investment deal. If you need any assistance, you can reach us via phone, email, or live chat. Our customer support team is 24/7 available at your service.</p>
+								</div> */}
+							</div>
 							<div className="contact-content">
 								<h3 className="contact-title">Quick Contact</h3>
 								<p>

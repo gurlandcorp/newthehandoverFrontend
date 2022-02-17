@@ -9,6 +9,7 @@ import PropertyBanner from '../components/Shares/PropertyBanner'
 import BlogSection from '../components/Shares/Blogs'
 import JoiningBanner from '../components/Home/JoiningBanner'
 import FeaturedProperty from '../components/Shares/FeaturedProperty'
+import LetUSGuid from '../components/Home/LetUSGuid'
 
 const Home: NextPage = ({data}: any) => {
     return (
@@ -19,6 +20,7 @@ const Home: NextPage = ({data}: any) => {
             <link rel="icon" href="/favicon.ico" />
         </Head>
         <Banner />
+        <LetUSGuid />
         <AboutSection />
         <LocationSection />
         <PropertyBanner />

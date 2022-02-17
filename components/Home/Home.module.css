@@ -1,0 +1,18 @@
+.guidCard {
+    height: 350px;
+}
+.guidCard svg {
+    height: 50px;
+}
+.guidContent {
+    box-shadow: 0px 0px 10px 0px #ddd;
+    margin: 15px 0px;
+    padding: 1rem;
+    border-radius: 3px;
+    border-top: 3px solid #00c194;
+    height: 100%;
+}
+
+.guidCard h4 {
+    font-size: 18px;
+}

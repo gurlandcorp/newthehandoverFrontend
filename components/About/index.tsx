@@ -4,6 +4,7 @@ import About08 from "../../public/assets/img/about/about08.jpg";
 import About09 from "../../public/assets/img/about/about09.jpg";
 import Shape14 from "../../public/assets/img/figure/shape14.svg";
 import Shape15 from "../../public/assets/img/figure/shape15.svg";
+import styles from "./About.module.css"
 
 const About = () => {
     return (
@@ -19,14 +20,14 @@ const About = () => {
                         <div className="about-box3 wow fadeInUp" data-wow-delay=".2s">
                             <span className="item-subtitle">About Us</span>
                             <h2 className="item-title">
-                                We&lsquo;re on a Mission to Change View of RealEstate Field.
+                                HandOver – Embark on a journey to your best off-plan property deal!
                             </h2>
-                            <p>
-                                when an unknown printer took a galley of type and scrambled it
-                                to make type specimen bookt has survived not only five
-                                centuries alsoey jequery the leap into electronic typesetting.
-                            </p>
-                            <div className="row">
+                            <h4 className={`${styles.h4}`}>Who Are We?</h4>
+                            <p style={{marginBottom: '10px'}}>HandOver is a leading property portal revolutionizing the off-plan real estate market. We take pride in bridging the gap between investors and top real estate developers to discover their best property offers online.</p>
+
+                            <h4 className={`${styles.h4}`}>Our Vision</h4>
+                            <p style={{marginBottom: '10px'}}>Being the most trusted name for property searching and pre-selling, HandOver has set its sights on taking the off-plan real estate industry by storm from the frontlines. Our topmost priority is to alleviate the burden of responsibility to ensure smooth sailing in your endeavors.</p>
+                            {/* <div className="row">
                                 <div className="col-lg-6 col-md-6 col-sm-6">
                                     <div className="about-layout1">
                                         <div className="item-img">
@@ -59,7 +60,7 @@ const About = () => {
                                         </p>
                                     </div>
                                 </div>
-                            </div>
+                            </div> */}
                         </div>
                     </div>
                 </div>
@@ -85,13 +86,12 @@ const About = () => {
                     </div>
                     <div className="col-xl-6 col-lg-6">
                         <div className="about-layout2">
-                            <span className="item-subtitle">Company Power</span>
+                            <span className="item-subtitle">Our Mission</span>
                             <h2 className="item-title">
                                 The Core Company Values Of Our main Goal.
                             </h2>
                             <p>
-                                when an unknown printer took a galley of type and scrambled it
-                                to make type specimen bookt has survived.
+                            We know it's special to you — so we do our best to make it a memorable, reliable, and secure real estate experience for you. We, at HandOver, are devoted to providing our clientele access to the latest and most comprehensive pre-sale/off-plan properties listings.
                             </p>
                             <div className="skills-wrap-layout-2 counter-appear">
                                 <div className="single-skill">

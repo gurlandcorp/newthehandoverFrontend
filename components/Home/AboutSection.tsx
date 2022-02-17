@@ -30,15 +30,13 @@ const AboutSection = () => {
                 <div className="about-box6 wow fadeInUp" data-wow-delay=".2s">
                 <div className="item-heading-left">
                     <span className="section-subtitle">Who We Are</span>
-                    <h2 className="section-title">
-                    We Provide You The Best Service Of Real Estate Industries
-                    </h2>
+                    <h2 className="section-title">We Provide You The Best Service Of Leading Property</h2>
                     <div className="bg-title-wrap" style={{ display: "block" }}>
                     <span className="background-title solid">About Us</span>
                     </div>
                 </div>
                 <p>
-                Others get indignant when asked for assistance, but we are delighted to help you! HandOver&lsquo;s dedicated resources are on hand to counsel you through every step till you sign the best investment deal. If you need any assistance, you can reach us via phone, email, or live chat. Our customer support team is 24/7 available at your service.
+                HandOver is a leading property portal revolutionizing the off-plan real estate market. We take pride in bridging the gap between investors and top real estate developers to discover their best property offers online.
                 </p>
                 <div className="about-button">
                     <Link href={'/contact'} >
