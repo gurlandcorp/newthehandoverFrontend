@@ -1,8 +1,8 @@
 import axios from 'axios';
 import { NextPage } from 'next'
-import Image from 'next/image';
+// import Image from 'next/image';
 import React, { useState } from 'react'
-import contactImg from "../public/assets/img/blog/contact01.jpg";
+// import contactImg from "../public/assets/img/blog/contact01.jpg";
 import styles from "./styles/Contact.module.css"
 
 const Contact: NextPage = () => {

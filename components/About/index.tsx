@@ -2,8 +2,8 @@ import Image from 'next/image';
 import React from 'react'
 import About08 from "../../public/assets/img/about/about08.jpg";
 import About09 from "../../public/assets/img/about/about09.jpg";
-import Shape14 from "../../public/assets/img/figure/shape14.svg";
-import Shape15 from "../../public/assets/img/figure/shape15.svg";
+// import Shape14 from "../../public/assets/img/figure/shape14.svg";
+// import Shape15 from "../../public/assets/img/figure/shape15.svg";
 import styles from "./About.module.css"
 
 const About = () => {

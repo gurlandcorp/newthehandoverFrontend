@@ -1,4 +1,5 @@
 import Banner3 from "../../public/assets/img/banner/banner03.jpg";
+
 const PropertyBanner = () => {
     return (
         <section
