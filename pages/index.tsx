@@ -25,7 +25,7 @@ const Home: NextPage = ({data}: any) => {
         <LocationSection />
         <PropertyBanner />
         <FeaturedProperty data={data.latest_properties} />
-        <BlogSection />
+        {/* <BlogSection /> */}
         <JoiningBanner />
     </>
     )

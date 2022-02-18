@@ -1,45 +1,64 @@
 import { NextPage } from 'next'
-import React, { useState } from 'react'
-import Blog4 from "../public/assets/img/blog/blog4.jpg";
-import Blog5 from "../public/assets/img/blog/blog5.jpg";
-import Blog6 from "../public/assets/img/blog/blog6.jpg";
-import Blog7 from "../public/assets/img/blog/blog7.jpg";
-import Blog8 from "../public/assets/img/blog/blog8.jpg";
-import Blog9 from "../public/assets/img/blog/blog9.jpg";
-import Blog13 from "../public/assets/img/blog/blog13.jpg";
-import Blog14 from "../public/assets/img/blog/blog14.jpg";
-import Blog15 from "../public/assets/img/blog/blog15.jpg";
-import Blog16 from "../public/assets/img/blog/blog16.jpg";
-import Blog17 from "../public/assets/img/blog/blog17.jpg";
-import Blog18 from "../public/assets/img/blog/blog18.jpg";
-import Widget2 from "../public/assets/img/blog/widget2.jpg";
-import Widget3 from "../public/assets/img/blog/widget3.jpg";
-import Widget4 from "../public/assets/img/blog/widget4.jpg";
-import Widget5 from "../public/assets/img/blog/widget5.jpg";
-import Widget6 from "../public/assets/img/blog/widget6.jpg";
+import React, { useEffect, useState } from 'react'
+import Blog4 from "../public/assets/img/blog/now.jpg";
 import widget05 from "../public/assets/img/blog/widget05.jpg";
-import axios from "axios";
 import JoiningBanner from '../components/Home/JoiningBanner';
 import BreadCrumb from '../components/Shares/BreadCrumb';
 import Image from 'next/image';
 import PropertyCard from '../components/Shares/PropertyCard';
 import PropertyCardForLG12 from '../components/Shares/PropertyCardForLG12';
+import Link from 'next/link';
 
-const Properties: NextPage = ({data}: any) => {
+const Properties: NextPage = ({data, query}: any) => {
     const [images, setImages] = useState([
 		Blog4,
-		Blog5,
-		Blog6,
-		Blog7,
-		Blog8,
-		Blog9,
-		Blog13,
-		Blog14,
-		Blog15,
-		Blog16,
-		Blog17,
-		Blog18,
 	]);
+
+	const [filter, setFilter] = useState({
+		text: '',
+		propertyType: '',
+		categories: '',
+		city: '',
+		price: '',
+	})
+	const [text, setText] = useState('')
+	const [type, setType] = useState('')
+	const [city, setCity] = useState('')
+	const [category, setCategory] = useState('')
+
+
+	const propertyType = [
+		"Family House",
+		"Apartment",
+		"Condo"
+	]
+	const categories = [
+		"Rent",
+		"Sell",
+		"Buy"
+	]
+	const cities = [
+		"Los Angeles",
+		"Chicago",
+		"Philadelphia"
+	]
+
+	useEffect(() => {
+		if(query.text!=undefined)
+		{
+			setText(query.text)
+		}
+
+		if(query.propertyType!=undefined)
+		{
+			setType(query.propertyType)
+		}
+
+		if(query.city!=undefined)
+		{
+			setCity(query.city)
+		}
+	},[query])
 
     return (
         <>
@@ -54,36 +73,61 @@ const Properties: NextPage = ({data}: any) => {
 									<input
 										type="text"
 										className="form-control"
-										placeholder="What are you looking for?"
+										placeholder="What are you looking for?" 
+										value={text}
+										onChange={(e)=>setText(e.target.value)}
 									/>
 									<div className="row">
 										<div className="col-lg-12 pl-15 mb-0">
 											<div className="rld-single-select">
 												<select className="select single-select mr-0">
-													<option value="1">Property Type</option>
-													<option value="2">Family House</option>
+													<option value="">Property Type</option>
+													{
+														propertyType.map((val, index) => {
+															if(type==val)
+															{
+																return <option value={val} key={index} selected >{val}</option>
+															}
+															else
+															{
+																return <option value={val} key={index} >{val}</option>
+															}
+														})
+													}
+													{/* <option value="2">Family House</option>
 													<option value="3">Apartment</option>
-													<option value="3">Condo</option>
+													<option value="3">Condo</option> */}
 												</select>
 											</div>
 										</div>
 										<div className="col-lg-12 pl-15 mb-0">
 											<div className="rld-single-select">
 												<select className="select single-select mr-0">
-													<option value="1">All Categories</option>
-													<option value="2">Rent</option>
-													<option value="3">Sell</option>
-													<option value="3">Buy</option>
+													<option value="">All Categories</option>
+													{
+														categories.map((val, index) => {
+															return <option value={val} key={index} >{val}</option>
+														})
+													}
 												</select>
 											</div>
 										</div>
 										<div className="col-lg-12 pl-15">
 											<div className="rld-single-select">
 												<select className="select single-select mr-0">
-													<option value="1">All Cities</option>
-													<option value="2">Los Angeles</option>
-													<option value="3">Chicago</option>
-													<option value="3">Philadelphia</option>
+													<option value="">All Cities</option>
+													{
+														cities.map((val, index) => {
+															if(city==val)
+															{
+																return <option value={val} key={index} selected >{val}</option>
+															}
+															else
+															{
+																return <option value={val} key={index} >{val}</option>
+															}
+														})
+													}
 												</select>
 											</div>
 										</div>
@@ -150,10 +194,12 @@ const Properties: NextPage = ({data}: any) => {
 										<a>Villa</a>
 									</div>
 									<h4 className="item-title">
-										<a>
-											{/* Modern Villa for House Highland Ave Los Angeles */}{" "}
-											{data[0]?.propertyTitle}
-										</a>
+										<Link href={`/property/${data[0]?._id}`}>
+											<a>
+												{/* Modern Villa for House Highland Ave Los Angeles */}{" "}
+												{data[0]?.propertyTitle}
+											</a>
+										</Link>
 									</h4>
 									<div className="location-area">
 										<i className="flaticon-maps-and-flags"></i>Downey,California
@@ -381,7 +427,8 @@ export async function getServerSideProps(context: any) {
     // Pass data to the page via props
     return { 
         props: { 
-            data
+            data,
+			query: context.query
         }
     }
 }

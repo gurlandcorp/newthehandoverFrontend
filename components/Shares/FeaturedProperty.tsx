@@ -27,7 +27,7 @@ const FeaturedProperty = (props: any) => {
                                 >
                                     <div className="item-img">
                                         <Link href={"/property/" + a._id}>
-                                            <a href="">
+                                            <a>
                                                 <Image
                                                     src={a.images[0]}
                                                     alt="blog"

@@ -9,7 +9,7 @@ const LetUSGuid = () => {
                     <div className="col-lg-12">
                         <div className="item-heading-left">
                             <span className="section-subtitle">Let Us Guide You Towards Property Investment Hotspots!</span>
-                            <h2 className="section-title">We have a proven track record of unmatched real estate experience!</h2>
+                            <h2 className="section-title text-center">We have a proven track record of unmatched real estate experience!</h2>
                             <div className='row'>
                                 <div className='col-lg-4 col-md-4 col-sm-6'>
                                     <div className={`text-center ${styles.guidCard}`}>

@@ -1,11 +1,11 @@
 import Image from "next/image";
 import Link from "next/link";
-import Location10 from "../../public/assets/img/toparea/location10.jpg";
-import Location11 from "../../public/assets/img/toparea/location11.jpg";
-import Location12 from "../../public/assets/img/toparea/location12.jpg";
-import Location13 from "../../public/assets/img/toparea/location13.jpg";
-import Location14 from "../../public/assets/img/toparea/location14.jpg";
-import Location15 from "../../public/assets/img/toparea/location15.jpg";
+import UmmAlQuwain from "../../public/assets/img/toparea/umm-al-quwain.jpg";
+import Fujairah from "../../public/assets/img/toparea/fujairah.jpg";
+import Dubai from "../../public/assets/img/toparea/dubai.jpg";
+import AbuDhabi from "../../public/assets/img/toparea/abu-dhabi.jpg";
+import Ajman from "../../public/assets/img/toparea/ajman.jpg";
+import Sharjah from "../../public/assets/img/toparea/sharjah.jpg";
 
 const LocationSection = () => {
     return (
@@ -40,7 +40,7 @@ const LocationSection = () => {
                         <Link href={'/'}>
                         <a style={{display: 'grid'}}>
                         <Image
-                            src={Location10.src}
+                            src={UmmAlQuwain.src}
                             alt="location"
                             width="520"
                             height="440"
@@ -68,28 +68,34 @@ const LocationSection = () => {
                 <div className="col-lg-6 col-md-6 col-sm-6">
                     <div className="location-box3 wow zoomIn" data-wow-delay=".2s">
                     <div className="item-img">
-                        <a href="single-listing1" style={{display: 'grid'}}>
-                        <Image
-                            src={Location11.src}
-                            alt="location"
-                            width="520"
-                            height="440"
-                        />
-                        </a>
+                        <Link href={'/'}>
+                            <a style={{display: 'grid'}}>
+                            <Image
+                                src={Fujairah.src}
+                                alt="location"
+                                width="520"
+                                height="440"
+                            />
+                            </a>
+                        </Link>
                     </div>
                     <div className="item-content">
                         <div className="content-body">
                         <div className="item-category">02 properties</div>
                         <div className="item-title">
                             <h3>
-                            <a href="single-listing2">Fujairah</a>
+                            <Link href={'/'}>
+                                <a>Fujairah</a>
+                            </Link>
                             </h3>
                         </div>
                         </div>
                         <div className="location-button">
-                        <a href="single-listing3" className="location-btn">
+                        <Link href={'/'}>
+                        <a className="location-btn">
                             <i className="fas fa-arrow-right"></i>
                         </a>
+                        </Link>
                         </div>
                     </div>
                     </div>
@@ -101,7 +107,7 @@ const LocationSection = () => {
                 <div className="item-img">
                     <a href="single-listing1" style={{display: 'grid'}}>
                     <Image
-                        src={Location12.src}
+                        src={Dubai.src}
                         alt="location"
                         width="690"
                         height="280"
@@ -130,7 +136,7 @@ const LocationSection = () => {
                 <div className="item-img">
                     <a href="single-listing1" style={{display: 'grid'}}>
                     <Image
-                        src={Location13.src}
+                        src={AbuDhabi.src}
                         alt="location"
                         width="690"
                         height="280"
@@ -161,7 +167,7 @@ const LocationSection = () => {
                     <div className="item-img">
                         <a href="single-listing1" style={{display: 'grid'}}>
                         <Image
-                            src={Location14.src}
+                            src={Ajman.src}
                             alt="location"
                             width="520"
                             height="440"
@@ -190,7 +196,7 @@ const LocationSection = () => {
                     <div className="item-img">
                         <a href="single-listing1" style={{display: 'grid'}}>
                         <Image
-                            src={Location10.src}
+                            src={Sharjah.src}
                             alt="location"
                             width="520"
                             height="440"

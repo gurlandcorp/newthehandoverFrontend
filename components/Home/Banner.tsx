@@ -1,11 +1,11 @@
-import Banner2 from "../../public/assets/img/banner/one.jpg";
+import Banner2 from "../../public/assets/img/burj-khalifa.jpg";
 
 const Banner = () => {
     return (
         <section
         className="main-banner-wrap1 main-banner-wrap4 parallaxie"
         data-bg-image={Banner2.src}
-        style={{ background: `url(${Banner2.src})` }}
+        style={{ background: `url(${Banner2.src})`,backgroundSize: 'cover',backgroundRepeat: 'no-repeat',backgroundAttachment: 'fixed',backgroundPositionX:'center' }}
         >
         <div className="container">
             <div className="row justify-content-end">

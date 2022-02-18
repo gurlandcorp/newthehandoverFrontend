@@ -4,7 +4,8 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build && next export",
-    "start": "NODE_ENV=production node server.js",
+    "start": "next start",
+    "start:envprod": "NODE_ENV=production node server.js",
     "start:prod": "next start -p 80",
     "lint": "next lint",
     "export": "next build && next export"

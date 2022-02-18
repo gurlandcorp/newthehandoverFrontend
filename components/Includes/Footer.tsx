@@ -279,10 +279,10 @@ const Footer = () => {
 								<div className="copyright-area1">
 									<ul>
 										<li>
-											<a href="about-1.html">Terms of Use</a>
+											<a href="">Terms of Use</a>
 										</li>
 										<li>
-											<a href="about-1.html">Privacy Policy</a>
+											<a href="">Privacy Policy</a>
 										</li>
 									</ul>
 								</div>
