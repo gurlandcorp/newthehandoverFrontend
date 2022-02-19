@@ -2,7 +2,7 @@ import Head from 'next/head'
 import React from 'react'
 import Footer from '../Includes/Footer'
 import Header from '../Includes/Header'
-import favIcon from "../../public/favicon-homlisti.svg"
+// import favIcon from "../../public/favicon-homlisti.svg"
 
 const Default = ({children}: any) => {
 
