@@ -3,7 +3,7 @@
   "private": false,
   "scripts": {
     "dev": "next dev",
-    "build": "next build && next export",
+    "build": "next build",
     "start": "next start",
     "start:envprod": "NODE_ENV=production node server.js",
     "start:prod": "next start -p 80",
@@ -13,10 +13,11 @@
   "dependencies": {
     "axios": "^0.26.0",
     "bootstrap": "^5.1.3",
-    "next": "12.0.10",
-    "next-optimized-images": "^2.6.2",
+    "next": "^12.1.0",
+    "next-optimized-images": "^1.4.2",
     "react": "17.0.2",
-    "react-dom": "17.0.2"
+    "react-dom": "17.0.2",
+    "sharp": "^0.30.1"
   },
   "devDependencies": {
     "@types/node": "17.0.18",
