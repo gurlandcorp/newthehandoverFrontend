@@ -1,6 +1,6 @@
 {
   "name": "handover_frontend",
-  "private": true,
+  "private": false,
   "scripts": {
     "dev": "next dev",
     "build": "next build && next export",
