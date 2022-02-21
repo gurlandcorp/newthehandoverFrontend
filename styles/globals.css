@@ -37,6 +37,9 @@ a {
   background: #00c194; 
 }
 
+@import "https://fonts.googleapis.com/css2?family=Roboto:wght@300,400,500,700&family=Ubuntu:wght@400;500;700&display=swap";
+@import "https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp";
+
 @import "../public/styles.css";
 @import "../public/css/flaticon/font/flaticon.css";
 @import "../public/css/all.min.css";
