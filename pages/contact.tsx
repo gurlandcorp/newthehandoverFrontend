@@ -57,16 +57,16 @@ const Contact: NextPage = () => {
 								<h3 className="contact-title">Office Information</h3>
 								<div className="contact-list">
 									<ul>
-										<li>Homlisti Real Estate Agency</li>
+										{/* <li>Homlisti Real Estate Agency</li>
 										<li>(United Estate Of America) Co., Ltd.</li>
 										<li>Bridge 8, Room 9201,</li>
 										<li>#25 Jocker Goru Zhong Road,</li>
-										<li>NYPD 200025 USA</li>
+										<li>NYPD 200025 USA</li> */}
 									</ul>
 								</div>
 								<div className="phone-box">
 									<div className="item-lebel">Emergency Call :</div>
-									<div className="phone-number">+86 21 6137 9292</div>
+									<div className="phone-number">+__ __ ____ ____</div>
 									<div className="item-icon">
 										<i className="fas fa-phone-alt"></i>
 									</div>

@@ -252,17 +252,16 @@ const Footer = () => {
 									<div className="footer-location">
 										<ul>
 											<li className="item-map">
-												<i className="fas fa-map-marker-alt"></i>121 King St,
-												Melbourne den 3000, Australia
+												<i className="fas fa-map-marker-alt"></i>_____________________
 											</li>
 											<li>
-												<a href="mailto:info@example.com">
-													<i className="fas fa-envelope"></i>info@example.com
+												<a href="mailto:Info@thehandover.com">
+													<i className="fas fa-envelope"></i>Info@thehandover.com
 												</a>
 											</li>
 											<li>
-												<a href="tel:+123596000">
-													<i className="fas fa-phone-alt"></i>(+123) 596 000
+												<a href="tel:">
+													<i className="fas fa-phone-alt"></i> ___ ________ {/* Phone Number Placeholder */}
 												</a>
 											</li>
 										</ul>
