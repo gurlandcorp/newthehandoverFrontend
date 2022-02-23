@@ -1,6 +1,6 @@
 import Banner2 from "../../public/assets/img/burj-khalifa.jpg";
 
-const Banner = () => {
+const Banner = (props: any) => {
     return (
         <section
         className="main-banner-wrap1 main-banner-wrap4 parallaxie"
@@ -16,30 +16,30 @@ const Banner = () => {
                 >
                 <div className="banner-style-1">
                     <div className="item-category-box1">
-                    <div className="item-category">For Rent</div>
+                    <div className="item-category">Property</div>
                     </div>
-                    <div className="item-price">
+                    {/* <div className="item-price">
                     $15,000/<span>mo</span>
-                    </div>
+                    </div> */}
                 </div>
-                <h3 className="item-title">Furnished Luxary Apartment</h3>
+                <h3 className="item-title">{props.data.propertyTitle}</h3>
                 <div className="location-area">
                     <i className="flaticon-maps-and-flags" />
-                    Downey, California
+                    {props.data.location.city}
                 </div>
                 <div className="item-categoery3 item-categoery4">
                     <ul>
                     <li>
                         <i className="flaticon-bed" />
-                        Beds: 03
+                        Beds: {props.data.bedrooms}
                     </li>
                     <li>
                         <i className="flaticon-shower" />
-                        Baths: 02
+                        Baths: {props.data.bathrooms}
                     </li>
                     <li>
                         <i className="flaticon-two-overlapping-square" />
-                        931 Sqft
+                        {props.data.area}
                     </li>
                     </ul>
                 </div>

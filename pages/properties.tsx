@@ -8,8 +8,10 @@ import Image from 'next/image';
 import PropertyCard from '../components/Shares/PropertyCard';
 import PropertyCardForLG12 from '../components/Shares/PropertyCardForLG12';
 import Link from 'next/link';
+import axios from 'axios';
 
 const Properties: NextPage = ({data, query}: any) => {
+
     const [images, setImages] = useState([
 		Blog4,
 	]);
@@ -58,6 +60,14 @@ const Properties: NextPage = ({data, query}: any) => {
 		{
 			setCity(query.city)
 		}
+
+		// let filter: any = {
+		// 	propertyType : query.propertyType
+		// }
+		// let result = axios.get(`https://handoverapi.herokuapp.com/property/filter/others`, filter).then(response => {
+        //     return response.data
+        // })
+        // console.log(result)
 	},[query])
 
     return (
@@ -420,10 +430,28 @@ export default Properties
 
 export async function getServerSideProps(context: any) {
     // Fetch data from external API
-	// console.log(context.query)
-    const res = await fetch(`${process.env.API_URL}/property/sort/desc`)
-    const data = await res.json()
-  
+	let res;
+	if(context.query.propertyType!=undefined)
+	{
+		let filter: any = {
+			propertyType : context.query.propertyType
+		}
+		res = await fetch(`http://127.0.0.1:3000/api/property/filter`, {
+			method: "POST",
+			body: JSON.stringify(filter),
+			headers: {
+				"Content-Type": "application/json"
+			}
+		})
+		.then(response => response.json())
+		res = res.data
+	}
+	else
+	{
+    	res = await fetch(`${process.env.API_URL}/property/sort/desc`)
+		.then(response => response.json());
+	}
+    const data = await res
     // Pass data to the page via props
     return { 
         props: { 
