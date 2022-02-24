@@ -46,6 +46,7 @@ const Properties: NextPage = ({data, query}: any) => {
 		"Buy"
 	]
 	const cities = [
+		"Dubai",
 		"Los Angeles",
 		"Chicago",
 		"Philadelphia"
@@ -57,12 +58,15 @@ const Properties: NextPage = ({data, query}: any) => {
 	const searchSubmit = async (e: any) => {
         e.preventDefault()
 
-		let filters: any = {}
-		rooms!='' && (filters.bedrooms = rooms)
-		bathRooms!='' && (filters.bathrooms = bathRooms)
-		type!='' && (filters.type = type)
-		text!='' && (filters.location = {address: text})
-
+		let filters: any = {
+			location: {}
+		}
+		rooms!='' && (filters.bedrooms = rooms);
+		bathRooms!='' && (filters.bathrooms = bathRooms);
+		type!='' && (filters.propertyType = type)
+		text!='' && (filters.location.address = text)
+		city!='' && (filters.location.city = city)
+		console.log(filters)
 		let res = await fetch(`${Base_URL}/api/property/filter`, {
 			method: "POST",
 			body: JSON.stringify(filters),
@@ -139,7 +143,7 @@ const Properties: NextPage = ({data, query}: any) => {
 										</div>
 										<div className="col-lg-12 pl-15 mb-0">
 											<div className="rld-single-select">
-												<select className="select single-select mr-0">
+												<select className="select single-select mr-0" onChange={(e) => setType(e.target.value)}>
 													<option value="">Property Type</option>
 													{
 														propertyType.map((val, index) => {
@@ -173,7 +177,7 @@ const Properties: NextPage = ({data, query}: any) => {
 										</div> */}
 										<div className="col-lg-12 pl-15">
 											<div className="rld-single-select">
-												<select className="select single-select mr-0">
+												<select className="select single-select mr-0" onChange={(e) => setCity(e.target.value)}>
 													<option value="">All Cities</option>
 													{
 														cities.map((val, index) => {
@@ -511,6 +515,7 @@ export async function getServerSideProps(context: any) {
 			method: "POST",
 			body: JSON.stringify(filter),
 			headers: {
+				"Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MWFlNDQ4ODk5YzZlNTM3MTQwMTY0N2QiLCJlbWFpbCI6InNhbWluYTkxQG1haWxpbmF0b3IuY29tIiwibmFtZSI6IlNhbWluYSIsImltYWdlVXJsIjoiIiwiaWF0IjoxNjM5NTg3MjcwLCJleHAiOjE2NzExMjMyNzB9.hHACfbXBwPBkrQSCZdHCqVTHuF-BcE-mHfUlgzf19vU",
 				"Content-Type": "application/json"
 			}
 		})
