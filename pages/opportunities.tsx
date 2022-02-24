@@ -59,13 +59,17 @@ const Properties: NextPage = ({data, query}: any) => {
         e.preventDefault()
 
 		let filters: any = {
-			location: {}
 		}
 		rooms!='' && (filters.bedrooms = rooms);
 		bathRooms!='' && (filters.bathrooms = bathRooms);
 		type!='' && (filters.propertyType = type)
-		text!='' && (filters.location.address = text)
-		city!='' && (filters.location.city = city)
+		if(text!='' || city!='')
+		{
+			filters.location = {
+				address: text,
+				city: city,
+			}
+		}
 		console.log(filters)
 		let res = await fetch(`${Base_URL}/api/property/filter`, {
 			method: "POST",
