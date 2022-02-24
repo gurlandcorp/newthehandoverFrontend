@@ -1269,13 +1269,16 @@ ul {
 }
 /*------------------- 5.5 Header Menu -------------------*/
 header.header {
-  position: fixed;
+  position: sticky;
   z-index: 15;
   top: 0;
   left: 0;
   right: 0;
   z-index: 999;
   background-color: transparent;
+}
+header.mob-header {
+  display: none;
 }
 @media only screen and (max-width: 991px) {
   header.rt-header {
@@ -1285,6 +1288,9 @@ header.header {
 @media only screen and (max-width: 991px) {
   header.header {
     display: none;
+  }
+  header.mob-header {
+    display: block;
   }
 }
 .logo-area a {
@@ -1977,6 +1983,7 @@ nav.template-main-menu > ul > li:hover .template-mega-menu {
   position: relative;
   z-index: 99;
   padding: 0;
+  background: #fff;
 }
 .header-menu.menu-layout3:after {
   content: "";
@@ -2033,7 +2040,22 @@ nav.template-main-menu > ul > li:hover .template-mega-menu {
 }
 .header-bottombar-area {
   padding: 15px 0px 20px;
+  position: absolute;
+  top: 85px;
+  width: 100%;
+  background: #fff;
+  transition: all 0.3s ease-in-out;
 }
+.header-bottombar-area.hide {
+  top: -1rem;
+}
+
+@media only screen and (max-width: 1199px) {
+  .header-bottombar-area {
+    top: 75px;
+  }
+}
+
 .header-bottombar-area .rent-form .form-check-box {
   display: flex;
   align-items: center;

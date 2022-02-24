@@ -1,10 +1,25 @@
 import Head from 'next/head'
-import React from 'react'
+import React, { useEffect } from 'react'
 import Footer from '../Includes/Footer'
 import Header from '../Includes/Header'
 // import favIcon from "../../public/favicon-homlisti.svg"
 
 const Default = ({children}: any) => {
+
+    useEffect(() => {
+        document.addEventListener('scroll', function(e) {
+            let lastKnownScrollPosition = window.scrollY;
+            console.log(lastKnownScrollPosition);
+            if(lastKnownScrollPosition > 100)
+            {
+                document.querySelector('#header-bottombar')?.classList.add('hide');
+            }
+            else
+            {
+                document.querySelector('#header-bottombar')?.classList.remove('hide');
+            }
+        });
+    })
 
     return (
         <>

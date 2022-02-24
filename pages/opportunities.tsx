@@ -109,7 +109,7 @@ const Properties: NextPage = ({data, query}: any) => {
 
     return (
         <>
-        <BreadCrumb title="All Listing" />
+        <BreadCrumb title="All Opportunities" />
 			<section className="grid-wrap3">
 				<div className="container">
 					<div className="row gutters-40">

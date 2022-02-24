@@ -4,18 +4,20 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/router";
+import styles from "./Header.module.css"
 
 const Header = () => {
 
 	const [activeLink, setActiveLink] = useState('')
 	const router = useRouter();
+	const [showSideMenu,setShowSideMenu] = useState(false)
 
 	useEffect(()=>{
 	},[])
 
 	return (
 		<>
-			<header className="header position-relative">
+			<header className="header">
 				<div id="rt-sticky-placeholder"></div>
 				<div id="header-menu" className="header-menu menu-layout1 header-menu menu-layout3" >
 					<div className="container">
@@ -126,6 +128,58 @@ const Header = () => {
 					</div>
 				</div>
 				<SearchSection />
+			</header>
+			<header className="p-3 mob-header">
+				<div style={{textAlign: 'right'}}>
+					<svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" width={'30px'} onClick={()=>setShowSideMenu(true)}>
+						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+					</svg>
+				</div>
+				<div className={`${styles.sidebar} ${showSideMenu==true ? styles.show : ''}`}>
+					<svg xmlns="http://www.w3.org/2000/svg" className={`h-6 w-6 ${styles.close}`} fill="none" viewBox="0 0 24 24" stroke="currentColor" width="30px" onClick={()=>setShowSideMenu(false)}>
+						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+					</svg>
+					<div className={styles.menu}>
+						<div className={styles.logo}>
+							<Link href={'/'} >
+								<a className="temp-logo">
+								<Image src={Logo}
+									width="157"
+									height="40"
+									alt="logo"
+									className="img-fluid"
+									layout="responsive"
+								/>
+								</a>
+							</Link>
+						</div>
+						<ul>
+							<li>
+								<Link href={'/'}>
+									<a onClick={()=>setShowSideMenu(false)}>Home</a>
+								</Link>
+							</li>
+
+							<li>
+								<Link href={'/about'}>
+									<a onClick={()=>setShowSideMenu(false)}>About</a>
+								</Link>
+							</li>
+
+							<li>
+								<Link href={'/opportunities'}>
+									<a onClick={()=>setShowSideMenu(false)}>Opportunities</a>
+								</Link>
+							</li>
+
+							<li>
+								<Link href={'/contact'}>
+									<a onClick={()=>setShowSideMenu(false)}>Contact</a>
+								</Link>
+							</li>
+						</ul>
+					</div>
+				</div>
 			</header>
 		</>
 	);

@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import React from 'react'
 
 const BreadCrumb = (props: any) => {
@@ -7,7 +8,9 @@ const BreadCrumb = (props: any) => {
                 <nav aria-label="breadcrumb">
                 <ol className="breadcrumb">
                     <li className="breadcrumb-item">
-                        <a href="index.html">Home</a>
+                        <Link href="/">
+                        <a>Home</a>
+                        </Link>
                     </li>
                     <li className="breadcrumb-item active" aria-current="page">
                         {props.title}
