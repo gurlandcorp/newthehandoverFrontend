@@ -47,8 +47,8 @@ const Header = () => {
 											</Link>
 										</li>
 										<li>
-											<Link href={'/properties'} >
-												<a className={`${activeLink=='properties' ? 'active' : ''}`} onClick={()=>setActiveLink('properties')}>All Property</a>
+											<Link href={'/opportunities'} >
+												<a className={`${activeLink=='properties' ? 'active' : ''}`} onClick={()=>setActiveLink('opportunities')}>Opportunities</a>
 											</Link>
 										</li>
 										{/* <li className="hide-on-desktop-menu">

@@ -26,7 +26,7 @@ const FeaturedProperty = (props: any) => {
                                     data-wow-delay=".6s"
                                 >
                                     <div className="item-img">
-                                        <Link href={"/property/" + a._id}>
+                                        <Link href={"/opportunity/" + a._id}>
                                             <a>
                                                 <Image
                                                     src={a.images[0]}
@@ -39,7 +39,7 @@ const FeaturedProperty = (props: any) => {
                                         <div className="react-icon">
                                             <ul>
                                                 <li>
-                                                    <Link href={"/property/" + a._id} >
+                                                    <Link href={"/opportunity/" + a._id} >
                                                         <a
                                                             data-bs-toggle="tooltip"
                                                             data-bs-placement="top"
@@ -50,7 +50,7 @@ const FeaturedProperty = (props: any) => {
                                                     </Link>
                                                 </li>
                                                 <li>
-                                                    <Link href={"/property/" + a._id} >
+                                                    <Link href={"/opportunity/" + a._id} >
                                                         <a
                                                             data-bs-toggle="tooltip"
                                                             data-bs-placement="top"
@@ -65,7 +65,7 @@ const FeaturedProperty = (props: any) => {
                                     <div className="item-content item-content-property">
                                         <div className="verified-area">
                                             <h3 className="item-title">
-                                                <Link href={"/property/" + a._id}>
+                                                <Link href={"/opportunity/" + a._id}>
                                                     <a>{a.propertyTitle}</a>
                                                 </Link>
                                             </h3>
@@ -104,7 +104,7 @@ const FeaturedProperty = (props: any) => {
 
                 </div>
                 <div className="property-button">
-                    <Link href={"/properties"}>
+                    <Link href={"/opportunities"}>
                         <a className="item-btn">
                             View All Properties
                         </a>

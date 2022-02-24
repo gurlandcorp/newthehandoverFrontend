@@ -14,7 +14,7 @@ const LocationSection = () => {
             <div className="row align-items-center">
             <div className="col-lg-6 col-md-7">
                 <div className="item-heading-left">
-                <span className="section-subtitle">Top Areas</span>
+                <span className="section-subtitle">Top Markets</span>
                 <h2 className="section-title">Find Your Neighborhood</h2>
                 <div className="bg-title-wrap" style={{ display: "block" }}>
                     <span className="background-title solid">Locations</span>

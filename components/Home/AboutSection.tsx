@@ -28,23 +28,22 @@ const AboutSection = () => {
             <div className="row">
             <div className="col-lg-5">
                 <div className="about-box6 wow fadeInUp" data-wow-delay=".2s">
-                <div className="item-heading-left">
-                    <span className="section-subtitle">Who We Are</span>
-                    <h2 className="section-title">We Provide You The Best Service Of Leading Property</h2>
-                    <div className="bg-title-wrap" style={{ display: "block" }}>
-                    <span className="background-title solid">About Us</span>
+                    <div className="item-heading-left">
+                        <span className="section-subtitle">Who We Are</span>
+                        <h2 className="section-title">Off plan investing online auctions.</h2>
+                        <div className="bg-title-wrap" style={{ display: "block" }}>
+                        <span className="background-title solid">About Us</span>
+                        </div>
                     </div>
-                </div>
-                <p>
-                HandOver is a leading property portal revolutionizing the off-plan real estate market. We take pride in bridging the gap between investors and top real estate developers to discover their best property offers online.
-                </p>
-                <div className="about-button">
-                    <Link href={'/contact'} >
-                        <a className="item-btn">
-                        Contact With Us
-                        </a>
-                    </Link>
-                </div>
+                    <p>Invest like a Sheik. With todays inflationary environment the smartest investors are allocating more of their portfolio’s capital to inflationary hedge assets like real estate. Invest in a hard asset that stores real value and yields future income.</p>
+                    <p>What is off plan? Off plan investing is the investment into residential real estate at the construction or pre construction phase. Prior to the completion of the project get discounts on the asset’s true value and see your capital appreciate.</p>
+                    <div className="about-button">
+                        <Link href={'/contact'} >
+                            <a className="item-btn">
+                            Contact With Us
+                            </a>
+                        </Link>
+                    </div>
                 </div>
             </div>
             <div className="offset-lg-1 col-lg-6">

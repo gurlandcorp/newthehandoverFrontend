@@ -9,7 +9,7 @@ const SearchSection = () => {
     const router = useRouter()
     const searchSubmit = (e: any) => {
         e.preventDefault()
-        router.push(`properties?propertyType=${search.property_type}&city=${search.city}&text=${search.text}`)
+        router.push(`/opportunities?propertyType=${search.property_type}&city=${search.city}&text=${search.text}`)
     }
 
     return (

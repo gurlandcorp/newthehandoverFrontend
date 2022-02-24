@@ -40,9 +40,9 @@ const JoiningBanner = () => {
                 </div>
               </div>
               <div className="item-content">
-                <h2 className="heading-title">Register as a Real Estate Developer</h2>
+                <h2 className="heading-title">Register as a developer or property owner</h2>
                 <p>
-                Be the part of the Top Off Plan Real Estate Development Marketplace
+                Be the part of the top off plan investing online auctions.
                 </p>
               </div>
             </div>

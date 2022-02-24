@@ -204,7 +204,7 @@ const Properties: NextPage = ({data, query}: any) => {
 										<a>Villa</a>
 									</div>
 									<h4 className="item-title">
-										<Link href={`/property/${data[0]?._id}`}>
+										<Link href={`/opportunity/${data[0]?._id}`}>
 											<a>
 												{/* Modern Villa for House Highland Ave Los Angeles */}{" "}
 												{data[0]?.propertyTitle}
@@ -243,7 +243,7 @@ const Properties: NextPage = ({data, query}: any) => {
 									<div className="col-lg-12 col-md-12">
 										<div className="item-shorting-box">
 											<div className="shorting-title">
-												<h4 className="item-title">9 Search Results Found</h4>
+												<h4 className="item-title">{data.length} Search Results Found</h4>
 											</div>
 											<div className="item-shorting-box-2">
 												<div className="by-shorting">
@@ -289,7 +289,7 @@ const Properties: NextPage = ({data, query}: any) => {
 											role="tabpanel"
 										>
 											<div className="row">
-												{data.slice(0, 7).map((i: any, index: any) => {
+												{data.slice(0, 10).map((i: any, index: any) => {
 													return <PropertyCard img={i} data={i} key={index} />;
 												})}
 											</div>

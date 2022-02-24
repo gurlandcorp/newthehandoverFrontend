@@ -28,7 +28,7 @@ const Footer = () => {
 										/>
 									</div>
 									<p>
-									We take pride in bridging the gap between investors and top real estate developers to discover their best property offers online.
+									<a href='/'>theHandover.com</a> is the only online marketplace for off plan investing. Search projects. Bid. Invest
 									</p>
 									<div className="item-social">
 										<ul>
@@ -252,7 +252,7 @@ const Footer = () => {
 									<div className="footer-location">
 										<ul>
 											<li className="item-map">
-												<i className="fas fa-map-marker-alt"></i>_____________________
+												<i className="fas fa-map-marker-alt"></i>Infoperformance Gulf FZCO, Dubai Silicon Oasis, DDP, Building A2, Dubai, United Arab Emirates 6009
 											</li>
 											<li>
 												<a href="mailto:Info@thehandover.com">

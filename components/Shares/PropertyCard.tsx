@@ -19,7 +19,7 @@ const PropertyCard = (props: any) => {
 		<div className="col-lg-6 col-md-6">
 			<div className="property-box2 wow animated fadeInUp" data-wow-delay=".3s">
 				<div className="item-img">
-					<Link href={`/property/${props.data._id}`} >
+					<Link href={`/opportunity/${props.data._id}`} >
                         <a>
                             <Image
                                 src={props.data.images[0]}
@@ -73,7 +73,7 @@ const PropertyCard = (props: any) => {
 				<div className="item-content">
 					<div className="verified-area">
 						<h3 className="item-title">
-							<Link href={`/property/${props.data._id}`} >
+							<Link href={`/opportunity/${props.data._id}`} >
 								<a>{props.data.propertyTitle}</a>
 							</Link>
 						</h3>
