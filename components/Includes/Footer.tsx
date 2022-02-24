@@ -252,7 +252,7 @@ const Footer = () => {
 									<div className="footer-location">
 										<ul>
 											<li className="item-map">
-												<i className="fas fa-map-marker-alt"></i>Infoperformance Gulf FZCO, Dubai Silicon Oasis, DDP, Building A2, Dubai, United Arab Emirates 6009
+												<i className="fas fa-map-marker-alt"></i>Thehandover Gulf FZCO, Dubai Silicon Oasis, DDP, Building A2, Dubai, United Arab Emirates 6009
 											</li>
 											<li>
 												<a href="mailto:Info@thehandover.com">

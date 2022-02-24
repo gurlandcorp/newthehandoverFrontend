@@ -1,5 +1,5 @@
 import { NextPage } from 'next'
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import Blog4 from "../public/assets/img/blog/now.jpg";
 import widget05 from "../public/assets/img/blog/widget05.jpg";
 import JoiningBanner from '../components/Home/JoiningBanner';
@@ -8,6 +8,9 @@ import Image from 'next/image';
 import PropertyCard from '../components/Shares/PropertyCard';
 import PropertyCardForLG12 from '../components/Shares/PropertyCardForLG12';
 import Link from 'next/link';
+import { Base_URL } from '../config/constants';
+import { MainContext } from '../context/MainContext';
+import { useRouter } from 'next/router';
 import axios from 'axios';
 
 const Properties: NextPage = ({data, query}: any) => {
@@ -24,9 +27,12 @@ const Properties: NextPage = ({data, query}: any) => {
 		price: '',
 	})
 	const [text, setText] = useState('')
+	const [rooms, setRooms] = useState('')
+	const [bathRooms, setBathRooms] = useState('')
 	const [type, setType] = useState('')
 	const [city, setCity] = useState('')
 	const [category, setCategory] = useState('')
+	const[opportunities, setOpportunities] = useState(data);
 
 
 	const propertyType = [
@@ -44,6 +50,29 @@ const Properties: NextPage = ({data, query}: any) => {
 		"Chicago",
 		"Philadelphia"
 	]
+
+	const {search, setSearch} = useContext(MainContext)
+    const router = useRouter()
+
+	const searchSubmit = async (e: any) => {
+        e.preventDefault()
+
+		let filters: any = {}
+		rooms!='' && (filters.bedrooms = rooms)
+		bathRooms!='' && (filters.bathrooms = bathRooms)
+		type!='' && (filters.type = type)
+		text!='' && (filters.location = {address: text})
+
+		let res = await fetch(`${Base_URL}/api/property/filter`, {
+			method: "POST",
+			body: JSON.stringify(filters),
+			headers: {
+				"Content-Type": "application/json"
+			}
+		})
+		.then(response => response.json())
+		setOpportunities(res.data)
+    }
 
 	useEffect(() => {
 		if(query.text!=undefined)
@@ -79,7 +108,7 @@ const Properties: NextPage = ({data, query}: any) => {
 						<div className="col-lg-4 widget-break-lg sidebar-widget">
 							<div className="widget widget-advanced-search">
 								<h3 className="widget-subtitle">Advanced Search</h3>
-								<form className="map-forms map-form-style-2" >
+								<form className="map-forms map-form-style-2" onSubmit={(e) => searchSubmit(e)} >
 									<input
 										type="text"
 										className="form-control"
@@ -88,6 +117,26 @@ const Properties: NextPage = ({data, query}: any) => {
 										onChange={(e)=>setText(e.target.value)}
 									/>
 									<div className="row">
+										<div className="col-lg-6">
+											<input
+												type="number"
+												className="form-control mt-2"
+												placeholder="Rooms" 
+												value={rooms}
+												min={1}
+												onChange={(e)=>setRooms(e.target.value)}
+											/>
+										</div>
+										<div className="col-lg-6">
+											<input
+												type="number"
+												className="form-control mt-2"
+												placeholder="Bathrooms" 
+												value={bathRooms}
+												min={1}
+												onChange={(e)=>setBathRooms(e.target.value)}
+											/>
+										</div>
 										<div className="col-lg-12 pl-15 mb-0">
 											<div className="rld-single-select">
 												<select className="select single-select mr-0">
@@ -110,7 +159,7 @@ const Properties: NextPage = ({data, query}: any) => {
 												</select>
 											</div>
 										</div>
-										<div className="col-lg-12 pl-15 mb-0">
+										{/* <div className="col-lg-12 pl-15 mb-0">
 											<div className="rld-single-select">
 												<select className="select single-select mr-0">
 													<option value="">All Categories</option>
@@ -121,7 +170,7 @@ const Properties: NextPage = ({data, query}: any) => {
 													}
 												</select>
 											</div>
-										</div>
+										</div> */}
 										<div className="col-lg-12 pl-15">
 											<div className="rld-single-select">
 												<select className="select single-select mr-0">
@@ -141,85 +190,101 @@ const Properties: NextPage = ({data, query}: any) => {
 												</select>
 											</div>
 										</div>
-									</div>
-								</form>
-								<div className="banner-search-wrap banner-search-wrap-2">
-									<div className="rld-main-search rld-main-search3">
-										<div className="main-search-field-2">
-											{/* <!-- Area Range --> */}
-											<div className="price-range-wrapper">
-												<div className="range-box">
-													<div className="price-label">Price:</div>
-													<div
-														id="price-range-filter-4"
-														className="price-range-filter"
-													></div>
-													<div className="price-filter-wrap d-flex align-items-center">
-														<div className="price-range-select">
-															<div className="price-range range-title">$</div>
-															<div
-																className="price-range"
-																id="price-range-min-4"
-															></div>
-															<div className="price-range">-</div>
-															<div
-																className="price-range"
-																id="price-range-max-4"
-															></div>
-														</div>
-													</div>
+										<div className="col-lg-12 pl-15">
+											<label className='text-black'>Price Range</label>
+											<div className='row'>
+												<div className="col-lg-6">
+													<input type="text" className="form-control" id="customRange1" placeholder='min' />
+												</div>
+												<div className="col-lg-6">
+													<input type="text" className="form-control" id="customRange1" placeholder='max' />
 												</div>
 											</div>
 										</div>
-										<div className="filter-button">
-											<a
-												href="single-listing1.html"
-												className="filter-btn1 search-btn"
-											>
-												Search<i className="fas fa-search"></i>
+									</div>
+									
+									<div className="banner-search-wrap banner-search-wrap-2">
+										<div className="rld-main-search rld-main-search3">
+											<div className="main-search-field-2">
+												{/* <!-- Area Range --> */}
+												{/* <div className="price-range-wrapper">
+													<div className="range-box">
+														<div className="price-label">Price:</div>
+														<div
+															id="price-range-filter-4"
+															className="price-range-filter"
+														></div>
+														<div className="price-filter-wrap d-flex align-items-center">
+															<div className="price-range-select">
+																<div className="price-range range-title">$</div>
+																<div
+																	className="price-range"
+																	id="price-range-min-4"
+																></div>
+																<div className="price-range">-</div>
+																<div
+																	className="price-range"
+																	id="price-range-max-4"
+																></div>
+															</div>
+														</div>
+													</div>
+												</div> */}
+											</div>
+											<div className="filter-button">
+												<button
+													type="submit"
+													className="filter-btn1 search-btn"
+												>
+													Search<i className="fas fa-search"></i>
+												</button>
+											</div>
+										</div>
+										{/* <!--/ End Search Form --> */}
+									</div>
+								</form>
+							</div>
+							{
+								opportunities.length>0 && (
+									<div className="widget widget-listing-box1">
+										<h3 className="widget-subtitle">Latest Listing</h3>
+										<div className="item-img">
+											<a>
+												<Image
+													src={opportunities[0]?.images[0]}
+													width="630px"
+													height={'400px'}
+													alt="widget"
+													// src={Widget6} alt="widget" width="630" height="400"
+												/>
 											</a>
+											<div className="item-category-box1">
+												<div className="item-category">For Rent</div>
+											</div>
+										</div>
+										<div className="widget-content">
+											<div className="item-category10">
+												<a>Villa</a>
+											</div>
+											<h4 className="item-title">
+												<Link href={`/opportunity/${opportunities[0]?._id}`}>
+													<a>
+														{/* Modern Villa for House Highland Ave Los Angeles */}{" "}
+														{opportunities[0]?.propertyTitle}
+													</a>
+												</Link>
+											</h4>
+											<div className="location-area">
+												<i className="flaticon-maps-and-flags"></i>Downey,California
+											</div>
+											<div className="item-price">
+												{/* $11,000 */} AED {opportunities[0]?.priceDemand}
+												{/* <span>/mo</span> */}
+											</div>
 										</div>
 									</div>
-									{/* <!--/ End Search Form --> */}
-								</div>
-							</div>
-							<div className="widget widget-listing-box1">
-								<h3 className="widget-subtitle">Latest Listing</h3>
-								<div className="item-img">
-									<a>
-										<Image
-											src={data[0]?.images[0]}
-                                            width="630px"
-                                            height={'400px'}
-											alt="widget"
-											// src={Widget6} alt="widget" width="630" height="400"
-										/>
-									</a>
-									<div className="item-category-box1">
-										<div className="item-category">For Rent</div>
-									</div>
-								</div>
-								<div className="widget-content">
-									<div className="item-category10">
-										<a>Villa</a>
-									</div>
-									<h4 className="item-title">
-										<Link href={`/opportunity/${data[0]?._id}`}>
-											<a>
-												{/* Modern Villa for House Highland Ave Los Angeles */}{" "}
-												{data[0]?.propertyTitle}
-											</a>
-										</Link>
-									</h4>
-									<div className="location-area">
-										<i className="flaticon-maps-and-flags"></i>Downey,California
-									</div>
-									<div className="item-price">
-										{/* $11,000 */} AED {data[0]?.priceDemand}
-										{/* <span>/mo</span> */}
-									</div>
-								</div>
-							</div>
+								)
+							}
 							<div className="widget widget-post">
 								<div className="item-img">
 									<Image src={widget05.src} blurDataURL={widget05.blurDataURL} alt="widget" width="690" height="850" />
@@ -243,7 +308,7 @@ const Properties: NextPage = ({data, query}: any) => {
 									<div className="col-lg-12 col-md-12">
 										<div className="item-shorting-box">
 											<div className="shorting-title">
-												<h4 className="item-title">{data.length} Search Results Found</h4>
+												<h4 className="item-title">{opportunities.length} Search Results Found</h4>
 											</div>
 											<div className="item-shorting-box-2">
 												<div className="by-shorting">
@@ -283,15 +348,18 @@ const Properties: NextPage = ({data, query}: any) => {
 								</div>
 								<div className="tab-style-1 tab-style-3">
 									<div className="tab-content" id="myTabContent">
-										<div
-											className="tab-pane fade show active"
+										<div className="tab-pane fade show active"
 											id="mylisting"
 											role="tabpanel"
 										>
 											<div className="row">
-												{data.slice(0, 10).map((i: any, index: any) => {
-													return <PropertyCard img={i} data={i} key={index} />;
-												})}
+												{
+													opportunities.length > 0 && (
+														data.slice(0, 10).map((i: any, index: any) => {
+															return <PropertyCard img={i} data={i} key={index} />;
+														})
+													)
+												}
 											</div>
 
 											{/* <div className="pagination-style-1">
@@ -436,7 +504,10 @@ export async function getServerSideProps(context: any) {
 		let filter: any = {
 			propertyType : context.query.propertyType
 		}
-		res = await fetch(`http://127.0.0.1:3000/api/property/filter`, {
+		context.query.rooms != undefined && (filter.bedrooms = context.query.rooms);
+		context.query.bathrooms != undefined && (filter.bathrooms = context.query.bathrooms);
+		
+		res = await fetch(`${Base_URL}/api/property/filter`, {
 			method: "POST",
 			body: JSON.stringify(filter),
 			headers: {

@@ -57,11 +57,10 @@ const Contact: NextPage = () => {
 								<h3 className="contact-title">Office Information</h3>
 								<div className="contact-list">
 									<ul>
-										{/* <li>Homlisti Real Estate Agency</li>
-										<li>(United Estate Of America) Co., Ltd.</li>
-										<li>Bridge 8, Room 9201,</li>
-										<li>#25 Jocker Goru Zhong Road,</li>
-										<li>NYPD 200025 USA</li> */}
+										<li>Thehandover Gulf FZCO,</li>
+										<li>Dubai Silicon Oasis, DDP,</li>
+										<li>Building A2, Dubai,</li>
+										<li>United Arab Emirates 6009</li>
 									</ul>
 								</div>
 								<div className="phone-box">

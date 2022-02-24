@@ -15,7 +15,7 @@ const MainContext = createContext<contextType>(context);
 const MainProvider = ({children}: any) => {
 
     const [search, setSearch] = useState({
-        text: '', city: '', property_type: ''
+        text: '', city: '', property_type: '', bedrooms: '', bathrooms: ''
     })
 
     return (

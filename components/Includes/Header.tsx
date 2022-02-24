@@ -3,13 +3,14 @@ import SearchSection from "./SearchSection";
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { useRouter } from "next/router";
 
 const Header = () => {
 
 	const [activeLink, setActiveLink] = useState('')
+	const router = useRouter();
 
 	useEffect(()=>{
-		
 	},[])
 
 	return (
@@ -38,17 +39,17 @@ const Header = () => {
 									<ul>
 										<li>
 											<Link href={'/'} >
-												<a className={`${activeLink=='' ? 'active' : ''}`} onClick={()=>setActiveLink('')}>Home</a>
+												<a className={`${router.pathname=='/' ? 'active' : ''}`}>Home</a>
 											</Link>
 										</li>
 										<li>
 											<Link href={'/about'} >
-												<a className={`${activeLink=='about' ? 'active' : ''}`} onClick={()=>setActiveLink('about')} >About</a>
+												<a className={`${router.pathname.search('about')!=-1 ? 'active' : ''}`} >About</a>
 											</Link>
 										</li>
 										<li>
 											<Link href={'/opportunities'} >
-												<a className={`${activeLink=='properties' ? 'active' : ''}`} onClick={()=>setActiveLink('opportunities')}>Opportunities</a>
+												<a className={`${router.pathname.search('opportunities')!=-1 || router.pathname.search('opportunity')!=-1 ? 'active' : ''}`}>Opportunities</a>
 											</Link>
 										</li>
 										{/* <li className="hide-on-desktop-menu">
@@ -74,7 +75,7 @@ const Header = () => {
 										<li>
 											<Link href={'/contact'}
 											>
-												<a className={`${activeLink=='contact' ? 'active' : ''}`} onClick={()=>setActiveLink('contact')}>
+												<a className={`${router.pathname.search('contact')!=-1 ? 'active' : ''}`}>
 												Contact
 												</a>
 											</Link>
