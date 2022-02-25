@@ -43,64 +43,66 @@ const Contact: NextPage = () => {
 			<div className="container">
 				<div className="row">
 					<div className="col-lg-12">
-						<div className="contact-box1">
-							<div className="contact-img">
-								<iframe
-								src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d116878.45300534296!2d90.4195470442074!3d23.731268144494663!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sbd!4v1635221509729!5m2!1sen!2sbd"
-								width="600"
-								height="550"
-								// style="border:0;"
-								allowFullScreen={false}
-								loading="lazy" ></iframe>
-							</div>
-							<div className="contact-content">
-								<h3 className="contact-title">Office Information</h3>
-								<div className="contact-list">
-									<ul>
-										<li>Thehandover Gulf FZCO,</li>
-										<li>Dubai Silicon Oasis, DDP,</li>
-										<li>Building A2, Dubai,</li>
-										<li>United Arab Emirates 6009</li>
-									</ul>
+						<div className="contact-box1 d-block">
+							<div className='row'>
+								<div className="contact-img col-lg-6 col-md-12">
+									<iframe
+									src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d116878.45300534296!2d90.4195470442074!3d23.731268144494663!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sbd!4v1635221509729!5m2!1sen!2sbd"
+									width="100%"
+									height="550"
+									// style="border:0;"
+									allowFullScreen={false}
+									loading="lazy" ></iframe>
 								</div>
-								<div className="phone-box">
-									<div className="item-lebel">Emergency Call :</div>
-									<div className="phone-number">+__ __ ____ ____</div>
-									<div className="item-icon">
-										<i className="fas fa-phone-alt"></i>
+								<div className="contact-content col-lg-6 col-md-12">
+									<h3 className="contact-title">Office Information</h3>
+									<div className="contact-list">
+										<ul>
+											<li>Thehandover Gulf FZCO,</li>
+											<li>Dubai Silicon Oasis, DDP,</li>
+											<li>Building A2, Dubai,</li>
+											<li>United Arab Emirates 6009</li>
+										</ul>
 									</div>
-								</div>
-								<div className="social-box">
-									<div className="item-lebel">Social Share :</div>
-									<ul className="item-social">
-										<li className='mx-1'>
-											<a href="https://www.facebook.com/">
-												<i className="fab fa-facebook-f"></i>
-											</a>
-										</li>
-										<li className='mx-1'>
-											<a href="https://twitter.com/">
-												<i className="fab fa-twitter"></i>
-											</a>
-										</li>
-										<li className='mx-1'>
-											<a href="https://vimeo.com/">
-												<i className="fab fa-vimeo-v"></i>
-											</a>
-										</li>
-										<li className='mx-1'>
-											<a href="https://www.pinterest.com/">
-												<i className="fab fa-pinterest-p"></i>
-											</a>
-										</li>
-										<li className='mx-1'>
-											<a href="https://web.whatsapp.com/">
-												<i className="fab fa-whatsapp"></i>
-											</a>
-										</li>
-									</ul>
-									<div className="item-icon">
-										<i className="fas fa-share-alt"></i>
+									<div className="phone-box">
+										<div className="item-lebel">Emergency Call :</div>
+										<div className="phone-number">+__ __ ____ ____</div>
+										<div className="item-icon">
+											<i className="fas fa-phone-alt"></i>
+										</div>
+									</div>
+									<div className="social-box">
+										<div className="item-lebel">Social Share :</div>
+										<ul className="item-social">
+											<li className='mx-1'>
+												<a href="https://www.facebook.com/">
+													<i className="fab fa-facebook-f"></i>
+												</a>
+											</li>
+											<li className='mx-1'>
+												<a href="https://twitter.com/">
+													<i className="fab fa-twitter"></i>
+												</a>
+											</li>
+											<li className='mx-1'>
+												<a href="https://vimeo.com/">
+													<i className="fab fa-vimeo-v"></i>
+												</a>
+											</li>
+											<li className='mx-1'>
+												<a href="https://www.pinterest.com/">
+													<i className="fab fa-pinterest-p"></i>
+												</a>
+											</li>
+											<li className='mx-1'>
+												<a href="https://web.whatsapp.com/">
+													<i className="fab fa-whatsapp"></i>
+												</a>
+											</li>
+										</ul>
+										<div className="item-icon">
+											<i className="fas fa-share-alt"></i>
+										</div>
 									</div>
 								</div>
 							</div>

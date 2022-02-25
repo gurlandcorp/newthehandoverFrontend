@@ -10,6 +10,7 @@ import Insta6 from "../../public/assets/img/instagram/insta06.jpg";
 import Logo from "../../public/logohandover.png";
 
 const Footer = () => {
+
     return (
         <>
         <footer className="footer-area">
@@ -28,7 +29,7 @@ const Footer = () => {
 										/>
 									</div>
 									<p>
-									<a href='/'>theHandover.com</a> is the only online marketplace for off plan investing. Search projects. Bid. Invest
+									<a href='https://thehandover.com' style={{color: '#00c194'}}>The handover</a> is the only online marketplace for off plan investing. Search projects. Bid. Invest
 									</p>
 									<div className="item-social">
 										<ul>
@@ -106,6 +107,7 @@ const Footer = () => {
 															height="73"
 															alt="instagram"
                                                             blurDataURL={Insta1.blurDataURL}
+															layout="responsive"
 														/>
 													</a>
 													<div className="item-overlay">
@@ -130,6 +132,7 @@ const Footer = () => {
 															width="86"
 															height="73"
 															alt="instagram"
+															layout="responsive"
 														/>
 													</a>
 													<div className="item-overlay">
@@ -154,6 +157,7 @@ const Footer = () => {
 															width="86"
 															height="73"
 															alt="instagram"
+															layout="responsive"
 														/>
 													</a>
 													<div className="item-overlay">
@@ -178,6 +182,7 @@ const Footer = () => {
 															width="86"
 															height="73"
 															alt="instagram"
+															layout="responsive"
 														/>
 													</a>
 													<div className="item-overlay">
@@ -202,6 +207,7 @@ const Footer = () => {
 															width="86"
 															height="73"
 															alt="instagram"
+															layout="responsive"
 														/>
 													</a>
 													<div className="item-overlay">
@@ -227,6 +233,7 @@ const Footer = () => {
 															height="73"
 															alt="instagram"
                                                             blurDataURL={Insta6.blurDataURL}
+															layout="responsive"
 														/>
 													</a>
 													<div className="item-overlay">

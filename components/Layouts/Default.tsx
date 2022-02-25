@@ -9,7 +9,6 @@ const Default = ({children}: any) => {
     useEffect(() => {
         document.addEventListener('scroll', function(e) {
             let lastKnownScrollPosition = window.scrollY;
-            console.log(lastKnownScrollPosition);
             if(lastKnownScrollPosition > 100)
             {
                 document.querySelector('#header-bottombar')?.classList.add('hide');

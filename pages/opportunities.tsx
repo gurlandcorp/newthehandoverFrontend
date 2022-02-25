@@ -70,7 +70,6 @@ const Properties: NextPage = ({data, query}: any) => {
 				city: city,
 			}
 		}
-		console.log(filters)
 		let res = await fetch(`${Base_URL}/api/property/filter`, {
 			method: "POST",
 			body: JSON.stringify(filters),
