@@ -1,4 +1,5 @@
 import React from 'react'
+import type { NextPage } from 'next';
 import { Grid, Paper } from '@mui/material'
 import { ButtonProps } from "@mui/material/Button"
 import { makeStyles } from '@mui/styles'
@@ -16,7 +17,7 @@ import { parseCookies } from 'nookies'
 import Cookies from "js-cookie"
 
 
-const Seller = (props: any) => {
+const Seller: NextPage = (props: any) => {
 
     interface Data {
         calories: number;

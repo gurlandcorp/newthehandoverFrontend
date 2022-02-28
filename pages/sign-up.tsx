@@ -1,4 +1,4 @@
-import { Copyright } from '@mui/icons-material'
+import type { NextPage } from 'next';
 import { Button, Checkbox, CssBaseline, FormControlLabel, Grid, TextField, Box, FormControl, FormLabel, RadioGroup, Radio, Typography, Link as MUILink } from '@mui/material'
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { styled } from '@mui/system'
@@ -26,7 +26,7 @@ const SignUpButton = styled(Button)(() => ({
     color: 'white',
 }))
 
-const SingUp = () => {
+const SingUp: NextPage = () => {
 
     const theme = createTheme({
         palette: {

@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import type { NextPage } from 'next';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -66,7 +67,7 @@ const LoginButton = styled(Button)(() => ({
     color: 'white',
 }))
 
-const SignIn = () => {
+const SignIn: NextPage = () => {
 
     const theme = createTheme({
         palette: {

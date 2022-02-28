@@ -9,8 +9,9 @@ import { Base_URL } from '../../../config/constants'
 import axios from 'axios'
 import { route } from 'next/dist/server/router'
 import { useRouter } from 'next/router'
+import { NextPage } from 'next'
 
-const PropertyAdd = () => {
+const PropertyAdd: NextPage = () => {
 
     const initialState = {
 		propertyTitle: "",
@@ -251,3 +252,9 @@ const PropertyAdd = () => {
 }
 
 export default PropertyAdd
+
+export async function getServerSideProps(context: any) {
+    return {
+      props: {}, // will be passed to the page component as props
+    }
+}
