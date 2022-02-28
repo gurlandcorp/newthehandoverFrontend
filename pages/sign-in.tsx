@@ -200,7 +200,7 @@ const SignIn = () => {
                         <Avatar sx={{ m: 1, bgcolor: '#00c194' }}>
                             <LockOutlinedIcon />
                         </Avatar>
-                        <Image src={Logo} width={'200px'} height={'23px'} />
+                        <Image src={Logo} width={'200px'} height={'23px'} alt='The Handover' />
                         <Typography component="h1" variant="h5">
                         Sign in
                         </Typography>

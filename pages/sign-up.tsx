@@ -134,7 +134,7 @@ const SingUp = () => {
             <Grid container className="d-flex flex-wrap justify-content-center" component="main" sx={{ width: '100%', height: '100%', minHeight: '100vh' }}>
                 <CssBaseline />
                 <Grid item xs={12} className="d-flex flex-column justify-content-center align-items-center" style={{backgroundColor: 'rgb(25 135 84 / 20%)', padding: '5rem'}}>
-                    <Image src={Logo} width={'350px'} height={'40px'} />
+                    <Image src={Logo} width={'350px'} height={'40px'} alt={'The Handover'} />
                     <h4 className="mt-4">Register yourselft in The Handover</h4>
                 </Grid>
                 <Grid className="d-flex flex-wrap justify-content-center w-100">

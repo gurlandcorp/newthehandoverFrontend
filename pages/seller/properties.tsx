@@ -12,7 +12,6 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import TableSortLabel from '@mui/material/TableSortLabel';
 import { Base_URL } from '../../config/constants';
-import { NextResponse } from 'next/server';
 import { parseCookies } from 'nookies'
 import Cookies from "js-cookie"
 
@@ -105,9 +104,9 @@ const Seller = (props: any) => {
                         </TableHead>
                         <TableBody>
                             {
-                                props.data.properties.map((property: any) => {
+                                props.data.properties.map((property: any, index: any) => {
                                     return (
-                                        <TableRow hover role="checkbox" tabIndex={-1} >
+                                        <TableRow key={index} hover role="checkbox" tabIndex={-1} >
                                             {/* <TableCell padding="checkbox">
                                                 <Checkbox color="primary" />
                                             </TableCell> */}
