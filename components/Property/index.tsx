@@ -351,7 +351,7 @@ const Index = (props: any) => {
 										<div className="item-map">
 											<iframe
 												src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d14604.942936504207!2d90.42287424999999!3d23.774618500000003!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sbd!4v1640231732625!5m2!1sen!2sbd"
-												width="731"
+												width="100%"
 												height="349"
 												style={{ border: "0" }}
 												allowFullScreen={false}
@@ -519,11 +519,9 @@ const Index = (props: any) => {
 										<div className="row">
 											<div className="form-group col-lg-12">
 												<div className="advanced-button">
-													<a href={`${process.env.APP_URL}/property/bid/${props.property._id}`}
-														className="item-btn"
-													>
-														Place a Bid
-													</a>
+													<Link href={`${process.env.APP_URL}/property/bid/${props.property._id}`}>
+														<a className="item-btn" > Place a Bid </a>
+													</Link>
 												</div>
 											</div>
 										</div>
@@ -534,12 +532,14 @@ const Index = (props: any) => {
 									<h3 className="widget-subtitle">Latest Listing</h3>
 									<div className="item-img">
 										<Link href={'/property/'+props.properties[0]?._id} passHref>
-											<Image
-												src={props.properties[0]?.images[0]}
-                                                width={'540px'}
-                                                height={'360px'}
-												alt="widget"
-											/>
+											<a>
+												<Image
+													src={props.properties[0]?.images[0]}
+													width={'540px'}
+													height={'360px'}
+													alt="widget"
+												/>
+											</a>
 										</Link>
 										<div className="item-category-box1">
 											<div className="item-category">For Rent</div>

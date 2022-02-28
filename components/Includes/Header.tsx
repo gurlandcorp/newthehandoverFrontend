@@ -26,8 +26,8 @@ const Header = () => {
 								<div className="logo-area">
 									<Link href={'/'} >
                                         <a className="temp-logo">
-										<Image src={Logo}
-											width="157"
+										<Image src={Logo} layout="intrinsic"
+											width="350"
 											height="40"
 											alt="logo"
 											className="img-fluid"

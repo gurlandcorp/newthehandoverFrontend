@@ -1,9 +1,9 @@
 import React from 'react'
 
-const Seller = () => {
+const SellerDashboard = () => {
     return (
-        <div>Seller</div>
+        <div>Seller Dashboard</div>
     )
 }
 
-export default Seller
+export default SellerDashboard

@@ -252,7 +252,7 @@ const Properties: NextPage = ({data, query}: any) => {
 								</form>
 							</div>
 							{
-								opportunities.length>0 && (
+								opportunities?.length>0 && (
 									<div className="widget widget-listing-box1">
 										<h3 className="widget-subtitle">Latest Listing</h3>
 										<div className="item-img">
@@ -315,7 +315,7 @@ const Properties: NextPage = ({data, query}: any) => {
 									<div className="col-lg-12 col-md-12">
 										<div className="item-shorting-box">
 											<div className="shorting-title">
-												<h4 className="item-title">{opportunities.length} Search Results Found</h4>
+												<h4 className="item-title">{opportunities?.length} Search Results Found</h4>
 											</div>
 											<div className="item-shorting-box-2">
 												<div className="by-shorting">
@@ -361,7 +361,7 @@ const Properties: NextPage = ({data, query}: any) => {
 										>
 											<div className="row">
 												{
-													opportunities.length > 0 && (
+													opportunities?.length > 0 && (
 														data.slice(0, 10).map((i: any, index: any) => {
 															return <PropertyCard img={i} data={i} key={index} />;
 														})
@@ -505,7 +505,8 @@ export default Properties
 
 export async function getServerSideProps(context: any) {
     // Fetch data from external API
-	let res;
+	let res: any;
+	let data = null
 	if(context.query.propertyType!=undefined)
 	{
 		let filter: any = {
@@ -522,15 +523,21 @@ export async function getServerSideProps(context: any) {
 				"Content-Type": "application/json"
 			}
 		})
-		.then(response => response.json())
-		res = res.data
+		if(res.status==200)
+		{
+			res = res.json()
+			data = res.data
+		}
 	}
 	else
 	{
-    	res = await fetch(`${process.env.API_URL}/property/sort/desc`)
-		.then(response => response.json());
+    	res = await fetch(`${process.env.API_URL}/property/sort/desc`);
+		if(res.status==200)
+		{
+			res = await res.json()
+			data = res
+		}
 	}
-    const data = await res
     // Pass data to the page via props
     return { 
         props: { 

@@ -13558,9 +13558,13 @@ body.slidemenuon .sidebarBtn .bar:nth-child(4) {
 }
 @media only screen and (max-width: 413px) {
   .single-property .single-listing-box1 .overview-area .gallery-icon-box {
-    display: inline-block;
+    display: flex;
     margin-bottom: 0;
-    margin-right: 40px;
+    /* margin-right: 40px; */
+    gap: 0.5rem;
+    align-items: baseline;
+    width: 100%;
+    flex-wrap: wrap;
   }
   .single-property .single-listing-box1 .overview-area .gallery-icon-box:last-child {
     margin-right: 0;
