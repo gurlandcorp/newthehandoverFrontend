@@ -127,7 +127,7 @@ const Header = () => {
 						</div>
 					</div>
 				</div>
-				<SearchSection />
+				{/* <SearchSection /> */}
 			</header>
 			<header className="p-3 mob-header">
 				<div style={{textAlign: 'right'}}>

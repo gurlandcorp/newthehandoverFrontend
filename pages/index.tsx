@@ -10,6 +10,7 @@ import BlogSection from '../components/Shares/Blogs'
 import JoiningBanner from '../components/Home/JoiningBanner'
 import FeaturedProperty from '../components/Shares/FeaturedProperty'
 import LetUSGuid from '../components/Home/LetUSGuid'
+import TopProperties from '../components/Home/TopProperties'
 
 const Home: NextPage = ({data}: any) => {
     return (
@@ -23,7 +24,8 @@ const Home: NextPage = ({data}: any) => {
             data.latest_properties != null && <Banner data={data.latest_properties[0]} />
         }
         
-        <LetUSGuid />
+        {/* <LetUSGuid /> */}
+        <TopProperties />
         <AboutSection />
         <LocationSection />
         <PropertyBanner />

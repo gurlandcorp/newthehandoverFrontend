@@ -526,7 +526,7 @@ export async function getServerSideProps(context: any) {
 		if(res.status==200)
 		{
 			res = res.json()
-			data = res.data
+			data = res.data==undefined ? [] : res.data
 		}
 	}
 	else

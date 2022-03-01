@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import type { NextPage } from 'next';
 import { Grid, Paper } from '@mui/material'
 import { ButtonProps } from "@mui/material/Button"
@@ -12,9 +12,11 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import TableSortLabel from '@mui/material/TableSortLabel';
-import { Base_URL } from '../../config/constants';
+import { API_LINK, Base_URL } from '../../config/constants';
 import { parseCookies } from 'nookies'
 import Cookies from "js-cookie"
+import { Delete } from '@mui/icons-material';
+import CustomPaper from '../../components/Shares/Components/CustomPaper';
 
 
 const Seller: NextPage = (props: any) => {
@@ -65,14 +67,27 @@ const Seller: NextPage = (props: any) => {
           label: 'Protein (g)',
         },
     ];
+
+    const [properties, setProperties] = useState(props.data.properties)
+
+    const delProperty = async (id: any) => {
+        let res = await fetch(`${Base_URL}/api/seller/properties/delete`, {
+            method: "POST",
+            body: JSON.stringify({
+                _id: id
+            })
+        }).then(response => response.json())
+        console.log(res)
+    }
+
     return (
         <Grid container>
             <Grid item py={2} width={'100%'} className={`d-flex flex-wrap justify-content-between`}>
                 <h4 className="mb-0">Properties</h4>
                 <AddItemButton href="/seller/property/add">Add new property</AddItemButton>
             </Grid>
-            <Paper className="my-4 w-100 p-2">
-                <Grid item width={'100%'} py={2}>
+            <CustomPaper>
+                <Grid item className="my-4 w-100 py-2 px-4" width={'100%'} py={2}>
                     <Table sx={{ minWidth: '100%' }} aria-labelledby="tableTitle" size={'medium'} >
                         <TableHead>
                             <TableRow>
@@ -85,27 +100,28 @@ const Seller: NextPage = (props: any) => {
                                 />
                                 </TableCell> */}
                                 <TableCell align={'left'} padding={'none'} sortDirection={false} >
-                                    <TableSortLabel>Title</TableSortLabel>
+                                Title
                                 </TableCell>
                                 <TableCell align={'left'} padding={'normal'} sortDirection={false} >
-                                    <TableSortLabel >Area</TableSortLabel>
+                                Area
                                 </TableCell>
                                 <TableCell align={'left'} padding={'normal'} >
-                                    <TableSortLabel>
-                                    Bedrooms
-                                    </TableSortLabel>
+                                Bedrooms
                                 </TableCell>
                                 <TableCell align={'left'} padding={'normal'} >
-                                    <TableSortLabel>Bathrooms</TableSortLabel>
+                                Type
                                 </TableCell>
                                 <TableCell align={'left'} padding={'normal'} >
-                                    <TableSortLabel>Type</TableSortLabel>
+                                Type
+                                </TableCell>
+                                <TableCell align={'left'} padding={'normal'} >
+                                    Action
                                 </TableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
                             {
-                                props.data.properties.map((property: any, index: any) => {
+                                properties?.map((property: any, index: any) => {
                                     return (
                                         <TableRow key={index} hover role="checkbox" tabIndex={-1} >
                                             {/* <TableCell padding="checkbox">
@@ -116,6 +132,9 @@ const Seller: NextPage = (props: any) => {
                                             <TableCell align="left">{property.bedrooms}</TableCell>
                                             <TableCell align="left">{property.bathrooms}</TableCell>
                                             <TableCell align="left">{property.propertyType}</TableCell>
+                                            <TableCell align="left">
+                                                <Delete color="error" onClick={()=>delProperty(property._id)} />
+                                            </TableCell>
                                         </TableRow>
                                     )
                                 })
@@ -123,7 +142,7 @@ const Seller: NextPage = (props: any) => {
                         </TableBody>
                     </Table>
                 </Grid>
-            </Paper>
+            </CustomPaper>
         </Grid>
     )
 }

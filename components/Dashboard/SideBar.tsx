@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import MuiDrawer from '@mui/material/Drawer';
 import { styled, useTheme, Theme, CSSObject, createTheme, ThemeProvider } from '@mui/material/styles';
 import { styled as SysStyled } from '@mui/system';
@@ -11,14 +11,12 @@ import ListItem from '@mui/material/ListItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
-import MailIcon from '@mui/icons-material/Mail';
 import { useRouter } from 'next/router';
 import { makeStyles } from '@mui/styles'
 import { Dashboard } from '@mui/icons-material';
 import Link from 'next/link';
 import Logo from "../../public/logohandover.png";
-import Image from 'next/image';
-import { ListItemButton } from '@mui/material';
+import { ListItemButton, Box } from '@mui/material';
 import { parseCookies } from "nookies"
 
 const drawerWidth = 280;  
@@ -83,19 +81,56 @@ const useStyles = makeStyles({
         '& svg': {
             color: '#00c194'
         }
+    },
+    paper: {
+        background: "transparent",
+        borderRight: "2px dotted #ddd"
     }
 })
 
+const theme = createTheme({
+    components: {
+        MuiDrawer: {
+            styleOverrides: {
+                paper: {
+                    backgroundColor: "transparent",
+                    borderRight: "2px dotted #ddd"
+                }
+            }
+        },
+        MuiListItemButton: {
+            styleOverrides: {
+                root: {
+                    "&.Mui-selected": {
+                        color: '#00c194',
+                        backgroundColor: 'rgba(0, 193, 148, 0.09)',
+                        borderRight: '2px solid #00c194',
+                        '& svg': {
+                            color: '#00c194'
+                        }
+                    }
+                }
+            }
+        },
+    },
+});  
+
 const SideBar = (props: any) => {
-    const theme = useTheme();
+    // const theme = useTheme();
 
     const route = useRouter()
     const {user}: any = parseCookies()
+
+    const [loggedInUser, setLoggedInUser] = useState(user)
+
     useEffect(()=>{
+
+        console.log(JSON.parse(loggedInUser));
+
     },[route])
 
-    const classes = useStyles()
     return (
+        <ThemeProvider theme={theme}>
             <Drawer variant="permanent" open={props.open}>
                 <DrawerHeader>
                     <img src={`${Logo.src}`}
@@ -105,10 +140,13 @@ const SideBar = (props: any) => {
                         className="img-fluid"
                     />
                     <IconButton onClick={props.handleDrawerClose}>
-                        {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
+                        <ChevronLeftIcon />
                     </IconButton>
                 </DrawerHeader>
-                <Divider />
+                <Box sx={{p:3, m:3, backgroundColor: 'rgb(228 245 242 / 57%)', color: '#000', borderRadius: '10px'}}>
+                    {loggedInUser!=null ? JSON.parse(loggedInUser).name : ''}
+                </Box>
+                {/* <Divider /> */}
                 <List>
                     {/* {['Property', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
                         <ListItem button key={text}>
@@ -119,7 +157,7 @@ const SideBar = (props: any) => {
                         </ListItem>
                     ))} */}
                     {
-                        user.userType == "Buyer" ? (
+                        user?.userType == "Buyer" ? (
                             <>
                             <Link href="/seller">
                                 <ListItemButton selected={route.pathname==='/buyer'}>
@@ -173,6 +211,7 @@ const SideBar = (props: any) => {
                     ))}
                 </List> */}
             </Drawer>
+        </ThemeProvider>
     )
 }
 

@@ -17,3 +17,54 @@
 .guidCard h4 {
     font-size: 18px;
 }
+.btnPrimary {
+    background-color: #00c194;
+    padding: 1px 10px;
+    border-radius: 3px;
+}
+.btnPrimary a {
+    color: #fff;
+}
+
+.topPropertyContainer {
+    padding: 5rem 3rem;
+}
+
+.topPropertyHeading {
+    color: #000;
+    text-align: center;
+}
+.propertyListCard {
+    padding: 0.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+}
+.propertyListCard .propertyListCardImage {
+    width: 50px;
+    height: 50px;
+    border-radius: 100%;
+    overflow: hidden;
+}
+
+.propertyListCardContent {
+    margin-left: 1rem;
+    flex: 1;
+}
+
+.propertyListCardContent a {
+    color: #00c194;
+}
+.propertyListCardContent .rate {
+    color: #9f9f9f;
+    padding-right: 1rem;
+}
+.propertyListCard {
+    border: 1px solid transparent;
+    transition: all 0.3s ease-in-out;
+}
+.propertyListCard:hover {
+    background-color: #f8f8f9;
+    box-shadow: none !important;
+    border: 1px solid #00c194;
+}

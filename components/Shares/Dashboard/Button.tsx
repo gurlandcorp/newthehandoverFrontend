@@ -19,7 +19,7 @@ const DefaultButton = styled(Button)<ButtonProps>(({theme}) => ({
 
 const AddItemButton = ({href='', startIcon ,children}: any) => {
     return href !== '' ? (
-        <Link href={href}>
+        <Link href={href} passHref>
             <DefaultButton variant="contained" startIcon={startIcon!='' ? startIcon : <Add />}>
                 {children}
             </DefaultButton>

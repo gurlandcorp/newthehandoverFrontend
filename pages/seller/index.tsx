@@ -1,9 +1,13 @@
 import type { NextPage } from 'next'
+import { parseCookies } from 'nookies'
 import React from 'react'
 
 const SellerDashboard: NextPage = () => {
+
+    const {user} = parseCookies()
+
     return (
-        <div>Seller Dashboard</div>
+        <h4>Hi {JSON.parse(user).name}, Welcome back</h4>
     )
 }
 

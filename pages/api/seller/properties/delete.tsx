@@ -3,7 +3,7 @@ import axios from 'axios'
 import type { NextApiRequest, NextApiResponse } from 'next'
 
 const cors = Cors({
-    methods: ['GET'],
+    methods: ['POST'],
 })
 
 function runMiddleware(req: NextApiRequest, res: NextApiResponse, fn: any) {
@@ -19,16 +19,15 @@ function runMiddleware(req: NextApiRequest, res: NextApiResponse, fn: any) {
 }
 
 export default async function handler(req:NextApiRequest, res: NextApiResponse) {
-
     await runMiddleware(req, res, cors)
-    if(req.method=="GET")
+    if(req.method=="POST")
     {
         let result: any = await axios({
-            method: "GET",
-            url: `${process.env.API_URL}/property/userproperties`,
+            method: "DELETE",
+            url: `${process.env.API_URL}/property/delete/${req.body._id}`,
             headers: {
                 "Content-Type": "application/json",
-                "Authorization": `${req.headers.authorization}`
+                "Authorization": `Bearer ${req.cookies.token}`
             }
         }).then(response => {
             return response.data

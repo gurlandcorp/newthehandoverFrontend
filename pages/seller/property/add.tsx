@@ -10,6 +10,7 @@ import axios from 'axios'
 import { route } from 'next/dist/server/router'
 import { useRouter } from 'next/router'
 import { NextPage } from 'next'
+import CustomPaper from '../../../components/Shares/Components/CustomPaper'
 
 const PropertyAdd: NextPage = () => {
 
@@ -97,7 +98,7 @@ const PropertyAdd: NextPage = () => {
 
         let result = await axios({
             method: "POST",
-            url: `https://handoverapi.herokuapp.com/property/add`,
+            url: `${Base_URL}/property/add`,
             headers: {
                 "Content-Type": "multipart/form-data",
                 "Authorization": `Bearer ${token}`
@@ -150,7 +151,7 @@ const PropertyAdd: NextPage = () => {
                 <h4 className="mb-0">Add new property</h4>
                 <AddItemButton href="/seller/properties" startIcon={<ListAltSharp />}>Properties list</AddItemButton>
             </Grid>
-            <Paper>
+            <CustomPaper>
                 <Grid container component="form" spacing={4} columns={12} className="p-4" onSubmit={(e: any)=>handleSubmit(e)}>
                     <Grid item xs={6}>
                         <TextField fullWidth id="propertyTitle" size="small" name="propertyTitle" label="Property Title" color="info" variant="standard" value={user.propertyTitle} onChange={(e)=>handleInputs(e)} />
@@ -246,7 +247,7 @@ const PropertyAdd: NextPage = () => {
                         <AddItemButton startIcon={<Add />}>Add Property</AddItemButton>
                     </Grid>
                 </Grid>
-            </Paper>
+            </CustomPaper>
         </Grid>
     )
 }
