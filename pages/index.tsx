@@ -6,10 +6,10 @@ import LocationSection from '../components/Home/LocationSection'
 import PropertyBanner from '../components/Shares/PropertyBanner'
 // import styles from '../styles/Home.module.css'
 // import API_Link from "../lib/constants"
-import BlogSection from '../components/Shares/Blogs'
+// import BlogSection from '../components/Shares/Blogs'
 import JoiningBanner from '../components/Home/JoiningBanner'
 import FeaturedProperty from '../components/Shares/FeaturedProperty'
-import LetUSGuid from '../components/Home/LetUSGuid'
+// import LetUSGuid from '../components/Home/LetUSGuid'
 import TopProperties from '../components/Home/TopProperties'
 
 const Home: NextPage = ({data}: any) => {
@@ -21,7 +21,7 @@ const Home: NextPage = ({data}: any) => {
             <link rel="icon" href="/favicon.ico" />
         </Head>
         {
-            data.latest_properties != null && <Banner data={data.latest_properties[0]} />
+            data.latest_properties != null && <Banner data={data.latest_properties[data.latest_properties.length-1]} />
         }
         
         {/* <LetUSGuid /> */}
