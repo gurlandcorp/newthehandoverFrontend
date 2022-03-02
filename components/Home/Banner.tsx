@@ -11,9 +11,14 @@ const Banner = (props: any) => {
     const {search, setSearch} = useContext(MainContext)
 
     const router = useRouter()
+
     const searchSubmit = (e: any) => {
         e.preventDefault()
         router.push(`/opportunities?propertyType=${search.property_type}&city=${search.city}&text=${search.text}`)
+    }
+
+    const learnMore = () => {
+        document.querySelector('.Home_topPropertyContainer__zEQHi')?.scrollIntoView()
     }
 
     return (
@@ -61,13 +66,18 @@ const Banner = (props: any) => {
                     <div className="col-xl-7 col-md-6 col-sm-12">
                         <div className={styles.heroSectionContentContainer}>
                             <h2>Off plan property investing for everyone online</h2>
-                            <div className="">
+                            <p>TheHandover is the world's first and largest Off Plan investing marketplace</p>
+                            <div className={styles.heroSectionBtnWrapper}>
+                                <h4>Explore <span>marketplace</span> as</h4>
                                 <button className={`${styles.btnGreen}`} style={{marginRight: '1rem'}}>
-                                    developers
+                                    Developer
                                 </button>
                                 <button className={styles.btnGreenOutline}>
-                                    Investors
+                                    Investor
                                 </button>
+                            </div>
+                            <div>
+                                <a className={`cursor-pointer ${styles.learnMore}`} onClick={()=>learnMore()}>Learn more about <span>TheHandover</span></a>
                             </div>
                         </div>
                     </div>
