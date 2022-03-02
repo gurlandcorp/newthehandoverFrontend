@@ -66,7 +66,7 @@ const Banner = (props: any) => {
                     <div className="col-xl-7 col-md-6 col-sm-12">
                         <div className={styles.heroSectionContentContainer}>
                             <h2>Off plan property investing for everyone online</h2>
-                            <p>TheHandover is the world&apos;s first and largest Off Plan investing marketplace</p>
+                            <p>TheHandover is the world&apos;s first and largest Off-plan investing marketplace</p>
                             <div className={styles.heroSectionBtnWrapper}>
                                 <h4>Explore <span>marketplace</span> as</h4>
                                 <button className={`${styles.btnGreen}`} style={{marginRight: '1rem'}}>
