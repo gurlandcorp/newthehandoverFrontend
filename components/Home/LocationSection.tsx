@@ -23,7 +23,7 @@ const LocationSection = () => {
                     </div>
                     <div className="col-lg-6 col-md-5">
                         <div className="heading-button">
-                            <Link href={'/properties'}>
+                            <Link href={'/opportunities'}>
                                 <a className="heading-btn item-btn-2">
                                     Explore More
                                 </a>

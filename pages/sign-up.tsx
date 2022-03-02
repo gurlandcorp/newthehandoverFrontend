@@ -198,7 +198,7 @@ const SingUp: NextPage = () => {
                     </SignUpButton>
                     <Grid container className="text-center">
                         <Grid item xs={12}>
-                            <Link href="/sign-in">
+                            <Link href="/sign-in" passHref>
                                 <MUILink variant='body2'>{"Alerady have an account? Sign In"}</MUILink>
                             </Link>
                         </Grid>
