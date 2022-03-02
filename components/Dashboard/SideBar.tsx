@@ -160,7 +160,7 @@ const SideBar = (props: any) => {
                     {
                         route.pathname.search('/buyer') != -1 && (
                             <>
-                            <Link href="/buyer">
+                            <Link href="/buyer" passHref>
                                 <ListItemButton selected={route.pathname==='/buyer'}>
                                         <ListItemIcon>
                                             <Dashboard />
@@ -182,7 +182,7 @@ const SideBar = (props: any) => {
                     {
                         route.pathname.search('seller') != -1 && (
                             <>
-                            <Link href="/seller">
+                            <Link href="/seller" passHref>
                                 <ListItemButton selected={route.pathname==='/seller'}>
                                         <ListItemIcon>
                                             <Dashboard />
@@ -190,7 +190,7 @@ const SideBar = (props: any) => {
                                         <ListItemText primary={'Dashboard'} />
                                 </ListItemButton>
                             </Link>
-                            <Link href="/seller/properties">
+                            <Link href="/seller/properties" passHref>
                                 <ListItemButton selected={route.pathname.search('seller/properties')!=-1 || route.pathname.search('seller/property/add')!=-1}>
                                     <ListItemIcon>
                                         <InboxIcon />
@@ -201,7 +201,7 @@ const SideBar = (props: any) => {
                             </>
                         )
                     }
-                    <Link href="/user/profile">
+                    <Link href="/user/profile" passHref>
                         <ListItemButton selected={route.pathname.search('user/profile')!=-1}>
                             <ListItemIcon>
                                 <InboxIcon />
