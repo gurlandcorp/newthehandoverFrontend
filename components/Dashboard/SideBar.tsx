@@ -13,7 +13,7 @@ import ListItemText from '@mui/material/ListItemText';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import { useRouter } from 'next/router';
 import { makeStyles } from '@mui/styles'
-import { Dashboard } from '@mui/icons-material';
+import { AccountCircle, Dashboard } from '@mui/icons-material';
 import Link from 'next/link';
 import Logo from "../../public/logohandover.png";
 import { ListItemButton, Box } from '@mui/material';
@@ -122,12 +122,13 @@ const SideBar = (props: any) => {
     const {user}: any = parseCookies()
 
     const [loggedInUser, setLoggedInUser] = useState(user)
+    const [name, setName] = useState(loggedInUser!= null && JSON.parse(loggedInUser).name)
 
     useEffect(()=>{
 
         console.log(JSON.parse(loggedInUser));
 
-    },[route])
+    },[route, loggedInUser])
 
     return (
         <ThemeProvider theme={theme}>
@@ -143,8 +144,8 @@ const SideBar = (props: any) => {
                         <ChevronLeftIcon />
                     </IconButton>
                 </DrawerHeader>
-                <Box sx={{p:3, m:3, backgroundColor: 'rgb(228 245 242 / 57%)', color: '#000', borderRadius: '10px'}}>
-                    {loggedInUser!=null ? JSON.parse(loggedInUser).name : ''}
+                <Box sx={{p:1, m:3, backgroundColor: 'rgb(228 245 242 / 57%)', color: '#000', borderRadius: '10px'}}>
+                    <AccountCircle sx={{m:1}} /> {name!=null ? name : ''}
                 </Box>
                 {/* <Divider /> */}
                 <List>
@@ -157,9 +158,9 @@ const SideBar = (props: any) => {
                         </ListItem>
                     ))} */}
                     {
-                        user?.userType == "Buyer" ? (
+                        route.pathname.search('/buyer') != -1 && (
                             <>
-                            <Link href="/seller">
+                            <Link href="/buyer">
                                 <ListItemButton selected={route.pathname==='/buyer'}>
                                         <ListItemIcon>
                                             <Dashboard />
@@ -167,16 +168,19 @@ const SideBar = (props: any) => {
                                         <ListItemText primary={'Dashboard'} />
                                 </ListItemButton>
                             </Link>
-                            <Link href="/buyer/properties">
+                            {/* <Link href="/buyer/properties">
                                 <ListItemButton selected={route.pathname.search('seller/properties')!=-1 || route.pathname.search('seller/property/add')!=-1}>
                                     <ListItemIcon>
                                         <InboxIcon />
                                     </ListItemIcon>
                                     <ListItemText primary={'Properties'} />
                                 </ListItemButton>
-                            </Link>
+                            </Link> */}
                             </>
-                        ) : (
+                        ) 
+                    }
+                    {
+                        route.pathname.search('seller') != -1 && (
                             <>
                             <Link href="/seller">
                                 <ListItemButton selected={route.pathname==='/seller'}>

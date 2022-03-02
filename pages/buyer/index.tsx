@@ -1,9 +1,17 @@
 import type { NextPage } from 'next'
-import React from 'react'
+import { parseCookies } from 'nookies'
+import React, {useEffect} from 'react'
 
 const Buyer: NextPage = () => {
+
+    const {user} = parseCookies()
+
+    useEffect(()=> {
+
+    },[user])
+
     return (
-        <div>Buyer</div>
+        <h4>Hi {user != undefined && JSON.parse(user)?.name}, Welcome back</h4>
     )
 }
 

@@ -39,6 +39,8 @@
     display: flex;
     flex-wrap: wrap;
     align-items: center;
+    border: 1px solid #ddd;
+    transition: all 0.3s ease-in-out;
 }
 .propertyListCard .propertyListCardImage {
     width: 50px;
@@ -53,18 +55,18 @@
 }
 
 .propertyListCardContent a {
-    color: #00c194;
+    color: #000000;
 }
 .propertyListCardContent .rate {
     color: #9f9f9f;
     padding-right: 1rem;
 }
-.propertyListCard {
-    border: 1px solid transparent;
-    transition: all 0.3s ease-in-out;
+.propertyListCardContent .rate .price {
+    color: #00c194;
 }
+
 .propertyListCard:hover {
-    background-color: #f8f8f9;
-    box-shadow: none !important;
+    /* background-color: #f8f8f9; */
     border: 1px solid #00c194;
+    box-shadow: 0 0.5rem 1rem rgb(0 0 0 / 15%);
 }
