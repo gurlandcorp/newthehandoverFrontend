@@ -14,7 +14,7 @@ const TopProperties = () => {
                 <div className="col-lg-4 col-md-6 col-xs-12">
                     <div className={`rounded-3 my-3 ${styles.propertyListCard}`}>
                         <div className={styles.propertyListCardImage}>
-                            <Image layout="responsive" src={Img.src} width={80} height={80} />
+                            <Image layout="responsive" src={Img.src} width={80} height={80} alt={'image'} />
                         </div>
                         <div className={styles.propertyListCardContent}>
                             <a href="">EB Sunrise Bay T2-4-404</a>
@@ -28,7 +28,7 @@ const TopProperties = () => {
                 <div className="col-lg-4 col-md-6 col-xs-12">
                     <div className={`rounded-3 my-3 ${styles.propertyListCard}`}>
                         <div className={styles.propertyListCardImage}>
-                            <Image layout="responsive" src={Img.src} width={80} height={80} />
+                            <Image layout="responsive" src={Img.src} width={80} height={80} alt={'image'} />
                         </div>
                         <div className={styles.propertyListCardContent}>
                             <a href="">EB Sunrise Bay T2-4-404</a>
@@ -42,7 +42,7 @@ const TopProperties = () => {
                 <div className="col-lg-4 col-md-6 col-xs-12">
                     <div className={`rounded-3 my-3 ${styles.propertyListCard}`}>
                         <div className={styles.propertyListCardImage}>
-                            <Image layout="responsive" src={Img.src} width={80} height={80} />
+                            <Image layout="responsive" src={Img.src} width={80} height={80} alt={'image'} />
                         </div>
                         <div className={styles.propertyListCardContent}>
                             <a href="">EB Sunrise Bay T2-4-404</a>
@@ -56,7 +56,7 @@ const TopProperties = () => {
                 <div className="col-lg-4 col-md-6 col-xs-12">
                     <div className={`rounded-3 my-3 ${styles.propertyListCard}`}>
                         <div className={styles.propertyListCardImage}>
-                            <Image layout="responsive" src={Img.src} width={80} height={80} />
+                            <Image layout="responsive" src={Img.src} width={80} height={80} alt={'image'} />
                         </div>
                         <div className={styles.propertyListCardContent}>
                             <a href="">EB Sunrise Bay T2-4-404</a>
@@ -70,7 +70,7 @@ const TopProperties = () => {
                 <div className="col-lg-4 col-md-6 col-xs-12">
                     <div className={`rounded-3 my-3 ${styles.propertyListCard}`}>
                         <div className={styles.propertyListCardImage}>
-                            <Image layout="responsive" src={Img.src} width={80} height={80} />
+                            <Image layout="responsive" src={Img.src} width={80} height={80} alt={'image'} />
                         </div>
                         <div className={styles.propertyListCardContent}>
                             <a href="">EB Sunrise Bay T2-4-404</a>
@@ -84,7 +84,7 @@ const TopProperties = () => {
                 <div className="col-lg-4 col-md-6 col-xs-12">
                     <div className={`rounded-3 my-3 ${styles.propertyListCard}`}>
                         <div className={styles.propertyListCardImage}>
-                            <Image layout="responsive" src={Img.src} width={80} height={80} />
+                            <Image layout="responsive" src={Img.src} width={80} height={80} alt={'image'} />
                         </div>
                         <div className={styles.propertyListCardContent}>
                             <a href="">EB Sunrise Bay T2-4-404</a>
