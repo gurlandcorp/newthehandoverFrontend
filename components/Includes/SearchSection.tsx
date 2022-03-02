@@ -18,63 +18,62 @@ const SearchSection = () => {
                 <div className="row align-items-center">
                     <div className="col-xl-9 col-lg-9">
                         <form className="map-form" onSubmit={(e)=>searchSubmit(e)}>
-                        <div className="row">
-                            <div className="col-lg-4 pl-15 pr-0">
-                                <div className="control-style">
-                                    <input
-                                    type="text"
-                                    className="form-control"
-                                    placeholder="What are you looking for?"
-                                    onChange={(e)=>setSearch({...search, text: e.target.value})}
-                                    />
+                            <div className="row">
+                                <div className="col-lg-4 pl-15 pr-0">
+                                    <div className="control-style">
+                                        <input
+                                        type="text"
+                                        className="form-control"
+                                        placeholder="What are you looking for?"
+                                        onChange={(e)=>setSearch({...search, text: e.target.value})}
+                                        />
+                                    </div>
+                                </div>
+                                <div className="col-lg-4 pl-15 pr-0">
+                                    <div className="rld-single-select mt-0">
+                                        <select className="select single-select mr-0 rounded" onChange={(e)=>setSearch({...search, property_type: e.target.value})} >
+                                            <option value="">Property Type</option>
+                                            <option value="Family House">Family House</option>
+                                            <option value="Apartment">Apartment</option>
+                                            <option value="Condo">Condo</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div className="col-lg-4 pl-15">
+                                    <div className="rld-single-select mt-0">
+                                        <select className="select single-select mr-0 rounded" onChange={(e)=>setSearch({...search, city: e.target.value})} >
+                                            <option value="">All Cities</option>
+                                            <option value="Los Angeles">Los Angeles</option>
+                                            <option value="Chicago">Chicago</option>
+                                            <option value="Philadelphia">Philadelphia</option>
+                                        </select>
+                                    </div>
                                 </div>
                             </div>
-                            <div className="col-lg-4 pl-15 pr-0">
-                                <div className="rld-single-select mt-0">
-                                    <select className="select single-select mr-0 rounded" onChange={(e)=>setSearch({...search, property_type: e.target.value})} >
-                                        <option value="">Property Type</option>
-                                        <option value="Family House">Family House</option>
-                                        <option value="Apartment">Apartment</option>
-                                        <option value="Condo">Condo</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div className="col-lg-4 pl-15">
-                            <div className="rld-single-select mt-0">
-                                <select className="select single-select mr-0 rounded" onChange={(e)=>setSearch({...search, city: e.target.value})} >
-                                    <option value="">All Cities</option>
-                                    <option value="Los Angeles">Los Angeles</option>
-                                    <option value="Chicago">Chicago</option>
-                                    <option value="Philadelphia">Philadelphia</option>
-                                </select>
-                            </div>
-                            </div>
-                        </div>
                         </form>
                     </div>
                     <div className="col-xl-3 col-lg-3 d-flex justify-content-end">
                         <div className="banner-search-wrap banner-search-wrap-2">
-                        <div className="rld-main-search rld-main-search2">
-                            <div className="row">
-                            <div className="col-sm-12">
-                                <div className="box">
-                                <div className="dropdown-filter">
-                                    <span>
-                                    <i className="fas fa-sliders-h" />
-                                    </span>
-                                </div>
-                                <div className="filter-button">
-                                    <a className="filter-btn1 search-btn" onClick={(e)=>searchSubmit(e)} >
-                                    <span>Search</span>
-                                    <i className="fas fa-search" />
-                                    </a>
-                                </div>
+                            <div className="rld-main-search rld-main-search2">
+                                <div className="row">
+                                    <div className="col-sm-12">
+                                        <div className="box">
+                                            {/* <div className="dropdown-filter">
+                                                <span>
+                                                <i className="fas fa-sliders-h" />
+                                                </span>
+                                            </div> */}
+                                            <div className="filter-button">
+                                                <a className="filter-btn1 search-btn" onClick={(e)=>searchSubmit(e)} >
+                                                <span>Search</span>
+                                                <i className="fas fa-search" />
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                            </div>
                         </div>
-                        </div>
-
                         {/* <!--/ End Search Form --> */}
                     </div>
                 </div>

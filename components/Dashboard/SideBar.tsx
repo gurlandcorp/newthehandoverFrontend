@@ -201,7 +201,14 @@ const SideBar = (props: any) => {
                             </>
                         )
                     }
-                    
+                    <Link href="/user/profile">
+                        <ListItemButton selected={route.pathname.search('user/profile')!=-1}>
+                            <ListItemIcon>
+                                <InboxIcon />
+                            </ListItemIcon>
+                            <ListItemText primary={'Profile'} />
+                        </ListItemButton>
+                    </Link>
                 </List>
                 {/* <Divider /> */}
                 {/* <List>

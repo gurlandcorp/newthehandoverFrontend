@@ -54,7 +54,7 @@ const LoginGrid = styled(Grid)(() => ({
 }))
 
 const LoginForm = styled(Grid)(() => ({
-    maxWidth: '400px',
+    maxWidth: '400px !important',
     backgroundColor: '#fff',
     borderRadius: '10px',
     boxShadow: '0px 5px 10px 0px #0b544359'
@@ -179,12 +179,14 @@ const SignIn: NextPage = () => {
             xs={false}
             sm={12}
             sx={{
+                p: 2,
                 backgroundImage: `url(${bgImage.src})`,
                 backgroundRepeat: 'no-repeat',
                 backgroundColor: (t: any) =>
                 t.palette.mode === 'light' ? t.palette.grey[50] : t.palette.grey[900],
                 backgroundSize: 'cover',
                 backgroundPosition: 'center',
+                width: '100%'
             }}
             >
                 <LoginForm item xs={12} sm={8} md={4}>
@@ -215,7 +217,7 @@ const SignIn: NextPage = () => {
                                 name="email"
                                 autoComplete="email"
                                 autoFocus
-                                variant="filled"
+                                variant="standard"
                                 value={user.email}
                                 onChange={(e)=>handleInputs(e)}
                             />
@@ -229,7 +231,7 @@ const SignIn: NextPage = () => {
                                 type="password"
                                 id="password"
                                 autoComplete="current-password"
-                                variant="filled"
+                                variant="standard"
                                 value={user.password} onChange={(e)=>handleInputs(e)}
                             />
                             <FormControlLabel

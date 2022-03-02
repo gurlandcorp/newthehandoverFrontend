@@ -70,3 +70,63 @@
     border: 1px solid #00c194;
     box-shadow: 0 0.5rem 1rem rgb(0 0 0 / 15%);
 }
+
+.heroSectionContentContainer {
+    margin-bottom: 2rem;
+}
+.heroSectionContentContainer h2 {
+    color: #000000;
+    text-transform: capitalize;
+    font-weight: 500;
+}
+.heroSectionContentContainer .btnGreen {
+    padding: 0.5rem 1.5rem;
+    border: none;
+    border-radius: 5px;
+    background-color: #00c194;
+    color: #ffffff;
+    transition: all 0.3s ease-in-out;
+    position: relative;
+    overflow: hidden;
+}
+.heroSectionContentContainer .btnGreen:after {
+    background: #ffffff;
+}
+.heroSectionContentContainer .btnGreen:hover {
+    background: transparent;
+    color: #00c194;
+}
+
+.heroSectionContentContainer button:after {
+    content: '';
+    position: absolute;
+    width: 0px;
+    height: 0px;
+    left: 0rem;
+    bottom: -1rem;
+    border-top-right-radius: 100%;
+    transition: all 0.4s ease-in-out;
+    z-index: -1;
+}
+.heroSectionContentContainer button:hover:after {
+    width: 180px;
+    height: 100px;
+}
+
+.heroSectionContentContainer .btnGreenOutline {
+    padding: 0.5rem 1.5rem;
+    border: 1px solid #00c194;
+    border-radius: 5px;
+    background-color: #fff;
+    color: #00c194;
+    transition: all 0.3s ease-in-out;
+    position: relative;
+    overflow: hidden;
+}
+.heroSectionContentContainer .btnGreenOutline:hover {
+    background: transparent;
+    color: #ffffff;
+}
+.heroSectionContentContainer .btnGreenOutline:after {
+    background: #00c194;
+}

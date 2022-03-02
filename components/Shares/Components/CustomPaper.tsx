@@ -5,7 +5,7 @@ import { styled } from '@mui/system';
 
 const NewPaper = styled(MuiPaper)(({theme}) => ({
     borderRadius: '10px',
-    boxShadow: 'rgb(5 92 72 / 27%) 0px 6px 10px 0px',
+    boxShadow: 'rgb(137 137 137 / 10%) 0px 6px 10px 0px',
     margin: '2rem auto',
     width: '100%'
 }))

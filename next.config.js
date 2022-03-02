@@ -1,6 +1,14 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   // reactStrictMode: true,
+  async rewrites() {
+    return [
+      {
+        source: '/buyer/profile',
+        destination: '/user/profile',
+      },
+    ]
+  },
   images: {
     // loader: 'cloudinary',
     // path: 'https://example.com/myaccount/',

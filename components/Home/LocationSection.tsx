@@ -9,7 +9,7 @@ import Sharjah from "../../public/assets/img/toparea/sharjah.jpg";
 
 const LocationSection = () => {
     return (
-        <section className="location-wrap1">
+        <section className="location-wrap1" style={{backgroundColor: '#ffffff'}}>
             <div className="container">
                 <div className="row align-items-center">
                     <div className="col-lg-6 col-md-7">

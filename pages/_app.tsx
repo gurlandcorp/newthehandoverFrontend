@@ -11,7 +11,7 @@ function MyApp({ Component, pageProps, router }: AppProps) {
         <MainProvider>
         {
             router.pathname.search('sign-in') == -1 && router.pathname.search('sign-up') == -1 ? (
-                router.pathname.search('seller') == 1 || router.pathname.search('buyer') == 1 ? (
+                router.pathname.search('seller') == 1 || router.pathname.search('buyer') == 1 || router.pathname.search('user') == 1 ? (
                     <UserLayout>
                         <Component {...pageProps} />
                     </UserLayout>

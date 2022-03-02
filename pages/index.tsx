@@ -26,9 +26,9 @@ const Home: NextPage = ({data}: any) => {
         
         {/* <LetUSGuid /> */}
         <TopProperties />
-        <AboutSection />
+        {/* <AboutSection /> */}
         <LocationSection />
-        <PropertyBanner />
+        {/* <PropertyBanner /> */}
         { data.latest_properties != null && <FeaturedProperty data={data.latest_properties} /> }
         {/* <BlogSection /> */}
         <JoiningBanner />
