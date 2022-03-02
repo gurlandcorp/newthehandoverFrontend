@@ -129,11 +129,25 @@ const Header = () => {
 				</div>
 				<SearchSection />
 			</header>
-			<header className="p-3 mob-header">
-				<div style={{textAlign: 'right'}}>
-					<svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" width={'30px'} onClick={()=>setShowSideMenu(true)}>
-						<path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16m-7 6h7" />
-					</svg>
+			<header className="px-3 py-2 mob-header">
+				<div className="d-flex flex-wrap justify-content-between align-items-center">
+					<div>
+						<Link href={'/'} >
+							<a className="temp-logo">
+							<Image src={Logo} layout="intrinsic"
+								width="300"
+								height="36"
+								alt="logo"
+								className="img-fluid"
+							/>
+							</a>
+						</Link>
+					</div>
+					<div style={{textAlign: 'right'}}>
+						<svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" width={'30px'} onClick={()=>setShowSideMenu(true)}>
+							<path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16m-7 6h7" />
+						</svg>
+					</div>
 				</div>
 				<div className={`${styles.sidebar} ${showSideMenu==true ? styles.show : ''}`}>
 					<svg xmlns="http://www.w3.org/2000/svg" className={`h-6 w-6 ${styles.close}`} fill="none" viewBox="0 0 24 24" stroke="currentColor" width="30px" onClick={()=>setShowSideMenu(false)}>

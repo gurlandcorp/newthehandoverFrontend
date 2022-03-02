@@ -15,15 +15,15 @@ const SearchSection = () => {
     return (
         <div id="header-bottombar" className="header-bottombar-area">
             <div className="container">
-                <div className="row align-items-center">
-                    <div className="col-xl-9 col-lg-9">
+                <div className="row align-items-center px-2 py-2 bg-light rounded-3">
+                    <div className="col-xl-10 col-lg-10">
                         <form className="map-form" onSubmit={(e)=>searchSubmit(e)}>
                             <div className="row">
                                 <div className="col-lg-4 pl-15 pr-0">
                                     <div className="control-style">
                                         <input
                                         type="text"
-                                        className="form-control"
+                                        className="form-control border-0"
                                         placeholder="What are you looking for?"
                                         onChange={(e)=>setSearch({...search, text: e.target.value})}
                                         />
@@ -31,7 +31,7 @@ const SearchSection = () => {
                                 </div>
                                 <div className="col-lg-4 pl-15 pr-0">
                                     <div className="rld-single-select mt-0">
-                                        <select className="select single-select mr-0 rounded" onChange={(e)=>setSearch({...search, property_type: e.target.value})} >
+                                        <select className="select single-select mr-0 rounded border-0" onChange={(e)=>setSearch({...search, property_type: e.target.value})} >
                                             <option value="">Property Type</option>
                                             <option value="Family House">Family House</option>
                                             <option value="Apartment">Apartment</option>
@@ -41,7 +41,7 @@ const SearchSection = () => {
                                 </div>
                                 <div className="col-lg-4 pl-15">
                                     <div className="rld-single-select mt-0">
-                                        <select className="select single-select mr-0 rounded" onChange={(e)=>setSearch({...search, city: e.target.value})} >
+                                        <select className="select single-select mr-0 rounded border-0" onChange={(e)=>setSearch({...search, city: e.target.value})} >
                                             <option value="">All Cities</option>
                                             <option value="Los Angeles">Los Angeles</option>
                                             <option value="Chicago">Chicago</option>
@@ -52,7 +52,7 @@ const SearchSection = () => {
                             </div>
                         </form>
                     </div>
-                    <div className="col-xl-3 col-lg-3 d-flex justify-content-end">
+                    <div className="col-xl-2 col-lg-2 d-flex justify-content-end">
                         <div className="banner-search-wrap banner-search-wrap-2">
                             <div className="rld-main-search rld-main-search2">
                                 <div className="row">

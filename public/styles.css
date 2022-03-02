@@ -2047,12 +2047,12 @@ nav.template-main-menu > ul > li:hover .template-mega-menu {
   transition: all 0.3s ease-in-out;
 }
 .header-bottombar-area.hide {
-  top: -1rem;
+  top: -1.5rem;
 }
 
 @media only screen and (max-width: 1199px) {
   .header-bottombar-area {
-    top: 75px;
+    top: 65px;
   }
 }
 
@@ -2176,7 +2176,7 @@ nav.template-main-menu > ul > li:hover .template-mega-menu {
 }
 @media only screen and (max-width: 1199px) {
   .header-menu.menu-layout3 nav.template-main-menu > ul > li > a {
-    padding: 30px 10px;
+    padding: 25px 10px
   }
 }
 .header-menu.menu-layout3 nav.template-main-menu > ul > li .no-padding {
@@ -7125,7 +7125,7 @@ body.slidemenuon .sidebarBtn .bar:nth-child(4) {
   content: "";
   height: 100%;
   width: 1px;
-  background-color: #e8e8e8;
+  /* background-color: #e8e8e8; */
   position: absolute;
   border: none;
   right: 0;
