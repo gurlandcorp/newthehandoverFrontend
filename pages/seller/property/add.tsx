@@ -5,7 +5,7 @@ import AddItemButton from '../../../components/Shares/Dashboard/Button'
 import { parseCookies } from 'nookies'
 import {useEffect} from "react";
 import { parse } from 'path/posix'
-import { Base_URL } from '../../../config/constants'
+import { API_LINK } from '../../../config/constants'
 import axios from 'axios'
 import { route } from 'next/dist/server/router'
 import { useRouter } from 'next/router'
@@ -98,7 +98,7 @@ const PropertyAdd: NextPage = () => {
 
         let result = await axios({
             method: "POST",
-            url: `${Base_URL}/property/add`,
+            url: `${API_LINK}/property/add`,
             headers: {
                 "Content-Type": "multipart/form-data",
                 "Authorization": `Bearer ${token}`
