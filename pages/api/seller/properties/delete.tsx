@@ -24,7 +24,7 @@ export default async function handler(req:NextApiRequest, res: NextApiResponse) 
     {
         let result: any = await axios({
             method: "DELETE",
-            url: `${process.env.API_URL}/property/delete/${req.body._id}`,
+            url: `${process.env.API_URL}/property/delete/${JSON.parse(req.body)._id}`,
             headers: {
                 "Content-Type": "application/json",
                 "Authorization": `Bearer ${req.cookies.token}`

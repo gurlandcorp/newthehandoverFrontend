@@ -4,6 +4,8 @@ import type { AppProps } from 'next/app'
 import Default from '../components/Layouts/Default'
 import { MainProvider } from '../context/MainContext'
 import UserLayout from '../components/Layouts/User'
+import { parseCookies } from "nookies"
+import App from 'next/app'
 
 function MyApp({ Component, pageProps, router }: AppProps) {
 
@@ -12,7 +14,7 @@ function MyApp({ Component, pageProps, router }: AppProps) {
         {
             router.pathname.search('sign-in') == -1 && router.pathname.search('sign-up') == -1 ? (
                 router.pathname.search('seller') == 1 || router.pathname.search('buyer') == 1 || router.pathname.search('user') == 1 ? (
-                    <UserLayout>
+                    <UserLayout pageProps={pageProps}>
                         <Component {...pageProps} />
                     </UserLayout>
                 ) : (

@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import type { NextPage } from 'next';
-import { Grid, Paper } from '@mui/material'
+import { Card, CardContent, CardMedia, Grid, Paper } from '@mui/material'
 import { ButtonProps } from "@mui/material/Button"
 import { makeStyles } from '@mui/styles'
 import { styled } from '@mui/system';
@@ -17,6 +17,53 @@ import { parseCookies } from 'nookies'
 import Cookies from "js-cookie"
 import { Delete } from '@mui/icons-material';
 import CustomPaper from '../../components/Shares/Components/CustomPaper';
+
+const useStyles = makeStyles(({ breakpoints }: any) => ({
+    root: {
+      margin: 'auto',
+      borderRadius: '16px', // 16px
+      transition: '0.3s',
+      boxShadow: '0px 14px 80px rgba(34, 35, 58, 0.2)',
+      position: 'relative',
+      maxWidth: 500,
+      marginLeft: 'auto',
+      overflow: 'initial',
+      background: '#ffffff',
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      paddingBottom: '16px',
+    },
+    media: {
+      width: '88%',
+      marginLeft: 'auto',
+      marginRight: 'auto',
+      marginTop: '-2rem',
+      height: 0,
+      paddingBottom: '48%',
+      borderRadius: '16px',
+      backgroundColor: '#fff',
+      position: 'relative',
+      '&:after': {
+        content: '" "',
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        width: '100%',
+        height: '100%',
+        backgroundImage: 'linear-gradient(147deg, #fe8a39 0%, #fd3838 74%)',
+        borderRadius: '16px', // 16
+        opacity: 0.5,
+      },
+    },
+    content: {
+      padding: 24,
+    },
+    cta: {
+      marginTop: 24,
+      textTransform: 'initial',
+    },
+}));  
 
 
 const Seller: NextPage = (props: any) => {
@@ -77,9 +124,12 @@ const Seller: NextPage = (props: any) => {
                 _id: id
             })
         }).then(response => response.json())
-        console.log(res)
+        if(res.status!=0)
+        {
+            console.log(res)
+        }
     }
-
+    const styles = useStyles()
     return (
         <Grid container>
             <Grid item py={2} width={'100%'} className={`d-flex flex-wrap justify-content-between`}>
@@ -171,8 +221,11 @@ export async function getServerSideProps(context: any) {
         properties = await res.data
     }
 
+    let user = JSON.parse(context.req.cookies.user)
+
     return { 
-        props: { 
+        props: {
+            user: user,
             data: {
                 properties
             }

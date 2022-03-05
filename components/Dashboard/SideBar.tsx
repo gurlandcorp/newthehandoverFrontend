@@ -56,22 +56,22 @@ const Paper = styled(MuiDrawer)(({theme}) => ({
     borderRight: '1px dotted rgba(0, 0, 0, 0.12)'
 }))
 
-const Drawer = styled(Paper, { shouldForwardProp: (prop) => prop !== 'open' })(
-    ({ theme, open }) => ({
-    width: drawerWidth,
-    flexShrink: 0,
-    whiteSpace: 'nowrap',
-    boxSizing: 'border-box',
-    ...(open && {
-        ...openedMixin(theme),
-        '& .MuiDrawer-paper': openedMixin(theme),
-    }),
-    ...(!open && {
-        ...closedMixin(theme),
-        '& .MuiDrawer-paper': closedMixin(theme),
-    }),
-    }),
-);
+// const Drawer = styled(Paper, { shouldForwardProp: (prop) => prop !== 'open' })(
+//     ({ theme, open }) => ({
+//     width: drawerWidth,
+//     flexShrink: 0,
+//     whiteSpace: 'nowrap',
+//     boxSizing: 'border-box',
+//     ...(open && {
+//         ...openedMixin(theme),
+//         '& .MuiDrawer-paper': openedMixin(theme),
+//     }),
+//     ...(!open && {
+//         ...closedMixin(theme),
+//         '& .MuiDrawer-paper': closedMixin(theme),
+//     }),
+//     }),
+// );
 
 const useStyles = makeStyles({
     active: {
@@ -88,7 +88,7 @@ const useStyles = makeStyles({
     }
 })
 
-const theme = createTheme({
+const themeStyle = createTheme({
     components: {
         MuiDrawer: {
             styleOverrides: {
@@ -116,23 +116,29 @@ const theme = createTheme({
 });  
 
 const SideBar = (props: any) => {
-    // const theme = useTheme();
+    
+    const theme = useTheme();
 
     const route = useRouter()
     const {user}: any = parseCookies()
-
     const [loggedInUser, setLoggedInUser] = useState(user)
-    const [name, setName] = useState(loggedInUser!= null && JSON.parse(loggedInUser).name)
+    const [name, setName] = useState()
 
     useEffect(()=>{
-
-        console.log(JSON.parse(loggedInUser));
+        setName(loggedInUser!= null && JSON.parse(loggedInUser).name)
 
     },[route, loggedInUser])
 
     return (
-        <ThemeProvider theme={theme}>
-            <Drawer variant="permanent" open={props.open}>
+        <ThemeProvider theme={themeStyle}>
+            <MuiDrawer sx={{
+          width: drawerWidth,
+          flexShrink: 0,
+          '& .MuiDrawer-paper': {
+            width: drawerWidth,
+            boxSizing: 'border-box',
+          },
+        }} variant="persistent" anchor="left" open={props.open}>
                 <DrawerHeader>
                     <img src={`${Logo.src}`}
                         width="157"
@@ -141,14 +147,23 @@ const SideBar = (props: any) => {
                         className="img-fluid"
                     />
                     <IconButton onClick={props.handleDrawerClose}>
-                        <ChevronLeftIcon />
+                        {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
                     </IconButton>
                 </DrawerHeader>
                 <Box sx={{p:1, m:3, backgroundColor: 'rgb(228 245 242 / 57%)', color: '#000', borderRadius: '10px'}}>
-                    <AccountCircle sx={{m:1}} /> {name!=null ? name : ''}
+                    {/* <AccountCircle/> */}
+                    {name!=null ? name : ''}
                 </Box>
                 {/* <Divider /> */}
                 <List>
+                    <Link href="/seller" passHref>
+                        <ListItemButton selected={route.pathname==='/seller'}>
+                                <ListItemIcon>
+                                    <Dashboard />
+                                </ListItemIcon>
+                                <ListItemText primary={'Dashboard'} />
+                        </ListItemButton>
+                    </Link>
                     {/* {['Property', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
                         <ListItem button key={text}>
                             <ListItemIcon>
@@ -158,7 +173,7 @@ const SideBar = (props: any) => {
                         </ListItem>
                     ))} */}
                     {
-                        route.pathname.search('/buyer') != -1 && (
+                        props.user.userType == 'Buyer' && (
                             <>
                             <Link href="/buyer" passHref>
                                 <ListItemButton selected={route.pathname==='/buyer'}>
@@ -177,19 +192,11 @@ const SideBar = (props: any) => {
                                 </ListItemButton>
                             </Link> */}
                             </>
-                        ) 
+                        )
                     }
                     {
-                        route.pathname.search('seller') != -1 && (
+                        props.user.userType == 'Saller' && (
                             <>
-                            <Link href="/seller" passHref>
-                                <ListItemButton selected={route.pathname==='/seller'}>
-                                        <ListItemIcon>
-                                            <Dashboard />
-                                        </ListItemIcon>
-                                        <ListItemText primary={'Dashboard'} />
-                                </ListItemButton>
-                            </Link>
                             <Link href="/seller/properties" passHref>
                                 <ListItemButton selected={route.pathname.search('seller/properties')!=-1 || route.pathname.search('seller/property/add')!=-1}>
                                     <ListItemIcon>
@@ -201,6 +208,7 @@ const SideBar = (props: any) => {
                             </>
                         )
                     }
+                    
                     <Link href="/user/profile" passHref>
                         <ListItemButton selected={route.pathname.search('user/profile')!=-1}>
                             <ListItemIcon>
@@ -221,7 +229,7 @@ const SideBar = (props: any) => {
                         </ListItem>
                     ))}
                 </List> */}
-            </Drawer>
+            </MuiDrawer>
         </ThemeProvider>
     )
 }

@@ -3,7 +3,7 @@ import axios from 'axios'
 import type { NextApiRequest, NextApiResponse } from 'next'
 
 const cors = Cors({
-    methods: ['GET'],
+    methods: ['POST'],
 })
 
 function runMiddleware(req: NextApiRequest, res: NextApiResponse, fn: any) {
@@ -21,21 +21,23 @@ function runMiddleware(req: NextApiRequest, res: NextApiResponse, fn: any) {
 export default async function handler(req:NextApiRequest, res: NextApiResponse) {
 
     await runMiddleware(req, res, cors)
-    if(req.method=="GET")
+    if(req.method=="POST")
     {
-        let result = await axios({
-            method: "GET",
-            url: `${process.env.API_URL}/user`,
+        let user = JSON.parse(req.cookies.user)
+        let result: any = await axios({
+            method: "POST",
+            url: `${process.env.API_URL}/user/edituser/${user._id}`,
             headers: {
                 "Content-Type" : "application/json",
-                "Authorization": `${req.headers.authorization}`
+                "Authorization": `Bearer ${req.cookies.token}`
             },
             data: req.body
         }).then(response => {
-            return response
+            return response.data
         }).catch(err => {
             console.log("error in opportunties filter request", err.response);
         });
+
         return res.status(200).json({data: result})
     }
     return res.status(200).json({error: "Request is not valid!"})

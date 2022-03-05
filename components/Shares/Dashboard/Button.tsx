@@ -10,6 +10,7 @@ const DefaultButton = styled(Button)<ButtonProps>(({theme}) => ({
     borderRadius: '10px',
     boxShadow: 'rgb(0 193 148 / 43%) 0px 2px 10px 0px',
     textTransform: 'capitalize',
+    color: "#fff",
     height: 'fit-content',
     '&:hover': {
         backgroundColor: 'rgb(5 163 126)',
@@ -20,9 +21,11 @@ const DefaultButton = styled(Button)<ButtonProps>(({theme}) => ({
 const AddItemButton = ({href='', startIcon ,children}: any) => {
     return href !== '' ? (
         <Link href={href} passHref>
-            <DefaultButton variant="contained" startIcon={startIcon!='' ? startIcon : <Add />}>
-                {children}
-            </DefaultButton>
+            <a>
+                <DefaultButton variant="contained" startIcon={startIcon!='' ? startIcon : <Add />}>
+                    {children}
+                </DefaultButton>
+            </a>
         </Link>
     ) : (
         <DefaultButton type='submit' variant="contained" startIcon={startIcon!='' ? startIcon : <Add />}>

@@ -1,5 +1,5 @@
 import React from 'react'
-import { styled } from '@mui/material/styles';
+import { styled, useTheme, Theme, CSSObject, createTheme, ThemeProvider } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import MuiAppBar, { AppBarProps as MuiAppBarProps } from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
@@ -21,6 +21,10 @@ import Tooltip from '@mui/material/Tooltip';
 import { AccountCircle, Login, SupervisedUserCircle } from '@mui/icons-material';
 import Cookies from "js-cookie"
 import { useRouter } from 'next/router';
+import TopMenus from '../Dashboard/AppBar';
+import Link from 'next/link';
+import { parseCookies } from "nookies"
+import App from 'next/app';
 
 const drawerWidth = 280;  
 
@@ -32,7 +36,9 @@ const AppBar = styled(MuiAppBar, {
     shouldForwardProp: (prop) => prop !== 'open',
     })<AppBarProps>(({ theme, open }) => ({
     zIndex: theme.zIndex.drawer + 1,
-    backgroundColor: '#00c194',
+    backgroundColor: '#ffffff',
+    color: '#000',
+    boxShadow: '0px 0px 10px 0px #ddd',
     transition: theme.transitions.create(['width', 'margin'], {
         easing: theme.transitions.easing.sharp,
         duration: theme.transitions.duration.leavingScreen,
@@ -56,8 +62,28 @@ const DrawerHeader = styled('div')(({ theme }) => ({
     ...theme.mixins.toolbar,
 }));
 
-const UserLayout = ({children}: any) => {
+const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })<{
+    open?: boolean;
+  }>(({ theme, open }) => ({
+    flexGrow: 1,
+    padding: theme.spacing(3),
+    transition: theme.transitions.create('margin', {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.leavingScreen,
+    }),
+    marginLeft: `-${drawerWidth}px`,
+    ...(open && {
+      transition: theme.transitions.create('margin', {
+        easing: theme.transitions.easing.easeOut,
+        duration: theme.transitions.duration.enteringScreen,
+      }),
+      marginLeft: 0,
+    }),
+  }));  
 
+const UserLayout = ({pageProps, children}: any) => {
+
+    // console.log(pageProps)
     const [open, setOpen] = React.useState(true);
 
     const handleDrawerOpen = () => {
@@ -84,9 +110,28 @@ const UserLayout = ({children}: any) => {
         router.push('/sign-in')
     }
 
+    const theme = createTheme({
+        palette: {
+            primary: {
+                main: '#00c194'
+            }
+        },
+        // components: {
+        //     MuiTextField: {
+        //         styleOverrides: {
+        //             root: {
+        //                 color: "#00c194"
+        //             }
+        //         }
+        //     }
+        // }
+    })
+
     return (
-        <Box sx={{ display: 'flex', backgroundColor: 'rgba(249, 250, 251, 0.72)', height: '100vh' }}>
+        <ThemeProvider theme={theme}>
+        <Box sx={{ fontFamily:'Poppins, san-serif', display: 'flex', backgroundColor: 'rgba(249, 250, 251, 0.72)', height: '100vh' }}>
             <CssBaseline />
+            {/* <TopMenus open={open} /> */}
             <AppBar position="fixed" open={open}>
                 <Toolbar sx={{display: 'flex', justifyContent: "space-between"}}>
                     <IconButton
@@ -101,9 +146,20 @@ const UserLayout = ({children}: any) => {
                     >
                         <MenuIcon />
                     </IconButton>
-                    <Typography variant="h6" noWrap component="div">
+                    {/* <Typography variant="h6" noWrap component="div">
                         The Handover
-                    </Typography>
+                    </Typography> */}
+                    <Box>
+                        <Link href={'/'}>
+                            <a className="mx-2">Opportunities</a>
+                        </Link>
+                        <Link href={'/about'}>
+                            <a className="mx-2">About</a>
+                        </Link>
+                        <Link href={'/contact'}>
+                            <a className="mx-2">Contact</a>
+                        </Link>
+                    </Box>
                     <Box>
                         <Tooltip title="Account settings">
                             <IconButton
@@ -162,14 +218,17 @@ const UserLayout = ({children}: any) => {
                     </Box>
                 </Toolbar>
             </AppBar>
-            <SideBar open={open} setOpen={setOpen} handleDrawerOpen={handleDrawerOpen} handleDrawerClose={handleDrawerClose} />
-            <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
-                <DrawerHeader />
-                <div className="p-2 px-4">
-                    {children}
-                </div>
-            </Box>
+            <SideBar user={pageProps.user} open={open} setOpen={setOpen} handleDrawerOpen={handleDrawerOpen} handleDrawerClose={handleDrawerClose} />
+            <Main open={open}>
+                <Box component="main" sx={{ flexGrow: 1 }}>
+                    <DrawerHeader />
+                    <div className="p-2">
+                        {children}
+                    </div>
+                </Box>
+            </Main>
         </Box>
+        </ThemeProvider>
     )
 }
 
