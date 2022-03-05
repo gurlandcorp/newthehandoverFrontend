@@ -126,7 +126,7 @@ const Seller: NextPage = (props: any) => {
         }).then(response => response.json())
         if(res.status!=0)
         {
-            console.log(res)
+            setProperties(properties.filter((property: any) => property._id !== id))
         }
     }
     const styles = useStyles()

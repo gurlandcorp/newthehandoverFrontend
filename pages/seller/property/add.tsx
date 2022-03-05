@@ -11,6 +11,7 @@ import { route } from 'next/dist/server/router'
 import { useRouter } from 'next/router'
 import { NextPage } from 'next'
 import CustomPaper from '../../../components/Shares/Components/CustomPaper'
+import Alert from '../../../components/Shares/Components/Alert'
 
 const PropertyAdd: NextPage = () => {
 
@@ -34,6 +35,8 @@ const PropertyAdd: NextPage = () => {
 	const [propertyType, setpropertyType] = useState("");
 	const [countrySate, setCountrySate] = useState("");
 	const [multiImages, setMultiImages] = useState("");
+    const [alert, setAlert] = useState(false)
+    const [loading, setLoading] = useState(false)
 
 	const handleInputs = (e: any) => {
 		setUser({
@@ -48,6 +51,7 @@ const PropertyAdd: NextPage = () => {
 	};
 	const handleSubmit = async (e: any) => {
 		e.preventDefault();
+        await setLoading(true)
         const {token}: any = parseCookies()
 		const {
 			propertyTitle,
@@ -109,10 +113,17 @@ const PropertyAdd: NextPage = () => {
         }).catch((err: any) => {
             console.log("error in opportunties filter request", err.response);
         });
+        if(result?.status==200)
+        {
+            setUser(initialState)
+            setAlert(true)
+            setCountrySate('')
+        }
         if(result?.savedEvent!= undefined)
         {
             route.push('/seller/properties')
         }
+        setLoading(false)
 	};
 
 	const property_types = [
@@ -244,10 +255,11 @@ const PropertyAdd: NextPage = () => {
                         >
                             Add Property
                         </SuiButton> */}
-                        <AddItemButton startIcon={<Add />}>Add Property</AddItemButton>
+                        <AddItemButton loading={loading} startIcon={<Add />}>Add Property</AddItemButton>
                     </Grid>
                 </Grid>
             </CustomPaper>
+            <Alert open={alert} setAlert={setAlert} message={'Property added successfully'} />
         </Grid>
     )
 }

@@ -18,8 +18,38 @@ const DefaultButton = styled(Button)<ButtonProps>(({theme}) => ({
     }
 }))
 
-const AddItemButton = ({href='', startIcon ,children}: any) => {
-    return href !== '' ? (
+const AddItemButton = ({href='', loading=false, startIcon ,children}: any) => {
+
+    const buttons = () => {
+        if(loading==true)
+        {
+            <DefaultButton type='button' variant="contained" startIcon={startIcon!='' ? startIcon : <Add />} disabled>
+                {children}
+            </DefaultButton>
+        }
+        else if(href !== '')
+        {
+            return <Link href={href} passHref>
+                <a>
+                    <DefaultButton variant="contained" startIcon={startIcon!='' ? startIcon : <Add />}>
+                        {children}
+                    </DefaultButton>
+                </a>
+            </Link>
+        }
+        else {
+            <DefaultButton type='submit' variant="contained" startIcon={startIcon!='' ? startIcon : <Add />}>
+                {children}
+            </DefaultButton>
+        }
+    }
+
+    return loading==true ? (
+    <DefaultButton type='button' variant="contained" startIcon={startIcon!='' ? startIcon : <Add />} disabled>
+        {children}
+    </DefaultButton>
+    ) : (
+        href !== '' ? (
         <Link href={href} passHref>
             <a>
                 <DefaultButton variant="contained" startIcon={startIcon!='' ? startIcon : <Add />}>
@@ -27,10 +57,11 @@ const AddItemButton = ({href='', startIcon ,children}: any) => {
                 </DefaultButton>
             </a>
         </Link>
-    ) : (
-        <DefaultButton type='submit' variant="contained" startIcon={startIcon!='' ? startIcon : <Add />}>
-            {children}
-        </DefaultButton>
+        ) : (
+            <DefaultButton type='submit' variant="contained" startIcon={startIcon!='' ? startIcon : <Add />}>
+                {children}
+            </DefaultButton>
+        )
     )
 }
 
