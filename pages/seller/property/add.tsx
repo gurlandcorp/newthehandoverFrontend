@@ -1,17 +1,16 @@
 import { Add, ListAltSharp } from '@mui/icons-material'
 import { Grid, MenuItem, Paper, TextField } from '@mui/material'
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import AddItemButton from '../../../components/Shares/Dashboard/Button'
 import { parseCookies } from 'nookies'
 import {useEffect} from "react";
 import { parse } from 'path/posix'
 import { API_LINK } from '../../../config/constants'
 import axios from 'axios'
-import { route } from 'next/dist/server/router'
 import { useRouter } from 'next/router'
 import { NextPage } from 'next'
 import CustomPaper from '../../../components/Shares/Components/CustomPaper'
-import Alert from '../../../components/Shares/Components/Alert'
+import { MainContext } from '../../../context/MainContext'
 
 const PropertyAdd: NextPage = () => {
 
@@ -30,12 +29,11 @@ const PropertyAdd: NextPage = () => {
 		zip: "",
 		description: "",
 	};
-
+    const {setAlert, setAlertMessage} = useContext(MainContext)
 	const [user, setUser] = useState(initialState);
 	const [propertyType, setpropertyType] = useState("");
 	const [countrySate, setCountrySate] = useState("");
 	const [multiImages, setMultiImages] = useState("");
-    const [alert, setAlert] = useState(false)
     const [loading, setLoading] = useState(false)
 
 	const handleInputs = (e: any) => {
@@ -49,6 +47,7 @@ const PropertyAdd: NextPage = () => {
     const multiImagesChange = (e: any) => {
 		setMultiImages(e.target.files);
 	};
+
 	const handleSubmit = async (e: any) => {
 		e.preventDefault();
         await setLoading(true)
@@ -91,11 +90,12 @@ const PropertyAdd: NextPage = () => {
 		formdata.append("state", countrySate);
 		formdata.append("zip", zip);
 
-		let requestOptions: any = {
-			method: "POST",
-			headers: myHeaders,
-			body: formdata,
-		};
+		// let requestOptions: any = {
+		// 	method: "POST",
+		// 	headers: myHeaders,
+		// 	body: formdata,
+		// };
+
         // let res = await fetch(`${Base_URL}/api/seller/properties/add`, requestOptions)
 		// .then((response) => response.json())
 		// .catch((error) => console.log("error", error));
@@ -113,15 +113,14 @@ const PropertyAdd: NextPage = () => {
         }).catch((err: any) => {
             console.log("error in opportunties filter request", err.response);
         });
+
         if(result?.status==200)
         {
-            setUser(initialState)
-            setAlert(true)
-            setCountrySate('')
-        }
-        if(result?.savedEvent!= undefined)
-        {
             route.push('/seller/properties')
+            await setUser(initialState)
+            setAlert(true)
+            setAlertMessage('Property added successfully')
+            setCountrySate('')
         }
         setLoading(false)
 	};
@@ -261,7 +260,7 @@ const PropertyAdd: NextPage = () => {
                     </Grid>
                 </Grid>
             </CustomPaper>
-            <Alert open={alert} setAlert={setAlert} message={'Property added successfully'} />
+            {/* <Alert open={alert} setAlert={setAlert} message={'Property added successfully'} /> */}
         </Grid>
     )
 }

@@ -25,7 +25,7 @@ export default async function handler(req:NextApiRequest, res: NextApiResponse) 
     {
         let result: any = await axios({
             method: "POST",
-            url: `${process.env.API_URL}/bidding/bid`,
+            url: `${process.env.API_URL}/bidding/highest`,
             headers: {
                 "Content-Type": "application/json",
                 "Authorization": `Bearer ${req.cookies.token}`
@@ -36,7 +36,7 @@ export default async function handler(req:NextApiRequest, res: NextApiResponse) 
         }).catch(err => {
             console.log("error in opportunties filter request", err.response);
         });
-        return res.status(200).json({data: result.data})
+        return res.status(200).json({data: result})
     }
     return res.status(200).json({error: "Request is not valid!"})
 }

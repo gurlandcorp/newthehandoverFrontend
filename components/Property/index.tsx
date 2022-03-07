@@ -4,8 +4,12 @@ import floor_plan00 from "../../public/assets/img/figure/floor_plan00.jpg";
 import listing01 from "../../public/assets/img/blog/listing01.jpg";
 import Image from 'next/image';
 import Link from 'next/link';
+import { parseCookies } from 'nookies';
 
 const Index = (props: any) => {
+
+	const {token} = parseCookies()
+
     return (
         <section className="single-listing-wrap1">
 			<div className="container">
@@ -519,7 +523,7 @@ const Index = (props: any) => {
 										<div className="row">
 											<div className="form-group col-lg-12">
 												<div className="advanced-button">
-													<Link href={`${process.env.APP_URL}/property/bid/${props.property._id}`}>
+													<Link href={token ? `/buyer/bid/${props.property._id}` : `/sign-in?redirect_to=buyer/bid/${props.property._id}`}>
 														<a className="item-btn" > Place a Bid </a>
 													</Link>
 												</div>

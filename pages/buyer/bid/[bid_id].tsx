@@ -1,20 +1,18 @@
 import { Grid, Typography, Box, TextField } from '@mui/material';
 import { NextPage } from 'next';
 import Link from 'next/link'
-import React, { useState } from 'react'
-import Alert from '../../../components/Shares/Components/Alert';
+import React, { useContext, useState } from 'react'
 import CustomPaper from '../../../components/Shares/Components/CustomPaper';
 import BreadCrumb from '../../../components/Shares/Components/user/BreadCrumb'
 import AddItemButton from '../../../components/Shares/Dashboard/Button';
 import { Base_URL } from '../../../config/constants';
+import { MainContext } from '../../../context/MainContext';
 
 const Bid: NextPage = (props: any) => {
-
+    const {setAlert, setAlertMessage} = useContext(MainContext)
     const [amount, setAmount] = useState(0);
     const [amountErr, setAmountErr] = useState('');
-    const [minAmount, setMinAmount] = useState(0);
-    const [alertMessage, setAlertMessage] = useState('');
-    const [alert, setAlert] = useState(false);
+    const [minAmount, setMinAmount] = useState((props.highest.length>0 ? props.highest.bidAmount: 0));
 
     const handleSubmit = async (e: any) => {
         e.preventDefault()
@@ -25,14 +23,19 @@ const Bid: NextPage = (props: any) => {
             var sellerId = props.sellerId;
             let res: any = await fetch(`${Base_URL}/api/buyer/bid`, {
                 method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
                 body: JSON.stringify({
                     bidAmount: amount,
                     propertyId: props.bid_id,
                     sellerId: props.user._id,
                 })
             }).then(response => response.json())
+
             setAmount(0)
-            setAlertMessage(res.Message)
+            setMinAmount(res.data.savedEvent.bidAmount)
+            setAlertMessage(res.data.Message)
             setAlert(true)
 
             // fetching new highest bidding amount
@@ -74,7 +77,6 @@ const Bid: NextPage = (props: any) => {
                         <AddItemButton style={{marginRight: '1rem'}}>Add</AddItemButton>
                     </Grid>
                 </Grid>
-                <Alert open={alert} setAlert={setAlert} message={alertMessage} />
             </CustomPaper>
         </>
     )
@@ -84,22 +86,21 @@ export default Bid
 
 export async function getServerSideProps(context: any) {
     let user = JSON.parse(context.req.cookies.user)
-    
     let res = await fetch(`${process.env.API_URL}/bidding/highest`, {
         method: "POST",
         headers: {
+            "Content-Type": "application/json",
             "Authorization" : `Bearer ${context.req.cookies.token}`
         },
         body: JSON.stringify({
             propertyId: context.query.bid_id,
         })
     }).then(response => response.json())
-    console.log(res)
     return {
         props: {
             user: user,
             bid_id: context.query.bid_id,
-            highest: res
+            highest: res.length>0 ? res[0] : []
         }
     }
 }

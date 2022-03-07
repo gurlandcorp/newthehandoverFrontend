@@ -17,6 +17,7 @@ import { parseCookies } from 'nookies'
 import Cookies from "js-cookie"
 import { Delete } from '@mui/icons-material';
 import CustomPaper from '../../components/Shares/Components/CustomPaper';
+import PropertiesList from '../../components/Dashboard/Seller/Properties/PropertiesList';
 
 const useStyles = makeStyles(({ breakpoints }: any) => ({
     root: {
@@ -116,19 +117,7 @@ const Seller: NextPage = (props: any) => {
     ];
 
     const [properties, setProperties] = useState(props.data.properties)
-
-    const delProperty = async (id: any) => {
-        let res = await fetch(`${Base_URL}/api/seller/properties/delete`, {
-            method: "POST",
-            body: JSON.stringify({
-                _id: id
-            })
-        }).then(response => response.json())
-        if(res.status!=0)
-        {
-            setProperties(properties.filter((property: any) => property._id !== id))
-        }
-    }
+    const [add, setAdd] = useState(false);
     const styles = useStyles()
     return (
         <Grid container>
@@ -137,61 +126,7 @@ const Seller: NextPage = (props: any) => {
                 <AddItemButton href="/seller/property/add">Add new property</AddItemButton>
             </Grid>
             <CustomPaper>
-                <Grid item className="my-4 w-100 py-2 px-4" width={'100%'} py={2}>
-                    <Table sx={{ minWidth: '100%' }} aria-labelledby="tableTitle" size={'medium'} >
-                        <TableHead>
-                            <TableRow>
-                                {/* <TableCell padding="checkbox">
-                                <Checkbox
-                                    color="primary"
-                                    inputProps={{
-                                    'aria-label': 'select all desserts',
-                                    }}
-                                />
-                                </TableCell> */}
-                                <TableCell align={'left'} padding={'none'} sortDirection={false} >
-                                Title
-                                </TableCell>
-                                <TableCell align={'left'} padding={'normal'} sortDirection={false} >
-                                Area
-                                </TableCell>
-                                <TableCell align={'left'} padding={'normal'} >
-                                Bedrooms
-                                </TableCell>
-                                <TableCell align={'left'} padding={'normal'} >
-                                Type
-                                </TableCell>
-                                <TableCell align={'left'} padding={'normal'} >
-                                Type
-                                </TableCell>
-                                <TableCell align={'left'} padding={'normal'} >
-                                    Action
-                                </TableCell>
-                            </TableRow>
-                        </TableHead>
-                        <TableBody>
-                            {
-                                properties?.map((property: any, index: any) => {
-                                    return (
-                                        <TableRow key={index} hover role="checkbox" tabIndex={-1} >
-                                            {/* <TableCell padding="checkbox">
-                                                <Checkbox color="primary" />
-                                            </TableCell> */}
-                                            <TableCell component="th" scope="row" padding="none" > {property.propertyTitle} </TableCell>
-                                            <TableCell align="left">{property.area}</TableCell>
-                                            <TableCell align="left">{property.bedrooms}</TableCell>
-                                            <TableCell align="left">{property.bathrooms}</TableCell>
-                                            <TableCell align="left">{property.propertyType}</TableCell>
-                                            <TableCell align="left">
-                                                <Delete color="error" onClick={()=>delProperty(property._id)} />
-                                            </TableCell>
-                                        </TableRow>
-                                    )
-                                })
-                            }
-                        </TableBody>
-                    </Table>
-                </Grid>
+                <PropertiesList properties={properties} setProperties={setProperties} />
             </CustomPaper>
         </Grid>
     )

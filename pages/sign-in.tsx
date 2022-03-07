@@ -67,7 +67,7 @@ const LoginButton = styled(Button)(() => ({
     color: 'white',
 }))
 
-const SignIn: NextPage = () => {
+const SignIn: NextPage = ({redirect_to}: any) => {
 
     const theme = createTheme({
         palette: {
@@ -136,13 +136,20 @@ const SignIn: NextPage = () => {
                     
                     cookie.set('token',res.data.token)
                     cookie.set('user',JSON.stringify(res.data.payload))
-                    if(res.data.payload.userType=='Saller')
+                    if(redirect_to)
                     {
-                        router.push('/seller');
+                        router.push(redirect_to)
                     }
                     else
                     {
-                        router.push('/buyer');
+                        if(res.data.payload.userType=='Saller')
+                        {
+                            router.push('/seller');
+                        }
+                        else
+                        {
+                            router.push('/buyer');
+                        }
                     }
 					// localStorage.setItem("token", JSON.stringify(res.data.token));
 					// localStorage.setItem("userData", JSON.stringify(res.data.payload));
@@ -279,3 +286,12 @@ const SignIn: NextPage = () => {
 }
 
 export default SignIn
+
+export async function getServerSideProps(context: any) {
+    let link = context.query.redirect_to != undefined ? context.query.redirect_to : ""
+    return {
+        props: {
+            redirect_to: link
+        }
+    }
+}

@@ -5,13 +5,14 @@ import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import styles from "./Header.module.css"
+import { parseCookies } from "nookies";
 
 const Header = () => {
 
 	const [activeLink, setActiveLink] = useState('')
 	const router = useRouter();
 	const [showSideMenu,setShowSideMenu] = useState(false)
-
+	const {token} = parseCookies()
 	useEffect(()=>{
 	},[])
 
@@ -114,12 +115,14 @@ const Header = () => {
 											</a>
 										</li>
 										<li className="listing-button">
-											<a href={'https://app.thehandover.com'} className="listing-btn">
-												<span>
-													<i className="fas fa-plus-circle"></i>
-												</span>
-												<span className="item-text">Add Property</span>
-											</a>
+											<Link href={token ? '/seller/property/add' : '/sign-in?redirect_to=seller/property/add'}>
+												<a className="listing-btn">
+													<span>
+														<i className="fas fa-plus-circle"></i>
+													</span>
+													<span className="item-text">Add Property</span>
+												</a>
+											</Link>
 										</li>
 									</ul>
 								</div>

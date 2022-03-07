@@ -4,27 +4,19 @@ import Box from '@mui/material/Box';
 import MuiAppBar, { AppBarProps as MuiAppBarProps } from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import CssBaseline from '@mui/material/CssBaseline';
-import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
-import { makeStyles } from '@mui/styles';
 import SideBar from '../Dashboard/SideBar';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
-import Avatar from '@mui/material/Avatar';
-import PersonAdd from '@mui/icons-material/PersonAdd';
-import Settings from '@mui/icons-material/Settings';
 import Logout from '@mui/icons-material/Logout';
 import Divider from '@mui/material/Divider';
 import Tooltip from '@mui/material/Tooltip';
-import { AccountCircle, Login, SupervisedUserCircle } from '@mui/icons-material';
+import { AccountCircle } from '@mui/icons-material';
 import Cookies from "js-cookie"
 import { useRouter } from 'next/router';
-import TopMenus from '../Dashboard/AppBar';
 import Link from 'next/link';
-import { parseCookies } from "nookies"
-import App from 'next/app';
 
 const drawerWidth = 280;  
 
@@ -116,16 +108,7 @@ const UserLayout = ({pageProps, children}: any) => {
             primary: {
                 main: '#00c194'
             }
-        },
-        // components: {
-        //     MuiTextField: {
-        //         styleOverrides: {
-        //             root: {
-        //                 color: "#00c194"
-        //             }
-        //         }
-        //     }
-        // }
+        }
     })
 
     return (
@@ -142,7 +125,7 @@ const UserLayout = ({pageProps, children}: any) => {
                         edge="start"
                         sx={{ display: {sm: 'none' ,md: 'block'},
                         marginRight: '36px',
-                        ...(open && { display: {md: 'none'} }),
+                        ...(open && { display: 'none' }),
                         }}
                     >
                         <MenuIcon />
@@ -155,7 +138,7 @@ const UserLayout = ({pageProps, children}: any) => {
                         edge="start"
                         sx={{ display: {sm: 'block' ,md: 'none'},
                         marginRight: '36px',
-                        ...(open && { display: {md: 'none'} }),
+                        ...(mobileOpen && { display: 'none' }),
                         }}
                     >
                         <MenuIcon />
