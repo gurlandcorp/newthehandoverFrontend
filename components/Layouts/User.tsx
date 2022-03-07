@@ -83,10 +83,11 @@ const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })<{
 
 const UserLayout = ({pageProps, children}: any) => {
 
-    // console.log(pageProps)
     const [open, setOpen] = React.useState(true);
+    const [mobileOpen, setMobileOpen] = React.useState(false);
 
     const handleDrawerOpen = () => {
+        console.log('there')
         setOpen(true);
     };
 
@@ -129,19 +130,32 @@ const UserLayout = ({pageProps, children}: any) => {
 
     return (
         <ThemeProvider theme={theme}>
-        <Box sx={{ fontFamily:'Poppins, san-serif', display: 'flex', backgroundColor: 'rgba(249, 250, 251, 0.72)', height: '100vh' }}>
+        <Box sx={{ fontFamily:'Poppins, san-serif', display: 'flex' }}>
             <CssBaseline />
             {/* <TopMenus open={open} /> */}
-            <AppBar position="fixed" open={open}>
+            <AppBar position="fixed" sx={{ width: { md: open==false ? `calc(100%)` : `calc(100% - ${drawerWidth}px)` }, ml: { md: open==false ? '0px' : `${drawerWidth}px` }, }}>
                 <Toolbar sx={{display: 'flex', justifyContent: "space-between"}}>
                     <IconButton
                         color="inherit"
                         aria-label="open drawer"
                         onClick={handleDrawerOpen}
                         edge="start"
-                        sx={{
+                        sx={{ display: {sm: 'none' ,md: 'block'},
                         marginRight: '36px',
-                        ...(open && { display: 'none' }),
+                        ...(open && { display: {md: 'none'} }),
+                        }}
+                    >
+                        <MenuIcon />
+                    </IconButton>
+
+                    <IconButton
+                        color="inherit"
+                        aria-label="open drawer"
+                        onClick={()=> setMobileOpen(!mobileOpen)}
+                        edge="start"
+                        sx={{ display: {sm: 'block' ,md: 'none'},
+                        marginRight: '36px',
+                        ...(open && { display: {md: 'none'} }),
                         }}
                     >
                         <MenuIcon />
@@ -151,6 +165,9 @@ const UserLayout = ({pageProps, children}: any) => {
                     </Typography> */}
                     <Box>
                         <Link href={'/'}>
+                            <a className="mx-2">Home</a>
+                        </Link>
+                        <Link href={'/opportunities'}>
                             <a className="mx-2">Opportunities</a>
                         </Link>
                         <Link href={'/about'}>
@@ -218,15 +235,13 @@ const UserLayout = ({pageProps, children}: any) => {
                     </Box>
                 </Toolbar>
             </AppBar>
-            <SideBar user={pageProps.user} open={open} setOpen={setOpen} handleDrawerOpen={handleDrawerOpen} handleDrawerClose={handleDrawerClose} />
-            <Main open={open}>
-                <Box component="main" sx={{ flexGrow: 1 }}>
-                    <DrawerHeader />
-                    <div className="p-2">
-                        {children}
-                    </div>
-                </Box>
-            </Main>
+            <SideBar user={pageProps.user} open={open} setOpen={setOpen} mobileOpen={mobileOpen} setMobileOpen={setMobileOpen} handleDrawerOpen={handleDrawerOpen} handleDrawerClose={handleDrawerClose} />
+            <Box component="main" sx={{ flexGrow: 1, p: 3, width: { md: open==false ? `calc(100%)` : `calc(100% - ${drawerWidth}px)` } }}>
+                <DrawerHeader />
+                <div className="p-2">
+                    {children}
+                </div>
+            </Box>
         </Box>
         </ThemeProvider>
     )

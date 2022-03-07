@@ -165,16 +165,16 @@ const PropertyAdd: NextPage = () => {
             <CustomPaper>
                 <Grid container component="form" spacing={4} columns={12} className="p-4" onSubmit={(e: any)=>handleSubmit(e)}>
                     <Grid item xs={6}>
-                        <TextField fullWidth id="propertyTitle" size="small" name="propertyTitle" label="Property Title" color="primary" variant="filled" value={user.propertyTitle} onChange={(e)=>handleInputs(e)} />
+                        <TextField fullWidth id="propertyTitle" size="small" name="propertyTitle" label="Property Title" color="primary" variant="filled" value={user.propertyTitle} onChange={(e)=>handleInputs(e)} required />
                     </Grid>
                     <Grid item xs={6}>
-                        <TextField fullWidth type="number" id="area" size="small" name="area" label="Area" color="primary" variant="filled" value={user.area} onChange={(e)=>handleInputs(e)} />
+                        <TextField fullWidth type="number" id="area" size="small" name="area" label="Area" color="primary" variant="filled" value={user.area} onChange={(e)=>handleInputs(e)} required />
                     </Grid>
                     <Grid item xs={6}>
-                        <TextField fullWidth type="number" id="bedrooms" size="small" name="bedrooms" label="Bed Rooms" color="primary" variant="filled" value={user.bedrooms} onChange={(e)=>handleInputs(e)} />
+                        <TextField fullWidth type="number" id="bedrooms" size="small" name="bedrooms" label="Bed Rooms" color="primary" variant="filled" value={user.bedrooms} onChange={(e)=>handleInputs(e)} required />
                     </Grid>
                     <Grid item xs={6}>
-                        <TextField fullWidth type="number" id="floors" size="small" name="floors" label="Floors" color="primary" variant="filled" value={user.floors} onChange={(e)=>handleInputs(e)} />
+                        <TextField fullWidth type="number" id="floors" size="small" name="floors" label="Floors" color="primary" variant="filled" value={user.floors} onChange={(e)=>handleInputs(e)} required />
                     </Grid>
                     <Grid item xs={6}>
                         <TextField fullWidth
@@ -185,6 +185,7 @@ const PropertyAdd: NextPage = () => {
                         onChange={(e) => setpropertyType(e.target.value)}
                         variant="filled"
                         color="primary"
+                        required
                         >
                         {property_types.map((option) => (
                             <MenuItem key={option.value} value={option.value}>
@@ -194,19 +195,19 @@ const PropertyAdd: NextPage = () => {
                         </TextField>
                     </Grid>
                     <Grid item xs={6}>
-                        <TextField fullWidth type="number" id="bathrooms" size="small" name="bathrooms" label="Bathrooms" color="primary" variant="filled" value={user.bathrooms} onChange={(e)=>handleInputs(e)} />
+                        <TextField fullWidth type="number" id="bathrooms" size="small" name="bathrooms" label="Bathrooms" color="primary" variant="filled" value={user.bathrooms} onChange={(e)=>handleInputs(e)} required />
                     </Grid>
                     <Grid item xs={6}>
-                        <TextField fullWidth type="number" id="priceDemand" size="small" name="priceDemand" label="Demand Price" color="primary" variant="filled" value={user.priceDemand} onChange={(e)=>handleInputs(e)} />
+                        <TextField fullWidth type="number" id="priceDemand" size="small" name="priceDemand" label="Demand Price" color="primary" variant="filled" value={user.priceDemand} onChange={(e)=>handleInputs(e)} required />
                     </Grid>
                     <Grid item xs={6}>
-                        <TextField fullWidth type="date" id="biddingEnd" size="small" name="biddingEnd" label="Bidding End" color="primary" variant="filled" value={user.biddingEnd} onChange={(e)=>handleInputs(e)} InputLabelProps={{ shrink: true, }} />
+                        <TextField fullWidth type="date" id="biddingEnd" size="small" name="biddingEnd" label="Bidding End" color="primary" variant="filled" value={user.biddingEnd} onChange={(e)=>handleInputs(e)} InputLabelProps={{ shrink: true, }} required />
                     </Grid>
                     <Grid item xs={6}>
-                        <TextField fullWidth id="address" size="small" name="address" label="Address" color="primary" variant="filled" value={user.address} onChange={(e)=>handleInputs(e)} />
+                        <TextField fullWidth id="address" size="small" name="address" label="Address" color="primary" variant="filled" value={user.address} onChange={(e)=>handleInputs(e)} required />
                     </Grid>
                     <Grid item xs={6}>
-                        <TextField fullWidth id="city" size="small" name="city" label="City" color="primary" variant="filled" value={user.city} onChange={(e)=>handleInputs(e)} />
+                        <TextField fullWidth id="city" size="small" name="city" label="City" color="primary" variant="filled" value={user.city} onChange={(e)=>handleInputs(e)} required />
                     </Grid>
                     <Grid item xs={6}>
                         <TextField fullWidth
@@ -218,6 +219,7 @@ const PropertyAdd: NextPage = () => {
                         onChange={(e) => setCountrySate(e.target.value)}
                         variant="filled"
                         color="primary"
+                        required
                         >
                         {states.map((option) => (
                             <MenuItem key={option.value} value={option.value}>
@@ -227,10 +229,10 @@ const PropertyAdd: NextPage = () => {
                         </TextField>
                     </Grid>
                     <Grid item xs={6}>
-                        <TextField fullWidth id="zip" size="small" name="zip" label="Zip" color="primary" variant="filled" value={user.zip} onChange={(e)=>handleInputs(e)} />
+                        <TextField fullWidth id="zip" size="small" name="zip" label="Zip" color="primary" variant="filled" value={user.zip} onChange={(e)=>handleInputs(e)} required />
                     </Grid>
                     <Grid item xs={12}>
-                        <TextField fullWidth multiline rows={4} id="description" size="small" name="description" label="Description" color="info" variant="filled" value={user.description} onChange={(e)=>handleInputs(e)} />
+                        <TextField fullWidth multiline rows={4} id="description" size="small" name="description" label="Description" color="info" variant="filled" value={user.description} onChange={(e)=>handleInputs(e)} required />
                     </Grid>
                     
                     <Grid item xs={12}>

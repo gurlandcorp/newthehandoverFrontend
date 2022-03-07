@@ -9,7 +9,7 @@ const theme = createTheme({
             styleOverrides: {
                 root: {
                     boxShadow: '0px 10px 10px 0px rgba(137,137,137,0.1)',
-                    padding: '1rem 2rem',
+                    padding: '1rem 1rem',
                     backgroundColor: '#fff',
                     borderRadius: '10px',
                     '& a': {

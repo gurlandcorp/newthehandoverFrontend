@@ -94,7 +94,6 @@ const themeStyle = createTheme({
             styleOverrides: {
                 paper: {
                     backgroundColor: "transparent",
-                    borderRight: "2px dotted #ddd"
                 }
             }
         },
@@ -124,38 +123,43 @@ const SideBar = (props: any) => {
     const [loggedInUser, setLoggedInUser] = useState(user)
     const [name, setName] = useState()
 
+    const handleMobileDrawerClose = () => {
+        console.log('there')
+        props.setMobileOpen(!props.mobileOpen)
+    }
+
     useEffect(()=>{
         setName(loggedInUser!= null && JSON.parse(loggedInUser).name)
 
     },[route, loggedInUser])
 
-    return (
-        <ThemeProvider theme={themeStyle}>
-            <MuiDrawer sx={{
-          width: drawerWidth,
-          flexShrink: 0,
-          '& .MuiDrawer-paper': {
-            width: drawerWidth,
-            boxSizing: 'border-box',
-          },
-        }} variant="persistent" anchor="left" open={props.open}>
-                <DrawerHeader>
-                    <img src={`${Logo.src}`}
-                        width="157"
-                        height="40"
-                        alt="logo"
-                        className="img-fluid"
-                    />
-                    <IconButton onClick={props.handleDrawerClose}>
-                        {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
-                    </IconButton>
-                </DrawerHeader>
-                <Box sx={{p:1, m:3, backgroundColor: 'rgb(228 245 242 / 57%)', color: '#000', borderRadius: '10px'}}>
-                    {/* <AccountCircle/> */}
-                    {name!=null ? name : ''}
-                </Box>
-                {/* <Divider /> */}
-                <List>
+    const lists = (
+        <List>
+            {
+                props.user?.userType == 'Buyer' && (
+                    <>
+                    <Link href="/buyer" passHref>
+                        <ListItemButton selected={route.pathname==='/buyer'}>
+                                <ListItemIcon>
+                                    <Dashboard />
+                                </ListItemIcon>
+                                <ListItemText primary={'Dashboard'} />
+                        </ListItemButton>
+                    </Link>
+                    <Link href="/buyer/biddings" passHref>
+                        <ListItemButton selected={route.pathname==='/buyer/biddings'}>
+                                <ListItemIcon>
+                                    <Dashboard />
+                                </ListItemIcon>
+                                <ListItemText primary={'My biddings'} />
+                        </ListItemButton>
+                    </Link>
+                    </>
+                )
+            }
+            {
+                props.user.userType == 'Saller' && (
+                    <>
                     <Link href="/seller" passHref>
                         <ListItemButton selected={route.pathname==='/seller'}>
                                 <ListItemIcon>
@@ -164,72 +168,88 @@ const SideBar = (props: any) => {
                                 <ListItemText primary={'Dashboard'} />
                         </ListItemButton>
                     </Link>
-                    {/* {['Property', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-                        <ListItem button key={text}>
-                            <ListItemIcon>
-                                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                            </ListItemIcon>
-                            <ListItemText primary={'Properties'} />
-                        </ListItem>
-                    ))} */}
-                    {
-                        props.user.userType == 'Buyer' && (
-                            <>
-                            <Link href="/buyer" passHref>
-                                <ListItemButton selected={route.pathname==='/buyer'}>
-                                        <ListItemIcon>
-                                            <Dashboard />
-                                        </ListItemIcon>
-                                        <ListItemText primary={'Dashboard'} />
-                                </ListItemButton>
-                            </Link>
-                            {/* <Link href="/buyer/properties">
-                                <ListItemButton selected={route.pathname.search('seller/properties')!=-1 || route.pathname.search('seller/property/add')!=-1}>
-                                    <ListItemIcon>
-                                        <InboxIcon />
-                                    </ListItemIcon>
-                                    <ListItemText primary={'Properties'} />
-                                </ListItemButton>
-                            </Link> */}
-                            </>
-                        )
-                    }
-                    {
-                        props.user.userType == 'Saller' && (
-                            <>
-                            <Link href="/seller/properties" passHref>
-                                <ListItemButton selected={route.pathname.search('seller/properties')!=-1 || route.pathname.search('seller/property/add')!=-1}>
-                                    <ListItemIcon>
-                                        <InboxIcon />
-                                    </ListItemIcon>
-                                    <ListItemText primary={'Properties'} />
-                                </ListItemButton>
-                            </Link>
-                            </>
-                        )
-                    }
-                    
-                    <Link href="/user/profile" passHref>
-                        <ListItemButton selected={route.pathname.search('user/profile')!=-1}>
+                    <Link href="/seller/properties" passHref>
+                        <ListItemButton selected={route.pathname.search('seller/properties')!=-1 || route.pathname.search('seller/property/add')!=-1}>
                             <ListItemIcon>
                                 <InboxIcon />
                             </ListItemIcon>
-                            <ListItemText primary={'Profile'} />
+                            <ListItemText primary={'Properties'} />
                         </ListItemButton>
                     </Link>
-                </List>
-                {/* <Divider /> */}
-                {/* <List>
-                    {['All mail', 'Trash', 'Spam'].map((text, index) => (
-                        <ListItem button key={text}>
-                        <ListItemIcon>
-                            {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                        </ListItemIcon>
-                        <ListItemText primary={text} />
-                        </ListItem>
-                    ))}
-                </List> */}
-            </MuiDrawer>
+                    </>
+                )
+            }
+            
+            <Link href="/user/profile" passHref>
+                <ListItemButton selected={route.pathname.search('user/profile')!=-1}>
+                    <ListItemIcon>
+                        <InboxIcon />
+                    </ListItemIcon>
+                    <ListItemText primary={'Profile'} />
+                </ListItemButton>
+            </Link>
+        </List>
+    )
+
+    return (
+        <ThemeProvider theme={themeStyle}>
+            <Box component="nav"
+            sx={{ overflow: "hidden", width: { md: props.open == false ? '0px' : drawerWidth }, flexShrink: { sm: 0 } }}
+            aria-label="mailbox folders" >
+                <MuiDrawer sx={{ display: { sm: 'block', md: 'none' },
+                    '& .MuiDrawer-paper': {
+                        backgroundColor: "#fff",
+                        borderRight: "2px dotted #ddd",
+                        width: drawerWidth,
+                        boxSizing: 'border-box',
+                    },
+                    }} variant="temporary" anchor="left" open={props.mobileOpen} onClose={handleMobileDrawerClose} ModalProps={{ keepMounted: true, }}>
+
+                    <DrawerHeader>
+                        <img src={`${Logo.src}`}
+                            width="157"
+                            height="40"
+                            alt="logo"
+                            className="img-fluid"
+                        />
+                        <IconButton onClick={handleMobileDrawerClose}>
+                            {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
+                        </IconButton>
+                    </DrawerHeader>
+                    
+                    <Box sx={{p:1, m:3, backgroundColor: 'rgb(228 245 242 / 57%)', color: '#000', borderRadius: '10px'}}>
+                        {/* <AccountCircle/> */}
+                        {name!=null ? name : ''}
+                    </Box>
+                    {lists}
+                </MuiDrawer>
+
+                <MuiDrawer sx={{ display: { sm: 'none', md: props.open==true?'block': 'none' },
+                    '& .MuiDrawer-paper': {
+                        width: drawerWidth,
+                        boxSizing: 'border-box',
+                    },
+                    }} variant="permanent" anchor="left" open={props.open}>
+
+                    <DrawerHeader>
+                        <img src={`${Logo.src}`}
+                            width="157"
+                            height="40"
+                            alt="logo"
+                            className="img-fluid"
+                        />
+                        <IconButton onClick={props.handleDrawerClose}>
+                            {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
+                        </IconButton>
+                    </DrawerHeader>
+                    
+                    <Box sx={{p:1, m:3, backgroundColor: 'rgb(228 245 242 / 57%)', color: '#000', borderRadius: '10px'}}>
+                        {/* <AccountCircle/> */}
+                        {name!=null ? name : ''}
+                    </Box>
+                    {lists}
+                </MuiDrawer>
+            </Box>
         </ThemeProvider>
     )
 }

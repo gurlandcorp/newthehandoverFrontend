@@ -5,6 +5,7 @@ import React, { useState } from 'react'
 import CustomPaper from '../../components/Shares/Components/CustomPaper'
 import BreadCrumb from '../../components/Shares/Components/user/BreadCrumb'
 import { parseCookies } from "nookies"
+import Cookies from "js-cookie"
 import { API_LINK, Base_URL } from '../../config/constants'
 import { Edit } from '@mui/icons-material'
 import AddItemButton from '../../components/Shares/Dashboard/Button'
@@ -30,6 +31,8 @@ const Profile: NextPage = (props: any) => {
 
     const submitProfile = async (e: any) => {
         e.preventDefault()
+        let user: any = Cookies.get('user')
+        user = user!=undefined ? JSON.parse(user) : null
         let res = await fetch(`${Base_URL}/api/user/profile`, {
             method: "POST",
             body: JSON.stringify({
@@ -39,6 +42,11 @@ const Profile: NextPage = (props: any) => {
             })
         }).then(response => response.json())
         await setAlert(true)
+        
+        user.name = name;
+        user.phone = phone
+        user.email = email
+        Cookies.set('user',JSON.stringify(user))
         setName(name)
         setEmail(email)
         setPhone(phone)
