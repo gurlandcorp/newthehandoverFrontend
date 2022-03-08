@@ -18,6 +18,7 @@ import Link from 'next/link';
 import Logo from "../../public/logohandover.png";
 import { ListItemButton, Box } from '@mui/material';
 import { parseCookies } from "nookies"
+import Image from 'next/image';
 
 const drawerWidth = 280;  
 
@@ -206,12 +207,14 @@ const SideBar = (props: any) => {
                     }} variant="temporary" anchor="left" open={props.mobileOpen} onClose={handleMobileDrawerClose} ModalProps={{ keepMounted: true, }}>
 
                     <DrawerHeader>
-                        <img src={`${Logo.src}`}
-                            width="157"
-                            height="40"
-                            alt="logo"
-                            className="img-fluid"
-                        />
+                        <Box className="justify-content-between mx-4">
+                            <Image src={`${Logo.src}`}
+                                width="157"
+                                height="18"
+                                alt="logo"
+                                className="img-fluid"
+                            />
+                        </Box>
                         <IconButton onClick={handleMobileDrawerClose}>
                             {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
                         </IconButton>
@@ -224,9 +227,9 @@ const SideBar = (props: any) => {
                     {lists}
                 </MuiDrawer>
 
-                <MuiDrawer sx={{ display: { sm: 'none', md: props.open==true?'block': 'none' },
+                <MuiDrawer sx={{ display: { xs: 'none', sm: 'none', md: 'block' },
                     '& .MuiDrawer-paper': {
-                        width: drawerWidth,
+                        width: props.open==true ? drawerWidth : '0px',
                         boxSizing: 'border-box',
                     },
                     }} variant="permanent" anchor="left" open={props.open}>

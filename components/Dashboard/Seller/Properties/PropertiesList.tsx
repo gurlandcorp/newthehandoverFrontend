@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Grid, IconButton } from '@mui/material'
+import { Box, Grid, IconButton, Typography, Button } from '@mui/material'
 import { ButtonProps } from "@mui/material/Button"
 import { makeStyles } from '@mui/styles'
 import { styled } from '@mui/system';
@@ -11,6 +11,9 @@ import TableRow from '@mui/material/TableRow';
 import { Delete, Edit } from '@mui/icons-material';
 import { Base_URL } from '../../../../config/constants';
 import EditProperty from './EditProperty';
+import Image from 'next/image';
+import styles from "./Properties.module.css"
+import Link from 'next/link';
 
 const PropertiesList = (props: any) => {
 
@@ -33,20 +36,13 @@ const PropertiesList = (props: any) => {
     }
 
     return (
-        <Grid item className="my-4 w-100 py-2 px-4" width={'100%'} py={2}>
+        <>
+        {/* <Grid item className="my-4 w-100 py-2 px-4" width={'100%'} py={2}>
             {
                 property == null ? (
                     <Table sx={{ minWidth: '100%' }} aria-labelledby="tableTitle" size={'medium'} >
                         <TableHead>
                             <TableRow>
-                                {/* <TableCell padding="checkbox">
-                                <Checkbox
-                                    color="primary"
-                                    inputProps={{
-                                    'aria-label': 'select all desserts',
-                                    }}
-                                />
-                                </TableCell> */}
                                 <TableCell align={'left'} padding={'none'} sortDirection={false} >
                                 Title
                                 </TableCell>
@@ -72,9 +68,6 @@ const PropertiesList = (props: any) => {
                                 props.properties?.map((property: any, index: any) => {
                                     return (
                                         <TableRow key={index} hover role="checkbox" tabIndex={-1} >
-                                            {/* <TableCell padding="checkbox">
-                                                <Checkbox color="primary" />
-                                            </TableCell> */}
                                             <TableCell component="th" scope="row" padding="none" > {property.propertyTitle} </TableCell>
                                             <TableCell align="left">{property.area}</TableCell>
                                             <TableCell align="left">{property.bedrooms}</TableCell>
@@ -98,7 +91,64 @@ const PropertiesList = (props: any) => {
                     <EditProperty property={property} setProperty={setProperty} />
                 )
             }
+        </Grid> */}
+        <Grid container p={3}>
+        {
+            property == null ? (
+                props.properties.map((item: any, index: any) => {
+                    return (
+                        <Grid item sm={12} md={6} key={index} className="p-2 w-100">
+                        <Grid container className={styles.propertyWrapper} sx={{ marginBottom:{sm:"2rem",xs:"2rem"} }}>
+                            <Grid item xs={12} sm={12} md={12} lg={4} sx={{ marginTop:{md:"0px",sm:"-2rem",xs:"-2rem"} }} className={styles.propertyImageContainer}>
+                                <Link href={`/opportunity/${item._id}`}>
+                                    <Box sx={{ width: 128, height: 128,overflow:"hidden",borderRadius:"10px",position:"relative" }} component="a" 
+                                    style={{ backgroundImage: `url(${item.images[0]})` }}>
+                                        {/* <Image src={item.images[0]} layout="fill" /> */}
+                                    </Box>
+                                </Link>
+                            </Grid>
+                            <Grid item xs={12} sm={12} md={12} lg={8} container className={styles.PropertyContentContainer}>
+                                <Grid item xs container direction="column">
+                                    <Grid item xs>
+                                        <Link href={`/opportunity/${item._id}`}>
+                                            <Typography gutterBottom variant="subtitle1" component="a" className={styles.propertyTitle}>
+                                            {item.propertyTitle}
+                                            </Typography>
+                                        </Link>
+                                        <Typography variant="body2" gutterBottom>
+                                        <span className="text-black">Area</span> {item.area}
+                                        </Typography>
+                                        <Typography variant="body2" color="text.secondary">
+                                        <span className="text-black">bedrooms</span> {item.bedrooms}
+                                        </Typography>
+                                        <Button className={styles.propertyReadmore}>Read More
+                                        </Button>
+                                    </Grid>
+                                </Grid>
+                                <Grid item>
+                                    <Typography variant="subtitle1" component="div" className="badge bg-info bg-opacity-10 text-info rounded-pill">
+                                        {`$${item.priceDemand}`}
+                                    </Typography>
+                                </Grid>
+                                <Box className={styles.propertyActions}>
+                                    <IconButton className={styles.edit}>
+                                        <Edit onClick={(e: any)=>editProperty(item)} />
+                                    </IconButton>
+                                    <IconButton className={`mx-2 ${styles.delete}`}>
+                                        <Delete onClick={(e: any)=>delProperty(item._id)} />
+                                    </IconButton>
+                                </Box>
+                            </Grid>
+                        </Grid>
+                    </Grid>
+                    )
+                })
+            ) : (
+                <EditProperty property={property} setProperty={setProperty} />
+            )
+        }
         </Grid>
+        </>
     )
 }
 

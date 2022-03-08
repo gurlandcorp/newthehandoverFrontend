@@ -142,7 +142,7 @@ const SignIn: NextPage = ({redirect_to}: any) => {
                     }
                     else
                     {
-                        if(res.data.payload.userType=='Saller')
+                        if(res.data.payload.userType=='Seller')
                         {
                             router.push('/seller');
                         }

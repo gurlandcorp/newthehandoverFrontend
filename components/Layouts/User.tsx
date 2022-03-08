@@ -113,10 +113,9 @@ const UserLayout = ({pageProps, children}: any) => {
 
     return (
         <ThemeProvider theme={theme}>
-        <Box sx={{ fontFamily:'Poppins, san-serif', display: 'flex' }}>
+        <Box sx={{ minWidth: "fit-content", fontFamily:'Poppins, san-serif', display: 'flex', minHeight: "100vh", backgroundColor: "#f9f9f9" }}>
             <CssBaseline />
-            {/* <TopMenus open={open} /> */}
-            <AppBar position="fixed" sx={{ width: { md: open==false ? `calc(100%)` : `calc(100% - ${drawerWidth}px)` }, ml: { md: open==false ? '0px' : `${drawerWidth}px` }, }}>
+            <AppBar position="fixed" sx={{ zIndex: '1', width: { md: open==false ? `calc(100%)` : `calc(100% - ${drawerWidth}px)` }, ml: { md: open==false ? '0px' : `${drawerWidth}px` }, }}>
                 <Toolbar sx={{display: 'flex', justifyContent: "space-between"}}>
                     <IconButton
                         color="inherit"

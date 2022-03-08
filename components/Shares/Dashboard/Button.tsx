@@ -8,7 +8,7 @@ import Link from 'next/link';
 const DefaultButton = styled(Button)<ButtonProps>(({theme}) => ({
     backgroundColor: '#00c194',
     borderRadius: '10px',
-    boxShadow: 'rgb(0 193 148 / 43%) 0px 2px 10px 0px',
+    boxShadow: 'rgb(137 137 137 / 10%) 0px 6px 10px 0px',
     textTransform: 'capitalize',
     color: "#fff",
     height: 'fit-content',

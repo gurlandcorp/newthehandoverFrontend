@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import type { NextPage } from 'next';
-import { Card, CardContent, CardMedia, Grid, Paper } from '@mui/material'
+import { Box, ButtonBase, Card, CardContent, CardMedia, Grid, Paper, Typography } from '@mui/material'
 import { ButtonProps } from "@mui/material/Button"
 import { makeStyles } from '@mui/styles'
 import { styled } from '@mui/system';
@@ -18,6 +18,7 @@ import Cookies from "js-cookie"
 import { Delete } from '@mui/icons-material';
 import CustomPaper from '../../components/Shares/Components/CustomPaper';
 import PropertiesList from '../../components/Dashboard/Seller/Properties/PropertiesList';
+import Image from "next/image"
 
 const useStyles = makeStyles(({ breakpoints }: any) => ({
     root: {
