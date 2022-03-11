@@ -5,8 +5,8 @@ export function middleware(req: NextRequest, ev: NextFetchEvent) {
     const user =  req.cookies.user ? JSON.parse(req.cookies.user) : ''
     if(token == '' || user?.userType!='Buyer'){
         const url = req.nextUrl.clone()
-        url.pathname = '/404'
-        return NextResponse.rewrite(url);
+        url.pathname = '/sign-in'
+        return NextResponse.redirect(url);;
     }
     return NextResponse.next();
 }

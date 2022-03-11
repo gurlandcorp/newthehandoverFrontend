@@ -3,7 +3,7 @@ import Link from 'next/link'
 import { makeStyles } from '@mui/styles'
 import image from "../../../public/assets/img/bg-home.jpg"
 import Image from "next/image"
-import { Box, Grid } from '@mui/material'
+import { Box, Grid, Button } from '@mui/material'
 
 const useStyles = makeStyles({
     card: {
@@ -51,7 +51,7 @@ const MyBiddings = (props: any) => {
                     if(bid.Property.length > 0)
                     {
                         return (
-                            <Grid item p={2} sm={12} md={6} key={index}>
+                            <Grid item p={2} sm={12} md={6} key={index} className="w-100">
                                 <Box className={`${style.card} align-items-center`} sx={{display: {lg: "flex",md:"block"}}}>
                                     <Box className={`${style.cardImage}`} sx={{
                                         width: {md: '100%', lg: '400px'},
@@ -65,9 +65,18 @@ const MyBiddings = (props: any) => {
                                         <p>Amount: <span className="alert-primary text-primary badge">{Intl.NumberFormat('en-US').format(bid.Property[0].priceDemand)}</span></p>
                                         <p>Bid Amount: <span className="alert-primary text-primary badge">{Intl.NumberFormat('en-US').format(bid.bidAmount)}</span></p>
                                         <span>Status: {bid.Property[0].winner == false ? <span className="text-success alert-info badge">Winner</span> : <span className="text-danger alert-warning badge">No approved</span> }</span>
-                                        <Link href={`/opportunity/${bid.Property[0]._id}`}>
-                                            <a className="mt-3">Read more</a>
-                                        </Link>
+                                        <div className="d-flex flex-wrap justify-content-between">
+                                            <Link href={`/opportunity/${bid.Property[0]._id}`}>
+                                                <a className="mt-3">Read more</a>
+                                            </Link>
+                                            {
+                                                bid.winner == false ? (
+                                                    <Button className="" >
+                                                        Pay Now
+                                                    </Button>
+                                                ) : ''
+                                            }
+                                        </div>
                                     </div>
                                 </Box>
                             </Grid>

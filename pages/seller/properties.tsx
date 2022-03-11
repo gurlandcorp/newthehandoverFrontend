@@ -5,16 +5,7 @@ import { ButtonProps } from "@mui/material/Button"
 import { makeStyles } from '@mui/styles'
 import { styled } from '@mui/system';
 import AddItemButton from '../../components/Shares/Dashboard/Button';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import TableSortLabel from '@mui/material/TableSortLabel';
 import { API_LINK, Base_URL } from '../../config/constants';
-import { parseCookies } from 'nookies'
-import Cookies from "js-cookie"
 import { Delete } from '@mui/icons-material';
 import CustomPaper from '../../components/Shares/Components/CustomPaper';
 import PropertiesList from '../../components/Dashboard/Seller/Properties/PropertiesList';
@@ -126,9 +117,7 @@ const Seller: NextPage = (props: any) => {
                 <h4 className="mb-0">Properties</h4>
                 <AddItemButton href="/seller/property/add">Add new property</AddItemButton>
             </Grid>
-            <CustomPaper>
-                <PropertiesList properties={properties} setProperties={setProperties} />
-            </CustomPaper>
+            <PropertiesList properties={properties} setProperties={setProperties} />
         </Grid>
     )
 }

@@ -84,6 +84,8 @@ const SignIn: NextPage = ({redirect_to}: any) => {
 
     const [user, setUser] = useState(initialState)
     const [emailError, setEmailError] = useState("")
+    const [forgetPassword, setForgetPassword] = useState(false)
+    const [forgetEmail, setForgetEmail] = useState('')
 	const [passwordError, setPasswordError] = useState("")
 	const [submiting, setSubmiting] = useState(false)
 
@@ -211,72 +213,110 @@ const SignIn: NextPage = ({redirect_to}: any) => {
                             <LockOutlinedIcon />
                         </Avatar>
                         <Image src={Logo} width={'200px'} height={'23px'} alt='The Handover' />
-                        <Typography component="h1" variant="h5">
-                        Sign in
+                        <Typography component="h1" variant="h5" className="mt-4">
+                        {forgetPassword == false ? 'Sign in' : 'Send forget password email'}
                         </Typography>
-                        <Box component="form" noValidate sx={{ mt: 1 }} onSubmit={(e: any)=>handleSubmit(e)}>
-                            <TextField
-                                margin="normal"
-                                required
-                                fullWidth
-                                id="email"
-                                label="Email Address"
-                                name="email"
-                                autoComplete="email"
-                                autoFocus
-                                variant="standard"
-                                value={user.email}
-                                onChange={(e)=>handleInputs(e)}
-                            />
-                            {emailError ? <small style={{ color: "red", fontSize: '11px' }}>{emailError}</small> : ""}
-                            <TextField
-                                margin="normal"
-                                required
-                                fullWidth
-                                name="password"
-                                label="Password"
-                                type="password"
-                                id="password"
-                                autoComplete="current-password"
-                                variant="standard"
-                                value={user.password} onChange={(e)=>handleInputs(e)}
-                            />
-                            <FormControlLabel
-                                control={<Checkbox value="remember" color="primary" />}
-                                label="Remember me"
-                            />
-                            <LoginButton
-                                type={`${submiting==true ? 'button' : 'submit'}`}
-                                fullWidth
-                                variant="contained"
-                                sx={{ mt: 3, mb: 2, p: 1, fontSize: 16 }} 
-                                color="primary"
-                            >
-                                Sign In
-                                {
-                                    submiting==true && (
-                                        <svg xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" width="30px" height="30px" viewBox="0 0 128 128" xmlSpace="preserve" style={{marginLeft: '1rem'}}><g><path d="M64 9.75A54.25 54.25 0 0 0 9.75 64H0a64 64 0 0 1 128 0h-9.75A54.25 54.25 0 0 0 64 9.75z" fill="#116c57" /><animateTransform attributeName="transform" type="rotate" from="0 64 64" to="360 64 64" dur="1200ms" repeatCount="indefinite" /></g></svg>
-                                    )
-                                }
-                            </LoginButton>
-                            <Grid container>
-                                <Grid item xs>
-                                    <NextLink href="/">
-                                        <Link variant="body2">
-                                            Forgot password?
-                                        </Link>
-                                    </NextLink>
-                                </Grid>
-                                <Grid item>
-                                    <NextLink href="/sign-up">
-                                        <Link variant="body2">
-                                            {"Don't have an account? Sign Up"}
-                                        </Link>
-                                    </NextLink>
-                                </Grid>
-                            </Grid>
-                            <Copyright sx={{ mt: 5 }} />
-                        </Box>
+                        {
+                            forgetPassword == true ? (
+                                <Box component="form">
+                                    <TextField
+                                        margin="normal"
+                                        required
+                                        fullWidth
+                                        id="email"
+                                        label="Email Address"
+                                        name="email"
+                                        autoComplete="email"
+                                        autoFocus
+                                        variant="standard"
+                                        value={forgetEmail}
+                                        onChange={(e)=>setForgetEmail(e.target.value)}
+                                    />
+                                    <LoginButton
+                                        type={`${submiting==true ? 'button' : 'submit'}`}
+                                        fullWidth
+                                        variant="contained"
+                                        sx={{ mt: 3, mb: 2, p: 1, fontSize: 16 }} 
+                                        color="primary" >
+                                        Send email
+                                        {
+                                            submiting==true && (
+                                                <svg xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" width="30px" height="30px" viewBox="0 0 128 128" xmlSpace="preserve" style={{marginLeft: '1rem'}}><g><path d="M64 9.75A54.25 54.25 0 0 0 9.75 64H0a64 64 0 0 1 128 0h-9.75A54.25 54.25 0 0 0 64 9.75z" fill="#116c57" /><animateTransform attributeName="transform" type="rotate" from="0 64 64" to="360 64 64" dur="1200ms" repeatCount="indefinite" /></g></svg>
+                                            )
+                                        }
+                                    </LoginButton>
+                                    <Grid container>
+                                        <Grid item xs>
+                                            <Link variant="body2">
+                                                <NextLink href={'/'}><a onClick={()=>setForgetPassword(false)}>Back</a></NextLink>
+                                            </Link>
+                                        </Grid>
+                                    </Grid>
+                                </Box>
+                            ) : (
+                                <Box component="form" noValidate sx={{ mt: 1 }} onSubmit={(e: any)=>handleSubmit(e)}>
+                                    <TextField
+                                        margin="normal"
+                                        required
+                                        fullWidth
+                                        id="email"
+                                        label="Email Address"
+                                        name="email"
+                                        autoComplete="email"
+                                        autoFocus
+                                        variant="standard"
+                                        value={user.email}
+                                        onChange={(e)=>handleInputs(e)}
+                                    />
+                                    {emailError ? <small style={{ color: "red", fontSize: '11px' }}>{emailError}</small> : ""}
+                                    <TextField
+                                        margin="normal"
+                                        required
+                                        fullWidth
+                                        name="password"
+                                        label="Password"
+                                        type="password"
+                                        id="password"
+                                        autoComplete="current-password"
+                                        variant="standard"
+                                        value={user.password} onChange={(e)=>handleInputs(e)}
+                                    />
+                                    <FormControlLabel
+                                        control={<Checkbox value="remember" color="primary" />}
+                                        label="Remember me"
+                                    />
+                                    <LoginButton
+                                        type={`${submiting==true ? 'button' : 'submit'}`}
+                                        fullWidth
+                                        variant="contained"
+                                        sx={{ mt: 3, mb: 2, p: 1, fontSize: 16 }} 
+                                        color="primary"
+                                    >
+                                        Sign In
+                                        {
+                                            submiting==true && (
+                                                <svg xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" width="30px" height="30px" viewBox="0 0 128 128" xmlSpace="preserve" style={{marginLeft: '1rem'}}><g><path d="M64 9.75A54.25 54.25 0 0 0 9.75 64H0a64 64 0 0 1 128 0h-9.75A54.25 54.25 0 0 0 64 9.75z" fill="#116c57" /><animateTransform attributeName="transform" type="rotate" from="0 64 64" to="360 64 64" dur="1200ms" repeatCount="indefinite" /></g></svg>
+                                            )
+                                        }
+                                    </LoginButton>
+                                    <Grid container>
+                                        <Grid item xs>
+                                            <Link variant="body2">
+                                                <a onClick={()=>setForgetPassword(true)}>Forgot password?</a>
+                                            </Link>
+                                        </Grid>
+                                        <Grid item>
+                                            <NextLink href="/sign-up">
+                                                <Link variant="body2">
+                                                    {"Don't have an account? Sign Up"}
+                                                </Link>
+                                            </NextLink>
+                                        </Grid>
+                                    </Grid>
+                                    <Copyright sx={{ mt: 5 }} />
+                                </Box>
+                            )
+                        }
                     </Box>
                 </LoginForm>
             </LoginGrid>

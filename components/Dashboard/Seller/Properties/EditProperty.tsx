@@ -7,6 +7,7 @@ import React, { useContext, useState } from 'react'
 import { API_LINK } from '../../../../config/constants';
 import { MainContext } from '../../../../context/MainContext';
 import AddItemButton from '../../../Shares/Dashboard/Button';
+import { Base_URL } from "../../../../config/constants"
 
 const EditProperty = (props: any) => {
 
@@ -32,6 +33,8 @@ const EditProperty = (props: any) => {
 	const [multiImages, setMultiImages] = useState("");
     const [loading, setLoading] = useState(false)
 
+    const {token}: any = parseCookies()
+
 	const handleInputs = (e: any) => {
 		setUser({
 			...user,
@@ -44,10 +47,20 @@ const EditProperty = (props: any) => {
 		setMultiImages(e.target.files);
 	};
 
+    const propertyLists = async () => {
+        let res = await fetch(`${Base_URL}/api/seller/properties`,{
+            method: "GET",
+            headers: {
+                "Authorization" : `Bearer ${token}`
+            }
+        }).then(response => response.json())
+        return res
+    }
+
 	const handleSubmit = async (e: any) => {
 		e.preventDefault();
         await setLoading(true)
-        const {token}: any = parseCookies()
+        
 		const {
 			propertyTitle,
 			area,
@@ -70,21 +83,21 @@ const EditProperty = (props: any) => {
 			`Bearer ${token}`
 		);
 
-		var formdata = new FormData();
-		formdata.append("propertyTitle", propertyTitle);
-		formdata.append("description", description);
-		formdata.append("area", area);
-		formdata.append("propertyType", "Constructed");
-		formdata.append("address", address);
-		formdata.append("bedrooms", bedrooms);
-		formdata.append("bathrooms", bathrooms);
-		formdata.append("floors", floors);
-		formdata.append("priceDemand", priceDemand);
-		formdata.append("biddingEnd", biddingEnd);
-		formdata.append("images", multiImages[0]);
-		formdata.append("city", city);
-		formdata.append("state", countrySate);
-		formdata.append("zip", zip);
+		let formdata = {
+            "propertyTitle": propertyTitle,
+            "description": description,
+            "area": area,
+            "propertyType": "Constructed",
+            "address": address,
+            "bedrooms": bedrooms,
+            "bathrooms": bathrooms,
+            "floors": floors,
+            "priceDemand": priceDemand,
+            "biddingEnd": biddingEnd,
+            "city": city,
+            "state": countrySate,
+            "zip": zip,
+        }
 
         let result = await axios({
             method: "PATCH",
@@ -107,6 +120,8 @@ const EditProperty = (props: any) => {
             setAlertMessage('Property updated successfully')
             setCountrySate('')
             props.setProperty(null)
+            let properties: any = await propertyLists()
+            props.setProperties(properties.data)
         }
         setLoading(false)
 	};
@@ -214,7 +229,7 @@ const EditProperty = (props: any) => {
                 <TextField fullWidth multiline rows={4} id="description" size="small" name="description" label="Description" color="info" variant="filled" value={user.description} onChange={(e)=>handleInputs(e)} required />
             </Grid>
             
-            <Grid item xs={12}>
+            {/* <Grid item xs={12}>
                 <input
                     type="file"
                     className="custom-style"
@@ -226,7 +241,7 @@ const EditProperty = (props: any) => {
                     style={{ marginLeft: "0px" }}
                     // hidden
                 />
-            </Grid>
+            </Grid> */}
             <Grid item xs={12}>
                 <AddItemButton loading={loading} startIcon={<Add />}>Update Property</AddItemButton>
                 <Button className="bg-danger text-white px-3" style={{borderRadius: '10px',marginLeft: '1rem'}} onClick={()=>props.setProperty(null)}>Cancel</Button>

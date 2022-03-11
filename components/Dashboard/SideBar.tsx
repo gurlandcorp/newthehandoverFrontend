@@ -131,7 +131,6 @@ const SideBar = (props: any) => {
 
     useEffect(()=>{
         setName(loggedInUser!= null && JSON.parse(loggedInUser).name)
-
     },[route, loggedInUser])
 
     const lists = (
@@ -159,7 +158,7 @@ const SideBar = (props: any) => {
                 )
             }
             {
-                props.user.userType == 'Saller' && (
+                props.user.userType == 'Seller' && (
                     <>
                     <Link href="/seller" passHref>
                         <ListItemButton selected={route.pathname==='/seller'}>

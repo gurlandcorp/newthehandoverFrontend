@@ -1,11 +1,13 @@
-import axios from 'axios';
 import { NextPage } from 'next'
-// import Image from 'next/image';
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
+import { Base_URL } from '../config/constants';
+import { MainContext } from '../context/MainContext';
 // import contactImg from "../public/assets/img/blog/contact01.jpg";
 import styles from "./styles/Contact.module.css"
 
 const Contact: NextPage = () => {
+
+	const {setAlert, setAlertMessage} = useContext(MainContext)
     const initialSate = {
 		name: "",
 		email: "",
@@ -19,23 +21,30 @@ const Contact: NextPage = () => {
 	const handleSubmit = async (e: any) => {
 		e.preventDefault();
 		const { name, email, message } = data;
-		axios.post(`https://handoverapi.herokuapp.com/contact/contactus`, {
+		let res = await fetch(`${Base_URL}/api/contact`, {
+			method: "POST",
+			body: JSON.stringify({
 				name,
 				email,
 				message,
 			})
-			.then(function (response1) {
-				// handle success
-                console.log('contact page',response1.data)
-				setData(response1?.data);
-			})
-			.catch(function (error) {
-				// handle error
-				console.log(error);
-			})
-			.then(function () {
-				// always executed
-			});
+		}).then((response) => {
+			return response.json()
+		})
+		.catch(function (error) {
+			console.log(error);
+		})
+		
+		if(res?.status==1)
+		{
+			await setAlert(true)
+			setAlertMessage(res?.data.Message)
+			setData(initialSate);
+		}
+		else
+		{
+			console.log('error',res)
+		}
 	};
 
     return (
