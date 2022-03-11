@@ -26,7 +26,7 @@ const useStyles = makeStyles({
 })
 
 const Property = (props:any) => {
-    console.log(props)
+    
     const classes = useStyles()
     return (
         <>

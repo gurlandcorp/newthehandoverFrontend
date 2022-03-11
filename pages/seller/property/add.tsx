@@ -272,6 +272,6 @@ export async function getServerSideProps(context: any) {
     return {
       props: {
         user: user
-      }, // will be passed to the page component as props
+      },
     }
 }
