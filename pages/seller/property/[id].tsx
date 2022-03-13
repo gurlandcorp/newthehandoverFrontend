@@ -84,8 +84,8 @@ const Property = (props:any) => {
                         props.bidding.map((bid:any, index: any) => {
                             return <div key={index} className="mb-3 bg-primary bg-opacity-10 p-2 rounded d-flex justify-content-between">
                                 <div>
-                                    <p><strong>User Name</strong> _____</p>
-                                    <p><strong>Email:</strong>info@domain.com</p>
+                                    <p><strong>User Name:</strong> {bid.Bidder[0].name}</p>
+                                    <p><strong>Email:</strong> {bid.Bidder[0].email}</p>
                                     <p><strong>Status:</strong> {bid.winner===true ? <span className="badge bg-info text-info bg-opacity-10">Winner</span> : <span className="badge bg-danger text-danger bg-opacity-10">Not-approved</span> }</p>
                                 </div>
                                 <div>
@@ -105,8 +105,8 @@ export default Property
 
 export async function getServerSideProps(context: any) {
     // Fetch data from external API
-    const propRes = await fetch(`${process.env.API_URL}/property/${context.query.id}`)
-    const property = await propRes.json()
+    // const propRes = await fetch(`${process.env.API_URL}/property/${context.query.id}`)
+    // const property = await propRes.json()
 
     const res: any = await axios({
         method: "GET",
@@ -130,8 +130,8 @@ export async function getServerSideProps(context: any) {
     return { 
         props: {
             user: user,
-            property: property,
-            bidding: res,
+            property: res.property,
+            bidding: res.events,
         }
     }
 }
