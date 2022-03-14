@@ -1,13 +1,5 @@
 import React, { useState } from 'react'
-import { Box, Grid, IconButton, Typography, Button, Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions, Slide } from '@mui/material'
-import { ButtonProps } from "@mui/material/Button"
-import { makeStyles } from '@mui/styles'
-import { styled } from '@mui/system';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
+import { Box, Grid, IconButton, Typography, Slide } from '@mui/material'
 import { Delete, Edit } from '@mui/icons-material';
 import { Base_URL } from '../../../../config/constants';
 import EditProperty from './EditProperty';
@@ -53,67 +45,19 @@ const PropertiesList = (props: any) => {
 
     return (
         <>
-        {/* <Grid item className="my-4 w-100 py-2 px-4" width={'100%'} py={2}>
-            {
-                property == null ? (
-                    <Table sx={{ minWidth: '100%' }} aria-labelledby="tableTitle" size={'medium'} >
-                        <TableHead>
-                            <TableRow>
-                                <TableCell align={'left'} padding={'none'} sortDirection={false} >
-                                Title
-                                </TableCell>
-                                <TableCell align={'left'} padding={'normal'} sortDirection={false} >
-                                Area
-                                </TableCell>
-                                <TableCell align={'left'} padding={'normal'} >
-                                Bedrooms
-                                </TableCell>
-                                <TableCell align={'left'} padding={'normal'} >
-                                Type
-                                </TableCell>
-                                <TableCell align={'left'} padding={'normal'} >
-                                Type
-                                </TableCell>
-                                <TableCell align={'left'} padding={'normal'} >
-                                    Action
-                                </TableCell>
-                            </TableRow>
-                        </TableHead>
-                        <TableBody>
-                            {
-                                props.properties?.map((property: any, index: any) => {
-                                    return (
-                                        <TableRow key={index} hover role="checkbox" tabIndex={-1} >
-                                            <TableCell component="th" scope="row" padding="none" > {property.propertyTitle} </TableCell>
-                                            <TableCell align="left">{property.area}</TableCell>
-                                            <TableCell align="left">{property.bedrooms}</TableCell>
-                                            <TableCell align="left">{property.bathrooms}</TableCell>
-                                            <TableCell align="left">{property.propertyType}</TableCell>
-                                            <TableCell align="left">
-                                                <IconButton>
-                                                    <Edit color="success" onClick={(e: any)=>editProperty(property)} />
-                                                </IconButton>
-                                                <IconButton>
-                                                    <Delete color="error" onClick={(e: any)=>delProperty(property._id)} />
-                                                </IconButton>
-                                            </TableCell>
-                                        </TableRow>
-                                    )
-                                })
-                            }
-                        </TableBody>
-                    </Table>
-                ) : (
-                    <EditProperty property={property} setProperty={setProperty} />
-                )
-            }
-        </Grid> */}
         <Grid container p={3}>
         {
             property == null ? (
                 properties.map((item: any, index: any) => {
+                    let currentDate: any = new Date()
+                    let propertyEndTime: any = new Date(item.biddingEnd.split('T')[0])
+                    currentDate = currentDate.getTime()
+                    propertyEndTime = propertyEndTime.getTime()
+                    let difference = propertyEndTime - currentDate
+                    let Difference_In_Days = difference / (1000 * 3600 * 24)
+                    let Difference_In_Hours = (difference % (1000 * 3600 * 24)) / (1000 * 60 * 60)
                     return (
-                        <Grid item sm={12} md={6} key={index} className="p-2 w-100">
+                        <Grid item xs={12} sm={6} key={index} className="p-2 w-100">
                             <Grid container className={styles.propertyWrapper} sx={{ marginBottom:{sm:"2rem",xs:"2rem"} }}>
                                 <Grid item xs={12} sm={12} md={12} lg={4} sx={{ marginTop:{md:"0px",sm:"-2rem",xs:"-2rem"} }} className={styles.propertyImageContainer}>
                                     <Link href={`/opportunity/${item._id}`}>
@@ -132,13 +76,19 @@ const PropertiesList = (props: any) => {
                                                 </Typography>
                                             </Link>
                                             <Typography variant="body2" gutterBottom>
-                                            <span className="text-black">Area</span> {item.area}
+                                                <span className="text-black">Area</span> {item.area}
                                             </Typography>
                                             <Typography variant="body2" color="text.secondary">
-                                            <span className="text-black">bedrooms</span> {item.bedrooms}
+                                                <span className="text-black">Bedrooms</span> {item.bedrooms}
+                                            </Typography>
+                                            <Typography variant="body2" color="text.secondary">
+                                            <span className="text-black">Duration</span> <span className="text-info">{Difference_In_Days.toFixed(0)} days {Difference_In_Hours.toFixed(0)} hours left</span>
+                                            </Typography>
+                                            <Typography variant="body2" color="text.secondary">
+                                                <span className="text-black">Status</span> <span className={`badge bg-opacity-10 ${Difference_In_Hours<=0 ? 'bg-danger text-danger' : 'bg-success text-success'}`}>{Difference_In_Hours<=0 ? 'Expired' : 'Available'}</span>
                                             </Typography>
                                             <Link href={`/seller/property/${item._id}`}>
-                                                <a className={styles.propertyReadmore}>View Details</a>
+                                                <a style={{fontSize: "14px",fontWeight: "500"}}>View Details</a>
                                             </Link>
                                         </Grid>
                                     </Grid>

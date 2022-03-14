@@ -12,7 +12,7 @@ const Header = () => {
 	const [activeLink, setActiveLink] = useState('')
 	const router = useRouter();
 	const [showSideMenu,setShowSideMenu] = useState(false)
-	const {token} = parseCookies()
+	const {token, user} = parseCookies()
 	useEffect(()=>{
 	},[])
 
@@ -106,13 +106,11 @@ const Header = () => {
 											</Link>
 										</li>
 										<li className="action-item-style my-account">
-											<a href={'https://app.thehandover.com'}
-												data-bs-toggle="tooltip"
-												data-bs-placement="bottom"
-												title="Sign In"
-											>
-												<i className="flaticon-user-1 icon-round"></i>
-											</a>
+											<Link href={`/${user==null ? '' :JSON.parse(user).userType=='Buyer' ? 'buyer': 'seller'}`}>
+												<a data-bs-toggle="tooltip" data-bs-placement="bottom" title="Sign In" >
+													<i className="flaticon-user-1 icon-round"></i>
+												</a>
+											</Link>
 										</li>
 										<li className="listing-button">
 											<Link href={token ? '/seller/property/add' : '/sign-in?redirect_to=seller/property/add'}>

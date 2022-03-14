@@ -27,19 +27,28 @@ const useStyles = makeStyles({
 
 const Property = (props:any) => {
     
+    let currentDate: any = new Date()
+    let propertyEndTime: any = new Date(props.property.biddingEnd.split('T')[0])
+    currentDate = currentDate.getTime()
+    propertyEndTime = propertyEndTime.getTime()
+    let difference = propertyEndTime - currentDate
+    let Difference_In_Days = difference / (1000 * 3600 * 24)
+    let Difference_In_Hours = (difference % (1000 * 3600 * 24)) / (1000 * 60 * 60)
+
     const classes = useStyles()
     return (
         <>
             <CustomPaper>
                 <Grid container>
                     <Grid item py={2} px={4} width={'100%'} className={`d-flex flex-wrap justify-content-between`}>
-                        <h4 className="mb-0">Properties</h4>
+                        <h4 className="mb-0">Property</h4>
                         <div className="d-flex align-items-center">
                             <div>
                             <span>Bidding Start</span> <span className="badge bg-primary bg-opacity-70 mx-2">{props.property.biddingStart.split('T')[0]}</span>
                             </div>
                             <div>
                             <span>Bidding End</span> <span className="badge bg-danger bg-opacity-70 mx-2">{props.property.biddingEnd.split('T')[0]}</span>
+                            <span>Duration</span> <span className="badge text-info">{Difference_In_Days.toFixed(0)} days {Difference_In_Hours.toFixed(0)} hours left </span>
                             </div>
                         </div>
                     </Grid>
