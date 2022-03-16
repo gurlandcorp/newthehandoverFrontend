@@ -179,6 +179,30 @@ const SignIn: NextPage = ({redirect_to}: any) => {
 		setSubmiting(false)
 	}
 
+    const handleSubmitForget = async (e: any) => {
+        e.preventDefault()
+        setSubmiting(true)
+        try {
+            const res = await fetch(`${Base_URL}/api/authenticate/forget-password`, {
+                method: "POST",
+                body: JSON.stringify({
+                    email: forgetEmail
+                }),
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            }).then(response => response.json());
+            if(res.status==1)
+            {
+                setForgetEmail('')
+                setForgetPassword(false)
+            }
+        } catch (error: any) {
+            console.log('error', error)
+        }
+        setSubmiting(false)
+    }
+
     return (
         <ThemeProvider theme={theme}>
         <Grid container component="main" sx={{ height: '100vh' }}>
@@ -218,7 +242,7 @@ const SignIn: NextPage = ({redirect_to}: any) => {
                         </Typography>
                         {
                             forgetPassword == true ? (
-                                <Box component="form">
+                                <Box component="form" onSubmit={(e: any)=>handleSubmitForget(e)}>
                                     <TextField
                                         margin="normal"
                                         required

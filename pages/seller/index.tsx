@@ -1,10 +1,11 @@
-import { Card, Box, Grid } from '@mui/material'
+import { Card, Box, Grid, TableContainer, Table, TableHead, TableRow, TableCell, TableBody, Paper, Typography } from '@mui/material'
 import { green } from '@mui/material/colors'
 import { makeStyles } from '@mui/styles'
 import axios from 'axios'
 import type { NextPage } from 'next'
 import { parseCookies } from 'nookies'
 import React from 'react'
+import CustomPaper from '../../components/Shares/Components/CustomPaper'
 import { API_LINK } from '../../config/constants'
 import image from "../../public/assets/img/bg-home.jpg"
 
@@ -53,7 +54,8 @@ const SellerDashboard: NextPage = (props: any) => {
                 position: 'relative',
                 overflow: 'visible',
                 background: `linear-gradient(45deg, rgb(0 0 0 / 20%), rgb(0 0 0 / 20%)), url(${image.src})`,
-                backgroundPosition: "center"
+                backgroundPosition: "center",
+                marginBottom: "6rem"
             }}>
             <h4 className="text-white text-center">Hi {props.user.name}, Welcome to dashboard</h4>
             <Grid container className={`gap-4 ${style.cardWrapper}`}>
@@ -90,6 +92,44 @@ const SellerDashboard: NextPage = (props: any) => {
                 </Grid> */}
             </Grid>
         </Card>
+        <CustomPaper>
+            <Typography component="h3">
+                Bidders Activity
+            </Typography>
+        <TableContainer component={Paper}>
+      <Table sx={{ minWidth: 650 }} aria-label="simple table">
+        <TableHead>
+          <TableRow>
+            <TableCell align="left">Bidder name</TableCell>
+            <TableCell align="right">biddings</TableCell>
+            <TableCell align="right">Accepted</TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+            <TableRow >
+              <TableCell align="left">{'John Smith'}</TableCell>
+              <TableCell align="right">{'30'}</TableCell>
+              <TableCell align="right">{'20'}</TableCell>
+            </TableRow>
+            <TableRow >
+              <TableCell align="left">{'John Smith'}</TableCell>
+              <TableCell align="right">{'30'}</TableCell>
+              <TableCell align="right">{'20'}</TableCell>
+            </TableRow>
+            <TableRow >
+              <TableCell align="left">{'John Smith'}</TableCell>
+              <TableCell align="right">{'30'}</TableCell>
+              <TableCell align="right">{'20'}</TableCell>
+            </TableRow>
+            <TableRow >
+              <TableCell align="left">{'John Smith'}</TableCell>
+              <TableCell align="right">{'30'}</TableCell>
+              <TableCell align="right">{'20'}</TableCell>
+            </TableRow>
+        </TableBody>
+      </Table>
+    </TableContainer>
+        </CustomPaper>
         </>
     )
 }

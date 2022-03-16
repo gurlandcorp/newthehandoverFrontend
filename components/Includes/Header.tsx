@@ -106,7 +106,7 @@ const Header = () => {
 											</Link>
 										</li>
 										<li className="action-item-style my-account">
-											<Link href={`/${user==null ? '' :JSON.parse(user).userType=='Buyer' ? 'buyer': 'seller'}`}>
+											<Link href={`/${user==null ? 'sign-in' :JSON.parse(user).userType=='Buyer' ? 'buyer': 'seller'}`}>
 												<a data-bs-toggle="tooltip" data-bs-placement="bottom" title="Sign In" >
 													<i className="flaticon-user-1 icon-round"></i>
 												</a>
