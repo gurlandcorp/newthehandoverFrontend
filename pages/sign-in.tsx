@@ -261,14 +261,14 @@ const SignIn: NextPage = ({redirect_to}: any) => {
                                     </div>
                                 </form>
                                 <div className="bg-white p-5 w-full rounded-xl shadow mt-5 lg:hidden">
-                                    <p>If you don't have any account then click <a className="cursor-pointer text-blue-500">here</a> to register yourself</p>
+                                    <p>If you don&apos;t have any account then click <a className="cursor-pointer text-blue-500">here</a> to register yourself</p>
                                 </div>
                             </div>
                         </div>
                         <div style={{ background: 'linear-gradient(309deg, #2b6cb0e0, #282452c7), url(/real-estate-background-vector-194501.jpg)', height: '100vh', backgroundPosition: 'center' }} className="hidden lg:block">
                             <div className="flex flex-wrap justify-center items-center h-full">
                                 <div className="bg-white p-5 w-4/5 rounded-xl shadow">
-                                    <p>If you don't have any account then click <NextLink href={'sign-up'}><a className="cursor-pointer text-blue-500">here</a></NextLink> to register yourself</p>
+                                    <p>If you don&apos;t have any account then click <NextLink href={'sign-up'}><a className="cursor-pointer text-blue-500">here</a></NextLink> to register yourself</p>
                                 </div>
                             </div>
                         </div>

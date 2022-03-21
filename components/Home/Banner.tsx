@@ -30,7 +30,7 @@ const Banner = (props: any) => {
                 <div className="grid grid-cols-1 items-center justify-center lg:grid-cols-2">
                     <div className="lg:text-left text-center">
                         <h1 className="heading">Off Plan Property<br /> Investing For<br /> Everyone Online.</h1>
-                        <p className="tagline">The Handover is the world's first and largest Off-plan
+                        <p className="tagline">The Handover is the world&apos;s first and largest Off-plan
                             investing marketplace</p>
                         <p className="tagline">Explore <strong>marketplace</strong> as</p>
                         <div className="block mt-10">
