@@ -1,0 +1,45 @@
+.slideBox {
+    position: relative;
+    height: 400px;
+    background-position: center center !important;
+    background-repeat: no-repeat !important;
+    background-size: cover !important;
+    border-radius: 15px;
+}
+.slideContent {
+    width: 100%;
+    height: 100%;
+    padding: 30px;
+    border-radius: 15px;
+    background-color: rgba(0, 0, 0, 0.349);
+    color: white;
+    vertical-align: bottom;
+    text-align: left;
+}
+.slideContent .arrow {
+    width: 60px;
+    height: 60px;
+    font-size: 54px;
+    color: black;
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+}
+.slideContent .arrow img {
+    width: 100%;
+}
+.slideContent:hover .arrow {
+    bottom: 50px;
+    transform: rotate(40deg);
+    transition: 0.1s ease-in-out;
+}
+.slideContent .propCount {
+    position: absolute;
+    bottom: 25px;
+    left: 15px;
+    font-size: 13px;
+}
+.slideContent .propCount .location {
+    font-size: 21px;
+    font-weight: 600;
+}

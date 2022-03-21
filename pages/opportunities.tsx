@@ -11,6 +11,7 @@ import Link from 'next/link';
 import { Base_URL } from '../config/constants';
 import { MainContext } from '../context/MainContext';
 import { useRouter } from 'next/router';
+import BackgroundImage from "/public/img/image-box-2.jpg"
 import axios from 'axios';
 
 const Properties: NextPage = ({data, query}: any) => {
@@ -108,8 +109,133 @@ const Properties: NextPage = ({data, query}: any) => {
 
     return (
         <>
-        <BreadCrumb title="All Opportunities" />
-			<section className="grid-wrap3">
+			{/* Start of Search Bar  */}
+			<div className="" style={{ backgroundImage: `linear-gradient(178deg, #00000059, rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 1), white), url(${BackgroundImage.src})`, backgroundRepeat: 'no-repeat' }}>
+				<div className="container-search py-10 mx-auto">
+					<div className="search-wrapper p-4">
+						<form action="" className="gap-4 grid grid-cols-1 lg:grid-cols-7 sm:grid-cols-2 w-full">
+							<input type="text" placeholder="What are you looking for ?" className="p-3 w-full col-span-2" />
+							<select name="" id="" className="p-3 w-full col-span-2">
+								<option value="">Property Type</option>
+							</select>
+							<select name="" id="" className="p-3 w-full col-span-2">
+								<option value="">All Cities</option>
+							</select>
+							<div className="flex flex-wrap items-center justify-end text-right w-full">
+								<button type="submit" className="px-4 py-2 w-full rounded-xl"><span className="mdi mdi-magnify" /> Search </button>
+							</div>
+						</form>
+					</div>
+				</div>
+				<div className="font-semibold py-32 text-3xl text-center">
+					<h3 className="uppercase theme-color text-4xl">Opportunities</h3>
+				</div>
+			</div>
+			{/* end of search Bar  */}
+
+			<div className="width py-10 mx-auto">
+				<div className="flex flex-wrap">
+					<div className="sidebar w-full lg:w-1/3">
+						<div className="adv-search p-5 shadow-xl rounded">
+							<h2 className="text-center font-medium text-xl mb-5">Advanced Search</h2>
+							<form onSubmit={(e) => searchSubmit(e)}>
+								<input type="text" className="w-full border border-solid rounded p-2 mb-4" placeholder="What are you looking for ?" />
+								<div className="grid grid-cols-2 gap-5">
+									<input type="text" className="w-full border border-solid rounded p-2 mb-4" placeholder="Rooms" />
+									<input type="text" className="w-full border border-solid rounded p-2 mb-4" placeholder="Bathrooms" />
+								</div>
+								<select name="" id="" className="w-full border border-solid rounded p-2 mb-4">
+									<option value="">Property Type</option>
+								</select>
+								<select name="" id="" className="w-full border border-solid rounded p-2 mb-4">
+									<option value="">All Cities</option>
+								</select>
+								<p className="mb-4">Price Range</p>
+								<div className="grid grid-cols-2 gap-5">
+									<input type="text" className="w-full border border-solid rounded p-2 mb-4" placeholder="Min" />
+									<input type="text" className="w-full border border-solid rounded p-2 mb-4" placeholder="Max" />
+								</div>
+								<div className="text-center">
+									<button type="submit" className="bg-black text-white py-2 px-3 rounded-3xl shadow hover:bg-white hover:text-black transition-all duration-300"><span className="mdi mdi-magnify" /> Search </button>
+								</div>
+							</form>
+						</div>
+					</div>
+					<div className="content-area w-full lg:w-2/3">
+						<div className="pt-3 ml-0 lg:ml-5 mt-5 lg:mt-0">
+							<div className="listing-filters w-full mb-5">
+								<h3 className="listing-title text-3xl text-blue-900">All Listings</h3>
+							</div>
+							<div className="listing-cont grid grid-cols-1 md:grid-cols-2 gap-5">
+								{
+									opportunities?.length > 0 && (
+										data.map((property: any, index: any)=> {
+											return (
+												<div key={index} className="list-item shadow-box rounded-xl overflow-hidden relative" style={{ backgroundImage: `url("${property.images[0]}")`, backgroundSize: 'cover', backgroundPosition: 'center', height: 300 }}>
+													<div className="detail-box p-5 bg-black text-white rounded-t-xl absolute bottom-0">
+														<div className="box-title w-full">{property.propertyTitle}</div>
+														<div className="box-location text-gray-500 text-sm">{property.location.city}</div>
+														<ul className="grid grid-cols-4 gap-2 text-sm text-gray-500">
+															<li><span className="mdi mdi-vector-square-plus" /> {property.area} sqft</li>
+															<li><span className="mdi mdi-bed-king-outline" /> {property.bedrooms} Beds</li>
+															<li><span className="mdi mdi-bathtub-outline" /> {property.bathrooms} Baths</li>
+															<li><span className="mdi mdi-cached" /> 4 Days ago</li>
+														</ul>
+														<div className="box-price">AED {property.priceDemand}</div>
+													</div>
+												</div>
+											)
+										})
+									)
+								}
+								
+								{/* <div className="list-item shadow-box rounded-xl overflow-hidden relative" style={{ backgroundImage: 'url("./image-box-2.jpg")', backgroundSize: 'cover', backgroundPosition: 'center', height: 300 }}>
+									<div className="detail-box p-5 bg-black text-white rounded-t-xl absolute bottom-0">
+										<div className="box-title w-full">EB Sunrise Bay T2-4-404</div>
+										<div className="box-location text-gray-500 text-sm">Dubai</div>
+										<ul className="grid grid-cols-4 gap-2 text-sm text-gray-500">
+											<li><span className="mdi mdi-vector-square-plus" /> 1100 sqft</li>
+											<li><span className="mdi mdi-bed-king-outline" /> 3 Beds</li>
+											<li><span className="mdi mdi-bathtub-outline" /> 2 Baths</li>
+											<li><span className="mdi mdi-cached" /> 4 Days ago</li>
+										</ul>
+										<div className="box-price">AED 50000</div>
+									</div>
+								</div>
+								<div className="list-item shadow-box rounded-xl overflow-hidden relative" style={{ backgroundImage: 'url("./image-box-2.jpg")', backgroundSize: 'cover', backgroundPosition: 'center', height: 300 }}>
+									<div className="detail-box p-5 bg-black text-white rounded-t-xl absolute bottom-0">
+										<div className="box-title w-full">EB Sunrise Bay T2-4-404</div>
+										<div className="box-location text-gray-500 text-sm">Dubai</div>
+										<ul className="grid grid-cols-4 gap-2 text-sm text-gray-500">
+											<li><span className="mdi mdi-vector-square-plus" /> 1100 sqft</li>
+											<li><span className="mdi mdi-bed-king-outline" /> 3 Beds</li>
+											<li><span className="mdi mdi-bathtub-outline" /> 2 Baths</li>
+											<li><span className="mdi mdi-cached" /> 4 Days ago</li>
+										</ul>
+										<div className="box-price">AED 50000</div>
+									</div>
+								</div>
+								<div className="list-item shadow-box rounded-xl overflow-hidden relative" style={{ backgroundImage: 'url("./image-box-2.jpg")', backgroundSize: 'cover', backgroundPosition: 'center', height: 300 }}>
+									<div className="detail-box p-5 bg-black text-white rounded-t-xl absolute bottom-0">
+										<div className="box-title w-full">EB Sunrise Bay T2-4-404</div>
+										<div className="box-location text-gray-500 text-sm">Dubai</div>
+										<ul className="grid grid-cols-4 gap-2 text-sm text-gray-500">
+											<li><span className="mdi mdi-vector-square-plus" /> 1100 sqft</li>
+											<li><span className="mdi mdi-bed-king-outline" /> 3 Beds</li>
+											<li><span className="mdi mdi-bathtub-outline" /> 2 Baths</li>
+											<li><span className="mdi mdi-cached" /> 4 Days ago</li>
+										</ul>
+										<div className="box-price">AED 50000</div>
+									</div>
+								</div> */}
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+        {/* <BreadCrumb title="All Opportunities" /> */}
+			{/* <section className="grid-wrap3">
 				<div className="container">
 					<div className="row gutters-40">
 						<div className="col-lg-4 widget-break-lg sidebar-widget">
@@ -160,24 +286,9 @@ const Properties: NextPage = ({data, query}: any) => {
 															}
 														})
 													}
-													{/* <option value="2">Family House</option>
-													<option value="3">Apartment</option>
-													<option value="3">Condo</option> */}
 												</select>
 											</div>
 										</div>
-										{/* <div className="col-lg-12 pl-15 mb-0">
-											<div className="rld-single-select">
-												<select className="select single-select mr-0">
-													<option value="">All Categories</option>
-													{
-														categories.map((val, index) => {
-															return <option value={val} key={index} >{val}</option>
-														})
-													}
-												</select>
-											</div>
-										</div> */}
 										<div className="col-lg-12 pl-15">
 											<div className="rld-single-select">
 												<select className="select single-select mr-0" onChange={(e) => setCity(e.target.value)}>
@@ -213,30 +324,6 @@ const Properties: NextPage = ({data, query}: any) => {
 									<div className="banner-search-wrap banner-search-wrap-2">
 										<div className="rld-main-search rld-main-search3">
 											<div className="main-search-field-2">
-												{/* <!-- Area Range --> */}
-												{/* <div className="price-range-wrapper">
-													<div className="range-box">
-														<div className="price-label">Price:</div>
-														<div
-															id="price-range-filter-4"
-															className="price-range-filter"
-														></div>
-														<div className="price-filter-wrap d-flex align-items-center">
-															<div className="price-range-select">
-																<div className="price-range range-title">$</div>
-																<div
-																	className="price-range"
-																	id="price-range-min-4"
-																></div>
-																<div className="price-range">-</div>
-																<div
-																	className="price-range"
-																	id="price-range-max-4"
-																></div>
-															</div>
-														</div>
-													</div>
-												</div> */}
 											</div>
 											<div className="filter-button">
 												<button
@@ -247,7 +334,6 @@ const Properties: NextPage = ({data, query}: any) => {
 												</button>
 											</div>
 										</div>
-										{/* <!--/ End Search Form --> */}
 									</div>
 								</form>
 							</div>
@@ -262,7 +348,6 @@ const Properties: NextPage = ({data, query}: any) => {
 													width="630px"
 													height={'400px'}
 													alt="widget"
-													// src={Widget6} alt="widget" width="630" height="400"
 												/>
 											</a>
 											<div className="item-category-box1">
@@ -276,7 +361,6 @@ const Properties: NextPage = ({data, query}: any) => {
 											<h4 className="item-title">
 												<Link href={`/opportunity/${opportunities[0]?._id}`}>
 													<a>
-														{/* Modern Villa for House Highland Ave Los Angeles */}{" "}
 														{opportunities[0]?.propertyTitle}
 													</a>
 												</Link>
@@ -285,8 +369,7 @@ const Properties: NextPage = ({data, query}: any) => {
 												<i className="flaticon-maps-and-flags"></i>Downey,California
 											</div>
 											<div className="item-price">
-												{/* $11,000 */} AED {opportunities[0]?.priceDemand}
-												{/* <span>/mo</span> */}
+												AED {opportunities[0]?.priceDemand}
 											</div>
 										</div>
 									</div>
@@ -338,15 +421,6 @@ const Properties: NextPage = ({data, query}: any) => {
 																<i className="fas fa-th"></i>
 															</a>
 														</li>
-														{/* <li className="nav-item">
-															<a
-																className="nav-link"
-																data-bs-toggle="tab"
-																href="#reviews"
-															>
-																<i className="fas fa-list-ul"></i>
-															</a>
-														</li> */}
 													</ul>
 												</div>
 											</div>
@@ -368,63 +442,6 @@ const Properties: NextPage = ({data, query}: any) => {
 													)
 												}
 											</div>
-
-											{/* <div className="pagination-style-1">
-												<ul className="pagination">
-													<li className="page-item">
-														<a
-															className="page-link"
-															// href="with-sidebar2.html"
-															aria-label="Previous"
-														>
-															<span aria-hidden="true">&laquo;</span>
-															<span className="sr-only">Previous</span>
-														</a>
-													</li>
-													<li className="page-item">
-														<a
-															className="page-link active"
-															// href="with-sidebar2.html"
-														>
-															1
-														</a>
-													</li>
-													<li className="page-item">
-														<a
-															className="page-link"
-															// href="with-sidebar2.html"
-														>
-															2
-														</a>
-													</li>
-													<li className="page-item">
-														<a
-															className="page-link"
-															// href="with-sidebar2.html"
-														>
-															3
-														</a>
-													</li>
-													<li className="page-item">
-														<a
-															className="page-link"
-															// href="with-sidebar2.html"
-														>
-															4
-														</a>
-													</li>
-													<li className="page-item">
-														<a
-															className="page-link"
-															// href="with-sidebar2.html"
-															aria-label="Next"
-														>
-															<span aria-hidden="true">&raquo;</span>
-															<span className="sr-only">Next</span>
-														</a>
-													</li>
-												</ul>
-											</div> */}
 										</div>
 										<div className="tab-pane fade" id="reviews" role="tabpanel">
 											<div className="row">
@@ -495,8 +512,8 @@ const Properties: NextPage = ({data, query}: any) => {
 						</div>
 					</div>
 				</div>
-			</section>
-			<JoiningBanner />
+			</section> */}
+			{/* <JoiningBanner /> */}
         </>
     )
 }

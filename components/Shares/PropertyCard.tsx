@@ -1,19 +1,6 @@
-// import Blog4 from "../assets/img/blog/blog4.jpg";
-// import Blog5 from "../assets/img/blog/blog5.jpg";
-// import Blog6 from "../assets/img/blog/blog6.jpg";
-// import Blog7 from "../assets/img/blog/blog7.jpg";
-// import Blog8 from "../assets/img/blog/blog8.jpg";
-// import Blog9 from "../assets/img/blog/blog9.jpg";
-// import Blog13 from "../assets/img/blog/blog13.jpg";
-// import Blog14 from "../assets/img/blog/blog14.jpg";
-// import Blog15 from "../assets/img/blog/blog15.jpg";
-// import Blog16 from "../assets/img/blog/blog16.jpg";
-// import Blog17 from "../assets/img/blog/blog17.jpg";
-
 import Image from "next/image";
 import Link from "next/link";
 
-// import Blog18 from "../assets/img/blog/blog18.jpg";
 const PropertyCard = (props: any) => {
 	return (
 		<div className="col-lg-6 col-md-6">

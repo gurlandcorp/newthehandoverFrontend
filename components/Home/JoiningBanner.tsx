@@ -12,58 +12,22 @@ const JoiningBanner = () => {
     const { token } = parseCookies()
 
     return (
-        <section
-            className="banner-collection1 motion-effects-wrap"
-            data-wow-delay=".2s"
-        >
-            <div className="shape-img1">
-                <Image src={Video.src} alt="figure" height="149" width="230" />
-            </div>
-            <div className="shape-img2">
-                <Image src={Video.src} alt="figure" height="149" width="230" />
-            </div>
-            <div className="container">
-                <div className="row align-items-center">
-                    <div className="col-lg-8 col-md-7">
-                        <div className="banner-box1">
-                            <div className="item-img">
-                                <Image
-                                    src={Banner1.src}
-                                    alt="banner"
-                                    height="252"
-                                    width="169"
-                                    className="img-bg-space"
-                                />
-                                <div className="motion-effects3">
-                                    {/* <img src={Shape3} alt="shape" height="113" width="113" /> */}
-                                </div>
-                                <div className="motion-effects4">
-                                    {/* <img src={Shape4} alt="shape" height="157" width="154" /> */}
-                                </div>
-                                <div className="motion-effects5">
-                                    {/* <img src={Shape5} alt="shape" height="91" width="102" /> */}
-                                </div>
-                            </div>
-                            <div className="item-content">
-                                <h2 className="heading-title">Register as a developer or property owner</h2>
-                                <p>
-                                    Be the part of the top off plan investing online auctions.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="col-lg-4 col-md-5">
-                        <div className="banner-button">
-                            <Link href={token ? '/seller/property/add' : '/sign-in?redirect_to=seller/property/add'}>
-                                <a className="banner-btn">
-                                    Post a Property
-                                </a>
-                            </Link>
-                        </div>
-                    </div>
+        <>
+        {/* Joining Property Starts Here  */}
+        <div className="bg-theme-color w-full">
+            <div className="grid grid-cols-2 items-center lg:grid-cols-3 mx-auto width py-10">
+                <div className="col-span-2 flex flex-wrap items-center justify-center lg:justify-start mb-5 lg:mb-0 text-white text-base sm:text-xl lg:text-3xl">
+                    <span className="icon text-white mdi mdi-account-edit-outline text-6xl lg:text-8xl" /> <span>Register as a developer or<br />property owner</span>
+                </div>
+                <div className="col-span-2 lg:col-span-1 w-full text-center lg:text-right">
+                    <Link href={token ? '/seller' : '/sign-in'}>
+                        <a className="dark-btn py-3 text-xl">Register Now</a>
+                    </Link>
                 </div>
             </div>
-        </section>
+        </div>
+        {/* Joining Property Ends Here  */}
+        </>
     );
 };
 

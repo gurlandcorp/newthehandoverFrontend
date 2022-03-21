@@ -1,4 +1,4 @@
-import Logo from "../../public/logohandover.png";
+import Logo from "../../public/logo.png";
 import SearchSection from "./SearchSection";
 import { useEffect, useState } from "react";
 import Link from "next/link";
@@ -18,7 +18,46 @@ const Header = () => {
 
 	return (
 		<>
-			<header className="header">
+			{/* Start of Site Header  */}
+			<div className="bg-white sticky top-0 w-full p-2 z-10 shadow-box">
+				<div className="flex flex-row items-center flex-wrap">
+					<div className="logo w-2/12">
+						<Link href={'/'}>
+							<a>
+								<Image src={Logo} layout="intrinsic" width="350" height="40" alt="logo" className="img-fluid" />
+							</a>
+						</Link>
+					</div>
+					<nav className="menu-center col-span-2 w-7/12">
+						<ul className="flex flex-wrap items-center ml-5">
+							<li>
+								<Link href={'/'}>
+									<a className="nav-item nav-active block text-center">Home</a>
+								</Link>
+							</li>
+							<li>
+								<Link href={'/opportunities'}>
+									<a className="nav-item text-center">Opportunities</a>
+								</Link>
+							</li>
+							<li><a href="#" className="nav-item">About</a></li>
+							<li><a href="#" className="nav-item">Contact</a></li>
+							<li><a href="#" className="bg-black duration-300 ease-in-out hover:bg-white hover:text-black inline-block px-4 py-1 rounded-3xl text-white border border-black border-solid">Auction</a></li>
+						</ul>
+					</nav>
+					<div className="flex flex-wrap justify-center w-3/12">
+						<div>
+							<a href="/" className="bg-black border border-black border-solid duration-300 ease-in-out hover:bg-white hover:text-black inline-block m-1 px-4 py-1 rounded-3xl text-white">+ Add Property</a>
+						</div>
+						<div>
+							<a href="/" className="bg-white border border-black border-solid duration-300 ease-in-out hover:bg-black hover:text-white inline-block m-1 px-4 py-1 rounded-3xl text-black">Login</a>
+						</div>
+					</div>
+				</div>
+			</div>
+			{/* ENd of Site Header  */}
+
+			{/* <header className="header">
 				<div id="rt-sticky-placeholder"></div>
 				<div id="header-menu" className="header-menu menu-layout1 header-menu menu-layout3" >
 					<div className="container">
@@ -55,26 +94,6 @@ const Header = () => {
 												<a className={`${router.pathname.search('opportunities')!=-1 || router.pathname.search('opportunity')!=-1 ? 'active' : ''}`}>Opportunities</a>
 											</Link>
 										</li>
-										{/* <li className="hide-on-desktop-menu">
-											<a href="index.html">Pages</a>
-											<ul>
-												<li>
-													<a href="about-1.html">About</a>
-												</li>
-												<li>
-													<a href="with-sidebar2.html">Property</a>
-												</li>
-												<li>
-													<a href="blog1.html">Blog</a>
-												</li>
-												<li>
-													<a href="404.html">404 Error</a>
-												</li>
-												<li>
-													<a href="contact.html">Contact</a>
-												</li>
-											</ul>
-										</li> */}
 										<li>
 											<Link href={'/contact'}
 											>
@@ -195,7 +214,7 @@ const Header = () => {
 						</ul>
 					</div>
 				</div>
-			</header>
+			</header> */}
 		</>
 	);
 };
