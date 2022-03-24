@@ -156,7 +156,7 @@ const Properties: NextPage = ({data, query}: any) => {
 									<input type="text" className="w-full border border-solid rounded p-2 mb-4" placeholder="Max" />
 								</div>
 								<div className="text-center">
-									<button type="submit" className="bg-black text-white py-2 px-3 rounded-3xl shadow hover:bg-white hover:text-black transition-all duration-300"><span className="mdi mdi-magnify" /> Search </button>
+									<button type="submit" className="bg-black text-white py-2 px-5 rounded-3xl shadow hover:bg-white hover:text-black transition-all duration-300"><span className="mdi mdi-magnify" /> Search </button>
 								</div>
 							</form>
 						</div>

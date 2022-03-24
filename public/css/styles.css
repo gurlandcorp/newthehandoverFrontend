@@ -1,6 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap");
 input:focus,
-select:focus {
+select:focus,
+textarea:focus {
   outline: none;
   box-shadow: 0px 5px 40px -15px #9ebee778;
   
@@ -56,11 +57,11 @@ nav ul li a {
     font-size: 15px;
 }
 ::placeholder {
-    /* Chrome, Firefox, Opera, Safari 10.1+ */
     color: black;
     font-weight: 400;
-    text-align: center;
-    opacity: 1; /* Firefox */
+    /* text-align: center; */
+    font-size: 14px;
+    opacity: 1;
 }
 .container-search select {
     background-color: white;

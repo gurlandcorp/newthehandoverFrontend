@@ -1,40 +1,22 @@
+import Link from "next/link";
 import Banner3 from "../../public/assets/img/banner/banner03.jpg";
 
 const PropertyBanner = () => {
     return (
-        <section
-        className="property-banner-wrap1 parallaxie"
-        data-bg-image={Banner3.src}
-        style={{
-            background: `url(${Banner3.src}) no-repeat center center / cover`,
-        }}
-        >
-        <div className="container">
-            <div className="row align-items-center">
-                <div className="col-lg-5 col-md-12">
-                    <div className="property-box1 wow slideInUp rounded" data-wow-delay="100">
-                        <div className="item-subtitle">Invest like a millionaire</div>
-                        <h3 className="item-title">Search upcoming projects and bid as a new project launches!</h3>
-                        {/* <div className="play-button">
-                            <div className="item-icon">
-                                <a
-                                    href="http://www.youtube.com/watch?v=1iIZeIy7TqM"
-                                    className="play-btn"
-                                >
-                                    <span className="play-icon style-1">
-                                    <i className="fas fa-play"></i>
-                                    </span>
-                                    <span className="play-text">Watch Video</span>
-                                </a>
-                            </div>
-                        </div> */}
-                    </div>
+        <section className="" data-bg-image={Banner3.src} style={{
+            background: `linear-gradient(0deg,#ffffff8c,#ffffff), url(${Banner3.src}) no-repeat center center / cover`,
+        }} >
+        <div className="width mx-auto">
+            <div className="flex flex-wrap items-center justify-between py-10">
+                <div className="py-5">
+                    <div className="text-base theme-color">Invest like a millionaire</div>
+                    <h3 className="item-title">Search upcoming projects and bid as a new project launches!</h3>
                 </div>
-                <div className="col-lg-7 col-md-12">
-                    <div className="property-img wow fadeInUp" data-wow-delay="100">
+                <div className="">
                     <div className="bg-title-wrap" style={{ display: "block" }}>
-                        <span className="background-title solid">Property For All</span>
-                    </div>
+                        <Link href={'/opportunities'}>
+                            <a className="cursor-pointer bg-theme-color py-2 px-5 text-white rounded-3xl block">Property For All</a>
+                        </Link>
                     </div>
                 </div>
             </div>
