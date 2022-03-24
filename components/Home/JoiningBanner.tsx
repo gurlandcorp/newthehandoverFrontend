@@ -21,7 +21,7 @@ const JoiningBanner = () => {
                 </div>
                 <div className="col-span-2 lg:col-span-1 w-full text-center lg:text-right">
                     <Link href={token ? '/seller' : '/sign-in'}>
-                        <a className="dark-btn py-3 text-xl">Register Now</a>
+                        <a className="dark-btn py-2 text-xl">Register Now</a>
                     </Link>
                 </div>
             </div>

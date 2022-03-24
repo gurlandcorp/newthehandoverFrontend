@@ -36,8 +36,21 @@ const Footer = () => {
 								Quick Links
 							</div>
 							<ul className="list-none">
-								<li><a className="text-gray-500">About</a></li>
-								<li><a className="text-gray-500">Contact</a></li>
+								<li>
+									<Link href={'/opportunities'}>
+										<a className="text-gray-500 block mb-2">Opportunities</a>
+									</Link>
+								</li>
+								<li>
+									<Link href={'/about'}>
+										<a className="text-gray-500 block mb-2">About</a>
+									</Link>
+								</li>
+								<li>
+									<Link href={'/contact'}>
+										<a className="text-gray-500 block mb-2">Contact</a>
+									</Link>
+								</li>
 							</ul>
 						</div>
 						<div className="col-right">
@@ -49,7 +62,7 @@ const Footer = () => {
 									Silicon Oasis, DDP, Building A2</p></li>
 								<li><span className="mdi mdi-phone" /> Telp: (0411) 425 277 / 425
 									276</li>
-								<li><span className="mdi mdi-email-outline" /> Email: inbox@ITsolutions.com</li>
+								<li><span className="mdi mdi-email-outline" /> Email: <a href="mailto:inbox@ITsolutions.com">inbox@ITsolutions.com</a></li>
 							</ul>
 						</div>
 					</div>

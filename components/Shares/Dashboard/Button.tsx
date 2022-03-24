@@ -6,14 +6,14 @@ import { Add } from '@mui/icons-material';
 import Link from 'next/link';
 
 const DefaultButton = styled(Button)<ButtonProps>(({theme}) => ({
-    backgroundColor: '#00c194',
+    backgroundColor: '#00c194 !important',
     borderRadius: '10px',
     boxShadow: 'rgb(137 137 137 / 10%) 0px 6px 10px 0px',
     textTransform: 'capitalize',
     color: "#fff",
     height: 'fit-content',
     '&:hover': {
-        backgroundColor: 'rgb(5 163 126)',
+        backgroundColor: 'rgb(5 163 126) !important',
         boxShadow: 'rgb(0 193 148 / 43%) 0px 5px 10px 0px inset',
     }
 }))

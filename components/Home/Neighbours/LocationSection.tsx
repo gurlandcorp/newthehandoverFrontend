@@ -21,7 +21,7 @@ const LocationSection = () => {
             <div className="width mx-auto">
                 <div className="title-box">
                     <h3 className="sub-title">TOP MARKETS</h3>
-                    <h2 className="theme-color text-lg font-semibold md:text-3xl">Find Your Neighbourhood</h2>
+                    <h2 className="theme-color text-lg sm:text-3xl md:text-4xl">Find Your Neighbourhood</h2>
                 </div>
             </div>
             <div className="width mx-auto my-10">
@@ -31,6 +31,24 @@ const LocationSection = () => {
                 spaceBetween={10}
                 pagination={{
                   clickable: true,
+                }}
+                breakpoints= {{
+                    "@0.00": {
+                      slidesPerView: 1,
+                      spaceBetween: 10,
+                    },
+                    "@0.75": {
+                      slidesPerView: 1,
+                      spaceBetween: 20,
+                    },
+                    "@1.00": {
+                      slidesPerView: 2,
+                      spaceBetween: 40,
+                    },
+                    "@1.50": {
+                      slidesPerView: 3,
+                      spaceBetween: 50,
+                    },
                 }}
                 modules={[Pagination]}
                 className="mySwiper">

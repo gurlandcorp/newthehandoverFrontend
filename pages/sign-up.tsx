@@ -167,28 +167,28 @@ const SingUp: NextPage = () => {
                                 <form onSubmit={(e: any)=>handleSubmit(e)}>
                                     <div className="pb-5">
                                         <label htmlFor="name" className="w-full">Name</label>
-                                        <input type="text" className="border border-blue-700 p-2 px-4 rounded-3xl text-sm w-full" name="name" id="name" placeholder="Enter name" value={user.name} onChange={(e)=>handleInputs(e)} required />
+                                        <input type="text" className="border theme-border-color p-2 px-4 rounded-3xl text-sm w-full" name="name" id="name" placeholder="Enter name" value={user.name} onChange={(e)=>handleInputs(e)} required />
                                         {
                                             error.name!='' ? <div className="bg-red-100 mt-2 px-2 rounded-3xl text-red-500 w-full capitalize" style={{ fontSize: '11px' }}>{error.name}</div> : ""
                                         }
                                     </div>
                                     <div className="pb-5">
                                         <label htmlFor="email" className="w-full">Email</label>
-                                        <input type="email" className="border border-blue-700 p-2 px-4 rounded-3xl text-sm w-full" name="email" id="email" placeholder="Enter email address" value={user.email} onChange={(e)=>handleInputs(e)} required />
+                                        <input type="email" className="border theme-border-color p-2 px-4 rounded-3xl text-sm w-full" name="email" id="email" placeholder="Enter email address" value={user.email} onChange={(e)=>handleInputs(e)} required />
                                         {
                                             error.email!='' ? <div className="bg-red-100 mt-2 px-2 rounded-3xl text-red-500 w-full capitalize" style={{ fontSize: '11px' }}>{error.email}</div> : ""
                                         }
                                     </div>
                                     <div className="pb-5">
                                         <label htmlFor="password" className="w-full">Password</label>
-                                        <input type="password" className="border border-blue-700 p-2 px-4 rounded-3xl text-sm w-full" name="password" id="password" placeholder="Enter password" value={user.password} onChange={(e)=>handleInputs(e)} required />
+                                        <input type="password" className="border theme-border-color p-2 px-4 rounded-3xl text-sm w-full" name="password" id="password" placeholder="Enter password" value={user.password} onChange={(e)=>handleInputs(e)} required />
                                         {
                                             error.password!='' ? <div className="bg-red-100 mt-2 px-2 rounded-3xl text-red-500 w-full capitalize" style={{ fontSize: '11px' }}>{error.password}</div> : ""
                                         }
                                     </div>
                                     <div className="pb-5">
                                         <label htmlFor="phone" className="w-full">Phone # <span className="text-sm text-gray-500">(optional)</span></label>
-                                        <input type="text" className="border border-blue-700 p-2 px-4 rounded-3xl text-sm w-full" name="phone" id="phone" placeholder="Enter phone #" value={user.phone} onChange={(e)=>handleInputs(e)} required />
+                                        <input type="text" className="border theme-border-color p-2 px-4 rounded-3xl text-sm w-full" name="phone" id="phone" placeholder="Enter phone #" value={user.phone} onChange={(e)=>handleInputs(e)} required />
                                     </div>
                                     <div className="">
                                         Designation
@@ -206,7 +206,7 @@ const SingUp: NextPage = () => {
                                         </div>
                                     </div>
                                     <div className='pt-10'>
-                                        <button type={`${submiting==true ? 'button' : 'submit'}`} className={`${submiting==true ? 'bg-blue-100 text-blue-700' : 'bg-blue-700 text-white'} w-full rounded-3xl p-2 flex flex-wrap justify-center transition-all duration-300`}>Sign up {
+                                        <button type={`${submiting==true ? 'button' : 'submit'}`} className={`${submiting==true ? 'bg-blue-100 text-blue-700' : 'bg-theme-color text-white'} w-full rounded-3xl p-2 flex flex-wrap justify-center transition-all duration-300`}>Sign up {
                                                 submiting==true && (
                                                     <svg xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" width="20px" height="20px" viewBox="0 0 128 128" xmlSpace="preserve" style={{marginLeft: '1rem'}}><g><path d="M64 9.75A54.25 54.25 0 0 0 9.75 64H0a64 64 0 0 1 128 0h-9.75A54.25 54.25 0 0 0 64 9.75z" fill="#252153" /><animateTransform attributeName="transform" type="rotate" from="0 64 64" to="360 64 64" dur="1200ms" repeatCount="indefinite" /></g></svg>
                                                 )

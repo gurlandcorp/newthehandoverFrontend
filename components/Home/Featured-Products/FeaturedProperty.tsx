@@ -13,16 +13,18 @@ const FeaturedProperty = (props: any) => {
         {/* latest listing block starts  */}
         <div className="width mx-auto py-20">
             <div className="gap-10 grid grid-cols-1 lg:grid-cols-2">
-                <div className="side">
-                    <div className="title-box mb-5">
-                        <h3 className="sub-title">LATEST LISTINGS</h3>
-                        <h2 className="title">Featured Property<br />
-                            For Sale</h2>
-                    </div>
-                    <div className="text-center">
-                        <Link href={'/opportunities'}>
-                        <a className="dark-btn">View All Properties</a>
-                        </Link>
+                <div className="side flex flex-wrap justify-center items-center">
+                    <div>
+                        <div className="title-box mb-5">
+                            <h3 className="sub-title">LATEST LISTINGS</h3>
+                            <h2 className="title">Featured Property<br />
+                                For Sale</h2>
+                        </div>
+                        <div className="text-center">
+                            <Link href={'/opportunities'}>
+                            <a className="dark-btn">View All Properties</a>
+                            </Link>
+                        </div>
                     </div>
                 </div>
                 {

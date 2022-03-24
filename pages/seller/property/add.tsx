@@ -157,7 +157,7 @@ const PropertyAdd: NextPage = () => {
 
     return (
         <Grid container>
-            <Grid item py={2} width={'100%'} className={`d-flex flex-wrap justify-content-between`}>
+            <Grid item py={2} width={'100%'} className={`flex flex-wrap justify-between`}>
                 <h4 className="mb-0">Add new property</h4>
                 <AddItemButton href="/seller/properties" startIcon={<ListAltSharp />}>Properties list</AddItemButton>
             </Grid>

@@ -203,6 +203,10 @@ const SignIn: NextPage = ({redirect_to}: any) => {
         setSubmiting(false)
     }
 
+    const style = {
+        themeColor: {color: "#252153"}
+    }
+
     return (
         <>
             <div className="bg-gray-100 h-screen">
@@ -231,37 +235,61 @@ const SignIn: NextPage = ({redirect_to}: any) => {
                                     </NextLink>
                                 </li>
                             </ul>
-                            <div className="flex flex-col items-center justify-center text-center pt-10">
-                                <div className="w-2/5">
-                                    <Image src={Logo.src} width={Logo.width} height={Logo.height} alt="site-logo" className="w-6/12 pb-5" />
-                                </div>
-                                <h3 className="text-2xl font-medium text-blue-900">Sign In</h3>
-                            </div>
-                            <div className="md:mx-16 mx-1 py-10">
-                                <form onSubmit={(e: any)=>handleSubmit(e)}>
-                                    <div className="pb-5">
-                                        <label htmlFor="" className="w-full">Email</label>
-                                        <input type="email" className="border border-blue-700 p-2 px-4 rounded-3xl text-sm w-full" name="email" id="email" placeholder="Email address" value={user.email} onChange={(e)=>handleInputs(e)} required />
-                                        {emailError ? <div className="bg-red-100 mt-2 px-2 rounded-3xl text-red-500 w-full capitalize" style={{ fontSize: '11px' }}>{emailError}</div> : ""}
+                            <div className="flex flex-wrap justify-center items-center h-full">
+                                <div>
+                                    <div className="flex flex-col items-center justify-center text-center pt-10">
+                                        <div className="w-2/5">
+                                            <Image src={Logo.src} width={Logo.width} height={Logo.height} alt="site-logo" className="w-6/12 pb-5" />
+                                        </div>
+                                        <h3 className="text-2xl font-medium text-blue-900">Sign In</h3>
                                     </div>
-                                    <div className="pb-5">
-                                        <label htmlFor="" className="w-full">Password</label>
-                                        <input type="password" className="border border-blue-700 p-2 px-4 rounded-3xl text-sm w-full" name="password" id="password" placeholder="Password" value={user.password} onChange={(e)=>handleInputs(e)} required />
+                                    <div className="md:mx-16 mx-1 py-10">
+                                        {
+                                            forgetPassword == true ? (
+                                                <form onSubmit={(e: any)=>handleSubmitForget(e)}>
+                                                    <div className="pb-5">
+                                                        <label htmlFor="" className="w-full">Email</label>
+                                                        <input type="email" className="border p-2 px-4 rounded-3xl text-sm w-full" name="email" id="email" placeholder="Email address" value={forgetEmail} onChange={(e)=>setForgetEmail(e.target.value)} required />
+                                                    </div>
+                                                    <div>
+                                                        <button type={`${submiting==true ? 'button' : 'submit'}`} className={`${submiting==true ? 'bg-blue-100 text-blue-700' : 'bg-blue-700 text-white'} w-full rounded-3xl p-2 flex flex-wrap justify-center transition-all duration-300`}>Send email {
+                                                                submiting==true && (
+                                                                    <svg xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" width="20px" height="20px" viewBox="0 0 128 128" xmlSpace="preserve" style={{marginLeft: '1rem'}}><g><path d="M64 9.75A54.25 54.25 0 0 0 9.75 64H0a64 64 0 0 1 128 0h-9.75A54.25 54.25 0 0 0 64 9.75z" fill="#252153" /><animateTransform attributeName="transform" type="rotate" from="0 64 64" to="360 64 64" dur="1200ms" repeatCount="indefinite" /></g></svg>
+                                                                )
+                                                            }
+                                                        </button>
+                                                    </div>
+                                                </form>
+                                            ) : (
+                                                <form onSubmit={(e: any)=>handleSubmit(e)}>
+                                                    <div className="pb-5">
+                                                        <label htmlFor="" className="w-full">Email</label>
+                                                        <input type="email" className="border theme-border-color p-2 px-4 rounded-3xl text-sm w-full" name="email" id="email" placeholder="Email address" value={user.email} onChange={(e)=>handleInputs(e)} required />
+                                                        {emailError ? <div className="bg-red-100 mt-2 px-2 rounded-3xl text-red-500 w-full capitalize" style={{ fontSize: '11px' }}>{emailError}</div> : ""}
+                                                    </div>
+                                                    <div className="pb-5">
+                                                        <label htmlFor="" className="w-full">Password</label>
+                                                        <input type="password" className="border theme-border-color p-2 px-4 rounded-3xl text-sm w-full" name="password" id="password" placeholder="Password" value={user.password} onChange={(e)=>handleInputs(e)} required />
+                                                    </div>
+                                                    <div className="text-right pb-5">
+                                                        <a onClick={()=>setForgetPassword(true)} className="cursor-pointer text-sm text-blue-500">Forget password</a>
+                                                    </div>
+                                                    <div>
+                                                        <button type={`${submiting==true ? 'button' : 'submit'}`} className={`${submiting==true ? 'bg-blue-100 text-blue-700' : 'bg-theme-color text-white'} w-full rounded-3xl p-2 flex flex-wrap justify-center transition-all duration-300`}>Sign In {
+                                                                submiting==true && (
+                                                                    <svg xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" width="20px" height="20px" viewBox="0 0 128 128" xmlSpace="preserve" style={{marginLeft: '1rem'}}><g><path d="M64 9.75A54.25 54.25 0 0 0 9.75 64H0a64 64 0 0 1 128 0h-9.75A54.25 54.25 0 0 0 64 9.75z" fill="#252153" /><animateTransform attributeName="transform" type="rotate" from="0 64 64" to="360 64 64" dur="1200ms" repeatCount="indefinite" /></g></svg>
+                                                                )
+                                                            }
+                                                        </button>
+                                                    </div>
+                                                </form>
+                                            )
+                                        }
+                                        
+                                        <div className="bg-white p-5 w-full rounded-xl shadow mt-5 lg:hidden">
+                                            <p>If you don&apos;t have any account then click <a className="cursor-pointer text-blue-500">here</a> to register yourself</p>
+                                        </div>
                                     </div>
-                                    <div className="text-right pb-5">
-                                        <a href="" className="text-sm text-blue-500">Forget password</a>
-                                    </div>
-                                    <div>
-                                        <button type={`${submiting==true ? 'button' : 'submit'}`} className={`${submiting==true ? 'bg-blue-100 text-blue-700' : 'bg-blue-700 text-white'} w-full rounded-3xl p-2 flex flex-wrap justify-center transition-all duration-300`}>Sign In {
-                                                submiting==true && (
-                                                    <svg xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" width="20px" height="20px" viewBox="0 0 128 128" xmlSpace="preserve" style={{marginLeft: '1rem'}}><g><path d="M64 9.75A54.25 54.25 0 0 0 9.75 64H0a64 64 0 0 1 128 0h-9.75A54.25 54.25 0 0 0 64 9.75z" fill="#252153" /><animateTransform attributeName="transform" type="rotate" from="0 64 64" to="360 64 64" dur="1200ms" repeatCount="indefinite" /></g></svg>
-                                                )
-                                            }
-                                        </button>
-                                    </div>
-                                </form>
-                                <div className="bg-white p-5 w-full rounded-xl shadow mt-5 lg:hidden">
-                                    <p>If you don&apos;t have any account then click <a className="cursor-pointer text-blue-500">here</a> to register yourself</p>
                                 </div>
                             </div>
                         </div>

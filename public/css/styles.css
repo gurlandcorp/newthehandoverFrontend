@@ -125,8 +125,14 @@ nav ul li a {
     font-family: "Montserrat";
 }
 .bg-theme-color {
-    background-color: #252153;
+    background-color: #252153 !important;
 }
 .theme-color {
     color: #252153;
+}
+.theme-border-color {
+    border-color: #252153;
+}
+.translate-x--100 {
+    transform: translateX(-100%);
 }

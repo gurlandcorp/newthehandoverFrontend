@@ -20,7 +20,7 @@ const SellerDashboard: NextPage = (props: any) => {
         card: {
             display: "flex",
             flexWrap: 'wrap',
-            justifyContent: "center",
+            justifyContent: "space-between",
             margin: "0 1rem",
             '& p': {
                 color: '#626262',
@@ -59,7 +59,7 @@ const SellerDashboard: NextPage = (props: any) => {
             }}>
             <h4 className="text-white text-center">Hi {props.user.name}, Welcome to dashboard</h4>
             <Grid container className={`gap-4 ${style.cardWrapper}`}>
-                <Grid item xs={12} md={4} lg={3} className={`p-3 bg-white shadow rounded-3 flex-row-reverse ${style.card}`} >
+                <Grid item xs={12} md={4} lg={3} className={`px-5 py-3 bg-white shadow rounded-xl flex-row-reverse ${style.card}`} >
                     <Box>
                         <svg xmlns="http://www.w3.org/2000/svg" className={style.svg} viewBox="0 0 20 20" fill="currentColor">
                             <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z" />
@@ -71,7 +71,7 @@ const SellerDashboard: NextPage = (props: any) => {
                     </Box>
                 </Grid>
 
-                <Grid item xs={12} md={4} lg={3} className={`p-3 bg-white shadow rounded-3 flex-row-reverse ${style.card}`} >
+                <Grid item xs={12} md={4} lg={3} className={`px-5 py-3 bg-white shadow rounded-xl flex-row-reverse ${style.card}`} >
                     <Box>
                         <svg xmlns="http://www.w3.org/2000/svg" className={style.svg} viewBox="0 0 20 20" fill="currentColor">
                             <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z" />

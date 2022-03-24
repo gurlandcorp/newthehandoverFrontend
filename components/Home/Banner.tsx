@@ -38,7 +38,7 @@ const Banner = (props: any) => {
                             <a href="#" className="inverse-dark-btn">Investor</a>
                         </div>
                     </div>
-                    <div className="mt-10 lg:mt-0">
+                    <div className="mt-10 lg:mt-0 text-center">
                         <Image src={CoverImage.src} width={CoverImage.width} height={CoverImage.height} className="cover-img mx-auto" alt={'cover-image'} />
                     </div>
                 </div>

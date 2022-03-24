@@ -113,7 +113,7 @@ const Seller: NextPage = (props: any) => {
     const styles = useStyles()
     return (
         <Grid container>
-            <Grid item py={2} width={'100%'} className={`d-flex flex-wrap justify-content-between`}>
+            <Grid item py={2} width={'100%'} className={`flex flex-wrap justify-between`}>
                 <h4 className="mb-0">Properties</h4>
                 <AddItemButton href="/seller/property/add">Add new property</AddItemButton>
             </Grid>
