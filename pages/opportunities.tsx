@@ -171,63 +171,25 @@ const Properties: NextPage = ({data, query}: any) => {
 									opportunities?.length > 0 && (
 										data.map((property: any, index: any)=> {
 											return (
-												<div key={index} className="list-item shadow-box rounded-xl overflow-hidden relative" style={{ backgroundImage: `url("${property.images[0]}")`, backgroundSize: 'cover', backgroundPosition: 'center', height: 300 }}>
-													<div className="detail-box p-5 bg-black text-white rounded-t-xl absolute bottom-0">
-														<div className="box-title w-full">{property.propertyTitle}</div>
-														<div className="box-location text-gray-500 text-sm">{property.location.city}</div>
-														<ul className="grid grid-cols-4 gap-2 text-sm text-gray-500">
-															<li><span className="mdi mdi-vector-square-plus" /> {property.area} sqft</li>
-															<li><span className="mdi mdi-bed-king-outline" /> {property.bedrooms} Beds</li>
-															<li><span className="mdi mdi-bathtub-outline" /> {property.bathrooms} Baths</li>
-															<li><span className="mdi mdi-cached" /> 4 Days ago</li>
-														</ul>
-														<div className="box-price">AED {property.priceDemand}</div>
-													</div>
-												</div>
+												<Link href={'/opportunity/'+property._id} key={index}>
+													<a className="list-item shadow-box rounded-xl overflow-hidden relative" style={{ backgroundImage: `url("${property.images[0]}")`, backgroundSize: 'cover', backgroundPosition: 'center', height: 300 }}>
+														<div className="detail-box p-5 bg-black text-white rounded-t-xl absolute bottom-0">
+															<div className="box-title w-full">{property.propertyTitle}</div>
+															<div className="box-location text-gray-500 text-sm">{property.location.city}</div>
+															<ul className="grid grid-cols-4 gap-2 text-sm text-gray-500">
+																<li><span className="mdi mdi-vector-square-plus" /> {property.area} sqft</li>
+																<li><span className="mdi mdi-bed-king-outline" /> {property.bedrooms} Beds</li>
+																<li><span className="mdi mdi-bathtub-outline" /> {property.bathrooms} Baths</li>
+																<li><span className="mdi mdi-cached" /> 4 Days ago</li>
+															</ul>
+															<div className="box-price">AED {property.priceDemand}</div>
+														</div>
+													</a>
+												</Link>
 											)
 										})
 									)
 								}
-								
-								{/* <div className="list-item shadow-box rounded-xl overflow-hidden relative" style={{ backgroundImage: 'url("./image-box-2.jpg")', backgroundSize: 'cover', backgroundPosition: 'center', height: 300 }}>
-									<div className="detail-box p-5 bg-black text-white rounded-t-xl absolute bottom-0">
-										<div className="box-title w-full">EB Sunrise Bay T2-4-404</div>
-										<div className="box-location text-gray-500 text-sm">Dubai</div>
-										<ul className="grid grid-cols-4 gap-2 text-sm text-gray-500">
-											<li><span className="mdi mdi-vector-square-plus" /> 1100 sqft</li>
-											<li><span className="mdi mdi-bed-king-outline" /> 3 Beds</li>
-											<li><span className="mdi mdi-bathtub-outline" /> 2 Baths</li>
-											<li><span className="mdi mdi-cached" /> 4 Days ago</li>
-										</ul>
-										<div className="box-price">AED 50000</div>
-									</div>
-								</div>
-								<div className="list-item shadow-box rounded-xl overflow-hidden relative" style={{ backgroundImage: 'url("./image-box-2.jpg")', backgroundSize: 'cover', backgroundPosition: 'center', height: 300 }}>
-									<div className="detail-box p-5 bg-black text-white rounded-t-xl absolute bottom-0">
-										<div className="box-title w-full">EB Sunrise Bay T2-4-404</div>
-										<div className="box-location text-gray-500 text-sm">Dubai</div>
-										<ul className="grid grid-cols-4 gap-2 text-sm text-gray-500">
-											<li><span className="mdi mdi-vector-square-plus" /> 1100 sqft</li>
-											<li><span className="mdi mdi-bed-king-outline" /> 3 Beds</li>
-											<li><span className="mdi mdi-bathtub-outline" /> 2 Baths</li>
-											<li><span className="mdi mdi-cached" /> 4 Days ago</li>
-										</ul>
-										<div className="box-price">AED 50000</div>
-									</div>
-								</div>
-								<div className="list-item shadow-box rounded-xl overflow-hidden relative" style={{ backgroundImage: 'url("./image-box-2.jpg")', backgroundSize: 'cover', backgroundPosition: 'center', height: 300 }}>
-									<div className="detail-box p-5 bg-black text-white rounded-t-xl absolute bottom-0">
-										<div className="box-title w-full">EB Sunrise Bay T2-4-404</div>
-										<div className="box-location text-gray-500 text-sm">Dubai</div>
-										<ul className="grid grid-cols-4 gap-2 text-sm text-gray-500">
-											<li><span className="mdi mdi-vector-square-plus" /> 1100 sqft</li>
-											<li><span className="mdi mdi-bed-king-outline" /> 3 Beds</li>
-											<li><span className="mdi mdi-bathtub-outline" /> 2 Baths</li>
-											<li><span className="mdi mdi-cached" /> 4 Days ago</li>
-										</ul>
-										<div className="box-price">AED 50000</div>
-									</div>
-								</div> */}
 							</div>
 						</div>
 					</div>

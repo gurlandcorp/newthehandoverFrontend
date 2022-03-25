@@ -1,609 +1,183 @@
 import React from 'react'
-import widget05 from "../../public/assets/img/blog/widget05.jpg";
-import floor_plan00 from "../../public/assets/img/figure/floor_plan00.jpg";
-import listing01 from "../../public/assets/img/blog/listing01.jpg";
-import Image from 'next/image';
-import Link from 'next/link';
-import { parseCookies } from 'nookies';
+import widget05 from "../../public/assets/img/blog/widget05.jpg"
+import floor_plan00 from "../../public/assets/img/figure/floor_plan00.jpg"
+import listing01 from "../../public/assets/img/blog/listing01.jpg"
+import Image from 'next/image'
+import { parseCookies } from 'nookies'
+import { Swiper, SwiperSlide } from "swiper/react"
+import "swiper/css";
+import "swiper/css/pagination";
+import { Pagination } from "swiper";
+import Link from 'next/link'
 
 const Index = (props: any) => {
 
-	const {token} = parseCookies()
+	const { token } = parseCookies()
 
-    return (
-        <section className="single-listing-wrap1">
-			<div className="container">
-				<div className="single-property">
-					<div className="content-wrapper">
-						<div className="property-heading">
-							<div className="row">
-								<div className="col-lg-6 col-md-12">
-									<div className="single-list-cate">
-										<div className="item-categoery">For Rent</div>
-									</div>
-								</div>
-								<div className="col-lg-6 col-md-12">
-									<div className="single-list-price">
-										AED {props.property.priceDemand}
-									</div>
-								</div>
-							</div>
-							<div className="row align-items-center">
-								<div className="col-lg-8 col-md-12">
-									<div className="single-verified-area">
-										<div className="item-title">
-											<h3>
-												<a
-												//  href="single-listing2.html"
-												>
-													{props.property.propertyTitle}
-												</a>
-											</h3>
-										</div>
-									</div>
-									{/* <div className="single-item-address">
-										<ul>
-											<li>
-												<i className="fas fa-map-marker-alt"></i>House#18, Road#07,
-												Albany, New York, 08525 /
-											</li>
-											<li>
-												<i className="fas fa-clock"></i>7 months ago /
-											</li>
-											<li>
-												<i className="fas fa-eye"></i>Views: 1,230
-											</li>
-										</ul>
-									</div> */}
-								</div>
-								<div className="col-lg-4 col-md-12">
-									<div className="side-button">
-										<ul>
-											<li>
-												<a href="with-sidebar2.html" className="side-btn">
-													<i className="flaticon-share"></i>
-												</a>
-											</li>
-											<li>
-												<a href="with-sidebar2.html" className="side-btn">
-													<i className="flaticon-heart"></i>
-												</a>
-											</li>
-											<li>
-												<a href="with-sidebar2.html" className="side-btn">
-													<i className="flaticon-left-and-right-arrows"></i>
-												</a>
-											</li>
-											<li>
-												<a href="with-sidebar2.html" className="side-btn">
-													<i className="flaticon-printer"></i>
-												</a>
-											</li>
-										</ul>
-									</div>
-								</div>
-							</div>
+	let currentDate: any = new Date()
+	let propertyEndTime: any = new Date(props.property.biddingEnd.split('T')[0])
+	currentDate = currentDate.getTime()
+	propertyEndTime = propertyEndTime.getTime()
+	let difference = propertyEndTime - currentDate
+	let Difference_In_Days = difference / (1000 * 3600 * 24)
+	let Difference_In_Hours = (difference % (1000 * 3600 * 24)) / (1000 * 60 * 60)
+
+	return (
+		<>
+			<div className="bg-gray-50 p-3">
+				<div className="text-sm">
+					<a href="/" className="mr-1">Home</a>&gt;
+					<a href="/opportunities" className="mx-1">Opportunities</a> &gt;
+					<span className="text-gray-600 mx-1">{props.property.propertyTitle}</span>
+				</div>
+			</div>
+
+			<div className="width py-10 mx-auto">
+				<h2 className="text-2xl my-2">{props.property.propertyTitle}</h2>
+				<div className="flex flex-wrap justify-between items-center">
+					<div>
+						<div className="price text-blue-700 font-medium">AED {props.property.priceDemand}</div>
+						<div className="text-gray-500 text-sm">Remaining time: { Difference_In_Hours < 0 && Difference_In_Days < 0 ? (
+								<span className="text-red-500 text-sm italic font-medium">Expired</span>
+							) : (
+								<span className="text-black">{ Difference_In_Days.toFixed(0)} days {Difference_In_Hours.toFixed(0)} hours left</span>
+							)
+						} </div>
+					</div>
+					<div className="grid grid-cols-2 gap-1">
+						<div className="p-1 text-white rounded" style={{ width: 'max-content', background: '#006CA1' }}>
+							<svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+								<path strokeLinecap="round" strokeLinejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+							</svg>
 						</div>
-
-						<div className="row">
-							<div className="col-lg-8">
-								<div
-									className="featured-thumb-slider-area wow fadeInUp"
-									data-wow-delay=".4s"
-								>
-									<div className="feature-box3 swiper-container">
-										<div className="swiper-wrapper">
-											<div className="swiper-slide">
-												<div className="feature-img1 zoom-image-hover">
-													{
-														props.property!=undefined && props.property!='' && props.property.images != undefined ?
-														(
-															<Image
-																src={props.property.images[0]}
-																alt="feature"
-                                                                width={'798px'}
-                                                                height={'420px'}
-															/>
-														) : (
-															''
-														)
-													}
-												</div>
-											</div>
-											{/* <div className="swiper-slide">
-												<div className="feature-img1 zoom-image-hover">
-													<img
-														src="img/blog/product3.jpg"
-														alt="feature"
-
-														// width="798"
-														// height="420"
-													/>
-												</div>
-											</div> */}
-
-											{/* <div className="swiper-slide">
-												<div className="feature-img1 zoom-image-hover">
-													<img
-														src="img/blog/product4.jpg"
-														alt="feature"
-														width="798"
-														height="420"
-													/>
-												</div>
-											</div> */}
-
-											{/* <div className="swiper-slide">
-												<div className="feature-img1 zoom-image-hover">
-													<img
-														src="img/blog/product5.jpg"
-														alt="feature"
-														// width="798"
-														// height="420"
-													/>
-												</div>
-											</div> */}
-
-											{/* <div className="swiper-slide">
-												<div className="feature-img1 zoom-image-hover">
-													<img
-														src="img/blog/product6.jpg"
-														alt="feature"
-														// width="798"
-														// height="420"
-													/>
-												</div>
-											</div> */}
-										</div>
-									</div>
-								</div>
-								<div className="single-listing-box1">
-									<div className="overview-area">
-										<h3 className="item-title">Overview</h3>
-										<div className="gallery-icon-box">
-											<div className="item-icon-box">
-												<div className="item-icon">
-													<i className="flaticon-comment"></i>
-												</div>
-												<ul className="item-number">
-													<li>ID No :</li>
-													<li className="deep-clr">98560</li>
-												</ul>
-											</div>
-											<div className="item-icon-box">
-												<div className="item-icon">
-													<i className="flaticon-home"></i>
-												</div>
-												<ul className="item-number">
-													<li>Type :</li>
-													<li className="deep-clr">
-														{props.property.propertyType}
-													</li>
-												</ul>
-											</div>
-											<div className="item-icon-box">
-												<div className="item-icon">
-													<i className="flaticon-bed"></i>
-												</div>
-												<ul className="item-number">
-													<li>Bed Room :</li>
-													<li className="deep-clr">
-														{props.property.bedrooms}
-													</li>
-												</ul>
-											</div>
-											<div className="item-icon-box">
-												<div className="item-icon">
-													<i className="flaticon-shower"></i>
-												</div>
-												<ul className="item-number">
-													<li>ID No :</li>
-													<li className="deep-clr">98560</li>
-												</ul>
-											</div>
-										</div>
-										<div className="gallery-icon-box">
-											<div className="item-icon-box">
-												<div className="item-icon">
-													<i className="flaticon-home"></i>
-												</div>
-												<ul className="item-number">
-													<li>Parking :</li>
-													<li className="deep-clr">Yes</li>
-												</ul>
-											</div>
-											<div className="item-icon-box">
-												<div className="item-icon">
-													<i className="flaticon-home"></i>
-												</div>
-												<ul className="item-number">
-													<li>Area :</li>
-													<li className="deep-clr">
-														{props.property.area} sqft
-													</li>
-												</ul>
-											</div>
-											<div className="item-icon-box">
-												<div className="item-icon">
-													<i className="flaticon-pencil"></i>
-												</div>
-												<ul className="item-number">
-													<li>Land Size :</li>
-													<li className="deep-clr">15,000 sqft</li>
-												</ul>
-											</div>
-											<div className="item-icon-box">
-												<div className="item-icon">
-													<i className="flaticon-two-overlapping-square"></i>
-												</div>
-												<ul className="item-number">
-													<li>Year Build :</li>
-													<li className="deep-clr">2022</li>
-												</ul>
-											</div>
-										</div>
-									</div>
-									<div className="overview-area listing-area">
-										<h3 className="item-title">About This Listing</h3>
-										<p>
-											{props.property.description}
-											{/* Praesent eros turpis, commodo vel justo at, pulvinar
-											mollis eros. Mauris aliquet eu quam id ornareor bi ac quam
-											enim. Cras vitae nulla condimentum, semper dolor non,
-											faucibus dolor. Vivamus adip iscing eros quis orci
-											fringilla, sed pretium lectus viverra. Pellentesque
-											habitant morbi tristique senectus et netus et malesuada
-											fames ac turpis egestas. */}
-										</p>
-										<p>
-											Praesent eros turpis, commodo vel justo at, pulvinar
-											mollis eros. Mauris aliquet eu quam id ornareor bi ac quam
-											enim. Cras vitae nulla condimentum, semper dolor non,
-											faucibus dolor. Vivamus adip iscing eros quis orci
-											fringilla, sed pretium lectus viverra.
-										</p>
-									</div>
-									<div className="overview-area single-details-box table-responsive">
-										<h3 className="item-title">Details</h3>
-										<table className="table-box1">
-											<tbody>
-												<tr>
-													<td className="item-bold">Id No</td>
-													<td>98560</td>
-													<td className="item-bold">Price</td>
-													<td>$12,500</td>
-												</tr>
-												<tr>
-													<td className="item-bold">Property Type</td>
-													<td>Apartment</td>
-													<td className="item-bold">Parking</td>
-													<td>Yes</td>
-												</tr>
-												<tr>
-													<td className="item-bold">Rooms</td>
-													<td>04</td>
-													<td className="item-bold">Property Status</td>
-													<td>For Rent</td>
-												</tr>
-												<tr>
-													<td className="item-bold">Bath Rooms</td>
-													<td>03</td>
-													<td className="item-bold">Land Area</td>
-													<td>15,000 sqft</td>
-												</tr>
-												<tr>
-													<td className="item-bold">Size</td>
-													<td>1050 sqft</td>
-													<td className="item-bold">Year Build</td>
-													<td>2022</td>
-												</tr>
-											</tbody>
-										</table>
-									</div>
-									<div className="overview-area ameniting-box">
-										<h3 className="item-title">Features & Amenities</h3>
-										<div className="row">
-											<div className="col-lg-4">
-												<ul className="ameniting-list">
-													<li>
-														<i className="fas fa-check-circle"></i>TV Cable
-													</li>
-													<li>
-														<i className="fas fa-check-circle"></i>Air Conditioning
-													</li>
-													<li>
-														<i className="fas fa-check-circle"></i>Barbeque
-													</li>
-													<li>
-														<i className="fas fa-check-circle"></i>Gym
-													</li>
-												</ul>
-											</div>
-											<div className="col-lg-4">
-												<ul className="ameniting-list">
-													<li>
-														<i className="fas fa-check-circle"></i>Swimming Pool
-													</li>
-													<li>
-														<i className="fas fa-check-circle"></i>Laundry
-													</li>
-													<li>
-														<i className="fas fa-check-circle"></i>Microwave
-													</li>
-													<li>
-														<i className="fas fa-check-circle"></i>Lawn
-													</li>
-												</ul>
-											</div>
-											<div className="col-lg-4">
-												<ul className="ameniting-list">
-													<li>
-														<i className="fas fa-check-circle"></i>Sauna
-													</li>
-													<li>
-														<i className="fas fa-check-circle"></i>Window Coverings
-													</li>
-													<li>
-														<i className="fas fa-check-circle"></i>CC Camera
-													</li>
-												</ul>
-											</div>
-										</div>
-									</div>
-									<div className="overview-area map-box">
-										<h3 className="item-title">Map Location</h3>
-										<div className="item-map">
-											<iframe
-												src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d14604.942936504207!2d90.42287424999999!3d23.774618500000003!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sbd!4v1640231732625!5m2!1sen!2sbd"
-												width="100%"
-												height="349"
-												style={{ border: "0" }}
-												allowFullScreen={false}
-												loading="lazy"
-											></iframe>
-										</div>
-									</div>
-									<div className="overview-area floor-plan-box">
-										<h3 className="item-title">Floor Plans</h3>
-										<div id="accordion" className="accordion">
-											<div className="card">
-												<div className="card-header">
-													<div
-														className="heading-title"
-														data-bs-toggle="collapse"
-														data-bs-target="#collapseOne"
-														aria-expanded="true"
-														role="button"
-													>
-														<span>First Floor Plan</span>
-														<div className="card-list">
-															<ul>
-																<li>
-																	<i className="flaticon-bed"></i>
-																	<span>Beds: 03</span>
-																</li>
-																<li>
-																	<i className="flaticon-shower"></i>
-																	<span>Baths: 02</span>
-																</li>
-																<li>
-																	<i className="flaticon-two-overlapping-square"></i>
-																	<span>931Sqft</span>
-																</li>
-															</ul>
-														</div>
-													</div>
-												</div>
-												<div
-													id="collapseOne"
-													className="collapse show"
-													data-bs-parent="#accordion"
-												>
-													<div className="card-body">
-														<div className="item-img">
-															<Image src={floor_plan00.src} alt="shape" width={floor_plan00.width} height={floor_plan00.height} />
-														</div>
-													</div>
-												</div>
-											</div>
-											<div className="card">
-												<div className="card-header">
-													<div
-														className="heading-title collapsed"
-														data-bs-toggle="collapse"
-														data-bs-target="#headingtwo"
-														aria-expanded="true"
-														role="button"
-													>
-														<span>Second Floor Plan</span>
-														<div className="card-list">
-															<ul>
-																<li>
-																	<i className="flaticon-bed"></i>
-																	<span>Beds: 03</span>
-																</li>
-																<li>
-																	<i className="flaticon-shower"></i>
-																	<span>Baths: 02</span>
-																</li>
-																<li>
-																	<i className="flaticon-two-overlapping-square"></i>
-																	<span>931Sqft</span>
-																</li>
-															</ul>
-														</div>
-													</div>
-												</div>
-												<div
-													id="headingtwo"
-													className="collapse"
-													data-bs-parent="#accordion"
-												>
-													<div className="card-body">
-														<div className="item-img">
-															{/* <img
-																src="img/figure/floor_plan.jpg"
-																alt="shape"
-															/> */}
-														</div>
-													</div>
-												</div>
-											</div>
-											<div className="card">
-												<div className="card-header">
-													<div
-														className="heading-title collapsed"
-														data-bs-toggle="collapse"
-														data-bs-target="#headingthree"
-														aria-expanded="true"
-														role="button"
-													>
-														<span>Third Floor Plan</span>
-														<div className="card-list">
-															<ul>
-																<li>
-																	<i className="flaticon-bed"></i>
-																	<span>Beds: 03</span>
-																</li>
-																<li>
-																	<i className="flaticon-shower"></i>
-																	<span>Baths: 02</span>
-																</li>
-																<li>
-																	<i className="flaticon-two-overlapping-square"></i>
-																	<span>931Sqft</span>
-																</li>
-															</ul>
-														</div>
-													</div>
-												</div>
-												<div
-													id="headingthree"
-													className="collapse"
-													data-bs-parent="#accordion"
-												>
-													<div className="card-body">
-														<div className="item-img">
-															{/* <img
-																src="img/figure/floor_plan.jpg"
-																alt="shape"
-															/> */}
-														</div>
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-									<div className="overview-area video-box1 mb-4">
-										<h3 className="item-title">Property Video</h3>
-										<div className="item-img">
+						<div className="p-1 text-white rounded" style={{ width: 'max-content', background: '#006CA1' }}>
+							<svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+								<path strokeLinecap="round" strokeLinejoin="round" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
+							</svg>
+						</div>
+						{/* <div class="p-1 text-white rounded" style="width: max-content;background:#006CA1;">
+						<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1">
+							<path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+						</svg>
+					</div> */}
+					</div>
+				</div>
+				<div className="">
+					<div className="flex flex-wrap">
+						<div className="my-4 bg-gray-50 p-4 rounded w-full md:w-9/12">
+							<div className="relative" style={{ width: "100%", height: "700px" }}>
+								{
+									props.property != undefined && props.property != '' && props.property.images != undefined ?
+										(
 											<Image
-												src={listing01.src} alt="map" width="731" height="349"
+												src={props.property.images[0]}
+												alt={props.property.propertyTitle}
+												layout="fill"
+												className="object-cover rounded"
 											/>
-											<div className="play-button">
-												<div className="item-icon">
-													<a
-														href="http://www.youtube.com/watch?v=1iIZeIy7TqM"
-														className="play-btn play-btn-big"
-													>
-														<span className="play-icon style-2">
-															<i className="fas fa-play"></i>
-														</span>
-													</a>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
+										) : (
+											''
+										)
+								}
 							</div>
-							<div className="col-lg-4 widget-break-lg sidebar-widget">
-								<div className="widget widget-contact-box">
-									<h3 className="widget-subtitle">Place a Bid</h3>
-									<form className="contact-box rt-contact-form">
-										<div className="row">
-											<div className="form-group col-lg-12">
-												<div className="advanced-button">
-													<Link href={token ? `/buyer/bid/${props.property._id}` : `/sign-in?redirect_to=buyer/bid/${props.property._id}`}>
-														<a className="item-btn" > Place a Bid </a>
-													</Link>
+							<Swiper
+								loop={false}
+								slidesPerView={4}
+								spaceBetween={10}
+								freeMode={true}
+								watchSlidesProgress={true}
+								modules={[Pagination]}
+								className="mySwiper mt-4">
+								{
+									props.property.images.map((image: any, index: any) => {
+										return (
+											<SwiperSlide key={index}>
+												<div className="bg-blue-100 flex items-center p-2 rounded" style={{ width: "max-content" }}>
+													<div className="relative" style={{ width: "100px", height: "100px" }}>
+														<Image
+															src={image}
+															alt={props.property.propertyTitle}
+															layout="fill"
+															className="object-cover rounded"
+														/>
+													</div>
 												</div>
-											</div>
-										</div>
-										<div className="form-response"></div>
-									</form>
-								</div>
-								<div className="widget widget-listing-box1">
-									<h3 className="widget-subtitle">Latest Listing</h3>
-									<div className="item-img">
-										<Link href={'/property/'+props.properties[0]?._id} passHref>
-											<a>
-												<Image
-													src={props.properties[0]?.images[0]}
-													width={'540px'}
-													height={'360px'}
-													alt="widget"
-												/>
-											</a>
-										</Link>
-										<div className="item-category-box1">
-											<div className="item-category">For Rent</div>
-										</div>
-									</div>
-									<div className="widget-content">
-										<div className="item-category10">
-											<a
-											// href="single-listing2.html"
-											>
-												Villa
-											</a>
-										</div>
-										<h4 className="item-title">
-											<a
-											// href="single-listing2.html"
-											>
-												{props.properties[0]?.propertyTitle}{" "}
-											</a>
-										</h4>
-										<div className="location-area">
-											<i className="flaticon-maps-and-flags"></i>
-											{/* {Object.values(dataPro[0]?.location).join(",")} */}
-
-											{/* 2150 S Jones Blvd,
-											USA */}
-										</div>
-										<div className="item-price">
-											AED {props.properties[0]?.priceDemand}
-											{/* $11,000<span>/mo</span> */}
-										</div>
-									</div>
-								</div>
-								<div className="widget widget-post">
-									<div className="item-img">
-										<Image src={widget05.src} layout="intrinsic" width={'690'} height={'850'} alt="widget" />
-										<div className="circle-shape">
-											<span className="item-shape"></span>
-										</div>
-									</div>
-									<div className="item-content">
-										<h4 className="item-title">Find Your Dream House</h4>
-										<div className="item-price">$2,999</div>
-										<div className="post-button">
-											<a
-												// href="single-listing2.html"
-												className="item-btn"
-											>
-												Shop Now
-											</a>
-										</div>
-									</div>
-								</div>
+											</SwiperSlide>
+										)
+									})
+								}
+							</Swiper>
+						</div>
+						<div className="text-center w-full mb-4 md:mb-0 md:p-4 md:w-3/12">
+							<div className="bg-gray-50 rounded p-4">	
+							{
+								Difference_In_Hours < 0 && Difference_In_Days < 0 ? (
+									<span className="text-red-500 capitalize">Bid ended</span>
+								) : (
+									<Link href={'/buyer/bid/'+props.property._id}>
+										<a className="inline-block bg-white border border-black border-solid duration-300 ease-in-out hover:bg-black hover:text-white m-1 px-4 py-1 rounded-3xl text-black">Appy for Bid</a>
+									</Link>
+								)
+							}
 							</div>
 						</div>
 					</div>
+					<div className="bg-white p-4 shadow-box rounded w-full">
+						<h4 className="text-xl theme-color my-2">Overview</h4>
+						<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+							<div className="flex flex-wrap bg-blue-100 rounded p-2">
+								<div className="px-1 w-max rounded flex items-center mr-2 bg-white">
+									<svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="#006CA1" strokeWidth={2}>
+										<path strokeLinecap="round" strokeLinejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+									</svg>
+								</div>
+								<div>
+									<h4 className="text-xs">Type</h4>
+									<p className="text-sm theme-color font-medium">{props.property.propertyType}</p>
+								</div>
+							</div>
+							<div className="flex flex-wrap bg-blue-100 rounded p-2">
+								<div className="px-1 w-max rounded flex items-center mr-2 bg-white">
+									<svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="#006CA1" strokeWidth={2}>
+										<path strokeLinecap="round" strokeLinejoin="round" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
+									</svg>
+								</div>
+								<div>
+									<h4 className="text-xs">Area</h4>
+									<p className="text-sm theme-color font-medium">{props.property.area} ft</p>
+								</div>
+							</div>
+							<div className="flex flex-wrap bg-blue-100 rounded p-2">
+								<div className="px-1 w-max rounded flex items-center mr-2 bg-white">
+									<svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="#006CA1">
+										<path d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z" />
+									</svg>
+								</div>
+								<div>
+									<h4 className="text-xs">Bed rooms</h4>
+									<p className="text-sm theme-color font-medium">{props.property.bedrooms}</p>
+								</div>
+							</div>
+							<div className="flex flex-wrap bg-blue-100 rounded p-2">
+								<div className="px-1 w-max rounded flex items-center mr-2 bg-white">
+									<svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="#006CA1" strokeWidth={2}>
+										<path strokeLinecap="round" strokeLinejoin="round" d="M20.618 5.984A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016zM12 9v2m0 4h.01" />
+									</svg>
+								</div>
+								<div>
+									<h4 className="text-xs">Bath rooms</h4>
+									<p className="text-sm theme-color font-medium">{props.property.bathrooms}</p>
+								</div>
+							</div>
+						</div>
+
+						<h4 className="text-xl theme-color my-2">Description</h4>
+						<p className="p-2 bg-gray-50 rounded">{props.property.description}</p>
+					</div>
 				</div>
 			</div>
-		</section>
-    )
+		</>
+	)
 }
 
 export default Index
