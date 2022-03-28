@@ -4,8 +4,6 @@ import type { AppProps } from 'next/app'
 import Default from '../components/Layouts/Default'
 import { MainProvider } from '../context/MainContext'
 import UserLayout from '../components/Layouts/User'
-import { parseCookies } from "nookies"
-import App from 'next/app'
 
 function MyApp({ Component, pageProps, router }: AppProps) {
 

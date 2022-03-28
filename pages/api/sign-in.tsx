@@ -6,17 +6,15 @@ async function handler(req:NextApiRequest, res: NextApiResponse) {
     
     if(req.method=='POST')
     {
+        let url = `${process.env.API_URL}/signin`
         let result = await axios({
             method: "POST",
-            url:`${process.env.API_URL}/signin`, 
-            headers: {
-                "Content-Type": "application/json"
-            },
+            url:url,
             data: req.body
         }).then(response => {
             return response.data
         }).catch(err => {
-            // console.log("error in opportunties filter request", err.response.data);
+            console.log('Errors',err.response)
             return res.status(200).json({status: 0, message: err.response.data.message})
         });
         return res.status(200).json({status: 1, data: result})

@@ -203,16 +203,12 @@ const SignIn: NextPage = ({redirect_to}: any) => {
         setSubmiting(false)
     }
 
-    const style = {
-        themeColor: {color: "#252153"}
-    }
-
     return (
         <>
             <div className="bg-gray-100 h-screen">
                 <div className="width mx-auto">
                     <div className="grid grid-cols-1 lg:grid-cols-2">
-                        <div className="p-2 bg-white h-screen">
+                        <div className="p-2 bg-white h-screen overflow-hidden">
                             <ul className="flex flex-wrap justify-center p-2">
                                 <li>
                                     <NextLink href={'/'}>
@@ -235,7 +231,7 @@ const SignIn: NextPage = ({redirect_to}: any) => {
                                     </NextLink>
                                 </li>
                             </ul>
-                            <div className="flex flex-wrap justify-center items-center h-full">
+                            <div className="flex flex-wrap justify-center items-center">
                                 <div>
                                     <div className="flex flex-col items-center justify-center text-center pt-10">
                                         <div className="w-2/5">
@@ -296,7 +292,7 @@ const SignIn: NextPage = ({redirect_to}: any) => {
                         <div style={{ background: 'linear-gradient(309deg, #2b6cb0e0, #282452c7), url(/real-estate-background-vector-194501.jpg)', height: '100vh', backgroundPosition: 'center' }} className="hidden lg:block">
                             <div className="flex flex-wrap justify-center items-center h-full">
                                 <div className="bg-white p-5 w-4/5 rounded-xl shadow">
-                                    <p>If you don&apos;t have any account then click <NextLink href={'sign-up'}><a className="cursor-pointer text-blue-500">here</a></NextLink> to register yourself</p>
+                                    <p>If you don&apos;t have any account then click <NextLink href={'/sign-up'}><a className="cursor-pointer text-blue-500">here</a></NextLink> to register yourself</p>
                                 </div>
                             </div>
                         </div>

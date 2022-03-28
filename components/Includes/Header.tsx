@@ -50,11 +50,11 @@ const Header = () => {
 									<a className="nav-item nav-active block text-center">Home</a>
 								</Link>
 							</li>
-							<li>
+							{/* <li>
 								<Link href={'/opportunities'}>
 									<a className="nav-item text-center">Opportunities</a>
 								</Link>
-							</li>
+							</li> */}
 							<li>
 								<Link href={'/about'}>
 									<a className="nav-item">About</a>
@@ -65,7 +65,11 @@ const Header = () => {
 									<a className="nav-item">Contact</a>
 								</Link>
 							</li>
-							<li><a href="#" className="bg-white duration-300 ease-in-out hover:bg-black hover:text-white inline-block px-4 py-1 rounded-3xl text-black border border-black border-solid ml-5">Auction</a></li>
+							<li>
+								<Link href={'/opportunities'}>
+									<a className="bg-white duration-300 ease-in-out hover:bg-black hover:text-white inline-block px-4 py-1 rounded-3xl text-black border border-black border-solid ml-5">Auction</a>
+								</Link>
+							</li>
 						</ul>
 					</nav>
 
