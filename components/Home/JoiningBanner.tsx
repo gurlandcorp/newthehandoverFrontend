@@ -20,7 +20,7 @@ const JoiningBanner = () => {
                     <span className="icon text-white mdi mdi-account-edit-outline text-6xl lg:text-8xl" /> <span>Register as a developer or<br />property owner</span>
                 </div>
                 <div className="col-span-2 lg:col-span-1 w-full text-center lg:text-right">
-                    <Link href={token ? '/seller' : '/sign-in'}>
+                    <Link href={token ? '/seller' : '/sign-up'}>
                         <a className="dark-btn py-2 text-xl">Register Now</a>
                     </Link>
                 </div>

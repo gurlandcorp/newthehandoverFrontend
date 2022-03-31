@@ -73,7 +73,7 @@ const Profile: NextPage = (props: any) => {
             </BreadCrumb>
 
             <CustomPaper>
-                <Grid container className="p-4 position-relative">
+                <Grid container className="p-4 relative">
                     {
                         editable == false ? (
                             <>
@@ -91,9 +91,9 @@ const Profile: NextPage = (props: any) => {
                                     <Box>{name}</Box>
                                     <Box>{email}</Box>
                                     <Box>{phone}</Box>
-                                    <Box> <Chip label={props.user.status} size="small" color={props.user.status=="Verified" ? "success" : "error"} /> </Box>
-                                    <IconButton className="position-absolute" style={{right: '1rem', top: '1rem'}} onClick={()=>setEditable(true)}>
-                                        <Edit color="success" />
+                                    <Box> <Chip label={props.user.status} size="small" color={props.user.status=="Verified" ? "info" : "error"} /> </Box>
+                                    <IconButton className="absolute" style={{right: '1rem', top: '1rem'}} onClick={()=>setEditable(true)}>
+                                        <Edit color="info" />
                                     </IconButton>
                                 </Grid>
                             </>

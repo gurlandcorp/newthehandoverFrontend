@@ -28,6 +28,42 @@ const Header = () => {
 		}, 300);
 	}
 
+	const HeaderRightLinks = user!=undefined && user!=null ? (
+		JSON.parse(user).userType=='Buyer' ? (
+			<>
+				<div>
+					<Link href={'/buyer'}>
+						<a className="bg-white border border-black border-solid duration-300 ease-in-out hover:bg-black hover:text-white inline-block m-1 px-4 py-1 rounded-3xl text-black">{JSON.parse(user).name}</a>
+					</Link>
+				</div>
+			</>
+		) : (
+			<>
+				<div className="hidden md:block">
+					<Link href={'/seller/property/add'}>
+						<a className="bg-black border border-black border-solid duration-300 ease-in-out hover:bg-white hover:text-black inline-block m-1 px-4 py-1 rounded-3xl text-white">+ Add Property</a>
+					</Link>
+				</div>
+				<div>
+					<Link href={'/seller'}>
+						<a className="bg-white border border-black border-solid duration-300 ease-in-out hover:bg-black hover:text-white inline-block m-1 px-4 py-1 rounded-3xl text-black">{JSON.parse(user).name}</a>
+					</Link>
+				</div>
+			</>
+		)
+	) : <>
+			<div className="hidden md:block">
+				<Link href={'/'}>
+					<a className="bg-black border border-black border-solid duration-300 ease-in-out hover:bg-white hover:text-black inline-block m-1 px-4 py-1 rounded-3xl text-white">+ Add Property</a>
+				</Link>
+			</div>
+			<div>
+				<Link href={'/sign-in'}>
+					<a className="bg-white border border-black border-solid duration-300 ease-in-out hover:bg-black hover:text-white inline-block m-1 px-4 py-1 rounded-3xl text-black">Login</a>
+				</Link>
+			</div>
+		</>;
+
 	useEffect(()=>{
 	},[])
 
@@ -50,11 +86,6 @@ const Header = () => {
 									<a className="nav-item nav-active block text-center">Home</a>
 								</Link>
 							</li>
-							{/* <li>
-								<Link href={'/opportunities'}>
-									<a className="nav-item text-center">Opportunities</a>
-								</Link>
-							</li> */}
 							<li>
 								<Link href={'/about'}>
 									<a className="nav-item">About</a>
@@ -89,16 +120,7 @@ const Header = () => {
 
 					<div className="flex flex-wrap justify-end w-4/12 lg:w-3/12">
 						{/* Display in medium screen */}
-						<div className="hidden md:block">
-							<Link href={'/'}>
-								<a className="bg-black border border-black border-solid duration-300 ease-in-out hover:bg-white hover:text-black inline-block m-1 px-4 py-1 rounded-3xl text-white">+ Add Property</a>
-							</Link>
-						</div>
-						<div>
-							<Link href={'/sign-in'}>
-								<a className="bg-white border border-black border-solid duration-300 ease-in-out hover:bg-black hover:text-white inline-block m-1 px-4 py-1 rounded-3xl text-black">Login</a>
-							</Link>
-						</div>
+						{HeaderRightLinks}
 					</div>
 				</div>
 			</div>

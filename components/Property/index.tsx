@@ -63,7 +63,7 @@ const Index = (props: any) => {
 					</div>
 				</div>
 				<div className="">
-					<div className="flex flex-wrap">
+					<div className="flex flex-wrap my-4">
 						<div className="my-4 bg-gray-50 p-4 rounded w-full md:w-9/12">
 							<div className="relative" style={{ width: "100%", height: "700px" }}>
 								{
@@ -108,18 +108,20 @@ const Index = (props: any) => {
 								}
 							</Swiper>
 						</div>
-						<div className="text-center w-full mb-4 md:mb-0 md:p-4 md:w-3/12">
-							<div className="bg-gray-50 rounded p-4">	
+						<div className="text-center w-full mb-4 md:mb-0 md:p-4 md:w-3/12 relative">
 							{
 								Difference_In_Hours < 0 && Difference_In_Days < 0 ? (
-									<span className="text-red-500 capitalize">Bid ended</span>
+									<div className="bg-red-100 bg-opacity-50 rounded-full p-4 sticky top-24">
+										<span className="text-red-500 capitalize">Bid ended</span>
+									</div>
 								) : (
-									<Link href={'/buyer/bid/'+props.property._id}>
-										<a className="inline-block bg-white border border-black border-solid duration-300 ease-in-out hover:bg-black hover:text-white m-1 px-4 py-1 rounded-3xl text-black">Appy for Bid</a>
-									</Link>
+									<div className="bg-gray-50 rounded p-4 sticky top-24">
+										<Link href={'/buyer/bid/'+props.property._id}>
+											<a className="inline-block bg-white border border-black border-solid duration-300 ease-in-out hover:bg-black hover:text-white m-1 px-4 py-1 rounded-3xl text-black">Appy for Bid</a>
+										</Link>
+									</div>
 								)
 							}
-							</div>
 						</div>
 					</div>
 					<div className="bg-white p-4 shadow-box rounded w-full">
