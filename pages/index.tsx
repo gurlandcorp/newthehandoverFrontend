@@ -16,7 +16,7 @@ const Home: NextPage = ({data}: any) => {
         <Banner />
         
         {/* <LetUSGuid /> */}
-        <TopProperties />
+        <TopProperties properties={data.latest_properties} />
 
         {/* <AboutSection /> */}
         <LocationSection />

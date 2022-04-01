@@ -23,12 +23,6 @@ export default async function handler(req:NextApiRequest, res: NextApiResponse) 
     await runMiddleware(req, res, cors)
     if(req.method=="POST")
     {
-        // let result = await axios.get(`${process.env.API_URL}/property/filter/others`, JSON.stringify(req.body), {
-        //     headers: { "Content-Type": "application/json" }
-        // }).then(response => {
-        //     return response.data
-        // })
-
         let result = await axios({
             method: "GET",
             url: `${process.env.API_URL}/property/filter/others`,

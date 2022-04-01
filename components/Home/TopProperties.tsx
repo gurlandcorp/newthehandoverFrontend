@@ -2,7 +2,7 @@ import React from 'react'
 import Link from 'next/link'
 import LandscapeCards from '../Shares/Cards/LandscapeCards'
 
-const TopProperties = () => {
+const TopProperties = ({properties}: any) => {
     return (
         <>
         {/* Start Top Properties Section  */}
@@ -12,7 +12,7 @@ const TopProperties = () => {
                     <h2 className="title">Top Properties over last 7 days</h2>
                 </div>
             </div>
-            <LandscapeCards />
+            <LandscapeCards properties={properties} />
             <div className="text-center">
                 <Link href={'/opportunities'}>
                     <a className="dark-btn">Go to Properties</a>

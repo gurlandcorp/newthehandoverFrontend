@@ -5,17 +5,12 @@
     box-shadow: 0px 10px 70px -15px #9ebee778;
 }
 .propBox .imgSide {
-    margin-right: 30px;
     width: 80px;
     height: 80px;
     background-position: center center;
     background-repeat: no-repeat;
     background-size: cover;
     border-radius: 50%;
-    float: left;
-}
-.propBox .content {
-    float: left;
 }
 .propBox .content .propTitle {
     font-size: 14px;

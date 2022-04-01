@@ -119,7 +119,8 @@ const LocationSection = () => {
                 </Swiper>
             </div>
             <div className="width mx-auto text-center">
-                <a href="/" className="dark-btn">Explore More</a>
+                <Link href={"/opportunities"}><a className="dark-btn">Explore More</a>
+                </Link>
             </div>
         </div>
         {/* End Neighbourhood Section Here  */}
