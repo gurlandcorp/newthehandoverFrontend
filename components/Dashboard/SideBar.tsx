@@ -11,7 +11,7 @@ import InboxIcon from '@mui/icons-material/MoveToInbox';
 import { useRouter } from 'next/router';
 import { Dashboard } from '@mui/icons-material';
 import Link from 'next/link';
-import Logo from "../../public/logohandover.png";
+import Logo from "../../public/logo.png";
 import { ListItemButton, Box } from '@mui/material';
 import { parseCookies } from "nookies"
 import Image from 'next/image';
@@ -133,8 +133,7 @@ const SideBar = (props: any) => {
 
     return (
         <ThemeProvider theme={themeStyle}>
-            <Box component="nav"
-            sx={{ overflow: "hidden", width: { md: props.open == false ? '0px' : drawerWidth }, flexShrink: { sm: 0 } }}
+            <Box component="nav" sx={{ overflow: "hidden", width: { md: props.open == false ? '0px' : drawerWidth }, flexShrink: { sm: 0 } }}
             aria-label="mailbox folders" >
                 <MuiDrawer sx={{ display: { sm: 'block', md: 'none' },
                     '& .MuiDrawer-paper': {
@@ -159,7 +158,7 @@ const SideBar = (props: any) => {
                         </IconButton>
                     </DrawerHeader>
                     
-                    <Box sx={{p:1, m:3, backgroundColor: blue[200], color: blue[700], borderRadius: '10px'}}>
+                    <Box sx={{p:1, m:3, backgroundColor: blue[200], color: blue[700], borderRadius: '10px'}} className="capitalize">
                         {name!=null ? name : ''}
                     </Box>
                     {lists}
@@ -184,8 +183,7 @@ const SideBar = (props: any) => {
                         </IconButton>
                     </DrawerHeader>
                     
-                    <Box sx={{p:1, m:3, backgroundColor: 'rgb(228 245 242 / 57%)', color: '#000', borderRadius: '10px'}}>
-                        {/* <AccountCircle/> */}
+                    <Box sx={{p:1, m:3, backgroundColor: 'rgb(228 245 242 / 57%)', color: '#000', borderRadius: '10px'}} className="capitalize">
                         {name!=null ? name : ''}
                     </Box>
                     {lists}

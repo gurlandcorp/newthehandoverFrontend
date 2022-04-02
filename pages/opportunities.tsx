@@ -165,14 +165,14 @@ const Properties: NextPage = ({data, query}: any) => {
 											return (
 												<Link href={'/opportunity/'+property._id} key={index}>
 													<a className="list-item shadow-box rounded-xl overflow-hidden relative" style={{ backgroundImage: `url("${property.images[0]}")`, backgroundSize: 'cover', backgroundPosition: 'center', height: 300 }}>
-														<div className="detail-box p-5 bg-black text-white rounded-t-xl absolute bottom-0">
+														<div className="detail-box p-5 bg-gray-800 text-white rounded-t-xl absolute bottom-0 w-full">
 															<div className="box-title w-full">{property.propertyTitle}</div>
 															<div className="box-location text-gray-500 text-sm">{property.location.city}</div>
-															<ul className="grid grid-cols-4 gap-2 text-sm text-gray-500">
+															<ul className="grid grid-cols-3 gap-2 text-sm text-gray-500 w-full">
 																<li><span className="mdi mdi-vector-square-plus" /> {property.area} sqft</li>
 																<li><span className="mdi mdi-bed-king-outline" /> {property.bedrooms} Beds</li>
 																<li><span className="mdi mdi-bathtub-outline" /> {property.bathrooms} Baths</li>
-																<li><span className="mdi mdi-cached" /> 4 Days ago</li>
+																{/* <li><span className="mdi mdi-cached" /> 4 Days ago</li> */}
 															</ul>
 															<div className="box-price">AED {property.priceDemand}</div>
 														</div>
@@ -204,7 +204,7 @@ export async function getServerSideProps(context: any) {
 		}
 		context.query.rooms != undefined && (filter.bedrooms = context.query.rooms);
 		context.query.bathrooms != undefined && (filter.bathrooms = context.query.bathrooms);
-		context.query.text != undefined && (filter.location.address = context.query.text);
+		context.query.text != undefined && (filter.location = {address : context.query.text});
 		
 		res = await fetch(`${Base_URL}/api/property/filter`, {
 			method: "POST",

@@ -8,6 +8,8 @@ type contextType = {
     setAlert: (content: any) => void,
     alertMessage: any,
     setAlertMessage: (content: any) => void,
+    loading: any,
+    setLoading: (content: any) => void
 }
 
 const context = {
@@ -16,7 +18,9 @@ const context = {
     alert: {},
     setAlert: () => {},
     alertMessage: {},
-    setAlertMessage: () => {}
+    setAlertMessage: () => {},
+    loading: {},
+    setLoading: () => {}
 }
 
 const MainContext = createContext<contextType>(context);
@@ -28,6 +32,7 @@ const MainProvider = ({children}: any) => {
     })
     const [alert, setAlert] = useState(false)
     const [alertMessage, setAlertMessage] = useState('')
+    const [loading, setLoading] = useState(false)
 
     return (
         <MainContext.Provider value={{
@@ -36,7 +41,9 @@ const MainProvider = ({children}: any) => {
             alert,
             setAlert,
             alertMessage,
-            setAlertMessage
+            setAlertMessage,
+            loading,
+            setLoading
         }}>
             {children}
             <Alert open={alert} setAlert={setAlert} message={alertMessage} />

@@ -17,6 +17,7 @@ import { AccountCircle } from '@mui/icons-material';
 import Cookies from "js-cookie"
 import { useRouter } from 'next/router';
 import Link from 'next/link';
+import { blue } from '@mui/material/colors';
 
 const drawerWidth = 280;  
 
@@ -106,7 +107,7 @@ const UserLayout = ({pageProps, children}: any) => {
     const theme = createTheme({
         palette: {
             primary: {
-                main: '#00c194'
+                main: blue[700]
             }
         }
     })
@@ -142,9 +143,7 @@ const UserLayout = ({pageProps, children}: any) => {
                     >
                         <MenuIcon />
                     </IconButton>
-                    {/* <Typography variant="h6" noWrap component="div">
-                        The Handover
-                    </Typography> */}
+                    
                     <Box>
                         <Link href={'/'}>
                             <a className="mx-2">Home</a>

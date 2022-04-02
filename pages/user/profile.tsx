@@ -4,13 +4,10 @@ import Link from 'next/link'
 import React, { useState } from 'react'
 import CustomPaper from '../../components/Shares/Components/CustomPaper'
 import BreadCrumb from '../../components/Shares/Components/user/BreadCrumb'
-import { parseCookies } from "nookies"
 import Cookies from "js-cookie"
 import { API_LINK, Base_URL } from '../../config/constants'
 import { Edit } from '@mui/icons-material'
 import AddItemButton from '../../components/Shares/Dashboard/Button'
-import CancelButton from '../../components/Shares/Components/CancelButton'
-import { makeStyles, ThemeProvider } from '@mui/styles'
 import { createTheme } from '@mui/system'
 import Alert from '../../components/Shares/Components/Alert'
 
@@ -52,22 +49,12 @@ const Profile: NextPage = (props: any) => {
         setPhone(phone)
         await setEditable(false)
     }
-
-    const theme = createTheme({
-        components: {
-            Typography: {
-                "& .MuiTypography-h4": {
-                    marginBottom: '1rem'
-                }
-            }
-        }
-    })
     
     return (
         <>
             <BreadCrumb>
-               <Link href={'/'}>
-                    <a> Home </a>
+               <Link href={props.user.userType=='Buyer' ? '/buyer' : '/seller'}>
+                    <a> Dashboard </a>
                </Link>
                <span> Profile </span>
             </BreadCrumb>
@@ -78,23 +65,26 @@ const Profile: NextPage = (props: any) => {
                         editable == false ? (
                             <>
                                 <Grid item xs={12} className="mb-3">
-                                    <Typography variant="h4" component="h4">Profile information</Typography>
+                                    <h4 className="text-xl font-medium">Profile information</h4>
                                 </Grid>
                                 <Grid item xs={12} md={3}>
-                                    {/* <Avatar {...stringAvatar(props.user.name)} /> */}
                                     <Box>Name</Box>
                                     <Box>Email</Box>
                                     <Box>Phone</Box>
                                     <Box>Status</Box>
                                 </Grid>
                                 <Grid item xs={12} md={9}>
-                                    <Box>{name}</Box>
-                                    <Box>{email}</Box>
-                                    <Box>{phone}</Box>
-                                    <Box> <Chip label={props.user.status} size="small" color={props.user.status=="Verified" ? "info" : "error"} /> </Box>
-                                    <IconButton className="absolute" style={{right: '1rem', top: '1rem'}} onClick={()=>setEditable(true)}>
-                                        <Edit color="info" />
-                                    </IconButton>
+                                    <div className="w-full">
+                                        <Box>{name}</Box>
+                                        <Box>{email}</Box>
+                                        <Box>{phone}</Box>
+                                        <Box> <Chip label={props.user.status} size="small" color={props.user.status=="Verified" ? "info" : "error"} /> </Box>
+                                    </div>
+                                    <div className="absolute top-0 right-0">
+                                        <IconButton className="absolute" style={{right: '1rem', top: '1rem'}} onClick={()=>setEditable(true)}>
+                                            <Edit color="info" />
+                                        </IconButton>
+                                    </div>
                                 </Grid>
                             </>
                         ) : (
@@ -111,7 +101,7 @@ const Profile: NextPage = (props: any) => {
                                     <TextField fullWidth label="Phone" variant="standard" value={phone} onChange={(e)=>setPhone(e.target.value)} />
                                 </Box>
                                 <AddItemButton style={{marginRight: '1rem'}}>Update Profile</AddItemButton>
-                                <Button className="bg-danger text-white px-3" style={{borderRadius: '10px',marginLeft: '1rem'}} onClick={()=>Cancel()}>Cancel</Button>
+                                <Button className="bg-red-500 text-white hover:bg-red-100 hover:text-red-500 px-3" style={{borderRadius: '10px',marginLeft: '1rem'}} onClick={()=>Cancel()}>Cancel</Button>
                             </Grid>
                             </>
                         )

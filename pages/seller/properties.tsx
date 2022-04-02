@@ -1,13 +1,9 @@
 import React, { useState } from 'react'
 import type { NextPage } from 'next';
 import { Box, ButtonBase, Card, CardContent, CardMedia, Grid, Paper, Typography } from '@mui/material'
-import { ButtonProps } from "@mui/material/Button"
 import { makeStyles } from '@mui/styles'
-import { styled } from '@mui/system';
 import AddItemButton from '../../components/Shares/Dashboard/Button';
-import { API_LINK, Base_URL } from '../../config/constants';
-import { Delete } from '@mui/icons-material';
-import CustomPaper from '../../components/Shares/Components/CustomPaper';
+import { Base_URL } from '../../config/constants';
 import PropertiesList from '../../components/Dashboard/Seller/Properties/PropertiesList';
 import Image from "next/image"
 
@@ -114,7 +110,7 @@ const Seller: NextPage = (props: any) => {
     return (
         <Grid container>
             <Grid item py={2} width={'100%'} className={`flex flex-wrap justify-between`}>
-                <h4 className="mb-0">Properties</h4>
+                <h4 className="mb-0 text-xl">Properties</h4>
                 <AddItemButton href="/seller/property/add">Add new property</AddItemButton>
             </Grid>
             <PropertiesList properties={properties} setProperties={setProperties} />

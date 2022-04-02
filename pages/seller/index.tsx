@@ -1,9 +1,8 @@
 import { Card, Box, Grid, TableContainer, Table, TableHead, TableRow, TableCell, TableBody, Paper, Typography } from '@mui/material'
-import { green } from '@mui/material/colors'
+import { blue, green } from '@mui/material/colors'
 import { makeStyles } from '@mui/styles'
 import axios from 'axios'
 import type { NextPage } from 'next'
-import { parseCookies } from 'nookies'
 import React from 'react'
 import CustomPaper from '../../components/Shares/Components/CustomPaper'
 import { API_LINK } from '../../config/constants'
@@ -33,11 +32,11 @@ const SellerDashboard: NextPage = (props: any) => {
             height: '60px',
             padding: "1rem",
             borderRadius: "100%",
-            backgroundColor: green[700]
+            backgroundColor: blue[700]
         },
         count: {
             fontSize: "20px",
-            color: "#108d6f !important",
+            color: blue[700] + " !important",
             fontWeight: "600"
         }
     })
@@ -57,7 +56,7 @@ const SellerDashboard: NextPage = (props: any) => {
                 backgroundPosition: "center",
                 marginBottom: "6rem"
             }}>
-            <h4 className="text-white text-center">Hi {props.user.name}, Welcome to dashboard</h4>
+            <h4 className="text-white text-3xl">Hi {props.user.name}, Welcome to dashboard</h4>
             <Grid container className={`gap-4 ${style.cardWrapper}`}>
                 <Grid item xs={12} md={4} lg={3} className={`px-5 py-3 bg-white shadow rounded-xl flex-row-reverse ${style.card}`} >
                     <Box>
@@ -82,54 +81,46 @@ const SellerDashboard: NextPage = (props: any) => {
                         <p className={style.count}>{props.data.biddings}</p>
                     </Box>
                 </Grid>
-
-                {/* <Grid item xs={12} md={4} lg={3} className="p-3 bg-white shadow rounded-3" >
-                    <svg xmlns="http://www.w3.org/2000/svg" className={style.svg} viewBox="0 0 20 20" fill="currentColor">
-                        <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z" />
-                    </svg>
-                    <p>Biddings</p>
-                    <p className={style.count}>10</p>
-                </Grid> */}
             </Grid>
         </Card>
-        <CustomPaper>
+        {/* <CustomPaper>
             <Typography component="h3">
                 Bidders Activity
             </Typography>
-        <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 650 }} aria-label="simple table">
-        <TableHead>
-          <TableRow>
-            <TableCell align="left">Bidder name</TableCell>
-            <TableCell align="right">biddings</TableCell>
-            <TableCell align="right">Accepted</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-            <TableRow >
-              <TableCell align="left">{'John Smith'}</TableCell>
-              <TableCell align="right">{'30'}</TableCell>
-              <TableCell align="right">{'20'}</TableCell>
-            </TableRow>
-            <TableRow >
-              <TableCell align="left">{'John Smith'}</TableCell>
-              <TableCell align="right">{'30'}</TableCell>
-              <TableCell align="right">{'20'}</TableCell>
-            </TableRow>
-            <TableRow >
-              <TableCell align="left">{'John Smith'}</TableCell>
-              <TableCell align="right">{'30'}</TableCell>
-              <TableCell align="right">{'20'}</TableCell>
-            </TableRow>
-            <TableRow >
-              <TableCell align="left">{'John Smith'}</TableCell>
-              <TableCell align="right">{'30'}</TableCell>
-              <TableCell align="right">{'20'}</TableCell>
-            </TableRow>
-        </TableBody>
-      </Table>
-    </TableContainer>
-        </CustomPaper>
+            <TableContainer component={Paper}>
+                <Table sx={{ minWidth: 650 }} aria-label="simple table">
+                    <TableHead>
+                    <TableRow>
+                        <TableCell align="left">Bidder name</TableCell>
+                        <TableCell align="right">biddings</TableCell>
+                        <TableCell align="right">Accepted</TableCell>
+                    </TableRow>
+                    </TableHead>
+                    <TableBody>
+                        <TableRow >
+                        <TableCell align="left">{'John Smith'}</TableCell>
+                        <TableCell align="right">{'30'}</TableCell>
+                        <TableCell align="right">{'20'}</TableCell>
+                        </TableRow>
+                        <TableRow >
+                        <TableCell align="left">{'John Smith'}</TableCell>
+                        <TableCell align="right">{'30'}</TableCell>
+                        <TableCell align="right">{'20'}</TableCell>
+                        </TableRow>
+                        <TableRow >
+                        <TableCell align="left">{'John Smith'}</TableCell>
+                        <TableCell align="right">{'30'}</TableCell>
+                        <TableCell align="right">{'20'}</TableCell>
+                        </TableRow>
+                        <TableRow >
+                        <TableCell align="left">{'John Smith'}</TableCell>
+                        <TableCell align="right">{'30'}</TableCell>
+                        <TableCell align="right">{'20'}</TableCell>
+                        </TableRow>
+                    </TableBody>
+                </Table>
+            </TableContainer>
+        </CustomPaper> */}
         </>
     )
 }

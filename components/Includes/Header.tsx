@@ -32,7 +32,7 @@ const Header = () => {
 		JSON.parse(user).userType=='Buyer' ? (
 			<>
 				<div>
-					<Link href={'/buyer'}>
+					<Link href={'/buyer'} passHref>
 						<a className="bg-white border border-black border-solid duration-300 ease-in-out hover:bg-black hover:text-white inline-block m-1 px-4 py-1 rounded-3xl text-black">{JSON.parse(user).name}</a>
 					</Link>
 				</div>
@@ -40,29 +40,31 @@ const Header = () => {
 		) : (
 			<>
 				<div className="hidden md:block">
-					<Link href={'/seller/property/add'}>
-						<a className="bg-black border border-black border-solid duration-300 ease-in-out hover:bg-white hover:text-black inline-block m-1 px-4 py-1 rounded-3xl text-white">+ Add Property</a>
+					<Link href={'/seller/property/add'} passHref>
+						<a className={"bg-black border border-black border-solid duration-300 ease-in-out hover:bg-white hover:text-black inline-block m-1 px-4 py-1 rounded-3xl text-white"}>+ Add Property</a>
 					</Link>
 				</div>
 				<div>
-					<Link href={'/seller'}>
-						<a className="bg-white border border-black border-solid duration-300 ease-in-out hover:bg-black hover:text-white inline-block m-1 px-4 py-1 rounded-3xl text-black">{JSON.parse(user).name}</a>
+					<Link href={'/seller'} passHref>
+						<a className={"bg-white border border-black border-solid duration-300 ease-in-out hover:bg-black hover:text-white inline-block m-1 px-4 py-1 rounded-3xl text-black"}>{JSON.parse(user).name}</a>
 					</Link>
 				</div>
 			</>
 		)
-	) : <>
+	) : (
+		<>
 			<div className="hidden md:block">
-				<Link href={'/'}>
-					<a className="bg-black border border-black border-solid duration-300 ease-in-out hover:bg-white hover:text-black inline-block m-1 px-4 py-1 rounded-3xl text-white">+ Add Property</a>
+				<Link href={'/sign-in?redirect_to='+ encodeURI('/seller/property/add')} passHref>
+					<a className={"bg-black border border-black border-solid duration-300 ease-in-out hover:bg-white hover:text-black inline-block m-1 px-4 py-1 rounded-3xl text-white"}>+ Add Property</a>
 				</Link>
 			</div>
 			<div>
-				<Link href={'/sign-in'}>
-					<a className="bg-white border border-black border-solid duration-300 ease-in-out hover:bg-black hover:text-white inline-block m-1 px-4 py-1 rounded-3xl text-black">Login</a>
+				<Link href={'/sign-in'} passHref>
+					<a className={"bg-white border border-black border-solid duration-300 ease-in-out hover:bg-black hover:text-white inline-block m-1 px-4 py-1 rounded-3xl text-black"}>Login</a>
 				</Link>
 			</div>
-		</>;
+		</>
+	)
 
 	useEffect(()=>{
 	},[])
@@ -129,31 +131,31 @@ const Header = () => {
 			{/* Mobile Responsive Header */}
 			<div className="bg-white duration-500 fixed h-screen w-full sm:w-10/12 md:w-2/6 p-4 top-0 transition-all z-50 translate-x--100" id="mobile-menu">
 				<div className="close-icon absolute close-icon h-5 text-red-500 w-5" style={{right: '1rem'}}>
-				<svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" id="close-menu-icon" fill="#f56565" viewBox="0 0 24 24" stroke="#f56565" strokeWidth="{2}" onClick={(e)=>closeMobileMenu()}>
-					<path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
-				</svg>
+					<svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" id="close-menu-icon" fill="#f56565" viewBox="0 0 24 24" stroke="#f56565" strokeWidth="{2}" onClick={(e)=>closeMobileMenu()}>
+						<path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+					</svg>
 				</div>
 				<ul>
-				<li>
-					<Link href={'/'}>
-						<a className="p-3 block text-xl text-blue-800">Home</a>
-					</Link>
-				</li>
-				<li>
-					<Link href={'/opportunities'}>
-						<a className="p-3 block text-xl">Opportunities</a>
-					</Link>
-				</li>
-				<li>
-					<Link href={'/about'}>
-						<a className="p-3 block text-xl">About</a>
-					</Link>
-				</li>
-				<li>
-					<Link href={'/contact'}>
-						<a className="p-3 block text-xl">Contact</a>
-					</Link>
-				</li>
+					<li>
+						<Link href={'/'}>
+							<a className="p-3 block text-xl text-blue-800">Home</a>
+						</Link>
+					</li>
+					<li>
+						<Link href={'/opportunities'}>
+							<a className="p-3 block text-xl">Opportunities</a>
+						</Link>
+					</li>
+					<li>
+						<Link href={'/about'}>
+							<a className="p-3 block text-xl">About</a>
+						</Link>
+					</li>
+					<li>
+						<Link href={'/contact'}>
+							<a className="p-3 block text-xl">Contact</a>
+						</Link>
+					</li>
 				</ul>
 			</div>
 			<div className="mobile-menu-overlay bg-black bg-opacity-50 duration-300 fixed h-screen top-0 transition-all w-full z-10 translate-x--100" onClick={(e)=>closeMobileMenu()} />

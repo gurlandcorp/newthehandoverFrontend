@@ -8,7 +8,6 @@ import styles from "./Properties.module.css"
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { TransitionProps } from '@mui/material/transitions';
-import { parseCookies } from 'nookies';
 
 const Transition = React.forwardRef(function Transition(props: TransitionProps & {
         children: React.ReactElement<any, any>;
@@ -41,8 +40,6 @@ const PropertiesList = (props: any) => {
         setProperty(property_data)
     }
 
-    const router = useRouter()
-
     return (
         <>
         <Grid container p={3}>
@@ -71,38 +68,42 @@ const PropertiesList = (props: any) => {
                                     <Grid item xs container direction="column">
                                         <Grid item xs>
                                             <Link href={`/opportunity/${item._id}`}>
-                                                <Typography gutterBottom variant="subtitle1" component="a" className={styles.propertyTitle}>
-                                                {item.propertyTitle}
-                                                </Typography>
+                                                <div className={`text-black text-lg font-medium`}>
+                                                    {item.propertyTitle}
+                                                </div>
                                             </Link>
                                             <Typography variant="body2" gutterBottom>
                                                 <span className="text-black">Area</span> {item.area}
                                             </Typography>
-                                            <Typography variant="body2" color="text.secondary">
+                                            <div className="text-sm">
                                                 <span className="text-black">Bedrooms</span> {item.bedrooms}
-                                            </Typography>
-                                            <Typography variant="body2" color="text.secondary">
-                                            <span className="text-black">Duration</span> <span className="text-info">{Difference_In_Days.toFixed(0)} days {Difference_In_Hours.toFixed(0)} hours left</span>
-                                            </Typography>
-                                            <Typography variant="body2" color="text.secondary">
-                                                <span className="text-black">Status</span> <span className={`badge bg-opacity-10 ${Difference_In_Hours<=0 ? 'bg-danger text-danger' : 'bg-success text-success'}`}>{Difference_In_Hours<=0 ? 'Expired' : 'Available'}</span>
-                                            </Typography>
+                                            </div>
+                                            {
+                                                (Difference_In_Days > 0 || Difference_In_Hours > 0) && (
+                                                    <div className="text-sm">
+                                                        <span className="text-black">Duration</span> <span className="text-blue-500 text-xs">{Difference_In_Days.toFixed(0)} days {Difference_In_Hours.toFixed(0)} hours left</span>
+                                                    </div>
+                                                )
+                                            }
+                                            <div className="text-sm">
+                                                <span className="text-black">Status</span> <span className={`text-xs px-1 rounded ${Difference_In_Days <=0 && Difference_In_Hours<=0 ? 'text-red-500 bg-red-100' : ' text-green-500 bg-green-100'}`}>{Difference_In_Days <=0 && Difference_In_Hours<=0 ? 'Expired' : 'Available'}</span>
+                                            </div>
                                             <Link href={`/seller/property/${item._id}`}>
                                                 <a style={{fontSize: "14px",fontWeight: "500"}}>View Details</a>
                                             </Link>
                                         </Grid>
                                     </Grid>
                                     <Grid item>
-                                        <Typography variant="subtitle1" component="div" className="badge bg-info bg-opacity-10 text-info rounded-pill">
+                                        <div className="text-xs text-blue-500 px-1 bg-blue-100 rounded">
                                             {`$${item.priceDemand}`}
-                                        </Typography>
+                                        </div>
                                     </Grid>
                                     <Box className={styles.propertyActions}>
-                                        <IconButton className={styles.edit}>
-                                            <Edit onClick={(e: any)=>editProperty(item)} />
+                                        <IconButton className={styles.edit} onClick={(e: any)=>editProperty(item)}>
+                                            <Edit />
                                         </IconButton>
-                                        <IconButton className={`mx-2 ${styles.delete}`}>
-                                            <Delete onClick={(e: any)=>delProperty(item._id)} />
+                                        <IconButton className={`mx-2 ${styles.delete}`} onClick={(e: any)=>delProperty(item._id)}>
+                                            <Delete />
                                         </IconButton>
                                     </Box>
                                 </Grid>

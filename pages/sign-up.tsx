@@ -1,40 +1,17 @@
 import type { NextPage } from 'next';
-import { Button, Checkbox, CssBaseline, FormControlLabel, Grid, TextField, Box, FormControl, FormLabel, RadioGroup, Radio, Typography, Link as MUILink } from '@mui/material'
-import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { styled } from '@mui/system'
 import Link from 'next/link'
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { useRouter } from 'next/router'
 import { Base_URL } from '../config/constants'
 import Cookies from "js-cookie"
 import Image from 'next/image';
 import Logo from "/public/logo.png"
-
-
-const Form = styled(Box)(() => ({
-    width: '450px',
-    marginTop: '-3rem',
-    backgroundColor: '#fff',
-    borderRadius: '10px',
-    marginBottom: '2rem'
-}))
-
-const SignUpButton = styled(Button)(() => ({
-    background: 'linear-gradient(45deg, #00c194 30%, rgb(35 179 145), #00c194 90%)',
-    border: 0,
-    borderRadius: 100,
-    color: 'white',
-}))
+import { MainContext } from '../context/MainContext';
+import Loader from "/public/img/loader.svg"
 
 const SingUp: NextPage = () => {
 
-    const theme = createTheme({
-        palette: {
-            primary: {
-                main: '#00c194'
-            },
-        },               
-    });
+    const {loading,setLoading} = useContext(MainContext)
 
     const initialUserState = {
 		name: "",
@@ -43,7 +20,7 @@ const SingUp: NextPage = () => {
 		phone: "",
 	}
     const [user, setUser] = useState(initialUserState)
-    const [userType, setUserType] = useState(false);
+    const [userType, setUserType] = useState('Seller');
     const [error, setError] = useState(initialUserState);
 	const [email, setEmail] = useState("");
     const [submiting, setSubmiting] = useState(false)
@@ -77,7 +54,7 @@ const SingUp: NextPage = () => {
                         "Content-Type": "application/json"
                     }
                 }).then(response => response.json());
-                console.log(res)
+
                 if (res.status == 200)
                 {
                     Cookies.set('user',JSON.stringify(res?.data?.SavedUser))
@@ -87,24 +64,6 @@ const SingUp: NextPage = () => {
                 {
                     setError({...error, email: res.message});
                 }
-				// if (res.status === 200) {
-				// 	// localStorage.setItem("payload", JSON.stringify(res?.data?.SavedUser));
-                //     Cookies.set('user',JSON.stringify(res?.data?.SavedUser))
-				// 	const res2 = await fetch(`${Base_URL}/api/sign-up/verifyemail`, {
-                //         method: "POST",
-                //         body: JSON.stringify({
-				// 		    code: res?.data?.SavedUser?.code,
-				// 	    }),
-                //         headers: {
-                //             "Content-Type": "application/json"
-                //         }
-                //     });
-				// 	localStorage.setItem(
-				// 		"code",
-				// 		JSON.stringify(res?.data?.SavedUser?.code)
-				// 	);
-				// 	route.push('/sign-in')
-				// }
 			}
 			else
 			{
@@ -131,6 +90,9 @@ const SingUp: NextPage = () => {
     }
     return (
         <>
+            <div className={`absolute top-0 left-0 bottom-0 right-0 bg-white z-10 flex justify-center transition-all duration-300 ${loading==true ? '' : 'scale-0'}`}>
+                <Image src={Loader} className="delay-100" />
+            </div>
             <div className="bg-gray-100" style={{minHeight: "100vh",height: "100%"}}>
                 <div className="width mx-auto">
                     <div className="grid grid-cols-1 lg:grid-cols-2">

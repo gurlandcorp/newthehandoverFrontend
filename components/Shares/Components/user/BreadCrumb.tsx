@@ -2,6 +2,7 @@ import React from 'react'
 import { Box, Breadcrumbs } from '@mui/material'
 import { makeStyles } from '@mui/styles'
 import { styled, useTheme, Theme, CSSObject, createTheme, ThemeProvider } from '@mui/material/styles';
+import { blue } from '@mui/material/colors';
 
 const theme = createTheme({
     components: {
@@ -16,7 +17,7 @@ const theme = createTheme({
                         color: '#000'
                     },
                     '& a:hover': {
-                        color: '#00c194'
+                        color: blue[700]
                     }
                 },
             }
