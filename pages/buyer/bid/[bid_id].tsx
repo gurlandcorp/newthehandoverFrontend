@@ -39,7 +39,7 @@ const Bid: NextPage = (props: any) => {
             setMinAmount(res.data.savedEvent.bidAmount)
             setAlertMessage(res.data.Message)
             setAlert(true)
-            router.push('buyer/biddings')
+            router.push('/buyer/biddings')
         }
         else
         {
