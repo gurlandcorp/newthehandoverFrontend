@@ -39,7 +39,7 @@ const Default = ({children}: any) => {
             <Head>
                 <link rel="shortcut icon" href="/favicon-homlisti.svg" />
             </Head>
-            <div className={`absolute top-0 left-0 bottom-0 right-0 bg-white z-10 flex justify-center transition-all duration-300 ${loading==true ? '' : 'scale-0'}`}>
+            <div className={`absolute top-0 left-0 bottom-0 right-0 bg-white z-50 md:z-10 flex justify-center transition-all duration-300 ${loading==true ? '' : 'scale-0'}`}>
                 <Image src={Loader} className="delay-100" />
             </div>
             <Header />

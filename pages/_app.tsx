@@ -16,7 +16,7 @@ function MyApp({ Component, pageProps, router }: AppProps) {
                         <Component {...pageProps} />
                     </UserLayout>
                 ) : (
-                    <Default>
+                    <Default pageProps={pageProps}>
                         <Component {...pageProps} />
                     </Default>
                 )
