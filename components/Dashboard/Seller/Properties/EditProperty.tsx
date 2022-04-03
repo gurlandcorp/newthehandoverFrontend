@@ -101,7 +101,7 @@ const EditProperty = (props: any) => {
 
         let result = await axios({
             method: "PATCH",
-            url: `${API_LINK}/property/edit/${props.property._id}`,
+            url: `${'https://handoverbackendapp.herokuapp.com'}/property/edit/${props.property._id}`,
             headers: {
                 "Content-Type": "application/json",
                 "Authorization": `Bearer ${token}`

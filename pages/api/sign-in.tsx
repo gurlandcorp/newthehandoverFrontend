@@ -22,7 +22,6 @@ async function handler(req:NextApiRequest, res: NextApiResponse) {
     await runMiddleware(req, res, cors)
     if(req.method=='POST')
     {
-        console.log(process.env.API_URL)
         let url = `${process.env.API_URL}/signin`
         let result = await axios({
             method: "POST",

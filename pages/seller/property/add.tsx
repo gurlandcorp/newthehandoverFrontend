@@ -102,7 +102,7 @@ const PropertyAdd: NextPage = () => {
 
         let result = await axios({
             method: "POST",
-            url: `${API_LINK}/property/add`,
+            url: `${'https://handoverbackendapp.herokuapp.com'}/property/add`,
             headers: {
                 "Content-Type": "multipart/form-data",
                 "Authorization": `Bearer ${token}`

@@ -1,13 +1,13 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { Box, Grid, IconButton, Typography, Slide } from '@mui/material'
 import { Delete, Edit } from '@mui/icons-material';
 import { Base_URL } from '../../../../config/constants';
 import EditProperty from './EditProperty';
-import Image from 'next/image';
 import styles from "./Properties.module.css"
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { TransitionProps } from '@mui/material/transitions';
+import { MainContext } from '../../../../context/MainContext';
 
 const Transition = React.forwardRef(function Transition(props: TransitionProps & {
         children: React.ReactElement<any, any>;
@@ -19,10 +19,11 @@ const Transition = React.forwardRef(function Transition(props: TransitionProps &
 
 const PropertiesList = (props: any) => {
 
+    const {setAlert, setAlertMessage} = useContext(MainContext)
     const [property, setProperty] = useState(null)
     const [properties, setProperties] = useState(props.properties)
-    const [model, setModel] = useState(false)
     const [bidding, setBidding] = useState<any>({property: {},bidding:[]})
+
     const delProperty = async (id: any) => {
         let res = await fetch(`${Base_URL}/api/seller/properties/delete`, {
             method: "POST",
@@ -32,7 +33,9 @@ const PropertiesList = (props: any) => {
         }).then(response => response.json())
         if(res.status!=0)
         {
-            props.setProperties(props.properties.filter((property: any) => property._id !== id))
+            setProperties(properties.filter((property: any) => property._id !== id))
+            setAlert(true)
+            setAlertMessage(res.data.Message)
         }
     }
 
