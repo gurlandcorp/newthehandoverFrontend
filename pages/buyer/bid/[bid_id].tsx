@@ -1,6 +1,7 @@
 import { Grid, Typography, Box, TextField } from '@mui/material';
 import { NextPage } from 'next';
 import Link from 'next/link'
+import { useRouter } from 'next/router';
 import React, { useContext, useState } from 'react'
 import CustomPaper from '../../../components/Shares/Components/CustomPaper';
 import BreadCrumb from '../../../components/Shares/Components/user/BreadCrumb'
@@ -14,6 +15,7 @@ const Bid: NextPage = (props: any) => {
     const [amountErr, setAmountErr] = useState('');
     const [minAmount, setMinAmount] = useState((props.highest.length>0 ? props.highest.bidAmount: 0));
 
+    const router = useRouter()
     const handleSubmit = async (e: any) => {
         e.preventDefault()
         if( amount > minAmount )
@@ -37,15 +39,7 @@ const Bid: NextPage = (props: any) => {
             setMinAmount(res.data.savedEvent.bidAmount)
             setAlertMessage(res.data.Message)
             setAlert(true)
-
-            // fetching new highest bidding amount
-            // res = await fetch(`/bidding/highest`, {
-            //     method: "GET",
-            //     body: JSON.stringify({
-            //     propertyId: props.id,
-            //     })
-            // })
-            // await setMinAmount(res.data[0].bidAmount)
+            router.push('buyer/biddings')
         }
         else
         {
