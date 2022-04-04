@@ -6,7 +6,7 @@ const LandscapeCard = ({property}: any) => {
     return (
         <div className={`${styles.propBox} flex flex-wrap`}>
             <div className="w-full md:w-2/5 flex justify-center md:block mb-2 md:mb-0">
-                <div style={{ background: `url(${property.images[0]})` }} className={`${styles.imgSide}`}>
+                <div style={{ background: `url(${property.images[0]})`,backgroundSize: "cover", backgroundPosition: "center" }} className={`${styles.imgSide}`}>
                 </div>
             </div>
             <div className={`${styles.content} w-full md:w-3/5`}>

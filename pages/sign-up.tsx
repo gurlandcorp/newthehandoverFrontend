@@ -90,7 +90,7 @@ const SingUp: NextPage = () => {
     }
     return (
         <>
-            <div className={`absolute top-0 left-0 bottom-0 right-0 bg-white z-10 flex justify-center transition-all duration-300 ${loading==true ? '' : 'scale-0'}`}>
+            <div className={`fixed top-0 left-0 bottom-0 right-0 bg-white h-full z-10 flex justify-center transition-all duration-300 ${loading==true ? '' : 'scale-0'}`}>
                 <Image src={Loader} className="delay-100" />
             </div>
             <div className="bg-gray-100" style={{minHeight: "100vh",height: "100%"}}>
@@ -154,7 +154,7 @@ const SingUp: NextPage = () => {
                                             <input type="text" className="border theme-border-color p-2 px-4 rounded-3xl text-sm w-full" name="phone" id="phone" placeholder="Enter phone #" value={user.phone} onChange={(e)=>handleInputs(e)} required />
                                         </div>
                                         <div className="">
-                                            Designation
+                                            Sign up as:
                                             <div className="flex justify-center">
                                                 <div className="form-check mr-5">
                                                     <label>
@@ -178,7 +178,7 @@ const SingUp: NextPage = () => {
                                         </div>
                                     </form>
                                     <div className="bg-white p-5 mt-5 w-full rounded-xl shadow lg:hidden">
-                                        <p>If you alerady have an account? click <Link href={'sign-in'}><a className="cursor-pointer text-blue-500">here</a></Link> to sign in yourself</p>
+                                        <p>If you alerady have an account? click <Link href={'/sign-in'}><a className="cursor-pointer text-blue-500">here</a></Link> to sign in yourself</p>
                                     </div>
                                 </div>
                             </div>
@@ -186,90 +186,13 @@ const SingUp: NextPage = () => {
                         <div style={{ background: 'linear-gradient(309deg, #2b6cb0e0, #282452c7), url(/real-estate-background-vector-194501.jpg)', height: '100%', backgroundPosition: 'center' }} className="hidden lg:block">
                             <div className="flex flex-wrap justify-center items-center h-full">
                                 <div className="bg-white p-5 w-4/5 rounded-xl shadow">
-                                    <p>If you alerady have an account? click <Link href={'sign-in'}><a className="cursor-pointer text-blue-500">here</a></Link> to sign in yourself</p>
+                                    <p>If you alerady have an account? click <Link href={'/sign-in'}><a className="cursor-pointer text-blue-500">here</a></Link> to sign in yourself</p>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            {/* <ThemeProvider theme={theme}>
-                <Grid container className="d-flex flex-wrap justify-content-center" component="main" sx={{ width: '100%', height: '100%', minHeight: '100vh' }}>
-                    <CssBaseline />
-                    <Grid item xs={12} className="d-flex flex-column justify-content-center align-items-center" style={{backgroundColor: 'rgb(25 135 84 / 20%)', padding: '5rem'}}>
-                        <Image src={Logo} width={'350px'} height={'40px'} alt={'The Handover'} />
-                        <h4 className="mt-4">Register yourselft in The Handover</h4>
-                    </Grid>
-                    <Grid className="d-flex flex-wrap justify-content-center w-100">
-                    <Form className={`shadow px-4 py-4`} component="form" onSubmit={(e: any)=>handleSubmit(e)}>
-                        <Box className="text-center">
-                            <Typography component="h1" variant="h5">
-                            Sign Up
-                            </Typography>
-                        </Box>
-                        <Box className="my-3">
-                            <TextField fullWidth type="text" id="name" name="name" label="Name" variant="filled" value={user.name} onChange={(e)=>handleInputs(e)} required />
-                            {error.name!='' ? <small style={{ color: "red", fontSize: '11px' }}>{error.name}</small> : ""}
-                        </Box>
-                        <Box className="my-3">
-                            <TextField fullWidth type="email" id="email" name="email" label="Email" variant="filled" value={user.email} onChange={(e)=>handleInputs(e)} required />
-                            {error.email!='' ? <small style={{ color: "red", fontSize: '11px' }}>{error.email}</small> : ""}
-                        </Box>
-                        <Box className="my-3">
-                            <TextField fullWidth type="password" id="password" name="password" label="Password" variant="filled" value={user.password} onChange={(e)=>handleInputs(e)} />
-                            {error.password!='' ? <small style={{ color: "red", fontSize: '11px' }}>{error.password}</small> : ""}
-                        </Box>
-
-                        <Box className="my-3">
-                            <TextField fullWidth type="tel" id="phone" name="phone" label="Phone" variant="filled" value={user.phone} onChange={(e)=>handleInputs(e)} />
-                        </Box>
-
-                        <FormControl>
-                            <FormLabel id="demo-row-radio-buttons-group-label">Select Designation</FormLabel>
-                            <RadioGroup
-                                row
-                                aria-labelledby="demo-row-radio-buttons-group-label"
-                                name="row-radio-buttons-group"
-                            >
-                                <FormControlLabel value="Buyer" control={<Radio sx={{ '&.Mui-checked': { color: '#00c194', }, }} />} label="Buyer" onChange={(e: any) => setUserType(e.target.value)} />
-                                <FormControlLabel value="Seller" control={<Radio sx={{ '&.Mui-checked': { color: '#00c194', }, }} />} label="Seller" onChange={(e: any) => setUserType(e.target.value)} />
-                            </RadioGroup>
-                        </FormControl>
-                        <Box className="my-3">
-                            <FormControlLabel
-                                control={<Checkbox sx={{
-                                    '&.Mui-checked': {
-                                        color: '#00c194',
-                                    },
-                                    }}/>}
-                                label="I agree the Term and Conditions"
-                            />
-                        </Box>
-                        <SignUpButton
-                            type={`${submiting==true ? 'button' : 'submit'}`}
-                            fullWidth
-                            variant="contained"
-                            sx={{ mt: 1, mb: 2, p: 1, fontSize: 16 }} 
-                            color="primary"
-                        >
-                            Sign Up
-                            {
-                                submiting==true && (
-                                    <svg xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" width="30px" height="30px" viewBox="0 0 128 128" xmlSpace="preserve" style={{marginLeft: '1rem'}}><g><path d="M64 9.75A54.25 54.25 0 0 0 9.75 64H0a64 64 0 0 1 128 0h-9.75A54.25 54.25 0 0 0 64 9.75z" fill="#116c57" /><animateTransform attributeName="transform" type="rotate" from="0 64 64" to="360 64 64" dur="1200ms" repeatCount="indefinite" /></g></svg>
-                                )
-                            }
-                        </SignUpButton>
-                        <Grid container className="text-center">
-                            <Grid item xs={12}>
-                                <Link href="/sign-in" passHref>
-                                    <MUILink variant='body2'>{"Alerady have an account? Sign In"}</MUILink>
-                                </Link>
-                            </Grid>
-                        </Grid>
-                    </Form>
-                    </Grid>
-                </Grid>
-            </ThemeProvider> */}
         </>
     )
 }

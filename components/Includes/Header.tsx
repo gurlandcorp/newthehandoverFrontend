@@ -90,7 +90,7 @@ const Header = (props: any) => {
 						{
 							( (user!=undefined && user!=null && JSON.parse(user).userType=='Seller') ) && (
 								<div className="hidden md:block">
-									<Link href={ (user!=undefined && user!=null) ? '/seller/property/add' : '/sign-in?redirect_to=/seller/property/add'} passHref>
+									<Link href={'/seller/property/add'}>
 										<a className={"bg-black border border-black border-solid duration-300 ease-in-out hover:bg-white hover:text-black inline-block m-1 px-4 py-1 rounded-3xl text-white"}>+ Add Property</a>
 									</Link>
 								</div>

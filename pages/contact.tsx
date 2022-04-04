@@ -1,5 +1,6 @@
 import { NextPage } from 'next'
 import React, { useContext, useState } from 'react'
+import SearchSection from '../components/Includes/SearchSection';
 import { Base_URL } from '../config/constants';
 import { MainContext } from '../context/MainContext';
 import styles from "./styles/Contact.module.css"
@@ -51,22 +52,7 @@ const Contact: NextPage = () => {
 		<>
 			{/* Start of Search Bar  */}
 			<div className="" style={{ backgroundImage: `linear-gradient(178deg, #00000059, rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 1), white), url(${BackgroundImage.src})`, backgroundRepeat: 'no-repeat' }}>
-				<div className="container-search py-10 mx-auto">
-					<div className="search-wrapper p-4">
-						<form action="" className="gap-4 grid grid-cols-1 lg:grid-cols-7 sm:grid-cols-2 w-full">
-							<input type="text" placeholder="What are you looking for ?" className="p-3 w-full col-span-2" />
-							<select name="" id="" className="p-3 w-full col-span-2">
-								<option value="">Property Type</option>
-							</select>
-							<select name="" id="" className="p-3 w-full col-span-2">
-								<option value="">All Cities</option>
-							</select>
-							<div className="flex flex-wrap items-center justify-end text-right w-full">
-								<button type="submit" className="px-4 py-2 w-full rounded-xl"><span className="mdi mdi-magnify" /> Search </button>
-							</div>
-						</form>
-					</div>
-				</div>
+				<SearchSection />
 				<div className="font-semibold py-32 text-3xl text-center">
 					<h3 className="uppercase theme-color text-4xl">Contact</h3>
 				</div>

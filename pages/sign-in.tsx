@@ -129,7 +129,7 @@ const SignIn: NextPage = ({redirect_to}: any) => {
 
     return (
         <>
-            <div className={`absolute top-0 left-0 bottom-0 right-0 bg-white z-10 flex justify-center transition-all duration-300 ${loading==true ? '' : 'scale-0'}`}>
+            <div className={`fixed top-0 left-0 bottom-0 right-0 bg-white z-10 flex justify-center transition-all duration-300 ${loading==true ? '' : 'scale-0'}`}>
                 <Image src={Loader} className="delay-100" />
             </div>
             <div className="bg-gray-100 h-screen">
@@ -210,7 +210,7 @@ const SignIn: NextPage = ({redirect_to}: any) => {
                                         }
                                         
                                         <div className="bg-white p-5 w-full rounded-xl shadow mt-5 lg:hidden">
-                                            <p>If you don&apos;t have any account then click <a className="cursor-pointer text-blue-500">here</a> to register yourself</p>
+                                            <p>If you don&apos;t have any account then click <NextLink href={'/sign-up'}><a className="cursor-pointer text-blue-500">here</a></NextLink> to register yourself</p>
                                         </div>
                                     </div>
                                 </div>
