@@ -4,7 +4,7 @@ import Footer from '../Includes/Footer/Footer'
 import Header from '../Includes/Header'
 import Router from "next/router"
 import { MainContext } from '../../context/MainContext'
-import DefaultLoader from '../Shares/Loaders/defaultLoader'
+import DefaultLoader from '../Shares/Loaders/DefaultLoader'
 
 const Default = ({children}: any) => {
 

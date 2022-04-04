@@ -16,7 +16,7 @@ import { Base_URL } from '../config/constants';
 import { styled } from '@mui/system';
 import NextLink from 'next/link';
 import Image from 'next/image';
-import Logo from "../public/logohandover.png"
+import Logo from "../public/logo.png"
 
 const LoginGrid = styled(Grid)(() => ({
     display: 'flex',
