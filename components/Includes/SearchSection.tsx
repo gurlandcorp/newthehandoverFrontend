@@ -26,8 +26,8 @@ const SearchSection = () => {
                         <option value="">All Cities</option>
                         <option value="Dubai">Dubai</option>
                     </select>
-                    <div className="flex flex-wrap items-center justify-end text-right w-full">
-                        <button type="submit" className="px-4 py-2 w-full rounded-xl"><span className="mdi mdi-magnify" /> Search </button>
+                    <div className="flex flex-wrap items-center justify-end text-right w-full text-3xl">
+                        <button type="submit" className="px-4 py-1 w-full rounded-xl"><span className="mdi mdi-magnify" /> Search </button>
                     </div>
                 </form>
             </div>

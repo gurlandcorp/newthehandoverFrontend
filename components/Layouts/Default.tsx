@@ -4,7 +4,7 @@ import Footer from '../Includes/Footer/Footer'
 import Header from '../Includes/Header'
 import Router from "next/router"
 import { MainContext } from '../../context/MainContext'
-import DefaultLoader from '../Shares/Loaders/DefaultLoader'
+import MainLoader from '../Shares/Loaders/MainLoader'
 
 const Default = ({children}: any) => {
 
@@ -27,7 +27,7 @@ const Default = ({children}: any) => {
             <Head>
                 <link rel="shortcut icon" href="/favicon-homlisti.svg" />
             </Head>
-            <DefaultLoader />
+            <MainLoader />
             <Header />
             {children}
             <Footer />

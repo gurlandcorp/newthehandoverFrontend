@@ -1,19 +1,17 @@
-import Logo from "../../public/logo.png";
-import SearchSection from "./SearchSection";
-import { useEffect, useState } from "react";
+import Logo from "/public/logo.png";
+import { useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import styles from "./Header.module.css"
 import { parseCookies } from "nookies";
-import Cookies from "js-cookie"
+import SellerDropDown from "../Dashboard/SellerDropDown";
+import BuyerDropDown from "../Dashboard/BuyerDropDown";
 
 const Header = (props: any) => {
-	const [activeLink, setActiveLink] = useState('')
+	
 	const router = useRouter();
-	const [showSideMenu,setShowSideMenu] = useState(false)
 	const {token, user} = parseCookies()
-	const [TopRightMenuLinks, setTopRightMenuLinks] = useState<any>('')
 
 	const openMobileMenu = async () => {
 		document.querySelector('.mobile-menu-overlay')?.classList.toggle('translate-x--100');
@@ -37,16 +35,18 @@ const Header = (props: any) => {
 	return (
 		<>
 			{/* Start of Site Header  */}
-			<div className="bg-white sticky top-0 w-full p-2 z-10 shadow-box">
-				<div className="flex flex-row items-center flex-wrap">
-					<div className="logo w-2/12 hidden lg:block">
-						<Link href={'/'}>
-							<a>
-								<Image src={Logo} layout="intrinsic" width="350" height="40" alt="logo" className="img-fluid" />
-							</a>
-						</Link>
-					</div>
-					<nav className="menu-center col-span-2 w-7/12 hidden lg:block">
+			<div className="bg-white sticky top-0 w-full p-2 z-10">
+				<div className="flex flex-wrap items-center justify-between px-5">
+					<div className="logo hidden lg:block">
+                        <div style={{ width: 200 }}>
+							<Link href={'/'}>
+								<a>
+									<Image src={Logo} alt="Logo" className="w-full" />
+								</a>
+							</Link>
+                        </div>
+                    </div>
+					<nav className="menu-center col-span-2 hidden lg:block">
 						<ul className="flex flex-wrap items-center ml-5">
 							<li>
 								<Link href={'/'}>
@@ -55,12 +55,12 @@ const Header = (props: any) => {
 							</li>
 							<li>
 								<Link href={'/about'}>
-									<a className="nav-item">About</a>
+									<a className="nav-item text-center">About</a>
 								</Link>
 							</li>
 							<li>
 								<Link href={'/contact'}>
-									<a className="nav-item">Contact</a>
+									<a className="nav-item text-center">Contact</a>
 								</Link>
 							</li>
 							<li>
@@ -85,7 +85,7 @@ const Header = (props: any) => {
 						</Link>
 					</div>
 
-					<div className="flex flex-wrap justify-end w-4/12 lg:w-3/12">
+					<div className="flex flex-wrap justify-end">
 						{/* Display in medium screen */}
 						{
 							( (user!=undefined && user!=null && JSON.parse(user).userType=='Seller') ) && (
@@ -99,20 +99,15 @@ const Header = (props: any) => {
 						{
 							user!=undefined && user!=null ? (
 								JSON.parse(user).userType=='Buyer' ? (
-									<div>
-										<Link href={'/buyer'} passHref>
-											<a className="bg-white border border-black border-solid duration-300 ease-in-out hover:bg-black hover:text-white inline-block m-1 px-4 py-1 rounded-3xl text-black">{JSON.parse(user).name}</a>
-										</Link>
-									</div>
+									<BuyerDropDown />
 								) : (
-									<div>
-										<Link href={'/seller'} passHref>
-											<a className={"bg-white border border-black border-solid duration-300 ease-in-out hover:bg-black hover:text-white inline-block m-1 px-4 py-1 rounded-3xl text-black"}>{JSON.parse(user).name}</a>
-										</Link>
-									</div>
+									<SellerDropDown />
 								)
 							) : (
 								<div>
+									<Link href={'/sign-up'} passHref>
+										<a className={"bg-white border border-black border-solid duration-300 ease-in-out hover:bg-black hover:text-white inline-block m-1 px-4 py-1 rounded-3xl text-black mr-2"}>Register</a>
+									</Link>
 									<Link href={'/sign-in'} passHref>
 										<a className={"bg-white border border-black border-solid duration-300 ease-in-out hover:bg-black hover:text-white inline-block m-1 px-4 py-1 rounded-3xl text-black"}>Login</a>
 									</Link>

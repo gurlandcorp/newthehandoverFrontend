@@ -4,7 +4,7 @@ import Loader from "/public/img/loader.svg"
 import { MainContext } from '../../../context/MainContext'
 import Router from "next/router"
 
-const DefaultLoader = () => {
+const MainLoader = () => {
 
     const {loading,setLoading} = useContext(MainContext)
     Router.events.on('routeChangeStart', (url) => {
@@ -24,4 +24,4 @@ const DefaultLoader = () => {
     )
 }
 
-export default DefaultLoader
+export default MainLoader

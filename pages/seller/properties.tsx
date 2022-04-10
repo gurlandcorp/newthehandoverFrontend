@@ -6,6 +6,7 @@ import AddItemButton from '../../components/Shares/Dashboard/Button';
 import { Base_URL } from '../../config/constants';
 import PropertiesList from '../../components/Dashboard/Seller/Properties/PropertiesList';
 import Image from "next/image"
+import Link from 'next/link';
 
 const useStyles = makeStyles(({ breakpoints }: any) => ({
     root: {
@@ -108,13 +109,43 @@ const Seller: NextPage = (props: any) => {
     const [add, setAdd] = useState(false);
     const styles = useStyles()
     return (
-        <Grid container>
-            <Grid item py={2} width={'100%'} className={`flex flex-wrap justify-between`}>
-                <h4 className="mb-0 text-xl">Properties</h4>
-                <AddItemButton href="/seller/property/add">Add new property</AddItemButton>
-            </Grid>
-            <PropertiesList properties={properties} setProperties={setProperties} />
-        </Grid>
+        <>
+            <div>
+                <nav className="relative w-full flex flex-wrap items-center justify-between py-2 hover:text-gray-700 rounded" style={{ backgroundColor: '#fbfbfb' }}>
+                    <div className="container-fluid w-full flex flex-wrap items-center justify-between px-6">
+                        <nav className="bg-grey-light rounded-md w-full" aria-label="breadcrumb">
+                            <ol className="list-reset flex text-sm">
+                                <li>
+                                    <Link href="/seller">
+                                        <a className="text-black">Dashboard</a>
+                                    </Link> /&nbsp;</li>
+                                <li><span className="text-gray-500">Properties</span></li>
+                            </ol>
+                        </nav>
+                    </div>
+                </nav>
+                {/* Place your content here */}
+                <div className="p-4">
+                    <div className="my-4 pb-4 flex justify-between items-center">
+                        <h3 className="text-2xl theme-color">Properties</h3>
+                        <Link href="/seller/property/add">
+                            <a className="px-4 py-1 bg-black text-white rounded-full transition-all duration-300">Add Property</a>
+                        </Link>
+                    </div>
+                    <div className="mt-4">
+                        <PropertiesList properties={properties} setProperties={setProperties} />
+                    </div>
+                </div>
+            </div>
+
+            {/* <Grid container>
+                <Grid item py={2} width={'100%'} className={`flex flex-wrap justify-between`}>
+                    <h4 className="mb-0 text-xl">Properties</h4>
+                    <AddItemButton href="/seller/property/add">Add new property</AddItemButton>
+                </Grid>
+                <PropertiesList properties={properties} setProperties={setProperties} />
+            </Grid> */}
+        </>
     )
 }
 

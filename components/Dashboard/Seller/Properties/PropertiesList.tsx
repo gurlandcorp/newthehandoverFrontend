@@ -8,6 +8,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { TransitionProps } from '@mui/material/transitions';
 import { MainContext } from '../../../../context/MainContext';
+import Property from './Property';
 
 const Transition = React.forwardRef(function Transition(props: TransitionProps & {
         children: React.ReactElement<any, any>;
@@ -45,7 +46,17 @@ const PropertiesList = (props: any) => {
 
     return (
         <>
-        <Grid container p={3}>
+        <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-5">
+            {
+                property == null ? (
+                    properties.map((property: any, index: any) => {
+                        return <Property key={index} property={property} delProperty={delProperty} editProperty={editProperty} />
+                    })
+                ) : <EditProperty property={property} setProperty={setProperty} setProperties={setProperties} />
+            }
+        </div>
+
+        {/* <Grid container p={3}>
         {
             property == null ? (
                 properties.map((item: any, index: any) => {
@@ -63,7 +74,6 @@ const PropertiesList = (props: any) => {
                                     <Link href={`/opportunity/${item._id}`}>
                                         <Box sx={{ width: 128, height: 128,overflow:"hidden",borderRadius:"10px",position:"relative" }} component="a" 
                                         style={{ backgroundImage: `url(${item.images[0]})` }}>
-                                            {/* <Image src={item.images[0]} layout="fill" /> */}
                                         </Box>
                                     </Link>
                                 </Grid>
@@ -118,7 +128,7 @@ const PropertiesList = (props: any) => {
                 <EditProperty property={property} setProperty={setProperty} setProperties={setProperties} />
             )
         }
-        </Grid>
+        </Grid> */}
         </>
     )
 }

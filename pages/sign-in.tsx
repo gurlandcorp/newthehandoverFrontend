@@ -23,7 +23,6 @@ const SignIn: NextPage = ({redirect_to}: any) => {
     const [emailError, setEmailError] = useState("")
     const [forgetPassword, setForgetPassword] = useState(false)
     const [forgetEmail, setForgetEmail] = useState('')
-	const [passwordError, setPasswordError] = useState("")
 	const [submiting, setSubmiting] = useState(false)
 
     const handleInputs = (e: any) => {
@@ -40,7 +39,6 @@ const SignIn: NextPage = ({redirect_to}: any) => {
 		setSubmiting(true)
 
 		setEmailError("")
-		setPasswordError("")
 		const { email, password } = user;
 		if (email === "admin@gmail.com") {
 			try {
@@ -51,7 +49,6 @@ const SignIn: NextPage = ({redirect_to}: any) => {
 				if (res.status === 200) {
 					localStorage.setItem("adminAuth", email);
 					localStorage.setItem("token", JSON.stringify(res.data.token));
-					// window.location = "/admin/allProperties";
 					router.push('/admin/allProperties')
 				}
 			} catch (error) {}
@@ -69,7 +66,7 @@ const SignIn: NextPage = ({redirect_to}: any) => {
 				}).then(response => response.json());
                 if(res.status==0)
                 {
-                    setEmailError(res.message)
+                    setEmailError("Your credentials are invalid!");
                 }
 				else if (res.status === 1) {
                     
@@ -92,12 +89,7 @@ const SignIn: NextPage = ({redirect_to}: any) => {
                     }
 				}
 			} catch (error: any) {
-				if (error?.response?.data?.message === "No User Exist With This Email") {
-					setEmailError("No User Exist With This Email");
-				}
-				if (error?.response?.data?.message === "Invalid Password") {
-					setPasswordError("Invalid Password");
-				}
+                setEmailError("Your credentials are invalid!");
 			}
 		}
 		setSubmiting(false)
@@ -185,10 +177,10 @@ const SignIn: NextPage = ({redirect_to}: any) => {
                                                 </form>
                                             ) : (
                                                 <form onSubmit={(e: any)=>handleSubmit(e)}>
+                                                    {emailError ? <div className="bg-red-100 mt-2 px-2 py-1 rounded-3xl text-red-500 w-full capitalize font-medium" style={{ fontSize: '11px' }}>{emailError}</div> : ""}
                                                     <div className="pb-5">
                                                         <label htmlFor="" className="w-full">Email</label>
                                                         <input type="email" className="border theme-border-color p-2 px-4 rounded-3xl text-sm w-full" name="email" id="email" placeholder="Email address" value={user.email} onChange={(e)=>handleInputs(e)} required />
-                                                        {emailError ? <div className="bg-red-100 mt-2 px-2 rounded-3xl text-red-500 w-full capitalize" style={{ fontSize: '11px' }}>{emailError}</div> : ""}
                                                     </div>
                                                     <div className="pb-5">
                                                         <label htmlFor="" className="w-full">Password</label>
