@@ -17,7 +17,7 @@ const Property = ({property, delProperty, editProperty}: any) => {
             <div className="w-full overflow-hidden relative" style={{ height: 250 }}>
                 <Image className="object-cover w-full" src={property.images[0]} layout="fill" alt="" />
                 <div className="absolute right-0 top-0">
-                    <a className="px-2 py-1 bg-blue-100 text-blue-500 inline-block border-r border-solid border-gray-300 cursor-pointer" onClick={(e: any)=>editProperty(property._id)}>
+                    <a className="px-2 py-1 bg-blue-100 text-blue-500 inline-block border-r border-solid border-gray-300 cursor-pointer" onClick={(e: any)=>editProperty(property)}>
                         <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                             <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" />
                         </svg>

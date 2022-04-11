@@ -1,25 +1,32 @@
 import { Grid } from '@mui/material'
-import Link from 'next/link'
 import React from 'react'
 import BreadCrumb from '../../components/Shares/Components/user/BreadCrumb'
 import MyBiddings from '../../components/Dashboard/Buyer/MyBiddings'
 
 const Biddings = (props: any) => {
 
+    const Links = [
+        {
+            href: "/buyer",
+            text: "Dashboard"
+        },
+        {
+            text: "My Bids"
+        }
+    ]
     return (
         <>
-            <BreadCrumb>
-               <Link href={'/buyer'}>
-                    <a> Dashboard </a>
-               </Link>
-               <span>My Biddings </span>
-            </BreadCrumb>
+            <BreadCrumb Links={Links} />
+
+            <div className="p-4">
+                <div className="my-4 pb-4 flex justify-between items-center">
+                    <h3 className="text-2xl theme-color">My Biddings</h3>
+                </div>
+                <div className="mt-4">
+                </div>
+            </div>
 
             <Grid container>
-                <Grid item py={2} px={1} width={'100%'}>
-                    <h5 className="mb-0">My Biddings</h5>
-                </Grid>
-
                 <MyBiddings biddings = {props.biddings} />
             </Grid>
         </>

@@ -88,30 +88,34 @@ const Header = (props: any) => {
 					<div className="flex flex-wrap justify-end">
 						{/* Display in medium screen */}
 						{
-							( (user!=undefined && user!=null && JSON.parse(user).userType=='Seller') ) && (
-								<div className="hidden md:block">
-									<Link href={'/seller/property/add'}>
-										<a className={"bg-black border border-black border-solid duration-300 ease-in-out hover:bg-white hover:text-black inline-block m-1 px-4 py-1 rounded-3xl text-white"}>+ Add Property</a>
-									</Link>
-								</div>
+							typeof window !== 'undefined' && (
+								(user!=undefined && user!=null && JSON.parse(user).userType=='Seller') && (
+									<div className="hidden md:block">
+										<Link href={'/seller/property/add'}>
+											<a className={"bg-black border border-black border-solid duration-300 ease-in-out hover:bg-white hover:text-black inline-block m-1 px-4 py-1 rounded-3xl text-white"}>+ Add Property</a>
+										</Link>
+									</div>
+								)
 							)
 						}
 						{
-							user!=undefined && user!=null ? (
-								JSON.parse(user).userType=='Buyer' ? (
-									<BuyerDropDown />
+							typeof window !== 'undefined' && (
+								user!=undefined && user!=null ? (
+									JSON.parse(user).userType=='Buyer' ? (
+										<BuyerDropDown />
+									) : (
+										<SellerDropDown />
+									)
 								) : (
-									<SellerDropDown />
+									<div>
+										<Link href={'/sign-up'} passHref>
+											<a className={"bg-white border border-black border-solid duration-300 ease-in-out hover:bg-black hover:text-white inline-block m-1 px-4 py-1 rounded-3xl text-black mr-2"}>Register</a>
+										</Link>
+										<Link href={'/sign-in'} passHref>
+											<a className={"bg-white border border-black border-solid duration-300 ease-in-out hover:bg-black hover:text-white inline-block m-1 px-4 py-1 rounded-3xl text-black"}>Login</a>
+										</Link>
+									</div>
 								)
-							) : (
-								<div>
-									<Link href={'/sign-up'} passHref>
-										<a className={"bg-white border border-black border-solid duration-300 ease-in-out hover:bg-black hover:text-white inline-block m-1 px-4 py-1 rounded-3xl text-black mr-2"}>Register</a>
-									</Link>
-									<Link href={'/sign-in'} passHref>
-										<a className={"bg-white border border-black border-solid duration-300 ease-in-out hover:bg-black hover:text-white inline-block m-1 px-4 py-1 rounded-3xl text-black"}>Login</a>
-									</Link>
-								</div>
 							)
 						}
 					</div>

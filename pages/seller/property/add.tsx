@@ -1,15 +1,9 @@
-import { Add, ListAltSharp } from '@mui/icons-material'
-import { Grid, MenuItem, Paper, TextField } from '@mui/material'
 import React, { useContext, useState } from 'react'
 import AddItemButton from '../../../components/Shares/Dashboard/Button'
 import { parseCookies } from 'nookies'
-import {useEffect} from "react";
-import { parse } from 'path/posix'
-import { API_LINK } from '../../../config/constants'
 import axios from 'axios'
 import { useRouter } from 'next/router'
 import { NextPage } from 'next'
-import CustomPaper from '../../../components/Shares/Components/CustomPaper'
 import { MainContext } from '../../../context/MainContext'
 import Link from 'next/link'
 import Image from 'next/image'
@@ -36,7 +30,6 @@ const PropertyAdd: NextPage = () => {
 	const [propertyType, setpropertyType] = useState("");
 	const [countrySate, setCountrySate] = useState("");
 	const [multiImages, setMultiImages] = useState([]);
-    const [multiImagesLinks, setMultiImagesLinks] = useState([]);
     const [loading, setLoading] = useState(false)
 
 	const handleInputs = (e: any) => {
@@ -273,7 +266,11 @@ const PropertyAdd: NextPage = () => {
                             }
                         </div>
                         <div className="mt-4">
-                            <button className="btn bg-black text-white rounded-full px-4 py-1 mr-4">Save</button>
+                            <button className="btn bg-black text-white rounded-full px-4 py-1 mr-4" disabled={loading ? true : false}>Save {
+                            loading &&
+                                <svg xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" width="20px" height="20px" viewBox="0 0 128 128" xmlSpace="preserve" style={{marginLeft: '1rem'}}><g><path d="M64 9.75A54.25 54.25 0 0 0 9.75 64H0a64 64 0 0 1 128 0h-9.75A54.25 54.25 0 0 0 64 9.75z" fill="#252153" /><animateTransform attributeName="transform" type="rotate" from="0 64 64" to="360 64 64" dur="1200ms" repeatCount="indefinite" /></g></svg>
+                            }
+                        </button>
                             <Link href={'/seller/properties'}>
                                 <a className="btn bg-red-100 hover:bg-red-500 text-red-500 hover:text-white rounded-full px-4 py-1 mr-4 transition-all duration-300">Cancel</a>
                             </Link>

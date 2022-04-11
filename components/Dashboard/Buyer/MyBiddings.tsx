@@ -94,7 +94,7 @@ const MyBiddings = (props: any) => {
                                         width: {md: '100%', lg: '400px'},
                                         transform: {md: 'translateY(-30px)',lg:'translateX(-30px)'},
                                         }}>
-                                        <Image src={image.src} layout="responsive" width={image.width} height={image.height}  />
+                                        <Image src={bid.Property[0]?.images[0]} layout="responsive" className="object-cover" width={image.width} height={image.height}  />
                                     </Box>
                                     <div style={{width: "100%", padding: "1rem"}}>
                                         <h4>{bid.Property[0]?.propertyTitle}</h4>

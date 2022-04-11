@@ -49,15 +49,20 @@ const Profile: NextPage = (props: any) => {
         setPhone(phone)
         await setEditable(false)
     }
+
+    const Links = [
+        {
+            href: props.user.userType=='Buyer' ? '/buyer' : '/seller',
+            text: "Dashboard"
+        },
+        {
+            text: "Profile"
+        }
+    ]
     
     return (
         <>
-            <BreadCrumb>
-               <Link href={props.user.userType=='Buyer' ? '/buyer' : '/seller'}>
-                    <a> Dashboard </a>
-               </Link>
-               <span> Profile </span>
-            </BreadCrumb>
+            <BreadCrumb Links={Links} />
 
             <CustomPaper>
                 <Grid container className="p-4 relative">

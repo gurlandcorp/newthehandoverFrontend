@@ -56,7 +56,7 @@ const useStyles = makeStyles(({ breakpoints }: any) => ({
 }));  
 
 
-const Seller: NextPage = (props: any) => {
+const SellerProperties: NextPage = (props: any) => {
 
     interface Data {
         calories: number;
@@ -149,7 +149,7 @@ const Seller: NextPage = (props: any) => {
     )
 }
 
-export default Seller
+export default SellerProperties
 
 
 export async function getServerSideProps(context: any) {
