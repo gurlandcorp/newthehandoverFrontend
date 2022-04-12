@@ -10,18 +10,14 @@ function MyApp({ Component, pageProps, router }: AppProps) {
     return (
         <MainProvider>
         {
-            router.pathname.search('sign-in') == -1 && router.pathname.search('sign-up') == -1 && router.pathname.search('forgetpassword') == -1 ? (
-                router.pathname.search('seller') == 1 || router.pathname.search('buyer') == 1 || router.pathname.search('user') == 1 ? (
-                    <UserLayout pageProps={pageProps}>
-                        <Component {...pageProps} />
-                    </UserLayout>
-                ) : (
-                    <Default pageProps={pageProps}>
-                        <Component {...pageProps} />
-                    </Default>
-                )
+            router.pathname.search('seller') == 1 || router.pathname.search('buyer') == 1 || router.pathname.search('user') == 1 ? (
+                <UserLayout pageProps={pageProps}>
+                    <Component {...pageProps} />
+                </UserLayout>
             ) : (
-                <Component {...pageProps} />
+                <Default pageProps={pageProps}>
+                    <Component {...pageProps} />
+                </Default>
             )
         }
         </MainProvider>

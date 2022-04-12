@@ -1,18 +1,15 @@
-import React, { useContext, useState } from 'react'
+import React, { useState } from 'react'
 import type { NextPage } from 'next';
 import { useRouter } from 'next/router';
 import axios from 'axios';
 import { Base_URL } from '../config/constants';
 import cookie from 'js-cookie'
-import NextLink from 'next/link';
 import Image from 'next/image';
 import Logo from "../public/logo.png"
-import { MainContext } from '../context/MainContext';
-import Loader from "/public/img/loader.svg"
+import styles from "/styles/Authentication.module.css"
+import Link from 'next/link';
 
 const SignIn: NextPage = ({redirect_to}: any) => {
-
-    const {loading,setLoading} = useContext(MainContext)
 
     const initialState = {
 		email: "",
@@ -24,6 +21,7 @@ const SignIn: NextPage = ({redirect_to}: any) => {
     const [forgetPassword, setForgetPassword] = useState(false)
     const [forgetEmail, setForgetEmail] = useState('')
 	const [submiting, setSubmiting] = useState(false)
+    const [userType, setUserType] = useState('Seller')
 
     const handleInputs = (e: any) => {
 		setUser({
@@ -64,11 +62,8 @@ const SignIn: NextPage = ({redirect_to}: any) => {
                         "Content-Type": "application/json"
                     }
 				}).then(response => response.json());
-                if(res.status==0)
-                {
-                    setEmailError("Your credentials are invalid!");
-                }
-				else if (res.status === 1) {
+                
+                if (res.status === 1 && userType == res.data.payload.userType) {
                     
                     cookie.set('token',res.data.token)
                     cookie.set('user',JSON.stringify(res.data.payload))
@@ -88,6 +83,10 @@ const SignIn: NextPage = ({redirect_to}: any) => {
                         }
                     }
 				}
+                else
+                {
+                    setEmailError("Your credentials are invalid!");
+                }
 			} catch (error: any) {
                 setEmailError("Your credentials are invalid!");
 			}
@@ -119,99 +118,96 @@ const SignIn: NextPage = ({redirect_to}: any) => {
         setSubmiting(false)
     }
 
+    const activeSeller = () => {
+        document.querySelector('.type-changer')?.classList.add(styles.start);
+    }
+
+    const activeBuyer = () => {
+        document.querySelector('.type-changer')?.classList.remove(styles.start);
+    }
+    
+
     return (
         <>
-            <div className={`fixed top-0 left-0 bottom-0 right-0 bg-white z-10 flex justify-center transition-all duration-300 ${loading==true ? '' : 'scale-0'}`}>
-                <Image src={Loader} className="delay-100" />
-            </div>
-            <div className="bg-gray-100 h-screen">
-                <div className="width mx-auto">
+            <div className="flex items-center justify-center" style={{ minHeight: 'calc(100vh - 72px)' }}>
+                <div className={`${styles.AuthenticationContainer} width mx-auto rounded-lg overflow-hidden`}>
                     <div className="grid grid-cols-1 lg:grid-cols-2">
-                        <div className="p-2 bg-white h-screen overflow-hidden">
-                            <ul className="flex flex-wrap justify-center p-2">
-                                <li>
-                                    <NextLink href={'/'}>
-                                        <a className="inline-block px-4">Home</a>
-                                    </NextLink>
-                                </li>
-                                <li>
-                                    <NextLink href={'/opportunities'}>
-                                        <a className="inline-block px-4">Opportunities</a>
-                                    </NextLink>
-                                </li>
-                                <li>
-                                    <NextLink href={'/about'}>
-                                        <a className="inline-block px-4">About</a>
-                                    </NextLink>
-                                </li>
-                                <li>
-                                    <NextLink href={'/contact'}>
-                                        <a className="inline-block px-4">Contact us</a>
-                                    </NextLink>
-                                </li>
-                            </ul>
-                            <div className="flex flex-wrap justify-center items-center">
-                                <div>
-                                    <div className="flex flex-col items-center justify-center text-center pt-10">
-                                        <div className="w-2/5">
-                                            <Image src={Logo.src} width={Logo.width} height={Logo.height} alt="site-logo" className="w-6/12 pb-5" />
-                                        </div>
-                                        <h3 className="text-2xl font-medium text-blue-900">Sign In</h3>
-                                    </div>
-                                    <div className="md:mx-16 mx-1 py-10">
-                                        {
-                                            forgetPassword == true ? (
-                                                <form onSubmit={(e: any)=>handleSubmitForget(e)}>
-                                                    <div className="pb-5">
-                                                        <label htmlFor="" className="w-full">Email</label>
-                                                        <input type="email" className="border p-2 px-4 rounded-3xl text-sm w-full" name="email" id="email" placeholder="Email address" value={forgetEmail} onChange={(e)=>setForgetEmail(e.target.value)} required />
-                                                    </div>
-                                                    <div>
-                                                        <button type={`${submiting==true ? 'button' : 'submit'}`} className={`${submiting==true ? 'bg-blue-100 text-blue-700' : 'bg-blue-700 text-white'} w-full rounded-3xl p-2 flex flex-wrap justify-center transition-all duration-300`}>Send email {
-                                                                submiting==true && (
-                                                                    <svg xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" width="20px" height="20px" viewBox="0 0 128 128" xmlSpace="preserve" style={{marginLeft: '1rem'}}><g><path d="M64 9.75A54.25 54.25 0 0 0 9.75 64H0a64 64 0 0 1 128 0h-9.75A54.25 54.25 0 0 0 64 9.75z" fill="#252153" /><animateTransform attributeName="transform" type="rotate" from="0 64 64" to="360 64 64" dur="1200ms" repeatCount="indefinite" /></g></svg>
-                                                                )
-                                                            }
-                                                        </button>
-                                                    </div>
-                                                </form>
-                                            ) : (
-                                                <form onSubmit={(e: any)=>handleSubmit(e)}>
-                                                    {emailError ? <div className="bg-red-100 mt-2 px-2 py-1 rounded-3xl text-red-500 w-full capitalize font-medium" style={{ fontSize: '11px' }}>{emailError}</div> : ""}
-                                                    <div className="pb-5">
-                                                        <label htmlFor="" className="w-full">Email</label>
-                                                        <input type="email" className="border theme-border-color p-2 px-4 rounded-3xl text-sm w-full" name="email" id="email" placeholder="Email address" value={user.email} onChange={(e)=>handleInputs(e)} required />
-                                                    </div>
-                                                    <div className="pb-5">
-                                                        <label htmlFor="" className="w-full">Password</label>
-                                                        <input type="password" className="border theme-border-color p-2 px-4 rounded-3xl text-sm w-full" name="password" id="password" placeholder="Password" value={user.password} onChange={(e)=>handleInputs(e)} required />
-                                                    </div>
-                                                    <div className="text-right pb-5">
-                                                        <a onClick={()=>setForgetPassword(true)} className="cursor-pointer text-sm text-blue-500">Forget password</a>
-                                                    </div>
-                                                    <div>
-                                                        <button type={`${submiting==true ? 'button' : 'submit'}`} className={`${submiting==true ? 'bg-blue-100 text-blue-700' : 'bg-theme-color text-white'} w-full rounded-3xl p-2 flex flex-wrap justify-center transition-all duration-300`}>Sign In {
-                                                                submiting==true && (
-                                                                    <svg xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" width="20px" height="20px" viewBox="0 0 128 128" xmlSpace="preserve" style={{marginLeft: '1rem'}}><g><path d="M64 9.75A54.25 54.25 0 0 0 9.75 64H0a64 64 0 0 1 128 0h-9.75A54.25 54.25 0 0 0 64 9.75z" fill="#252153" /><animateTransform attributeName="transform" type="rotate" from="0 64 64" to="360 64 64" dur="1200ms" repeatCount="indefinite" /></g></svg>
-                                                                )
-                                                            }
-                                                        </button>
-                                                    </div>
-                                                </form>
-                                            )
-                                        }
-                                        
-                                        <div className="bg-white p-5 w-full rounded-xl shadow mt-5 lg:hidden">
-                                            <p>If you don&apos;t have any account then click <NextLink href={'/sign-up'}><a className="cursor-pointer text-blue-500">here</a></NextLink> to register yourself</p>
-                                        </div>
-                                    </div>
-                                </div>
+                        <div style={{ background: 'linear-gradient(45deg, #f1f1f1, #f1f1f1)', backgroundPosition: 'center' }} className="hidden lg:block">
+                            <div className="flex flex-wrap justify-center items-center h-full">
                             </div>
                         </div>
-                        <div style={{ background: 'linear-gradient(309deg, #2b6cb0e0, #282452c7), url(/real-estate-background-vector-194501.jpg)', height: '100vh', backgroundPosition: 'center' }} className="hidden lg:block">
-                            <div className="flex flex-wrap justify-center items-center h-full">
-                                <div className="bg-white p-5 w-4/5 rounded-xl shadow">
-                                    <p>If you don&apos;t have any account then click <NextLink href={'/sign-up'}><a className="cursor-pointer text-blue-500">here</a></NextLink> to register yourself</p>
+                        <div className="p-2 bg-white">
+                            <div className="flex flex-col items-center justify-center text-center pt-10">
+                                <div style={{width:"250px"}}>
+                                    <Image src={Logo} alt="site-logo" className="pb-5" />
+                                </div>
+                                <h3 className="text-2xl font-medium text-blue-900">Login</h3>
+                            </div>
+                            <div className="md:mx-16 mx-1 py-5">
+                                {
+                                    forgetPassword == true ? (
+                                        <form onSubmit={(e: any)=>handleSubmitForget(e)}>
+                                            <div className="pb-5">
+                                                <label htmlFor="" className="w-full">Email</label>
+                                                <input type="email" className="border border-gray-600 p-2 px-4 rounded-3xl text-sm w-full" name="email" id="email" placeholder="Email address" value={forgetEmail} onChange={(e)=>setForgetEmail(e.target.value)} required />
+                                            </div>
+                                            <div>
+                                                <button type={`${submiting==true ? 'button' : 'submit'}`} className={`${submiting==true ? 'bg-blue-100 text-blue-700' : 'bg-blue-700 text-white'} w-full rounded-3xl p-2 flex flex-wrap justify-center transition-all duration-300`}>Send email {
+                                                        submiting==true && (
+                                                            <svg xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" width="20px" height="20px" viewBox="0 0 128 128" xmlSpace="preserve" style={{marginLeft: '1rem'}}><g><path d="M64 9.75A54.25 54.25 0 0 0 9.75 64H0a64 64 0 0 1 128 0h-9.75A54.25 54.25 0 0 0 64 9.75z" fill="#252153" /><animateTransform attributeName="transform" type="rotate" from="0 64 64" to="360 64 64" dur="1200ms" repeatCount="indefinite" /></g></svg>
+                                                        )
+                                                    }
+                                                </button>
+                                            </div>
+                                        </form>
+                                    ) : (
+                                        <form onSubmit={(e: any)=>handleSubmit(e)}>
+                                            
+                                            <div className="pb-2 flex items-center justify-center">
+                                                <div className={`${styles.typeChanger} ${styles.start} type-changer start border border-black border-solid overflow-hidden relative rounded-full text-white`} style={{ width: 'max-content' }}>
+                                                    <label htmlFor="Seller" className="py-1 px-3 inline-block rounded-full cursor-pointer text-black" onClick={()=>activeSeller()}>
+                                                        Seller
+                                                        <input type="radio" name="type" id="Seller" defaultValue="Seller" className="hidden" onChange={(e) => setUserType(e.target.value)} />
+                                                    </label>
+                                                    <label htmlFor="Buyer" className="py-1 px-3 inline-block cursor-pointer text-black" onClick={()=>activeBuyer()}>
+                                                        Buyer
+                                                        <input type="radio" name="type" id="Buyer" defaultValue="Buyer" className="hidden" onChange={(e) => setUserType(e.target.value)} />
+                                                    </label>
+                                                </div>
+                                            </div>
+
+                                            {emailError ? <div className="bg-red-100 mt-2 px-2 py-1 mb-2 rounded-3xl text-red-500 w-full capitalize font-medium" style={{ fontSize: '11px' }}>{emailError}</div> : ""}
+                                            
+                                            <div className="pb-5">
+                                                <label htmlFor="" className="w-full text-gray-600">Email</label>
+                                                <input type="email" className="border border-gray-500 p-2 px-4 rounded-3xl text-sm w-full" name="email" id="email" placeholder="Email address" value={user.email} onChange={(e)=>handleInputs(e)} autoComplete="username" required />
+                                            </div>
+
+                                            <div className="pb-5">
+                                                <label htmlFor="" className="w-full text-gray-600">Password</label>
+                                                <input type="password" className="border border-gray-500 p-2 px-4 rounded-3xl text-sm w-full" name="password" id="password" placeholder="Password" value={user.password} onChange={(e)=>handleInputs(e)} autoComplete="current-password" required />
+                                            </div>
+
+                                            <div className="text-left pb-5">
+                                                <a onClick={()=>setForgetPassword(true)} className="cursor-pointer text-sm text-gray-600">Forget password</a>
+                                            </div>
+
+                                            <div>
+                                                <button type={`${submiting==true ? 'button' : 'submit'}`} className={`${submiting==true ? 'bg-gray-500 text-black' : 'bg-gray-900 text-white'} w-full rounded-3xl p-2 flex flex-wrap justify-center transition-all duration-300`}>Sign In {
+                                                        submiting==true && (
+                                                            <svg xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" width="20px" height="20px" viewBox="0 0 128 128" xmlSpace="preserve" style={{marginLeft: '1rem'}}><g><path d="M64 9.75A54.25 54.25 0 0 0 9.75 64H0a64 64 0 0 1 128 0h-9.75A54.25 54.25 0 0 0 64 9.75z" fill="#252153" /><animateTransform attributeName="transform" type="rotate" from="0 64 64" to="360 64 64" dur="1200ms" repeatCount="indefinite" /></g></svg>
+                                                        )
+                                                    }
+                                                </button>
+                                            </div>
+                                        </form>
+                                    )
+                                }
+                                <div className="w-full mt-5 text-center">
+                                    <p>If you don&apos;t have any account? <Link href={'/sign-up'}>
+                                            <a className="cursor-pointer text-blue-900">Sign up</a>
+                                        </Link>
+                                    </p>
                                 </div>
                             </div>
                         </div>

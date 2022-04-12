@@ -18,7 +18,7 @@ const BreadCrumb = ({Links=[]}: any) => {
                                     </li>
                                 )
                                 : (
-                                    <li> / <span className="text-gray-500">{link.text}</span></li>
+                                    <li key={index}> / <span className="text-gray-500">{link.text}</span></li>
                                 )
                             })
                         }

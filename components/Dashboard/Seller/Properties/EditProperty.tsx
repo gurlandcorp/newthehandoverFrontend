@@ -1,9 +1,7 @@
 import axios from 'axios';
-import { useRouter } from 'next/router';
 import { parseCookies } from 'nookies';
 import React, { useContext, useState } from 'react'
 import { MainContext } from '../../../../context/MainContext';
-import AddItemButton from '../../../Shares/Dashboard/Button';
 import { Base_URL } from "../../../../config/constants"
 
 const EditProperty = (props: any) => {

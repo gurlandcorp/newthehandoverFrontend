@@ -1,7 +1,8 @@
-import { Grid } from '@mui/material'
-import React from 'react'
+import React, { useState } from 'react'
 import BreadCrumb from '../../components/Shares/Components/user/BreadCrumb'
 import MyBiddings from '../../components/Dashboard/Buyer/MyBiddings'
+import MyBids from '../../components/Dashboard/Buyer/MyBids'
+import { Base_URL } from '../../config/constants'
 
 const Biddings = (props: any) => {
 
@@ -14,6 +15,42 @@ const Biddings = (props: any) => {
             text: "My Bids"
         }
     ]
+
+    const [currentProperty, setCurrentProperty] = useState<any>();
+
+    const openPayNow = async (bid: any) => {
+        await setCurrentProperty(bid)
+
+        document.querySelector('.pay-now-container')?.classList.remove('hidden')
+        setTimeout(() => {
+            document.querySelector('.pay-now-container')?.classList.remove('scale-0')
+        }, 300);
+    }
+
+    const clear = async () => {
+        document.querySelector('.pay-now-container')?.classList.add('scale-0')
+        setTimeout(() => {
+            document.querySelector('.pay-now-container')?.classList.remove('hidden')
+        }, 300);
+        await setCurrentProperty('')
+    }
+
+    const payNow = async (e: any) => {
+        e.preventDefault();
+
+        const res: any = await fetch(`${Base_URL}/api/buyer/pay/create-token`,{
+            method:"POST"
+        }).then(response => response.json());
+
+        if(res.error != undefined)
+        {
+            console.log('error:', res.error)
+            return false;
+        }
+        let token = res.result.id;
+        console.log('result:', res.result.id)
+    }
+
     return (
         <>
             <BreadCrumb Links={Links} />
@@ -25,10 +62,77 @@ const Biddings = (props: any) => {
                 <div className="mt-4">
                 </div>
             </div>
+            <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-5">
+                {
+                    props.biddings.map((bid: any, index: any) => {
+                        return (
+                            <MyBids key={index} bid={bid} openPayNow={openPayNow} />
+                        )
+                    })
+                }
+            </div>
 
-            <Grid container>
-                <MyBiddings biddings = {props.biddings} />
-            </Grid>
+            <div className="pay-now-container fixed top-0 bottom-0 left-0 right-0 bg-gray-900 bg-opacity-50 hidden transition-all duration-300 scale-0" style={{zIndex: "1200"}}>
+                <div className="flex flex-wrap justify-center items-center mt-24">
+                    <form className="p-4 bg-white rounded shadow-box w-3/6" onSubmit={(e)=>payNow(e)}>
+                        <div className="p-2 text-xl text-center font-medium">Payment</div>
+                        <div className="font-medium">Property Details</div>
+                        <div className="mb-5 text-sm bg-gray-50 p-2 rounded">
+                            <div>Title: <span className="text-gray-500">{currentProperty!='' ? currentProperty?.Property[0].propertyTitle : ''}</span></div>
+                            <div>Amount: <span className="text-blue-700">{currentProperty?.bidAmount}</span></div>
+                        </div>
+                        <div className="text-blue-500 inline-block mb-1">Please provide card details for amount <span className="py-1 px-2 rounded inline-block bg-blue-100 text-blue-700 text-xs font-medium">{currentProperty?.bidAmount}</span></div>
+                        <div className="mb-5 bg-gray-50 p-2 rounded">
+                            <div className="mb-5">
+                                <label htmlFor="">Card Number</label>
+                                <input className="border border-solid border-white focus:border-blue-700 w-full rounded py-1 px-2" placeholder="Enter 16 digit card number" />
+                            </div>
+                            <div className="grid grid-cols-3 gap-4 justify-center">
+                                <div className="">
+                                    <label htmlFor="">Expiry Month</label>
+                                    <select className="border border-solid border-white focus:border-blue-700 w-full rounded py-1 px-2" >
+                                        <option value="0">Select Month</option>
+                                        <option value="1">January</option>
+                                        <option value="2">Feburary</option>
+                                        <option value="3">March</option>
+                                        <option value="4">April</option>
+                                        <option value="5">May</option>
+                                        <option value="6">Jun</option>
+                                        <option value="7">July</option>
+                                        <option value="8">August</option>
+                                        <option value="9">September</option>
+                                        <option value="10">October</option>
+                                        <option value="11">November</option>
+                                        <option value="12">December</option>
+                                    </select>
+                                </div>
+                                <div className="">
+                                    <label htmlFor="">Year</label>
+                                    <select className="border border-solid border-white focus:border-blue-700 w-full rounded py-1 px-2" >
+                                        <option value="0">Select Year</option>
+                                        <option value="2022">2022</option>
+                                        <option value="2023">2023</option>
+                                        <option value="2024">2024</option>
+                                        <option value="2025">2025</option>
+                                        <option value="2026">2026</option>
+                                        <option value="2027">2027</option>
+                                        <option value="2028">2028</option>
+                                    </select>
+                                </div>
+                                <div className="">
+                                    <label htmlFor="">CVV</label>
+                                    <input className="border border-solid border-white focus:border-blue-700 w-full rounded py-1 px-2" placeholder="Enter cvv code" />
+                                </div>
+                            </div>
+                            <div className="text-right">
+                                <button className="p-2 px-4 bg-red-100 text-red-800 rounded mt-2 mr-2" onClick={()=>clear()}>Cancel</button>
+                                <button className="p-2 px-4 bg-blue-100 text-blue-800 rounded mt-2">Pay Now</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            {/* <MyBiddings biddings = {props.biddings} /> */}
         </>
     )
 }
@@ -39,8 +143,8 @@ export async function getServerSideProps(context: any) {
     let user = JSON.parse(context.req.cookies.user)
     const res = await fetch(`${process.env.API_URL}/bidding/userbiddings`, {
         headers: {
-            "Content-Type": "application/json",
-            "Authorization" : `Bearer ${context.req.cookies.token}`
+            "Authorization" : `Bearer ${context.req.cookies.token}`,
+            "Content-Type": "application/json"
         }
     }).then(response => response.json())
     return {

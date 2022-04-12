@@ -2,8 +2,6 @@ import Head from 'next/head'
 import React, { useContext, useEffect } from 'react'
 import Footer from '../Includes/Footer/Footer'
 import Header from '../Includes/Header'
-import Router from "next/router"
-import { MainContext } from '../../context/MainContext'
 import MainLoader from '../Shares/Loaders/MainLoader'
 
 const Default = ({children}: any) => {
