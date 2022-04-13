@@ -126,7 +126,7 @@ const Index = (props: any) => {
 					</div>
 					<div className="bg-white p-4 shadow-box rounded w-full">
 						<h4 className="text-xl theme-color my-2">Overview</h4>
-						<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+						<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
 							<div className="flex flex-wrap bg-blue-100 rounded p-2">
 								<div className="px-1 w-max rounded flex items-center mr-2 bg-white">
 									<svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="#006CA1" strokeWidth={2}>
@@ -147,6 +147,17 @@ const Index = (props: any) => {
 								<div>
 									<h4 className="text-xs">Area</h4>
 									<p className="text-sm theme-color font-medium">{props.property.area} ft</p>
+								</div>
+							</div>
+							<div className="flex flex-wrap bg-blue-100 rounded p-2">
+								<div className="px-1 w-max rounded flex items-center mr-2 bg-white">
+									<svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="#006CA1">
+										<path d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z" />
+									</svg>
+								</div>
+								<div>
+									<h4 className="text-xs">Floors</h4>
+									<p className="text-sm theme-color font-medium">{props.property.floors}</p>
 								</div>
 							</div>
 							<div className="flex flex-wrap bg-blue-100 rounded p-2">
