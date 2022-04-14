@@ -67,7 +67,9 @@ const Property = (props:any) => {
                                     <Image src={props.property.images[0]} width={300} height={300} layout="responsive" />
                                 </div>
                             </div>
-                            <h3 className="text-2xl mt-2">{props.property.propertyTitle} <span className="text-sm text-blue-800 font-medium bg-blue-100 px-1 rounded">AED {props.property.priceDemand}</span> </h3>
+                            <div className="flex flex-wrap justify-between items-center">
+                            <h3 className="text-2xl mt-2">{props.property.propertyTitle}</h3> <span className="text-sm text-blue-800 font-medium bg-blue-100 px-1 rounded h-auto">AED {props.property.priceDemand}</span>
+                            </div>
                             <h4 className="text-lg theme-color my-2">Overview</h4>
                             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
                                 <div className="flex flex-wrap bg-blue-100 rounded p-2">
@@ -147,64 +149,20 @@ const Property = (props:any) => {
                 </div>
             </div>
             
-            {/* <Grid container>
-                <Grid item py={2} px={4} width={'100%'} className={`d-flex flex-wrap justify-content-between`}>
-                    <div className="d-flex align-items-center">
-                        <div>
-                            <span>Bidding Start</span> <span className="badge bg-primary bg-opacity-70 mx-2">{props.property.biddingStart.split('T')[0]}</span>
-                        </div>
-                        <div>
-                            <span>Bidding End</span> <span className="badge bg-danger bg-opacity-70 mx-2">{props.property.biddingEnd.split('T')[0]}</span>
-                            <span>Duration</span> <span className="badge text-info">{Difference_In_Days.toFixed(0)} days {Difference_In_Hours.toFixed(0)} hours left </span>
-                        </div>
-                    </div>
-                </Grid>
-            </Grid> */}
-            {/* <CustomPaper>
-                <Grid container className="p-4">
-                    <Grid item xs={12} md={6}>
-                        <div style={{width: "100%", height: "400px", paddingRight: '1rem'}} className="overflow-hidden">
-                            <div className="position-relative">
-                                <Image src={props.property.images[0]} width={300} height={300} layout="responsive" />
-                            </div>
-                        </div>
-                    </Grid>
-                    <Grid item xs={12} md={6}>
-                        <div className={`mx-2 ${classes.biddings}`}>
-                            <div>
-                                <h3> {props.property.propertyTitle} </h3>
-                            </div>
-                            <p>
-                                <strong>Area </strong> {props.property.area}
-                            </p>
-                            <p>
-                                <strong>Bedrooms </strong> {props.property.bedrooms}
-                            </p>
-                            <p>
-                                <strong>Bathrooms </strong> {props.property.bathrooms}
-                            </p>
-                            <p> <strong>Floors </strong> {props.property.floors} </p>
-                            <p> <strong>Property Type </strong> {props.property.propertyType} </p>
-                            <p> <strong>Demand price </strong> {props.property.priceDemand} </p>
-                            <strong>Description</strong>
-                            <p> {props.property.description} </p>
-                        </div>
-                    </Grid>
-                </Grid>
-            </CustomPaper> */}
             <div className="shadow-lg rounded">
                 <div className={`p-4 ${classes.biddings}`}>
                     <h4 className="text-lg font-medium">Buyer Biddings</h4>
                     {
                         props.bidding.map((bid:any, index: any) => {
-                            return <div key={index} className="mb-3 bg-gray-100 p-2 rounded flex justify-center">
+                            return <div key={index} className="mb-3 bg-gray-50 p-2 rounded-md flex justify-between">
                                 <div>
                                     <p><strong>User Name:</strong> {bid.Bidder[0].name}</p>
                                     <p><strong>Email:</strong> {bid.Bidder[0].email}</p>
-                                    <p><strong>Status:</strong> {bid.winner===true ? <span className="text-xs bg-blue-500 text-blue-500">Winner</span> : <span className="text-xs bg-red-100 text-red-500">Not-approved</span> }</p>
+                                    <p><strong>Status:</strong> {bid.winner===true ? <span className="text-xs bg-blue-500 text-blue-500">Winner</span> : <span className="text-xs bg-red-100 text-red-500 px-2 rounded-md">Not-approved</span> }</p>
                                 </div>
-                                <div>
-                                    <span className="text-xs text-blue-500">{'$'+bid.bidAmount}</span>
+                                <div className="flex flex-col">
+                                    <p className="bg-blue-100 text-blue-500 font-medium px-2 rounded-md text-center">{'AED '+bid.bidAmount}</p>
+                                    <button className="bg-gray-900 text-gray-100 px-2 py-1 rounded-md shadow-lg">Accept Bid</button>
                                 </div>
                             </div>
                         })

@@ -5,6 +5,11 @@ import { MainContext } from "../../context/MainContext";
 
 const SearchSection = () => {
 
+    const propertyType = [
+		"Constructed",
+		"Non Constructed",
+	]
+
     const {search, setSearch} = useContext(MainContext)
     const router = useRouter()
     const searchSubmit = (e: any) => {
@@ -21,6 +26,11 @@ const SearchSection = () => {
                     <input type="text" placeholder="What are you looking for ?" className="p-3 w-full col-span-2" value={search.text} onChange={(e)=>setSearch({...search, text: e.target.value})} />
                     <select className="p-3 w-full col-span-2" onChange={(e)=>setSearch({...search, property_type: e.target.value})}>
                         <option value="">Property Type</option>
+                        {
+                            propertyType.map((type: any, index: any) => {
+                                return <option key={index} value={type}>{type}</option>
+                            })
+                        }
                     </select>
                     <select className="p-3 w-full col-span-2" onChange={(e)=>setSearch({...search, city: e.target.value})}>
                         <option value="">All Cities</option>

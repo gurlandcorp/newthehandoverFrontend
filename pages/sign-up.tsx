@@ -7,6 +7,7 @@ import Cookies from "js-cookie"
 import Image from 'next/image';
 import Logo from "/public/logo.png"
 import styles from "/styles/Authentication.module.css"
+import TabletLogin from "/public/img/tablet-login.svg"
 
 const SingUp: NextPage = () => {
 
@@ -102,6 +103,7 @@ const SingUp: NextPage = () => {
                 <div className="grid grid-cols-1 lg:grid-cols-2">
                     <div style={{ background: 'linear-gradient(45deg, #f1f1f1, #f1f1f1)', backgroundPosition: 'center' }} className="hidden lg:block">
                         <div className="flex flex-wrap justify-center items-center h-full">
+                            <Image src={TabletLogin} alt="Login-Left_Image" />
                         </div>
                     </div>
                     <div className="p-2 bg-white">
@@ -109,7 +111,7 @@ const SingUp: NextPage = () => {
                             <div style={{width:"250px"}}>
                                 <Image src={Logo} alt="site-logo" className="pb-5" />
                             </div>
-                            <h3 className="text-2xl font-medium text-blue-900">Login</h3>
+                            <h3 className="text-2xl font-medium text-blue-900">Register</h3>
                         </div>
                         <div className="md:mx-16 mx-1 py-5">
                             <form onSubmit={(e: any)=>handleSubmit(e)}>
@@ -143,11 +145,11 @@ const SingUp: NextPage = () => {
                                     <div className="pb-2 flex items-center justify-center">
                                         <div className={`${styles.typeChanger} ${styles.start} type-changer start border border-black border-solid overflow-hidden relative rounded-full text-white`} style={{ width: 'max-content' }}>
                                             <label htmlFor="Seller" className="py-1 px-3 inline-block rounded-full cursor-pointer text-black" onClick={()=>activeSeller()}>
-                                                Seller
+                                                Developer
                                                 <input type="radio" name="type" id="Seller" defaultValue="Seller" className="hidden" onChange={(e) => setUserType(e.target.value)} />
                                             </label>
                                             <label htmlFor="Buyer" className="py-1 px-3 inline-block cursor-pointer text-black" onClick={()=>activeBuyer()}>
-                                                Buyer
+                                                Investor
                                                 <input type="radio" name="type" id="Buyer" defaultValue="Buyer" className="hidden" onChange={(e) => setUserType(e.target.value)} />
                                             </label>
                                         </div>

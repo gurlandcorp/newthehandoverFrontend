@@ -1,6 +1,5 @@
 import { Grid, Typography, Box, TextField } from '@mui/material';
 import { NextPage } from 'next';
-import Link from 'next/link'
 import { useRouter } from 'next/router';
 import React, { useContext, useState } from 'react'
 import CustomPaper from '../../../components/Shares/Components/CustomPaper';
@@ -22,7 +21,6 @@ const Bid: NextPage = (props: any) => {
         {
             // store new highest bidding amount
             setAmountErr('')
-            var sellerId = props.sellerId;
             let res: any = await fetch(`${Base_URL}/api/buyer/bid`, {
                 method: "POST",
                 headers: {
@@ -47,14 +45,19 @@ const Bid: NextPage = (props: any) => {
         }
 	};
 
+    const Links = [
+        {
+            href: "/buyer",
+            text: "Dashboard"
+        },
+        {
+            text: props.bid_id
+        }
+    ]
+
     return (
         <>
-            <BreadCrumb>
-               <Link href={'/buyer'}>
-                    <a> Dashboard </a>
-               </Link>
-               <span>My Biddings </span>
-            </BreadCrumb>
+            <BreadCrumb Links={Links} />
             <CustomPaper>
                 <Grid container p={2}>
                     <Grid item component="form" xs={12} onSubmit={(e: any)=>handleSubmit(e)}>

@@ -11,7 +11,6 @@ const About = () => {
         <>
         {/* Start of Search Bar  */}
         <div className="" style={{ backgroundImage: `linear-gradient(178deg, #00000059, rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 1), white), url(${BackgroundImage.src})`, backgroundRepeat: 'no-repeat' }}>
-            <SearchSection />
             <div className="font-semibold py-32 text-3xl text-center">
                 <h3 className="uppercase theme-color text-4xl">About</h3>
             </div>

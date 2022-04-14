@@ -7,7 +7,7 @@
 }
 .typeChanger::after {
     content: '';
-    width: 72px;
+    width: 50%;
     height: 32px;
     background: #f4f4f4;
     position: absolute;

@@ -35,8 +35,8 @@ const Banner = (props: any) => {
                             investing marketplace</p>
                         <p className="tagline">Explore <strong>marketplace</strong> as</p>
                         <div className="block mt-10">
-                            <Link href={'/opportunities'}><a className="dark-btn mr-2">Developer</a></Link>
-                            <Link href={'/opportunities'}><a className="inverse-dark-btn">Investor</a></Link>
+                            <Link href={'/sign-in'}><a className="dark-btn mr-2">Developer</a></Link>
+                            <Link href={'/sign-in'}><a className="inverse-dark-btn">Investor</a></Link>
                         </div>
                     </div>
                     <div className="mt-10 lg:mt-0 text-center">

@@ -36,12 +36,11 @@ const Properties: NextPage = ({data, query}: any) => {
 	const [category, setCategory] = useState('')
 	const[opportunities, setOpportunities] = useState(data);
 
-
 	const propertyType = [
-		"Family House",
-		"Apartment",
-		"Condo"
+		"Constructed",
+		"Non Constructed",
 	]
+
 	const categories = [
 		"Rent",
 		"Sell",
@@ -72,6 +71,7 @@ const Properties: NextPage = ({data, query}: any) => {
 				city: city,
 			}
 		}
+		console.log(filters)
 		let res = await fetch(`${Base_URL}/api/property/filter`, {
 			method: "POST",
 			body: JSON.stringify(filters),
@@ -98,13 +98,14 @@ const Properties: NextPage = ({data, query}: any) => {
 		{
 			setCity(query.city)
 		}
-	},[query])
+		setOpportunities(data)
+		
+	},[query, data])
 
     return (
         <>
 			{/* Start of Search Bar  */}
 			<div className="" style={{ backgroundImage: `linear-gradient(178deg, #00000059, rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 1), white), url(${BackgroundImage.src})`, backgroundRepeat: 'no-repeat' }}>
-				<SearchSection />
 				<div className="font-semibold py-32 text-3xl text-center">
 					<h3 className="uppercase theme-color text-4xl">Opportunities</h3>
 				</div>
@@ -122,8 +123,13 @@ const Properties: NextPage = ({data, query}: any) => {
 									<input type="text" className="w-full border border-solid rounded p-2 mb-4" placeholder="Rooms" />
 									<input type="text" className="w-full border border-solid rounded p-2 mb-4" placeholder="Bathrooms" />
 								</div>
-								<select name="" id="" className="w-full border border-solid rounded p-2 mb-4">
+								<select name="" id="" className="w-full border border-solid rounded p-2 mb-4" onChange={(e) => setType(e.target.value)}>
 									<option value="">Property Type</option>
+									{
+										propertyType.map((type: any, index: any) => {
+											return <option key={index} value={type}>{type}</option>
+										})
+									}
 								</select>
 								<select name="" id="" className="w-full border border-solid rounded p-2 mb-4">
 									<option value="">All Cities</option>
@@ -147,7 +153,7 @@ const Properties: NextPage = ({data, query}: any) => {
 							<div className="listing-cont grid grid-cols-1 md:grid-cols-2 gap-5">
 								{
 									opportunities?.length > 0 && (
-										data.map((property: any, index: any)=> {
+										opportunities.map((property: any, index: any)=> {
 											return (
 												<Link href={'/opportunity/'+property._id} key={index}>
 													<a className="list-item shadow-box rounded-xl overflow-hidden relative" style={{ backgroundImage: `url("${property.images[0]}")`, backgroundSize: 'cover', backgroundPosition: 'center', height: 300 }}>
@@ -182,7 +188,7 @@ export default Properties
 export async function getServerSideProps(context: any) {
     // Fetch data from external API
 	let res: any;
-	let data = null
+	let data = []
 	if(context.query.propertyType!=undefined)
 	{
 		let filter: any = {
@@ -190,7 +196,6 @@ export async function getServerSideProps(context: any) {
 		}
 		context.query.rooms != undefined && (filter.bedrooms = context.query.rooms);
 		context.query.bathrooms != undefined && (filter.bathrooms = context.query.bathrooms);
-		context.query.text != undefined && (filter.location = {address : context.query.text});
 		
 		res = await fetch(`${Base_URL}/api/property/filter`, {
 			method: "POST",
@@ -198,11 +203,10 @@ export async function getServerSideProps(context: any) {
 			headers: {
 				"Content-Type": "application/json"
 			}
-		})
-		if(res.status==200)
+		}).then(response => response.json())
+		if(res.data!=undefined)
 		{
-			res = res.json()
-			data = res.data==undefined ? [] : res.data
+			data = res.data
 		}
 	}
 	else
