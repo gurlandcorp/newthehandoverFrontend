@@ -1,6 +1,7 @@
 import axios from 'axios'
 import type { NextPage } from 'next'
 import React from 'react'
+import ProgressGraph from '../../components/Dashboard/Seller/Dashboard/ProgressGraph'
 import { API_LINK } from '../../config/constants'
 import styles from "./Seller.module.css"
 
@@ -19,7 +20,7 @@ const SellerDashboard: NextPage = (props: any) => {
         </nav>
 
         {/* Place your content here */}
-        <div className="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mt-4 bg-white shadow-xl p-4 rounded-xl">
+        <div className="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mt-4 bg-white shadow-xl p-4 mb-10 rounded-xl">
             <div className="p-4 rounded-xl flex justify-between items-center bg-red-100 border border-red-500">
                 <div>
                     <p className="text-red-500">Total Properties</p>
@@ -39,8 +40,12 @@ const SellerDashboard: NextPage = (props: any) => {
                 </svg>
             </div>
         </div>
+        
+        <div className="w-full p-10 shadow-xl rounded-xl">
+            <ProgressGraph />
+        </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-            <div className="p-4 mt-20 overflow-hidden rounded-xl shadow-xl bg-white">
+            <div className="px-4 mt-20 overflow-hidden rounded-xl shadow-xl bg-white">
                 <h3 className="theme-color font-medium pb-4">Bidder Activities</h3>
                 <table className={`${styles.table} table-auto w-full`}>
                     <thead>

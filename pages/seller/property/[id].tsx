@@ -1,12 +1,11 @@
-import { Grid } from '@mui/material'
 import { makeStyles } from '@mui/styles'
-import { fontWeight } from '@mui/system'
 import axios from 'axios'
 import Image from 'next/image'
 import Link from 'next/link'
-import React from 'react'
-import CustomPaper from '../../../components/Shares/Components/CustomPaper'
-import { API_LINK } from '../../../config/constants'
+import React, { useEffect, useState, useContext } from 'react'
+import ConfirmAlert from '../../../components/Shares/Popups/ConfirmAlert'
+import { API_LINK, Base_URL } from '../../../config/constants'
+import { MainContext } from '../../../context/MainContext'
 
 const useStyles = makeStyles({
     biddings: {
@@ -37,6 +36,20 @@ const Property = (props:any) => {
     let Difference_In_Hours = (difference % (1000 * 3600 * 24)) / (1000 * 60 * 60)
 
     const classes = useStyles()
+
+    const [displayAlert, setDisplayAlert] = useState(false);
+    const [selectedBidId, setSelectedBidId] = useState('');
+    const {setAlert, setAlertMessage} = useContext(MainContext)
+
+    const onSubmitAcceptBid = async (e: any) => {
+        setDisplayAlert(false)
+        let res = await fetch(`${Base_URL}/api/seller/accept-bid/${selectedBidId}`, {
+            method: "POST"
+        }).then(response => response.json());
+        setAlert(true)
+        setAlertMessage('Property bid accepted')
+    }
+
     return (
         <>
             <nav className="relative w-full flex flex-wrap items-center justify-between py-2 hover:text-gray-700 rounded" style={{ backgroundColor: '#fbfbfb' }}>
@@ -59,8 +72,8 @@ const Property = (props:any) => {
                 </div>
             </nav>
             <div className="py-4">
-                <div className="grid grid-cols-12 gap-6">
-                    <div className="col-span-8">
+                <div className="grid grid-cols-12 gap-4">
+                    <div className="col-span-12 md:col-span-8 order-2 md:order-1">
                         <div className="bg-white p-4 shadow-lg rounded w-full">
                             <div style={{width: "100%", height: "400px"}} className="overflow-hidden">
                                 <div className="position-relative">
@@ -133,10 +146,27 @@ const Property = (props:any) => {
                             <p className="p-2 bg-gray-50 rounded">{props.property.description}</p>
                         </div>
                     </div>
-                    <div className="col-span-4 px-5">
+                    <div className="col-span-12 md:col-span-4 order-1">
                         <div className="shadow-lg px-4 py-2 rounded sticky top-24">
-                            <p className="text-sm font-medium">Bidding Start <span className="text-blue-500 mx-2">{props.property.biddingStart.split('T')[0]}</span></p>
-                            <p className="text-sm font-medium">Bidding End <span className="text-red-500 mx-2">{props.property.biddingEnd.split('T')[0]}</span></p>
+                            <div className="text-sm font-medium mb-2 flex justify-between items-center">
+                                
+                                <span className='flex items-center'>
+                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-blue-500 mr-1" viewBox="0 0 20 20" fill="currentColor">
+                                        <path d="M10 2a5 5 0 00-5 5v2a2 2 0 00-2 2v5a2 2 0 002 2h10a2 2 0 002-2v-5a2 2 0 00-2-2H7V7a3 3 0 015.905-.75 1 1 0 001.937-.5A5.002 5.002 0 0010 2z" />
+                                    </svg>
+                                    Bids start on
+                                </span>
+                                <span className="bg-blue-500 text-white mx-2 rounded-lg px-2">{props.property.biddingStart.split('T')[0]}</span>
+                            </div>
+                            <div className="text-sm font-medium mb-2 flex justify-between items-center">
+                                <span className='flex items-center'>
+                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-red-500 mr-1" viewBox="0 0 20 20" fill="currentColor">
+                                        <path fillRule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clipRule="evenodd" />
+                                    </svg>
+                                    Bids end on
+                                </span>
+                                <span className="bg-red-500 text-white mx-2 rounded-lg px-2">{props.property.biddingEnd.split('T')[0]}</span>
+                            </div>
                             {
                                 (Difference_In_Days > 0 || Difference_In_Hours > 0) ? (
                                     <p className="text-sm font-medium">Duration <span className="text-blue-500">{Difference_In_Days.toFixed(0)} days {Difference_In_Hours.toFixed(0)} hours left </span></p>
@@ -154,22 +184,28 @@ const Property = (props:any) => {
                     <h4 className="text-lg font-medium">Buyer Biddings</h4>
                     {
                         props.bidding.map((bid:any, index: any) => {
-                            return <div key={index} className="mb-3 bg-gray-50 p-2 rounded-md flex justify-between">
-                                <div>
-                                    <p><strong>User Name:</strong> {bid.Bidder[0].name}</p>
-                                    <p><strong>Email:</strong> {bid.Bidder[0].email}</p>
-                                    <p><strong>Status:</strong> {bid.winner===true ? <span className="text-xs bg-blue-500 text-blue-500">Winner</span> : <span className="text-xs bg-red-100 text-red-500 px-2 rounded-md">Not-approved</span> }</p>
+                            return (
+                                <div key={index} className="mb-3 bg-gray-50 p-2 rounded-md flex flex-wrap justify-between">
+                                    <div className='bg-gray-100 p-2 rounded-lg'>
+                                        <p><strong>User Name:</strong> {bid.Bidder[0].name}</p>
+                                        <p><strong>Email:</strong> {bid.Bidder[0].email}</p>
+                                        <p><strong>Status:</strong> {bid.winner===true ? <span className="text-xs bg-blue-100 text-blue-500 px-2 rounded-md">Winner</span> : <span className="text-xs bg-red-100 text-red-500 px-2 rounded-md">Not-approved</span> }</p>
+                                    </div>
+                                    <div className="flex flex-col mt-2 sm:mt-0">
+                                        <p className="bg-blue-100 text-blue-500 font-medium px-2 rounded-md text-center">{'AED '+bid.bidAmount}</p>
+                                        <button className="bg-gray-900 text-gray-100 px-2 py-1 rounded-md shadow-lg" onClick={()=>{
+                                            setSelectedBidId(bid._id)
+                                            setDisplayAlert(true)
+                                        }}>Accept Bid</button>
+                                    </div>
                                 </div>
-                                <div className="flex flex-col">
-                                    <p className="bg-blue-100 text-blue-500 font-medium px-2 rounded-md text-center">{'AED '+bid.bidAmount}</p>
-                                    <button className="bg-gray-900 text-gray-100 px-2 py-1 rounded-md shadow-lg">Accept Bid</button>
-                                </div>
-                            </div>
+                            )
                         })
                     }
                     
                 </div>
             </div>
+            <ConfirmAlert display={displayAlert} setDisplay={setDisplayAlert} text={'Are you sure! Do you want to accept bid?'} onSubmit={onSubmitAcceptBid} />
         </>
     )
 }

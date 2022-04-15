@@ -177,7 +177,10 @@ const Profile: NextPage = (props: any) => {
                             cancelChangePassword()
                             setEditable(true)
                         }}>Edit Profile</a></li>
-                        <li><a className="bg-gray-900 text-white px-2 py-1 block cursor-pointer hover:bg-white hover:text-gray-900 transition-all duration-300" onClick={()=>setIsChangePass(true)}>Change Password</a></li>
+                        <li><a className="bg-gray-900 text-white px-2 py-1 block cursor-pointer hover:bg-white hover:text-gray-900 transition-all duration-300" onClick={()=>{
+                            setEditable(false)
+                            setIsChangePass(true)
+                        }}>Change Password</a></li>
                     </ul>
                 </div>
             </div>

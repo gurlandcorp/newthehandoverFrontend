@@ -115,5 +115,10 @@ const Alert = (props: any) => {
         </ThemeProvider>
     );
 }
+Alert.defaultProps = {
+    open: false,
+    setAlert: () => {},
+    message: ""
+}
 
 export default Alert;
