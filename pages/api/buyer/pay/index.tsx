@@ -62,6 +62,7 @@ async function handler(req:NextApiRequest, res: NextApiResponse) {
         catch(e:any) {
             return res.status(200).json({error: e.raw.message});
         }
+        
     }
 
     return res.status(200).json({status:0,message: 'Api is not valid'})
