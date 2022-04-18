@@ -1,17 +1,11 @@
 import { NextPage } from 'next'
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Blog4 from "../public/assets/img/blog/now.jpg";
-import widget05 from "../public/assets/img/blog/widget05.jpg";
-import JoiningBanner from '../components/Home/JoiningBanner';
-import BreadCrumb from '../components/Shares/BreadCrumb';
-import Image from 'next/image';
-import PropertyCard from '../components/Shares/PropertyCard';
-import PropertyCardForLG12 from '../components/Shares/PropertyCardForLG12';
 import Link from 'next/link';
 import { Base_URL } from '../config/constants';
-import { MainContext } from '../context/MainContext';
 import { useRouter } from 'next/router';
-import axios from 'axios';
+import BackgroundImage from "/public/img/image-box-2.jpg"
+import { AnyObject } from 'chart.js/types/basic';
 
 const Properties: NextPage = ({data, query}: any) => {
 
@@ -34,12 +28,11 @@ const Properties: NextPage = ({data, query}: any) => {
 	const [category, setCategory] = useState('')
 	const[opportunities, setOpportunities] = useState(data);
 
-
 	const propertyType = [
-		"Family House",
-		"Apartment",
-		"Condo"
+		"Constructed",
+		"Non Constructed",
 	]
+
 	const categories = [
 		"Rent",
 		"Sell",
@@ -52,8 +45,18 @@ const Properties: NextPage = ({data, query}: any) => {
 		"Philadelphia"
 	]
 
-	const {search, setSearch} = useContext(MainContext)
     const router = useRouter()
+
+	const changeOrder = async (e: any) => {
+		let res = await fetch(`${Base_URL}/api/property/${e.target.value}`, {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json"
+			}
+		})
+		.then(response => response.json())
+		setOpportunities(res.data)
+	}
 
 	const searchSubmit = async (e: any) => {
         e.preventDefault()
@@ -96,407 +99,93 @@ const Properties: NextPage = ({data, query}: any) => {
 		{
 			setCity(query.city)
 		}
-
-		// let filter: any = {
-		// 	propertyType : query.propertyType
-		// }
-		// let result = axios.get(`https://handoverapi.herokuapp.com/property/filter/others`, filter).then(response => {
-        //     return response.data
-        // })
-        // console.log(result)
-	},[query])
+		setOpportunities(data)
+		
+	},[query, data])
 
     return (
         <>
-        <BreadCrumb title="All Opportunities" />
-			<section className="grid-wrap3">
-				<div className="container">
-					<div className="row gutters-40">
-						<div className="col-lg-4 widget-break-lg sidebar-widget">
-							<div className="widget widget-advanced-search">
-								<h3 className="widget-subtitle">Advanced Search</h3>
-								<form className="map-forms map-form-style-2" onSubmit={(e) => searchSubmit(e)} >
-									<input
-										type="text"
-										className="form-control"
-										placeholder="What are you looking for?" 
-										value={text}
-										onChange={(e)=>setText(e.target.value)}
-									/>
-									<div className="row">
-										<div className="col-lg-6">
-											<input
-												type="number"
-												className="form-control mt-2"
-												placeholder="Rooms" 
-												value={rooms}
-												min={1}
-												onChange={(e)=>setRooms(e.target.value)}
-											/>
-										</div>
-										<div className="col-lg-6">
-											<input
-												type="number"
-												className="form-control mt-2"
-												placeholder="Bathrooms" 
-												value={bathRooms}
-												min={1}
-												onChange={(e)=>setBathRooms(e.target.value)}
-											/>
-										</div>
-										<div className="col-lg-12 pl-15 mb-0">
-											<div className="rld-single-select">
-												<select className="select single-select mr-0" onChange={(e) => setType(e.target.value)}>
-													<option value="">Property Type</option>
-													{
-														propertyType.map((val, index) => {
-															if(type==val)
-															{
-																return <option value={val} key={index} selected >{val}</option>
-															}
-															else
-															{
-																return <option value={val} key={index} >{val}</option>
-															}
-														})
-													}
-													{/* <option value="2">Family House</option>
-													<option value="3">Apartment</option>
-													<option value="3">Condo</option> */}
-												</select>
-											</div>
-										</div>
-										{/* <div className="col-lg-12 pl-15 mb-0">
-											<div className="rld-single-select">
-												<select className="select single-select mr-0">
-													<option value="">All Categories</option>
-													{
-														categories.map((val, index) => {
-															return <option value={val} key={index} >{val}</option>
-														})
-													}
-												</select>
-											</div>
-										</div> */}
-										<div className="col-lg-12 pl-15">
-											<div className="rld-single-select">
-												<select className="select single-select mr-0" onChange={(e) => setCity(e.target.value)}>
-													<option value="">All Cities</option>
-													{
-														cities.map((val, index) => {
-															if(city==val)
-															{
-																return <option value={val} key={index} selected >{val}</option>
-															}
-															else
-															{
-																return <option value={val} key={index} >{val}</option>
-															}
-														})
-													}
-												</select>
-											</div>
-										</div>
-										<div className="col-lg-12 pl-15">
-											<label className='text-black'>Price Range</label>
-											<div className='row'>
-												<div className="col-lg-6">
-													<input type="text" className="form-control" id="customRange1" placeholder='min' />
-												</div>
-												<div className="col-lg-6">
-													<input type="text" className="form-control" id="customRange1" placeholder='max' />
-												</div>
-											</div>
-										</div>
-									</div>
-									
-									<div className="banner-search-wrap banner-search-wrap-2">
-										<div className="rld-main-search rld-main-search3">
-											<div className="main-search-field-2">
-												{/* <!-- Area Range --> */}
-												{/* <div className="price-range-wrapper">
-													<div className="range-box">
-														<div className="price-label">Price:</div>
-														<div
-															id="price-range-filter-4"
-															className="price-range-filter"
-														></div>
-														<div className="price-filter-wrap d-flex align-items-center">
-															<div className="price-range-select">
-																<div className="price-range range-title">$</div>
-																<div
-																	className="price-range"
-																	id="price-range-min-4"
-																></div>
-																<div className="price-range">-</div>
-																<div
-																	className="price-range"
-																	id="price-range-max-4"
-																></div>
-															</div>
-														</div>
-													</div>
-												</div> */}
-											</div>
-											<div className="filter-button">
-												<button
-													type="submit"
-													className="filter-btn1 search-btn"
-												>
-													Search<i className="fas fa-search"></i>
-												</button>
-											</div>
-										</div>
-										{/* <!--/ End Search Form --> */}
-									</div>
-								</form>
+			{/* Start of page heading  */}
+			<div className="" style={{ backgroundImage: `linear-gradient(178deg, #00000059, rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 1), white), url(${BackgroundImage.src})`, backgroundRepeat: 'no-repeat' }}>
+				<div className="font-semibold py-32 text-3xl text-center">
+					<h3 className="uppercase theme-color text-4xl">Opportunities</h3>
+				</div>
+			</div>
+
+			<div className="width py-10 mx-auto">
+				<div className="flex flex-wrap">
+					{/* Left Side Advance Search */}
+					<div className="sidebar w-full lg:w-1/3">
+						<div className="adv-search p-5 shadow-xl rounded">
+							<h2 className="text-center font-medium text-xl mb-5">Advanced Search</h2>
+							<form onSubmit={(e) => searchSubmit(e)}>
+								<input type="text" className="w-full border border-solid rounded p-2 mb-4" placeholder="What are you looking for ?" />
+								<div className="grid grid-cols-2 gap-5">
+									<input type="text" className="w-full border border-solid rounded p-2 mb-4" placeholder="Rooms" />
+									<input type="text" className="w-full border border-solid rounded p-2 mb-4" placeholder="Bathrooms" />
+								</div>
+								<select name="" id="" className="w-full border border-solid rounded p-2 mb-4" onChange={(e) => setType(e.target.value)}>
+									<option value="">Property Type</option>
+									{
+										propertyType.map((type: any, index: any) => {
+											return <option key={index} value={type}>{type}</option>
+										})
+									}
+								</select>
+								<select name="" id="" className="w-full border border-solid rounded p-2 mb-4">
+									<option value="">All Cities</option>
+								</select>
+								<p className="mb-4">Price Range</p>
+								<div className="grid grid-cols-2 gap-5">
+									<input type="text" className="w-full border border-solid rounded p-2 mb-4" placeholder="Min" />
+									<input type="text" className="w-full border border-solid rounded p-2 mb-4" placeholder="Max" />
+								</div>
+								<div className="text-center">
+									<button type="submit" className="bg-black text-white py-2 px-5 rounded-3xl shadow hover:bg-white hover:text-black transition-all duration-300"><span className="mdi mdi-magnify" /> Search </button>
+								</div>
+							</form>
+						</div>
+					</div>
+
+					{/* Opportunities List */}
+					<div className="content-area w-full lg:w-2/3">
+						<div className="pt-3 ml-0 lg:ml-5 mt-5 lg:mt-0">
+							<div className="listing-filters w-full mb-5 flex flex-wrap justify-between">
+								<h3 className="listing-title text-3xl text-blue-900">All Listings</h3>
+								<select name="" id="" className="p-2 px-4 text-sm shadow rounded-lg hover:shadow-lg" onChange={(e)=>changeOrder(e)}>
+									<option value="desc">Sort by desc</option>
+									<option value="asc">Sort by asc</option>
+								</select>
 							</div>
-							{
-								opportunities?.length>0 && (
-									<div className="widget widget-listing-box1">
-										<h3 className="widget-subtitle">Latest Listing</h3>
-										<div className="item-img">
-											<a>
-												<Image
-													src={opportunities[0]?.images[0]}
-													width="630px"
-													height={'400px'}
-													alt="widget"
-													// src={Widget6} alt="widget" width="630" height="400"
-												/>
-											</a>
-											<div className="item-category-box1">
-												<div className="item-category">For Rent</div>
-											</div>
-										</div>
-										<div className="widget-content">
-											<div className="item-category10">
-												<a>Villa</a>
-											</div>
-											<h4 className="item-title">
-												<Link href={`/opportunity/${opportunities[0]?._id}`}>
-													<a>
-														{/* Modern Villa for House Highland Ave Los Angeles */}{" "}
-														{opportunities[0]?.propertyTitle}
+							<div className="listing-cont grid grid-cols-1 md:grid-cols-2 gap-5">
+								{
+									opportunities?.length > 0 && (
+										opportunities.map((property: any, index: any)=> {
+											return (
+												<Link href={'/opportunity/'+property._id} key={index}>
+													<a className="list-item shadow-box rounded-xl overflow-hidden relative" style={{ backgroundImage: `url("${property.images[0]}")`, backgroundSize: 'cover', backgroundPosition: 'center', height: 300 }}>
+														<div className="detail-box p-5 bg-gray-800 text-white rounded-t-xl absolute bottom-0 w-full">
+															<div className="box-title w-full">{property.propertyTitle}</div>
+															<div className="box-location text-gray-500 text-sm">{property.location.city}</div>
+															<ul className="grid grid-cols-3 gap-2 text-sm text-gray-500 w-full">
+																<li><span className="mdi mdi-vector-square-plus" /> {property.area} sqft</li>
+																<li><span className="mdi mdi-bed-king-outline" /> {property.bedrooms} Beds</li>
+																<li><span className="mdi mdi-bathtub-outline" /> {property.bathrooms} Baths</li>
+																{/* <li><span className="mdi mdi-cached" /> 4 Days ago</li> */}
+															</ul>
+															<div className="box-price">AED {property.priceDemand}</div>
+														</div>
 													</a>
 												</Link>
-											</h4>
-											<div className="location-area">
-												<i className="flaticon-maps-and-flags"></i>Downey,California
-											</div>
-											<div className="item-price">
-												{/* $11,000 */} AED {opportunities[0]?.priceDemand}
-												{/* <span>/mo</span> */}
-											</div>
-										</div>
-									</div>
-								)
-							}
-							<div className="widget widget-post">
-								<div className="item-img">
-									<Image src={widget05.src} blurDataURL={widget05.blurDataURL} alt="widget" width="690" height="850" />
-
-									<div className="circle-shape">
-										<span className="item-shape"></span>
-									</div>
-								</div>
-								<div className="item-content">
-									<h4 className="item-title">Find Your Dream House</h4>
-									<div className="item-price">$2,999</div>
-									<div className="post-button">
-										<a className="item-btn">Shop Now</a>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div className="col-lg-8">
-							<div className="property-wrap-9">
-								<div className="row justify-content-center">
-									<div className="col-lg-12 col-md-12">
-										<div className="item-shorting-box">
-											<div className="shorting-title">
-												<h4 className="item-title">{opportunities?.length} Search Results Found</h4>
-											</div>
-											<div className="item-shorting-box-2">
-												<div className="by-shorting">
-													<div className="shorting">Sort by:</div>
-													<select className="select single-select mr-0">
-														<option value="1">Default</option>
-														<option value="2">High Price</option>
-														<option value="3">Medium Price</option>
-														<option value="3">Low Price</option>
-													</select>
-												</div>
-												<div className="grid-button">
-													<ul className="nav nav-tabs" role="tablist">
-														<li className="nav-item">
-															<a
-																className="nav-link active"
-																data-bs-toggle="tab"
-																href="#mylisting"
-															>
-																<i className="fas fa-th"></i>
-															</a>
-														</li>
-														{/* <li className="nav-item">
-															<a
-																className="nav-link"
-																data-bs-toggle="tab"
-																href="#reviews"
-															>
-																<i className="fas fa-list-ul"></i>
-															</a>
-														</li> */}
-													</ul>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div className="tab-style-1 tab-style-3">
-									<div className="tab-content" id="myTabContent">
-										<div className="tab-pane fade show active"
-											id="mylisting"
-											role="tabpanel"
-										>
-											<div className="row">
-												{
-													opportunities?.length > 0 && (
-														data.slice(0, 10).map((i: any, index: any) => {
-															return <PropertyCard img={i} data={i} key={index} />;
-														})
-													)
-												}
-											</div>
-
-											{/* <div className="pagination-style-1">
-												<ul className="pagination">
-													<li className="page-item">
-														<a
-															className="page-link"
-															// href="with-sidebar2.html"
-															aria-label="Previous"
-														>
-															<span aria-hidden="true">&laquo;</span>
-															<span className="sr-only">Previous</span>
-														</a>
-													</li>
-													<li className="page-item">
-														<a
-															className="page-link active"
-															// href="with-sidebar2.html"
-														>
-															1
-														</a>
-													</li>
-													<li className="page-item">
-														<a
-															className="page-link"
-															// href="with-sidebar2.html"
-														>
-															2
-														</a>
-													</li>
-													<li className="page-item">
-														<a
-															className="page-link"
-															// href="with-sidebar2.html"
-														>
-															3
-														</a>
-													</li>
-													<li className="page-item">
-														<a
-															className="page-link"
-															// href="with-sidebar2.html"
-														>
-															4
-														</a>
-													</li>
-													<li className="page-item">
-														<a
-															className="page-link"
-															// href="with-sidebar2.html"
-															aria-label="Next"
-														>
-															<span aria-hidden="true">&raquo;</span>
-															<span className="sr-only">Next</span>
-														</a>
-													</li>
-												</ul>
-											</div> */}
-										</div>
-										<div className="tab-pane fade" id="reviews" role="tabpanel">
-											<div className="row">
-												{images.map((i, index) => {
-													return <PropertyCardForLG12 key={index} img={i} />;
-												})}
-											</div>
-											<div className="pagination-style-1">
-												<ul className="pagination">
-													<li className="page-item">
-														<a
-															className="page-link"
-															// href="with-sidebar.html"
-															aria-label="Previous"
-														>
-															<span aria-hidden="true">&laquo;</span>
-															<span className="sr-only">Previous</span>
-														</a>
-													</li>
-													<li className="page-item">
-														<a
-															className="page-link active"
-															// href="with-sidebar2.html"
-														>
-															1
-														</a>
-													</li>
-													<li className="page-item">
-														<a
-															className="page-link"
-															// href="with-sidebar2.html"
-														>
-															2
-														</a>
-													</li>
-													<li className="page-item">
-														<a
-															className="page-link"
-															// href="with-sidebar2.html"
-														>
-															3
-														</a>
-													</li>
-													<li className="page-item">
-														<a
-															className="page-link"
-															// href="with-sidebar2.html"
-														>
-															4
-														</a>
-													</li>
-													<li className="page-item">
-														<a
-															className="page-link"
-															// href="with-sidebar2.html"
-															aria-label="Next"
-														>
-															<span aria-hidden="true">&raquo;</span>
-															<span className="sr-only">Next</span>
-														</a>
-													</li>
-												</ul>
-											</div>
-										</div>
-									</div>
-								</div>
+											)
+										})
+									)
+								}
 							</div>
 						</div>
 					</div>
 				</div>
-			</section>
-			<JoiningBanner />
+			</div>
         </>
     )
 }
@@ -506,7 +195,7 @@ export default Properties
 export async function getServerSideProps(context: any) {
     // Fetch data from external API
 	let res: any;
-	let data = null
+	let data = []
 	if(context.query.propertyType!=undefined)
 	{
 		let filter: any = {
@@ -519,14 +208,12 @@ export async function getServerSideProps(context: any) {
 			method: "POST",
 			body: JSON.stringify(filter),
 			headers: {
-				"Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MWFlNDQ4ODk5YzZlNTM3MTQwMTY0N2QiLCJlbWFpbCI6InNhbWluYTkxQG1haWxpbmF0b3IuY29tIiwibmFtZSI6IlNhbWluYSIsImltYWdlVXJsIjoiIiwiaWF0IjoxNjM5NTg3MjcwLCJleHAiOjE2NzExMjMyNzB9.hHACfbXBwPBkrQSCZdHCqVTHuF-BcE-mHfUlgzf19vU",
 				"Content-Type": "application/json"
 			}
-		})
-		if(res.status==200)
+		}).then(response => response.json())
+		if(res.data!=undefined)
 		{
-			res = res.json()
-			data = res.data==undefined ? [] : res.data
+			data = res.data
 		}
 	}
 	else

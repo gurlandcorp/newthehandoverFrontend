@@ -1,12 +1,7 @@
-import { Add } from '@mui/icons-material';
-import { Button, Grid, MenuItem, TextField } from '@mui/material'
 import axios from 'axios';
-import { useRouter } from 'next/router';
 import { parseCookies } from 'nookies';
 import React, { useContext, useState } from 'react'
-import { API_LINK } from '../../../../config/constants';
 import { MainContext } from '../../../../context/MainContext';
-import AddItemButton from '../../../Shares/Dashboard/Button';
 import { Base_URL } from "../../../../config/constants"
 
 const EditProperty = (props: any) => {
@@ -30,7 +25,6 @@ const EditProperty = (props: any) => {
 	const [user, setUser] = useState(initialState);
 	const [propertyType, setpropertyType] = useState(props.property.propertyType);
 	const [countrySate, setCountrySate] = useState(props.property.location.state);
-	const [multiImages, setMultiImages] = useState("");
     const [loading, setLoading] = useState(false)
 
     const {token}: any = parseCookies()
@@ -40,11 +34,6 @@ const EditProperty = (props: any) => {
 			...user,
 			[e.target.name]: e.target.value,
 		});
-	};
-    const route = useRouter()
-
-    const multiImagesChange = (e: any) => {
-		setMultiImages(e.target.files);
 	};
 
     const propertyLists = async () => {
@@ -101,7 +90,7 @@ const EditProperty = (props: any) => {
 
         let result = await axios({
             method: "PATCH",
-            url: `${API_LINK}/property/edit/${props.property._id}`,
+            url: `${'https://handoverbackendapp.herokuapp.com'}/property/edit/${props.property._id}`,
             headers: {
                 "Content-Type": "application/json",
                 "Authorization": `Bearer ${token}`
@@ -139,114 +128,96 @@ const EditProperty = (props: any) => {
 
 	const states = [
 		{
-		  value: 'Sharjah',
-		  label: 'Sharjah',
-		},
-		{
-		  value: 'Ajman',
-		  label: 'Ajman',
-		},
-		{
-			value: 'Fujairah',
-			label: 'Fujairah',
-		},
-		{
-			value: 'Umm Al Quwain',
-			label: 'Umm Al Quwain',
+		  value: 'Dubai',
+		  label: 'Dubai',
 		}
 	];
 
     return (
-        <Grid container component="form" spacing={4} columns={12} className="p-4" onSubmit={(e: any)=>handleSubmit(e)}>
-            <Grid item xs={6}>
-                <TextField fullWidth id="propertyTitle" size="small" name="propertyTitle" label="Property Title" color="primary" variant="filled" value={user.propertyTitle} onChange={(e)=>handleInputs(e)} required />
-            </Grid>
-            <Grid item xs={6}>
-                <TextField fullWidth type="number" id="area" size="small" name="area" label="Area" color="primary" variant="filled" value={user.area} onChange={(e)=>handleInputs(e)} required />
-            </Grid>
-            <Grid item xs={6}>
-                <TextField fullWidth type="number" id="bedrooms" size="small" name="bedrooms" label="Bed Rooms" color="primary" variant="filled" value={user.bedrooms} onChange={(e)=>handleInputs(e)} required />
-            </Grid>
-            <Grid item xs={6}>
-                <TextField fullWidth type="number" id="floors" size="small" name="floors" label="Floors" color="primary" variant="filled" value={user.floors} onChange={(e)=>handleInputs(e)} required />
-            </Grid>
-            <Grid item xs={6}>
-                <TextField fullWidth
-                id="standard-select-property-type"
-                select
-                label="Please select property type"
-                value={propertyType}
-                onChange={(e) => setpropertyType(e.target.value)}
-                variant="filled"
-                color="primary"
-                required
-                >
-                {property_types.map((option) => (
-                    <MenuItem key={option.value} value={option.value} selected={propertyType==option.value ? true : false}>
-                    {option.label}
-                    </MenuItem>
-                ))}
-                </TextField>
-            </Grid>
-            <Grid item xs={6}>
-                <TextField fullWidth type="number" id="bathrooms" size="small" name="bathrooms" label="Bathrooms" color="primary" variant="filled" value={user.bathrooms} onChange={(e)=>handleInputs(e)} required />
-            </Grid>
-            <Grid item xs={6}>
-                <TextField fullWidth type="number" id="priceDemand" size="small" name="priceDemand" label="Demand Price" color="primary" variant="filled" value={user.priceDemand} onChange={(e)=>handleInputs(e)} required />
-            </Grid>
-            <Grid item xs={6}>
-                <TextField fullWidth type="date" id="biddingEnd" size="small" name="biddingEnd" label="Bidding End" color="primary" variant="filled" value={user.biddingEnd} onChange={(e)=>handleInputs(e)} InputLabelProps={{ shrink: true, }} required />
-            </Grid>
-            <Grid item xs={6}>
-                <TextField fullWidth id="address" size="small" name="address" label="Address" color="primary" variant="filled" value={user.address} onChange={(e)=>handleInputs(e)} required />
-            </Grid>
-            <Grid item xs={6}>
-                <TextField fullWidth id="city" size="small" name="city" label="City" color="primary" variant="filled" value={user.city} onChange={(e)=>handleInputs(e)} required />
-            </Grid>
-            <Grid item xs={6}>
-                <TextField fullWidth
-                id="state"
-                name="state"
-                select
-                label="Please select state"
-                value={countrySate}
-                onChange={(e) => setCountrySate(e.target.value)}
-                variant="filled"
-                color="primary"
-                required
-                >
-                {states.map((option) => (
-                    <MenuItem key={option.value} value={option.value}>
-                    {option.label}
-                    </MenuItem>
-                ))}
-                </TextField>
-            </Grid>
-            <Grid item xs={6}>
-                <TextField fullWidth id="zip" size="small" name="zip" label="Zip" color="primary" variant="filled" value={user.zip} onChange={(e)=>handleInputs(e)} required />
-            </Grid>
-            <Grid item xs={12}>
-                <TextField fullWidth multiline rows={4} id="description" size="small" name="description" label="Description" color="info" variant="filled" value={user.description} onChange={(e)=>handleInputs(e)} required />
-            </Grid>
-            
-            {/* <Grid item xs={12}>
-                <input
-                    type="file"
-                    className="custom-style"
-                    name="images"
-                    id="images"
-                    accept="image/*"
-                    multiple
-                    onChange={(e) => multiImagesChange(e)}
-                    style={{ marginLeft: "0px" }}
-                    // hidden
-                />
-            </Grid> */}
-            <Grid item xs={12}>
-                <AddItemButton loading={loading} startIcon={<Add />}>Update Property</AddItemButton>
-                <Button className="bg-danger text-white px-3" style={{borderRadius: '10px',marginLeft: '1rem'}} onClick={()=>props.setProperty(null)}>Cancel</Button>
-            </Grid>
-        </Grid>
+        <>
+            <form onSubmit={(e: any)=>handleSubmit(e)}>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 gap-x-10 pb-6 border-solid border-b">
+                    <div className="grid grid-cols-1 gap-2">
+                        <label htmlFor="propertyTitle" className="text-gray-500">Property title <span className="text-red-500">*</span></label>
+                        <input type="text" className="px-3 py-1 rounded-full bg-white border border-solid focus:border-1 focus:border-blue-500 transition-all duration-300" id="propertyTitle" name="propertyTitle" placeholder="Property title" value={user.propertyTitle} onChange={(e)=>handleInputs(e)} />
+                    </div>
+                    <div className="grid grid-cols-1 gap-2">
+                        <label htmlFor="area" className="text-gray-500">Area <span className="text-red-500">*</span></label>
+                        <input type="text" className="px-3 py-1 rounded-full bg-white border border-solid focus:border-1 focus:border-blue-500 transition-all duration-300" id="area" name="area" placeholder="Area" value={user.area} onChange={(e)=>handleInputs(e)} />
+                    </div>
+                    <div className="grid grid-cols-2 gap-4 gap-x-10 col-span-2">
+                        <div className="flex flex-col">
+                            <label htmlFor="description" className="text-gray-500">Description</label>
+                            <textarea className="px-3 py-1 rounded-lg bg-white border border-solid focus:border-1 focus:border-blue-500 transition-all duration-300" id="description" name="description" placeholder="Description" value={user.description} onChange={(e)=>handleInputs(e)} rows={5}></textarea>
+                        </div>
+                        <div>
+                            <div className="grid grid-cols-1 gap-2 mb-4">
+                                <label htmlFor="bedrooms" className="text-gray-500">Bedrooms <span className="text-red-500">*</span></label>
+                                <input type="text" className="px-3 py-1 rounded-full bg-white border border-solid focus:border-1 focus:border-blue-500 transition-all duration-300" id="bedrooms" name="bedrooms" placeholder="Bedrooms" value={user.bedrooms} onChange={(e)=>handleInputs(e)} />
+                            </div>
+                            <div className="grid grid-cols-1 gap-2">
+                                <label htmlFor="floors" className="text-gray-500">Floors <span className="text-red-500">*</span></label>
+                                <input type="text" className="px-3 py-1 rounded-full bg-white border border-solid focus:border-1 focus:border-blue-500 transition-all duration-300" id="floors" name="floors" placeholder="Floors" value={user.floors} onChange={(e)=>handleInputs(e)} />
+                            </div>
+                        </div>
+                    </div>
+                    <div className="grid grid-cols-1 gap-2">
+                        <label htmlFor="bathrooms" className="text-gray-500">Bathrooms <span className="text-red-500">*</span></label>
+                        <input type="text" className="px-3 py-1 rounded-full bg-white border border-solid focus:border-1 focus:border-blue-500 transition-all duration-300" id="bathrooms" name="bathrooms" placeholder="Bathrooms" value={user.bathrooms} onChange={(e)=>handleInputs(e)} />
+                    </div>
+                    <div className="grid grid-cols-1 gap-2">
+                        <label htmlFor="priceDemand" className="text-gray-500">Price Demand <span className="text-red-500">*</span></label>
+                        <input type="text" className="px-3 py-1 rounded-full bg-white border border-solid focus:border-1 focus:border-blue-500 transition-all duration-300" id="priceDemand" name="priceDemand" placeholder="Price Demand" value={user.priceDemand} onChange={(e)=>handleInputs(e)} />
+                    </div>
+                    <div className="grid grid-cols-1 gap-2">
+                        <label htmlFor="biddingEnd" className="text-gray-500">Bid End <span className="text-red-500">*</span></label>
+                        <input type="date" className="px-3 py-1 rounded-full bg-white border border-solid focus:border-1 focus:border-blue-500 transition-all duration-300" id="biddingEnd" name="biddingEnd" value={user.biddingEnd} onChange={(e)=>handleInputs(e)} />
+                    </div>
+                    <div className="grid grid-cols-1 gap-2">
+                        <label htmlFor="type" className="text-gray-500">Select property type <span className="text-red-500">*</span></label>
+                        <select className="px-3 py-1 rounded-full bg-white border border-solid focus:border-1 focus:border-blue-500 transition-all duration-300" id="type" name="type" defaultValue={propertyType} onChange={(e) => setpropertyType(e.target.value)}>
+                            <option value="">Select property type</option>
+                            {
+                                property_types.map((option) => (
+                                    <option key={option.value} value={option.value}>{option.label}</option>
+                                ))
+                            }
+                        </select>
+                    </div>
+                    <div className="grid grid-cols-1 gap-2">
+                        <label htmlFor="address" className="text-gray-500">Address <span className="text-red-500">*</span></label>
+                        <input type="text" className="px-3 py-1 rounded-full bg-white border border-solid focus:border-1 focus:border-blue-500 transition-all duration-300" id="address" name="address" placeholder="Address" value={user.address} onChange={(e)=>handleInputs(e)} />
+                    </div>
+                    <div className="grid grid-cols-1 gap-2">
+                        <label htmlFor="city" className="text-gray-500">City <span className="text-red-500">*</span></label>
+                        <input type="text" className="px-3 py-1 rounded-full bg-white border border-solid focus:border-1 focus:border-blue-500 transition-all duration-300" id="city" name="city" placeholder="City" value={user.city} onChange={(e)=>handleInputs(e)} />
+                    </div>
+                    <div className="grid grid-cols-1 gap-2">
+                        <label htmlFor="state" className="text-gray-500">Select state <span className="text-red-500">*</span></label>
+                        <select className="px-3 py-1 rounded-full bg-white border border-solid focus:border-1 focus:border-blue-500 transition-all duration-300" id="state" name="state" defaultValue={countrySate} onChange={(e) => setCountrySate(e.target.value)}>
+                            <option value="">Select state</option>
+                            {
+                                states.map((option) => (
+                                    <option key={option.value} value={option.value}>{option.label}</option>
+                                ))
+                            }
+                        </select>
+                    </div>
+                    <div className="grid grid-cols-1 gap-2">
+                        <label htmlFor="zip" className="text-gray-500">Zip Code <span className="text-red-500">*</span></label>
+                        <input type="text" className="px-3 py-1 rounded-full bg-white border border-solid focus:border-1 focus:border-blue-500 transition-all duration-300" id="zip" name="zip" placeholder="Zip Code" value={user.zip} onChange={(e)=>handleInputs(e)} />
+                    </div>
+                </div>
+                <div className="mt-4 flex">
+                    <button className="btn bg-black text-white rounded-full px-4 py-1 mr-4 flex" disabled={loading ? true : false}>Update Property {
+                    loading &&
+                        <svg xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" width="20px" height="20px" viewBox="0 0 128 128" xmlSpace="preserve" style={{marginLeft: '1rem'}}><g><path d="M64 9.75A54.25 54.25 0 0 0 9.75 64H0a64 64 0 0 1 128 0h-9.75A54.25 54.25 0 0 0 64 9.75z" fill="#252153" /><animateTransform attributeName="transform" type="rotate" from="0 64 64" to="360 64 64" dur="1200ms" repeatCount="indefinite" /></g></svg>
+                    }
+                    </button>
+                    <button type="button" className="btn bg-red-100 hover:bg-red-500 text-red-500 hover:text-white rounded-full px-4 py-1 mr-4 transition-all duration-300" onClick={()=>props.setProperty(null)}>Cancel</button>
+                </div>
+            </form>
+        </>
     )
 }
 

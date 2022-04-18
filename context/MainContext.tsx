@@ -1,3 +1,5 @@
+import Cookies from "js-cookie";
+import { useRouter } from "next/router";
 import { createContext, useState } from "react";
 import Alert from "../components/Shares/Components/Alert";
 
@@ -8,6 +10,9 @@ type contextType = {
     setAlert: (content: any) => void,
     alertMessage: any,
     setAlertMessage: (content: any) => void,
+    loading: any,
+    setLoading: (content: any) => void,
+    logout: () => void
 }
 
 const context = {
@@ -16,7 +21,10 @@ const context = {
     alert: {},
     setAlert: () => {},
     alertMessage: {},
-    setAlertMessage: () => {}
+    setAlertMessage: () => {},
+    loading: {},
+    setLoading: () => {},
+    logout: () => {}
 }
 
 const MainContext = createContext<contextType>(context);
@@ -28,6 +36,14 @@ const MainProvider = ({children}: any) => {
     })
     const [alert, setAlert] = useState(false)
     const [alertMessage, setAlertMessage] = useState('')
+    const [loading, setLoading] = useState(false)
+
+    const router = useRouter()
+    const logout = () => {
+        Cookies.remove('token')
+        Cookies.remove('user')
+        router.push('/sign-in')
+    }
 
     return (
         <MainContext.Provider value={{
@@ -36,7 +52,10 @@ const MainProvider = ({children}: any) => {
             alert,
             setAlert,
             alertMessage,
-            setAlertMessage
+            setAlertMessage,
+            loading,
+            setLoading,
+            logout
         }}>
             {children}
             <Alert open={alert} setAlert={setAlert} message={alertMessage} />

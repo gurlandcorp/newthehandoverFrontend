@@ -23,12 +23,6 @@ export default async function handler(req:NextApiRequest, res: NextApiResponse) 
     await runMiddleware(req, res, cors)
     if(req.method=="POST")
     {
-        // let result = await axios.get(`${process.env.API_URL}/property/filter/others`, JSON.stringify(req.body), {
-        //     headers: { "Content-Type": "application/json" }
-        // }).then(response => {
-        //     return response.data
-        // })
-
         let result = await axios({
             method: "GET",
             url: `${process.env.API_URL}/property/filter/others`,
@@ -41,7 +35,6 @@ export default async function handler(req:NextApiRequest, res: NextApiResponse) 
         }).catch(err => {
             console.log("error in opportunties filter request", err);
         });
-        
         return res.status(200).json({data: result})
     }
     return res.status(200).json({error: "Request is not valid!"})

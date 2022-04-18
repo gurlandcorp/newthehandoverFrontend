@@ -1,8 +1,8 @@
 import Head from 'next/head'
-import React, { useEffect } from 'react'
-import Footer from '../Includes/Footer'
+import React, { useContext, useEffect } from 'react'
+import Footer from '../Includes/Footer/Footer'
 import Header from '../Includes/Header'
-// import favIcon from "../../public/favicon-homlisti.svg"
+import MainLoader from '../Shares/Loaders/MainLoader'
 
 const Default = ({children}: any) => {
 
@@ -24,15 +24,8 @@ const Default = ({children}: any) => {
         <>
             <Head>
                 <link rel="shortcut icon" href="/favicon-homlisti.svg" />
-                {/* <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" /> */}
-                {/* <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Ubuntu:wght@400;500;700&display=swap" rel="stylesheet" /> */}
-                {/* <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==" /> */}
-                {/* <link href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp" rel="stylesheet" /> */}
-                
-                {/* <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" /> */}
-
-                {/* <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;500;700&display=swap" rel="stylesheet" /> */}
             </Head>
+            <MainLoader />
             <Header />
             {children}
             <Footer />

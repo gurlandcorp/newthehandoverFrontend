@@ -1,22 +1,35 @@
 import axios from 'axios'
 import { NextApiRequest, NextApiResponse } from "next";
-import { API_LINK } from "../../config/constants";
+import Cors from 'cors'
+
+const cors = Cors({
+    methods: ['POST'],
+})
+
+function runMiddleware(req: NextApiRequest, res: NextApiResponse, fn: any) {
+    return new Promise((resolve, reject) => {
+        fn(req, res, (result: any) => {
+            if (result instanceof Error) {
+                return reject(result)
+            }
+
+            return resolve(result)
+        })
+    })
+}
 
 async function handler(req:NextApiRequest, res: NextApiResponse) {
-    
+    await runMiddleware(req, res, cors)
     if(req.method=='POST')
     {
+        let url = `${process.env.API_URL}/signin`
         let result = await axios({
             method: "POST",
-            url:`${process.env.API_URL}/signin`, 
-            headers: {
-                "Content-Type": "application/json"
-            },
+            url:url,
             data: req.body
         }).then(response => {
             return response.data
         }).catch(err => {
-            // console.log("error in opportunties filter request", err.response.data);
             return res.status(200).json({status: 0, message: err.response.data.message})
         });
         return res.status(200).json({status: 1, data: result})

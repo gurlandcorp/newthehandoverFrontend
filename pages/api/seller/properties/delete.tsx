@@ -35,7 +35,7 @@ export default async function handler(req:NextApiRequest, res: NextApiResponse) 
             console.log("error in opportunties filter request", err.response);
             return res.status(200).json({status: 0, Message: err.response.data.Message})
         });
-        return res.status(200).json({data: result})
+        return res.status(200).json({status: 1, data: result})
     }
-    return res.status(200).json({error: "Request is not valid!"})
+    return res.status(200).json({status: 0, error: "Request is not valid!"})
 }

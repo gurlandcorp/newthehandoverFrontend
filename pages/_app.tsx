@@ -1,29 +1,23 @@
-import 'bootstrap/dist/css/bootstrap.css'
+// import 'bootstrap/dist/css/bootstrap.css'
 import '../styles/globals.css'
 import type { AppProps } from 'next/app'
 import Default from '../components/Layouts/Default'
 import { MainProvider } from '../context/MainContext'
 import UserLayout from '../components/Layouts/User'
-import { parseCookies } from "nookies"
-import App from 'next/app'
 
 function MyApp({ Component, pageProps, router }: AppProps) {
 
     return (
         <MainProvider>
         {
-            router.pathname.search('sign-in') == -1 && router.pathname.search('sign-up') == -1 && router.pathname.search('forgetpassword') == -1 ? (
-                router.pathname.search('seller') == 1 || router.pathname.search('buyer') == 1 || router.pathname.search('user') == 1 ? (
-                    <UserLayout pageProps={pageProps}>
-                        <Component {...pageProps} />
-                    </UserLayout>
-                ) : (
-                    <Default>
-                        <Component {...pageProps} />
-                    </Default>
-                )
+            router.pathname.search('seller') == 1 || router.pathname.search('buyer') == 1 || router.pathname.search('user') == 1 ? (
+                <UserLayout pageProps={pageProps}>
+                    <Component {...pageProps} />
+                </UserLayout>
             ) : (
-                <Component {...pageProps} />
+                <Default pageProps={pageProps}>
+                    <Component {...pageProps} />
+                </Default>
             )
         }
         </MainProvider>

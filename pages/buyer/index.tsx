@@ -1,102 +1,42 @@
 import type { NextPage } from 'next'
-import { parseCookies } from 'nookies'
 import React, {useEffect} from 'react'
-
-import { Card, Box, Grid } from '@mui/material'
-import { green } from '@mui/material/colors'
-import { makeStyles } from '@mui/styles'
 import image from "../../public/assets/img/bg-home.jpg"
 
 const Buyer: NextPage = (props: any) => {
 
-    const {user} = parseCookies()
-
-    const styles = makeStyles({
-        cardWrapper: {
-            position: 'absolute',
-            left: '2rem',
-            bottom: '-3rem',
-            width: "100%"
-        },
-        card: {
-            display: "flex",
-            flexWrap: 'wrap',
-            justifyContent: "center",
-            margin: "0 1rem",
-            '& p': {
-                color: '#626262',
-                width: '100%',
-                margin: 0
-            }
-        },
-        svg: {
-            width: '60px',
-            height: '60px',
-            padding: "1rem",
-            borderRadius: "100%",
-            backgroundColor: green[700]
-        },
-        count: {
-            fontSize: "20px",
-            color: "#108d6f !important",
-            fontWeight: "600"
-        }
-    })
-
-    const style = styles()
-
-    useEffect(()=> {
-
-    },[user])
-
     return (
         <>
-        <Card style={{
-            boxShadow: '0px 10px 10px 0px #ddd',
-            height: '300px', display: 'flex',
-            color: "#fff",
-            alignItems: 'center',
-            justifyContent: 'center',
-            position: 'relative',
-            overflow: 'visible',
-            background: `url(${image.src})`,
-            backgroundPosition: "center"
-            }}>
-            <h4 className="text-white">Hi {props.user.name}, Welcome to dashboard</h4>
-            <Grid container className={`gap-4 ${style.cardWrapper}`}>
-                <Grid item xs={12} md={4} lg={3} className={`p-3 bg-white shadow rounded-3 flex-row-reverse ${style.card}`} >
-                    <Box>
-                        <svg xmlns="http://www.w3.org/2000/svg" className={style.svg} viewBox="0 0 20 20" fill="currentColor">
-                            <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z" />
-                        </svg>
-                    </Box>
-                    <Box className="flex-grow-1">
-                        <p>Bidding</p>
-                        <p className={style.count}>10</p>
-                    </Box>
-                </Grid>
+            <nav className="relative w-full flex flex-wrap items-center justify-between py-2 hover:text-gray-700 rounded" style={{ backgroundColor: '#fbfbfb' }}>
+                <div className="container-fluid w-full flex flex-wrap items-center justify-between px-6">
+                    <nav className="bg-grey-light rounded-md w-full" aria-label="breadcrumb">
+                        <ol className="list-reset flex">
+                            <li><a href="/buyer" className="text-black">Dashboard</a></li>
+                        </ol>
+                    </nav>
+                </div>
+            </nav>
 
-                <Grid item xs={12} md={4} lg={3} className={`p-3 bg-white shadow rounded-3 flex-row-reverse ${style.card}`} >
-                    <Box>
-                        <svg xmlns="http://www.w3.org/2000/svg" className={style.svg} viewBox="0 0 20 20" fill="currentColor">
-                            <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z" />
-                        </svg>
-                    </Box>
-                    <Box className="flex-grow-1">
-                        <p>Approval</p>
-                        <p className={style.count}>2</p>
-                    </Box>
-                </Grid>
-
-                {/* <Grid item xs={12} md={4} lg={3} className="p-3 bg-white shadow rounded-3" >
-                    <svg xmlns="http://www.w3.org/2000/svg" className={style.svg} viewBox="0 0 20 20" fill="currentColor">
-                        <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z" />
+            {/* Place your content here */}
+            <div className="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mt-4 bg-white shadow-xl p-4 rounded-xl">
+                <div className="p-4 rounded-xl flex justify-between items-center bg-red-100 border border-red-500">
+                    <div>
+                        <p className="text-red-500">Bidding</p>
+                        <span className="text-red-600 font-semibold">{0}</span>
+                    </div>
+                    <svg xmlns="http://www.w3.org/2000/svg" className="bg-red-500 text-white border border-red-500 p-1 w-8 h-8 rounded-full" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
                     </svg>
-                    <p>Biddings</p>
-                    <p className={style.count}>10</p>
-                </Grid> */}
-            </Grid>
-        </Card>
+                </div>
+                <div className="p-4 rounded-xl flex justify-between items-center bg-blue-100 border border-blue-500">
+                    <div>
+                        <p className="text-blue-500">Approval</p>
+                        <span className="text-blue-600 font-semibold">{0}</span>
+                    </div>
+                    <svg xmlns="http://www.w3.org/2000/svg" className="bg-blue-500 text-white border border-blue-500 p-1 w-8 h-8 rounded-full" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                    </svg>
+                </div>
+            </div>
         </>
     )
 }

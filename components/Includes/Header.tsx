@@ -1,201 +1,159 @@
-import Logo from "../../public/logohandover.png";
-import SearchSection from "./SearchSection";
-import { useEffect, useState } from "react";
+import Logo from "/public/logo.png";
+import { useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import styles from "./Header.module.css"
 import { parseCookies } from "nookies";
+import SellerDropDown from "../Dashboard/SellerDropDown";
+import BuyerDropDown from "../Dashboard/BuyerDropDown";
 
-const Header = () => {
-
-	const [activeLink, setActiveLink] = useState('')
+const Header = (props: any) => {
+	
 	const router = useRouter();
-	const [showSideMenu,setShowSideMenu] = useState(false)
 	const {token, user} = parseCookies()
+
+	const openMobileMenu = async () => {
+		document.querySelector('.mobile-menu-overlay')?.classList.toggle('translate-x--100');
+		setTimeout(() => {
+			document.querySelector('#mobile-menu')?.classList.toggle('translate-x--100');
+		}, 200);
+	}
+
+	// console.log(Cookies.get('user'))
+
+	const closeMobileMenu = async () => {
+		document.querySelector('#mobile-menu')?.classList.toggle('translate-x--100');
+		setTimeout(() => {
+			document.querySelector('.mobile-menu-overlay')?.classList.toggle('translate-x--100');
+		}, 300);
+	}
+
 	useEffect(()=>{
 	},[])
 
 	return (
 		<>
-			<header className="header">
-				<div id="rt-sticky-placeholder"></div>
-				<div id="header-menu" className="header-menu menu-layout1 header-menu menu-layout3" >
-					<div className="container">
-						<div className="row d-flex align-items-center">
-							<div className="col-xl-2 col-lg-2">
-								<div className="logo-area">
-									<Link href={'/'} >
-                                        <a className="temp-logo">
-										<Image src={Logo} layout="intrinsic"
-											width="350"
-											height="40"
-											alt="logo"
-											className="img-fluid"
-										/>
-                                        </a>
-									</Link>
-								</div>
-							</div>
-							<div className="col-xl-6 col-lg-6 d-flex justify-content-center position-static">
-								<nav id="dropdown" className="template-main-menu template-main-menu-3">
-									<ul>
-										<li>
-											<Link href={'/'} >
-												<a className={`${router.pathname=='/' ? 'active' : ''}`}>Home</a>
-											</Link>
-										</li>
-										<li>
-											<Link href={'/about'} >
-												<a className={`${router.pathname.search('about')!=-1 ? 'active' : ''}`} >About</a>
-											</Link>
-										</li>
-										<li>
-											<Link href={'/opportunities'} >
-												<a className={`${router.pathname.search('opportunities')!=-1 || router.pathname.search('opportunity')!=-1 ? 'active' : ''}`}>Opportunities</a>
-											</Link>
-										</li>
-										{/* <li className="hide-on-desktop-menu">
-											<a href="index.html">Pages</a>
-											<ul>
-												<li>
-													<a href="about-1.html">About</a>
-												</li>
-												<li>
-													<a href="with-sidebar2.html">Property</a>
-												</li>
-												<li>
-													<a href="blog1.html">Blog</a>
-												</li>
-												<li>
-													<a href="404.html">404 Error</a>
-												</li>
-												<li>
-													<a href="contact.html">Contact</a>
-												</li>
-											</ul>
-										</li> */}
-										<li>
-											<Link href={'/contact'}
-											>
-												<a className={`${router.pathname.search('contact')!=-1 ? 'active' : ''}`}>
-												Contact
-												</a>
-											</Link>
-										</li>
-									</ul>
-								</nav>
-							</div>
-							<div className="col-xl-4 col-lg-4 d-flex justify-content-end">
-								<div className="header-action-layout1">
-									<ul className="action-list">
-										<li className="action-item-style left-right-btn">
-											<Link href={'/'}>
-                                                <a data-bs-toggle="tooltip" data-bs-placement="bottom" title="Compare">
-                                                    <i className="flaticon-left-and-right-arrows icon-round"></i>
-                                                    <div className="item-count">0</div>
-                                                </a>
-											</Link>
-										</li>
-										<li className="action-item-style wish-btn">
-											<Link href={'/'}>
-                                                <a data-bs-toggle="tooltip" data-bs-placement="bottom" title="Favourites">
-                                                    <i className="flaticon-heart icon-round"></i>
-                                                    <div className="item-count">0</div>
-                                                </a>
-											</Link>
-										</li>
-										<li className="action-item-style my-account">
-											<Link href={`/${user==null ? 'sign-in' :JSON.parse(user).userType=='Buyer' ? 'buyer': 'seller'}`}>
-												<a data-bs-toggle="tooltip" data-bs-placement="bottom" title="Sign In" >
-													<i className="flaticon-user-1 icon-round"></i>
-												</a>
-											</Link>
-										</li>
-										<li className="listing-button">
-											<Link href={token ? '/seller/property/add' : '/sign-in?redirect_to=seller/property/add'}>
-												<a className="listing-btn">
-													<span>
-														<i className="fas fa-plus-circle"></i>
-													</span>
-													<span className="item-text">Add Property</span>
-												</a>
-											</Link>
-										</li>
-									</ul>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<SearchSection />
-			</header>
-			<header className="px-3 py-2 mob-header">
-				<div className="d-flex flex-wrap justify-content-between align-items-center">
-					<div>
-						<Link href={'/'} >
-							<a className="temp-logo">
-							<Image src={Logo} layout="intrinsic"
-								width="300"
-								height="36"
-								alt="logo"
-								className="img-fluid"
-							/>
-							</a>
-						</Link>
-					</div>
-					<div style={{textAlign: 'right'}}>
-						<svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" width={'30px'} onClick={()=>setShowSideMenu(true)}>
-							<path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16m-7 6h7" />
-						</svg>
-					</div>
-				</div>
-				<div className={`${styles.sidebar} ${showSideMenu==true ? styles.show : ''}`}>
-					<svg xmlns="http://www.w3.org/2000/svg" className={`h-6 w-6 ${styles.close}`} fill="none" viewBox="0 0 24 24" stroke="currentColor" width="30px" onClick={()=>setShowSideMenu(false)}>
-						<path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
-					</svg>
-					<div className={styles.menu}>
-						<div className={styles.logo}>
-							<Link href={'/'} >
-								<a className="temp-logo">
-								<Image src={Logo}
-									width="157"
-									height="40"
-									alt="logo"
-									className="img-fluid"
-									layout="responsive"
-								/>
+			{/* Start of Site Header  */}
+			<div className="bg-white sticky top-0 w-full p-2 z-10">
+				<div className="flex flex-wrap items-center justify-between px-5">
+					<div className="logo hidden lg:block">
+                        <div style={{ width: 200 }}>
+							<Link href={'/'}>
+								<a>
+									<Image src={Logo} alt="Logo" className="w-full" />
 								</a>
 							</Link>
-						</div>
-						<ul>
+                        </div>
+                    </div>
+					<nav className="menu-center col-span-2 hidden lg:block">
+						<ul className="flex flex-wrap items-center ml-5">
 							<li>
 								<Link href={'/'}>
-									<a onClick={()=>setShowSideMenu(false)}>Home</a>
+									<a className="nav-item nav-active block text-center">Home</a>
 								</Link>
 							</li>
-
 							<li>
 								<Link href={'/about'}>
-									<a onClick={()=>setShowSideMenu(false)}>About</a>
+									<a className="nav-item text-center">About</a>
 								</Link>
 							</li>
-
-							<li>
-								<Link href={'/opportunities'}>
-									<a onClick={()=>setShowSideMenu(false)}>Opportunities</a>
-								</Link>
-							</li>
-
 							<li>
 								<Link href={'/contact'}>
-									<a onClick={()=>setShowSideMenu(false)}>Contact</a>
+									<a className="nav-item text-center">Contact</a>
+								</Link>
+							</li>
+							<li>
+								<Link href={'/opportunities'}>
+									<a className="bg-white duration-300 ease-in-out hover:bg-black hover:text-white inline-block px-4 py-1 rounded-3xl text-black border border-black border-solid ml-5">Auction</a>
 								</Link>
 							</li>
 						</ul>
+					</nav>
+
+					{/* Small screen menu */}
+					<div className="w-4/12 block lg:hidden p-4" onClick={(e)=>openMobileMenu()}>
+						<svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" id="menu-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+							<path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h7" />
+						</svg>
+					</div>
+					<div className="logo w-4/12 block lg:hidden">
+						<Link href={'/'}>
+							<a>
+								<Image src={Logo} layout="intrinsic" width="350" height="40" alt="logo" className="img-fluid" />
+							</a>
+						</Link>
+					</div>
+
+					<div className="flex flex-wrap justify-end">
+						{/* Display in medium screen */}
+						{
+							typeof window !== 'undefined' && (
+								(user!=undefined && user!=null && JSON.parse(user).userType=='Seller') && (
+									<div className="hidden md:block">
+										<Link href={'/seller/property/add'}>
+											<a className={"bg-black border border-black border-solid duration-300 ease-in-out hover:bg-white hover:text-black inline-block m-1 px-4 py-1 rounded-3xl text-white"}>+ Add Property</a>
+										</Link>
+									</div>
+								)
+							)
+						}
+						{
+							typeof window !== 'undefined' && (
+								user!=undefined && user!=null ? (
+									JSON.parse(user).userType=='Buyer' ? (
+										<BuyerDropDown />
+									) : (
+										<SellerDropDown />
+									)
+								) : (
+									<div>
+										<Link href={'/sign-up'} passHref>
+											<a className={"bg-white border border-black border-solid duration-300 ease-in-out hover:bg-black hover:text-white inline-block m-1 px-4 py-1 rounded-3xl text-black mr-2"}>Register</a>
+										</Link>
+										<Link href={'/sign-in'} passHref>
+											<a className={"bg-white border border-black border-solid duration-300 ease-in-out hover:bg-black hover:text-white inline-block m-1 px-4 py-1 rounded-3xl text-black"}>Login</a>
+										</Link>
+									</div>
+								)
+							)
+						}
 					</div>
 				</div>
-			</header>
+			</div>
+			{/* ENd of Site Header  */}
+
+			{/* Mobile Responsive Header */}
+			<div className="bg-white duration-500 fixed h-screen w-full sm:w-10/12 md:w-2/6 p-4 top-0 transition-all z-40 translate-x--100" id="mobile-menu">
+				<div className="close-icon absolute close-icon h-5 text-red-500 w-5" style={{right: '1rem'}}>
+					<svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" id="close-menu-icon" fill="#f56565" viewBox="0 0 24 24" stroke="#f56565" strokeWidth="{2}" onClick={(e)=>closeMobileMenu()}>
+						<path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+					</svg>
+				</div>
+				<ul>
+					<li>
+						<Link href={'/'}>
+							<a className="p-3 block text-xl text-blue-800" onClick={(e)=>closeMobileMenu()}>Home</a>
+						</Link>
+					</li>
+					<li>
+						<Link href={'/opportunities'}>
+							<a className="p-3 block text-xl" onClick={(e)=>closeMobileMenu()}>Opportunities</a>
+						</Link>
+					</li>
+					<li>
+						<Link href={'/about'}>
+							<a className="p-3 block text-xl" onClick={(e)=>closeMobileMenu()}>About</a>
+						</Link>
+					</li>
+					<li>
+						<Link href={'/contact'}>
+							<a className="p-3 block text-xl" onClick={(e)=>closeMobileMenu()}>Contact</a>
+						</Link>
+					</li>
+				</ul>
+			</div>
+			<div className="mobile-menu-overlay bg-black bg-opacity-50 duration-300 fixed h-screen top-0 transition-all w-full z-10 translate-x--100" onClick={(e)=>closeMobileMenu()} />
 		</>
 	);
 };

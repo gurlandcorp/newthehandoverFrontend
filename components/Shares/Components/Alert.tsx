@@ -9,15 +9,13 @@ export interface State extends SnackbarOrigin {
     open: boolean;
 }
 
-const styles = makeStyles({
-    alert: {
-        backgroundColor: '#00c194',
-        color: '#fff'
-    }
-})
-
 const theme = createTheme({
     components: {
+        MuiAlert: {
+            styleOverrides: {
+                
+            }
+        },
         MuiSnackbar: {
         },
     },
@@ -30,7 +28,6 @@ const Alert = (props: any) => {
         vertical: 'top',
         horizontal: 'right',
     });
-
     const { vertical, horizontal, open } = state;
 
     const handleClick = (newState: SnackbarOrigin) => () => {
@@ -111,12 +108,17 @@ const Alert = (props: any) => {
                 onClose={handleClose}
                 key={vertical + horizontal} 
             >
-                <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
+                <Alert onClose={handleClose} severity={`info`} sx={{ width: '100%' }}>
                     {props.message}
                 </Alert>
             </Snackbar>
         </ThemeProvider>
     );
+}
+Alert.defaultProps = {
+    open: false,
+    setAlert: () => {},
+    message: ""
 }
 
 export default Alert;

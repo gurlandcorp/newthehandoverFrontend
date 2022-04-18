@@ -20,14 +20,14 @@ async function handler(req:NextApiRequest, res: NextApiResponse) {
         });
 
         if (result?.status == 200) {
-            let result2 = await axios({
+            let result2: any = await axios({
                 method: "POST",
                 url:`${process.env.API_URL}/signup/verifyemail`, 
                 headers: {
                     "Content-Type": "application/json"
                 },
                 data: {
-                    code: result?.data?.SavedUser?.code,
+                    code: result.data?.SavedUser?.code,
                 }
             }).then(response => {
                 return response
@@ -36,7 +36,7 @@ async function handler(req:NextApiRequest, res: NextApiResponse) {
             });
         }
 
-        return res.status(200).json({status: 1, data: result})
+        return res.status(200).json({status: result.status, data: result.data})
     }
 
     return res.status(200).json({status:0,message: 'Api is not valid'})

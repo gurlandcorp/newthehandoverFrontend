@@ -1,7 +1,7 @@
 import type { NextPage } from 'next'
 import React from 'react'
 import PropertyContent from "../../components/Property"
-import FeaturedProperty from '../../components/Shares/FeaturedProperty'
+import FeaturedProperty from '../../components/Home/Featured-Products/FeaturedProperty'
 
 const Property: NextPage = ({data}: any) => {
     return (

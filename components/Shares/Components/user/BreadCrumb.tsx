@@ -1,37 +1,31 @@
 import React from 'react'
-import { Box, Breadcrumbs } from '@mui/material'
-import { makeStyles } from '@mui/styles'
-import { styled, useTheme, Theme, CSSObject, createTheme, ThemeProvider } from '@mui/material/styles';
+import Link from 'next/link'
 
-const theme = createTheme({
-    components: {
-        MuiBreadcrumbs: {
-            styleOverrides: {
-                root: {
-                    boxShadow: '0px 10px 10px 0px rgba(137,137,137,0.1)',
-                    padding: '1rem 1rem',
-                    backgroundColor: '#fff',
-                    borderRadius: '10px',
-                    '& a': {
-                        color: '#000'
-                    },
-                    '& a:hover': {
-                        color: '#00c194'
-                    }
-                },
-            }
-        },
-    },
-})
+const BreadCrumb = ({Links=[]}: any) => {
 
-const BreadCrumb = ({children}: any) => {
-    // const classes = useStyles()
     return (
-        <ThemeProvider theme={theme}>
-            <Breadcrumbs>
-                {children}
-            </Breadcrumbs>
-        </ThemeProvider>
+        <nav className="relative w-full flex flex-wrap items-center justify-between py-2 hover:text-gray-700 rounded" style={{ backgroundColor: '#fbfbfb' }}>
+            <div className="container-fluid w-full flex flex-wrap items-center justify-between px-6">
+                <nav className="bg-grey-light rounded-md w-full" aria-label="breadcrumb">
+                    <ol className="list-reset flex">
+                        {
+                            Links.map((link: any, index:any) => {
+                                return link.href != undefined ? (
+                                    <li key={index}>
+                                        <Link href={link.href}>
+                                            <a className="text-black mr-1">{link.text}</a>
+                                        </Link>
+                                    </li>
+                                )
+                                : (
+                                    <li key={index}> / <span className="text-gray-500">{link.text}</span></li>
+                                )
+                            })
+                        }
+                    </ol>
+                </nav>
+            </div>
+        </nav>
     )
 }
 
