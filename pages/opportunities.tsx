@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { Base_URL } from '../config/constants';
 import { useRouter } from 'next/router';
 import BackgroundImage from "/public/img/image-box-2.jpg"
+import { AnyObject } from 'chart.js/types/basic';
 
 const Properties: NextPage = ({data, query}: any) => {
 
@@ -46,6 +47,17 @@ const Properties: NextPage = ({data, query}: any) => {
 
     const router = useRouter()
 
+	const changeOrder = async (e: any) => {
+		let res = await fetch(`${Base_URL}/api/property/${e.target.value}`, {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json"
+			}
+		})
+		.then(response => response.json())
+		setOpportunities(res.data)
+	}
+
 	const searchSubmit = async (e: any) => {
         e.preventDefault()
 
@@ -61,7 +73,6 @@ const Properties: NextPage = ({data, query}: any) => {
 				city: city,
 			}
 		}
-		console.log(filters)
 		let res = await fetch(`${Base_URL}/api/property/filter`, {
 			method: "POST",
 			body: JSON.stringify(filters),
@@ -139,8 +150,12 @@ const Properties: NextPage = ({data, query}: any) => {
 					{/* Opportunities List */}
 					<div className="content-area w-full lg:w-2/3">
 						<div className="pt-3 ml-0 lg:ml-5 mt-5 lg:mt-0">
-							<div className="listing-filters w-full mb-5">
+							<div className="listing-filters w-full mb-5 flex flex-wrap justify-between">
 								<h3 className="listing-title text-3xl text-blue-900">All Listings</h3>
+								<select name="" id="" className="p-2 px-4 text-sm shadow rounded-lg hover:shadow-lg" onChange={(e)=>changeOrder(e)}>
+									<option value="desc">Sort by desc</option>
+									<option value="asc">Sort by asc</option>
+								</select>
 							</div>
 							<div className="listing-cont grid grid-cols-1 md:grid-cols-2 gap-5">
 								{
