@@ -1,19 +1,10 @@
 import { NextPage } from 'next'
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Blog4 from "../public/assets/img/blog/now.jpg";
-import widget05 from "../public/assets/img/blog/widget05.jpg";
-import JoiningBanner from '../components/Home/JoiningBanner';
-import BreadCrumb from '../components/Shares/BreadCrumb';
-import Image from 'next/image';
-import PropertyCard from '../components/Shares/PropertyCard';
-import PropertyCardForLG12 from '../components/Shares/PropertyCardForLG12';
 import Link from 'next/link';
 import { Base_URL } from '../config/constants';
-import { MainContext } from '../context/MainContext';
 import { useRouter } from 'next/router';
 import BackgroundImage from "/public/img/image-box-2.jpg"
-import axios from 'axios';
-import SearchSection from '../components/Includes/SearchSection';
 
 const Properties: NextPage = ({data, query}: any) => {
 
@@ -53,7 +44,6 @@ const Properties: NextPage = ({data, query}: any) => {
 		"Philadelphia"
 	]
 
-	const {search, setSearch} = useContext(MainContext)
     const router = useRouter()
 
 	const searchSubmit = async (e: any) => {
@@ -104,16 +94,16 @@ const Properties: NextPage = ({data, query}: any) => {
 
     return (
         <>
-			{/* Start of Search Bar  */}
+			{/* Start of page heading  */}
 			<div className="" style={{ backgroundImage: `linear-gradient(178deg, #00000059, rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 1), white), url(${BackgroundImage.src})`, backgroundRepeat: 'no-repeat' }}>
 				<div className="font-semibold py-32 text-3xl text-center">
 					<h3 className="uppercase theme-color text-4xl">Opportunities</h3>
 				</div>
 			</div>
-			{/* end of search Bar  */}
 
 			<div className="width py-10 mx-auto">
 				<div className="flex flex-wrap">
+					{/* Left Side Advance Search */}
 					<div className="sidebar w-full lg:w-1/3">
 						<div className="adv-search p-5 shadow-xl rounded">
 							<h2 className="text-center font-medium text-xl mb-5">Advanced Search</h2>
@@ -145,6 +135,8 @@ const Properties: NextPage = ({data, query}: any) => {
 							</form>
 						</div>
 					</div>
+
+					{/* Opportunities List */}
 					<div className="content-area w-full lg:w-2/3">
 						<div className="pt-3 ml-0 lg:ml-5 mt-5 lg:mt-0">
 							<div className="listing-filters w-full mb-5">

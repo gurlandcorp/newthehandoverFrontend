@@ -35,20 +35,42 @@ const Biddings = (props: any) => {
         await setCurrentProperty('')
     }
 
+    const [cardNumber, setCardNumber] = useState('')
+    const [expiryMonth, setExpiryMonth] = useState('')
+    const [expiryYear, setExpiryYear] = useState('')
+    const [CVV, setCVV] = useState('')
+    const [bidderId, setBidderId] = useState('')
+    const [sellerId, setSellerId] = useState('')
+    const [amount, setAmount] = useState('')
+
     const payNow = async (e: any) => {
         e.preventDefault();
 
-        const res: any = await fetch(`${Base_URL}/api/buyer/pay/create-token`,{
-            method:"POST"
+        let form_data = {
+            cardNumber: cardNumber,
+            exp_month: expiryMonth,
+            exp_year: expiryYear,
+            cvv: CVV,
+            bidderId: bidderId,
+            sellerId: sellerId,
+            propertyId: currentProperty!='' ? currentProperty?.Property[0]?._id : '',
+            amount: amount
+        }
+
+        const res: any = await fetch(`${Base_URL}/api/buyer/pay`,{
+            method:"POST",
+            body: JSON.stringify(form_data)
         }).then(response => response.json());
 
-        if(res.error != undefined)
-        {
-            console.log('error:', res.error)
-            return false;
-        }
-        let token = res.result.id;
-        console.log('result:', res.result.id)
+        console.log(res)
+
+        // if(res.error != undefined)
+        // {
+        //     console.log('error:', res.error)
+        //     return false;
+        // }
+        // let token = res.result.id;
+        // console.log('result:', res.result.id)
     }
 
     return (
@@ -62,19 +84,19 @@ const Biddings = (props: any) => {
                 <div className="mt-4">
                 </div>
             </div>
-            <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-5">
+            <div className="grid sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-5">
                 {
                     props.biddings.map((bid: any, index: any) => {
                         return (
-                            <MyBids key={index} bid={bid} openPayNow={openPayNow} />
+                            <MyBids key={index} bid={bid} openPayNow={openPayNow} setBidderId={setBidderId} setSellerId={setSellerId} setAmount={setAmount} />
                         )
                     })
                 }
             </div>
 
-            <div className="pay-now-container fixed top-0 bottom-0 left-0 right-0 bg-gray-900 bg-opacity-50 hidden transition-all duration-300 scale-0" style={{zIndex: "1200"}}>
-                <div className="flex flex-wrap justify-center items-center mt-24">
-                    <form className="p-4 bg-white rounded shadow-box w-3/6" onSubmit={(e)=>payNow(e)}>
+            <div className="pay-now-container fixed top-0 bottom-0 left-0 right-0 bg-gray-900 bg-opacity-50 hidden transition-all duration-300 scale-0 overflow-y-auto" style={{zIndex: "1200"}}>
+                <div className="flex flex-wrap justify-center items-center py-10 lg:mt-24">
+                    <form className="p-4 bg-white rounded shadow-box w-11/12 md:w-5/6 lg:w-3/6" onSubmit={(e)=>payNow(e)}>
                         <div className="p-2 text-xl text-center font-medium">Payment</div>
                         <div className="font-medium">Property Details</div>
                         <div className="mb-5 text-sm bg-gray-50 p-2 rounded">
@@ -85,12 +107,12 @@ const Biddings = (props: any) => {
                         <div className="mb-5 bg-gray-50 p-2 rounded">
                             <div className="mb-5">
                                 <label htmlFor="">Card Number</label>
-                                <input className="border border-solid border-white focus:border-blue-700 w-full rounded py-1 px-2" placeholder="Enter 16 digit card number" />
+                                <input className="border border-solid border-white focus:border-blue-700 w-full rounded py-1 px-2" placeholder="Enter 16 digit card number" value={cardNumber} onChange={(e)=>setCardNumber(e.target.value)} />
                             </div>
-                            <div className="grid grid-cols-3 gap-4 justify-center">
+                            <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 justify-center">
                                 <div className="">
                                     <label htmlFor="">Expiry Month</label>
-                                    <select className="border border-solid border-white focus:border-blue-700 w-full rounded py-1 px-2" >
+                                    <select className="border border-solid border-white focus:border-blue-700 w-full rounded py-1 px-2" value={expiryMonth} onChange={(e)=>setExpiryMonth(e.target.value)} >
                                         <option value="0">Select Month</option>
                                         <option value="1">January</option>
                                         <option value="2">Feburary</option>
@@ -108,8 +130,8 @@ const Biddings = (props: any) => {
                                 </div>
                                 <div className="">
                                     <label htmlFor="">Year</label>
-                                    <select className="border border-solid border-white focus:border-blue-700 w-full rounded py-1 px-2" >
-                                        <option value="0">Select Year</option>
+                                    <select className="border border-solid border-white focus:border-blue-700 w-full rounded py-1 px-2" value={expiryYear} onChange={(e)=>setExpiryYear(e.target.value)} >
+                                        <option value="">Select Year</option>
                                         <option value="2022">2022</option>
                                         <option value="2023">2023</option>
                                         <option value="2024">2024</option>
@@ -121,12 +143,12 @@ const Biddings = (props: any) => {
                                 </div>
                                 <div className="">
                                     <label htmlFor="">CVV</label>
-                                    <input className="border border-solid border-white focus:border-blue-700 w-full rounded py-1 px-2" placeholder="Enter cvv code" />
+                                    <input className="border border-solid border-white focus:border-blue-700 w-full rounded py-1 px-2" placeholder="Enter cvv code" value={CVV} onChange={(e)=>setCVV(e.target.value)} />
                                 </div>
                             </div>
-                            <div className="text-right">
-                                <button className="p-2 px-4 bg-red-100 text-red-800 rounded mt-2 mr-2" onClick={()=>clear()}>Cancel</button>
-                                <button className="p-2 px-4 bg-blue-100 text-blue-800 rounded mt-2">Pay Now</button>
+                            <div className="text-right flex flex-wrap">
+                                <button className="p-2 px-4 bg-blue-100 text-blue-800 rounded mr-2 mt-2">Pay Now</button>
+                                <button className="p-2 px-4 bg-red-100 text-red-800 rounded mt-2" onClick={()=>clear()}>Cancel</button>
                             </div>
                         </div>
                     </form>

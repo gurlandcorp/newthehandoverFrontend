@@ -193,10 +193,16 @@ const Property = (props:any) => {
                                     </div>
                                     <div className="flex flex-col mt-2 sm:mt-0">
                                         <p className="bg-blue-100 text-blue-500 font-medium px-2 rounded-md text-center">{'AED '+bid.bidAmount}</p>
-                                        <button className="bg-gray-900 text-gray-100 px-2 py-1 rounded-md shadow-lg" onClick={()=>{
-                                            setSelectedBidId(bid._id)
-                                            setDisplayAlert(true)
-                                        }}>Accept Bid</button>
+                                        {
+                                            bid.winner == true ? (
+                                                <span className="bg-green-900 text-green-100 px-2 rounded-md shadow-lg text-center">Accepted</span>
+                                            ) : (
+                                                <button className="bg-gray-900 text-gray-100 px-2 py-1 rounded-md shadow-lg" onClick={()=>{
+                                                    setSelectedBidId(bid._id)
+                                                    setDisplayAlert(true)
+                                                }}>Accept Bid</button>
+                                            )
+                                        }
                                     </div>
                                 </div>
                             )

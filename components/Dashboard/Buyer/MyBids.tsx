@@ -2,7 +2,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
 
-const MyBids = ({bid, openPayNow}: any) => {
+const MyBids = ({bid, openPayNow, setBidderId, setSellerId, setAmount}: any) => {
 
     let currentDate: any = new Date()
     let propertyEndTime: any = new Date(bid.Property[0].biddingEnd.split('T')[0])
@@ -52,9 +52,18 @@ const MyBids = ({bid, openPayNow}: any) => {
                     </span>
                 </div>
             </div>
-            <div className="w-full">
-                <button className="bg-gray-900 text-white inline-block w-full py-1" onClick={()=>openPayNow(bid)}>Pay Now</button>
-            </div>
+            {
+                bid.winner == true && (
+                    <div className="w-full">
+                        <button className="bg-gray-900 text-white inline-block w-full py-1" onClick={()=>{
+                            setAmount(bid.bidAmount)
+                            setBidderId(bid.bidderId)
+                            setSellerId(bid.sellerId)
+                            openPayNow(bid)
+                        }}>Pay Now</button>
+                    </div>
+                )
+            }
         </div>
     )
 }
