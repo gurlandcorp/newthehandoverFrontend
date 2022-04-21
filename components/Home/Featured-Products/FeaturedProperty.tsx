@@ -4,6 +4,8 @@ import Image from "next/image";
 import styles from "./FeaturedProperty.module.css"
 import { LinkButton } from "../../Shares/Buttons";
 import SqFtImage from "/public/img/property-icons/select.png"
+import BedImage from "/public/img/property-icons/bed.png"
+import RegreshImage from "/public/img/property-icons/refresh.png"
 
 const FeaturedProperty = (props: any) => {
 
@@ -27,11 +29,11 @@ const FeaturedProperty = (props: any) => {
                             <div>
                                 <h3 className="text-white text-2xl font-semibold pb-4">{props.data[2].propertyTitle}</h3>
                                 <p className="text-white text-sm pb-2">{props.data[2].location.address}, {props.data[2].location.city} {props.data[2].location.zip}</p>
-                                <div className="grid grid-cols-4 text-gray-300 text-xs">
-                                    <span><Image src={SqFtImage} width={15} height={15} alt={'area sq.ft'} /> {props.data[2].area} sq.ft</span>
-                                    <span>{props.data[2].bedrooms} bed</span>
-                                    <span>{props.data[2].bathrooms} bath</span>
-                                    <span>3 hours left</span>
+                                <div className="grid grid-cols-4 text-gray-300 text-xs items-center">
+                                    <span className="flex justify-center"><Image src={SqFtImage} width={15} height={15} alt={'area sq.ft'} /> <span className="ml-1">{props.data[2].area} sq.ft</span></span>
+                                    <span className="flex justify-center"><Image src={BedImage} width={15} height={15} alt={'area sq.ft'} /> <span className="ml-1">{props.data[2].bedrooms} bed</span></span>
+                                    <span className="flex justify-center"><Image src={BedImage} width={15} height={15} alt={'area sq.ft'} /> <span className="ml-1">{props.data[2].bathrooms} bath</span></span>
+                                    <span className="flex justify-center"><Image src={RegreshImage} width={15} height={15} alt={'area sq.ft'} /> <span className="ml-1">3 hours left</span></span>
                                 </div>
                             </div>
                             <div>
