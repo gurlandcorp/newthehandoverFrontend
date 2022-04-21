@@ -7,7 +7,7 @@ const SearchSection = () => {
 
     const propertyType = [
 		"Constructed",
-		"Non Constructed",
+		"Non-Constructed",
 	]
 
     const {search, setSearch} = useContext(MainContext)
@@ -21,10 +21,10 @@ const SearchSection = () => {
         <>
         {/* Start of Search Bar  */}
         <div className="container-search py-10 mx-auto">
-            <div className="search-wrapper p-4">
-                <form className="gap-4 grid grid-cols-1 lg:grid-cols-7 sm:grid-cols-2 w-full" onSubmit={(e)=>searchSubmit(e)}>
-                    <input type="text" placeholder="What are you looking for ?" className="p-3 w-full col-span-2" value={search.text} onChange={(e)=>setSearch({...search, text: e.target.value})} />
-                    <select className="p-3 w-full col-span-2" onChange={(e)=>setSearch({...search, property_type: e.target.value})}>
+            <div className="search-wrapper p-2 rounded-lg lg:rounded-full">
+                <form className="gap-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-8 sm:grid-cols-2 w-full" onSubmit={(e)=>searchSubmit(e)}>
+                    <input type="text" placeholder="What are you looking for ?" className="px-3 py-1 w-full lg:col-span-3 rounded-full" value={search.text} onChange={(e)=>setSearch({...search, text: e.target.value})} />
+                    <select className="px-3 py-1 w-full lg:col-span-2 rounded-full" onChange={(e)=>setSearch({...search, property_type: e.target.value})}>
                         <option value="">Property Type</option>
                         {
                             propertyType.map((type: any, index: any) => {
@@ -32,12 +32,12 @@ const SearchSection = () => {
                             })
                         }
                     </select>
-                    <select className="p-3 w-full col-span-2" onChange={(e)=>setSearch({...search, city: e.target.value})}>
+                    <select className="px-3 py-1 w-full lg:col-span-2 rounded-full" onChange={(e)=>setSearch({...search, city: e.target.value})}>
                         <option value="">All Cities</option>
                         <option value="Dubai">Dubai</option>
                     </select>
                     <div className="flex flex-wrap items-center justify-end text-right w-full text-3xl">
-                        <button type="submit" className="px-4 py-1 w-full rounded-xl"><span className="mdi mdi-magnify" /> Search </button>
+                        <button type="submit" className="w-full rounded-full">Search <span className="mdi mdi-magnify" /></button>
                     </div>
                 </form>
             </div>

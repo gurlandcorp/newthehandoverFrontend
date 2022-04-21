@@ -5,7 +5,7 @@
     font-size: 18px;
     margin-bottom: 10px;
 }
-.containerFooter ul li span {
+.containerFooter ul li > span.mdi {
     color: #252153;
     font-size: 24px;
 }

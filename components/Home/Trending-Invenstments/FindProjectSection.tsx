@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import styles from "./LocationSection.module.css"
+import styles from "./FindProjectSection.module.css"
 import UmmAlQuwain from "/public/assets/img/toparea/umm-al-quwain.jpg";
 import Fujairah from "/public/assets/img/toparea/fujairah.jpg";
 import Dubai from "/public/assets/img/toparea/dubai.jpg";
@@ -8,10 +8,11 @@ import AbuDhabi from "/public/assets/img/toparea/abu-dhabi.jpg";
 import Ajman from "/public/assets/img/toparea/ajman.jpg";
 import Sharjah from "/public/assets/img/toparea/sharjah.jpg";
 import { Swiper, SwiperSlide } from "swiper/react";
-// Import Swiper styles
+
 import "swiper/css";
 import "swiper/css/pagination";
 import { Pagination } from "swiper";
+import { LinkButton } from "../../Shares/Buttons";
 
 const LocationSection = () => {
     return (
@@ -20,8 +21,8 @@ const LocationSection = () => {
         <div className="py-20" style={{backgroundColor: '#f7f7f7'}}>
             <div className="width mx-auto">
                 <div className="title-box">
-                    <h3 className="sub-title">TOP MARKETS</h3>
-                    <h2 className="theme-color text-lg sm:text-3xl md:text-4xl">Find Your Neighbourhood</h2>
+                    <h3 className="sub-title">TOP Trending Invenstment MARKETS</h3>
+                    <h2 className="theme-color text-lg sm:text-3xl md:text-4xl font-semibold">Find Your Project</h2>
                 </div>
             </div>
             <div className="width mx-auto my-10">
@@ -119,8 +120,7 @@ const LocationSection = () => {
                 </Swiper>
             </div>
             <div className="width mx-auto text-center">
-                <Link href={"/opportunities"}><a className="dark-btn">Explore More</a>
-                </Link>
+                <LinkButton href={"/opportunities"}>Explore More</LinkButton>
             </div>
         </div>
         {/* End Neighbourhood Section Here  */}

@@ -1,6 +1,7 @@
 import React from 'react'
 import Link from 'next/link'
 import LandscapeCards from '../Shares/Cards/LandscapeCards'
+import { LinkButton } from '../Shares/Buttons'
 
 const TopProperties = ({properties}: any) => {
     return (
@@ -9,14 +10,14 @@ const TopProperties = ({properties}: any) => {
         <div className="m-auto py-20 width">
             <div className="my-4">
                 <div className="title-box">
-                    <h2 className="title">Top Properties over last 7 days</h2>
+                    <h2 className="title">Explore the latest properties listings</h2>
                 </div>
             </div>
             <LandscapeCards properties={properties} />
             <div className="text-center">
-                <Link href={'/opportunities'}>
-                    <a className="dark-btn">Go to Properties</a>
-                </Link>
+                <LinkButton href={'/opportunities'}>
+                    Go to Properties
+                </LinkButton>
             </div>
         </div>
         {/* End Top Properties Section Here  */}

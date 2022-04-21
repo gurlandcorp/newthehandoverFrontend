@@ -24,11 +24,11 @@ const Footer = () => {
 							<div className="mb-2">
 								<Image src={Logo.src} alt="logo" width="156" height="18" />
 							</div>
-							<p className="footer-about mb-10">The handover is the only online marketplace for off plan investing. <br /> Search projects for Bid and Invest.</p>
+							<p className="footer-about mb-10 text-gray-500">The handover is the only online marketplace for off plan investing. <br /> Search projects for Bid and Invest.</p>
 							<ul className="list-none">
-								<li className="inline-block mr-3"><a href={'/'}><span className="mdi mdi-facebook" /></a></li>
-								<li className="inline-block mr-3"><a href={'/'}><span className="mdi mdi-twitter" /></a></li>
-								<li className="inline-block mr-3"><a href={'/'}><span className="mdi mdi-instagram" /></a></li>
+								<li className="inline-block mr-3"><a href={'/'}><span className="mdi mdi-facebook text-2xl" /></a></li>
+								<li className="inline-block mr-3"><a href={'/'}><span className="mdi mdi-twitter text-2xl" /></a></li>
+								<li className="inline-block mr-3"><a href={'/'}><span className="mdi mdi-instagram text-2xl" /></a></li>
 							</ul>
 						</div>
 						<div className="col-center">
@@ -58,11 +58,12 @@ const Footer = () => {
 								Contact
 							</div>
 							<ul className="list-none">
-								<li className="flex"><span className="mdi mdi-google-maps" /> <p>Thehandover Gulf FZCO, Dubai
+								<li className="flex"><span className={`${styles.mdi} mdi mdi-google-maps`} /> <p className='text-gray-500'>Thehandover Gulf FZCO, Dubai
 									Silicon Oasis, DDP, Building A2</p></li>
-								<li><span className="mdi mdi-phone" /> Telp: (0411) 425 277 / 425
-									276</li>
-								<li><span className="mdi mdi-email-outline" /> Email: <a href="mailto:inbox@ITsolutions.com">inbox@ITsolutions.com</a></li>
+								<li>
+									<span className={`${styles.mdi} mdi mdi-phone`} /> Telp: <span className='text-gray-500 text-base'>(0411) 425 277 / 425 276</span>
+								</li>
+								<li><span className={`${styles.mdi} mdi mdi-email-outline`} /> Email: <a href="mailto:inbox@ITsolutions.com" className='text-gray-500'>inbox@ITsolutions.com</a></li>
 							</ul>
 						</div>
 					</div>

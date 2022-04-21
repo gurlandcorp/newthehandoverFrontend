@@ -57,25 +57,21 @@ nav ul li a {
     justify-content: center;
     align-items: center;
     background-color: #f7f7f7;
-    border-radius: 10px;
 }
 .container-search input {
     background-color: white;
     border: none;
-    border-radius: 10px;
     font-size: 15px;
 }
 ::placeholder {
     color: black;
     font-weight: 400;
-    /* text-align: center; */
     font-size: 14px;
     opacity: 1;
 }
 .container-search select {
     background-color: white;
     border: none;
-    border-radius: 10px;
     font-size: 15px;
 }
 .container-search button {

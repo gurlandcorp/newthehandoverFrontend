@@ -20,8 +20,6 @@ const Header = (props: any) => {
 		}, 200);
 	}
 
-	// console.log(Cookies.get('user'))
-
 	const closeMobileMenu = async () => {
 		document.querySelector('#mobile-menu')?.classList.toggle('translate-x--100');
 		setTimeout(() => {
@@ -50,17 +48,17 @@ const Header = (props: any) => {
 						<ul className="flex flex-wrap items-center ml-5">
 							<li>
 								<Link href={'/'}>
-									<a className="nav-item nav-active block text-center">Home</a>
+									<a className={`nav-item block text-center ${router.pathname=='/' ? 'nav-active': ''}`}>Home</a>
 								</Link>
 							</li>
 							<li>
 								<Link href={'/about'}>
-									<a className="nav-item text-center">About</a>
+									<a className={`nav-item text-center ${router.pathname=='/about' ? 'nav-active': ''}`}>About</a>
 								</Link>
 							</li>
 							<li>
 								<Link href={'/contact'}>
-									<a className="nav-item text-center">Contact</a>
+									<a className={`nav-item text-center ${router.pathname=='/contact' ? 'nav-active': ''}`}>Contact</a>
 								</Link>
 							</li>
 							<li>

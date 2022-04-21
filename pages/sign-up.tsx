@@ -56,7 +56,7 @@ const SingUp: NextPage = () => {
 
                 if (res.status == 200)
                 {
-                    Cookies.set('user',JSON.stringify(res?.data?.SavedUser))
+                    // Cookies.set('user',JSON.stringify(res?.data?.SavedUser))
                     route.push('/sign-in')
                 }
                 else if(res.status == 0)

@@ -1,11 +1,11 @@
 import { NextPage } from 'next'
 import React, { useEffect, useState } from 'react'
 import Blog4 from "../public/assets/img/blog/now.jpg";
-import Link from 'next/link';
 import { Base_URL } from '../config/constants';
 import { useRouter } from 'next/router';
 import BackgroundImage from "/public/img/image-box-2.jpg"
-import { AnyObject } from 'chart.js/types/basic';
+import Image from 'next/image';
+import Opportunities from "../components/Opportunities"
 
 const Properties: NextPage = ({data, query}: any) => {
 
@@ -48,14 +48,17 @@ const Properties: NextPage = ({data, query}: any) => {
     const router = useRouter()
 
 	const changeOrder = async (e: any) => {
-		let res = await fetch(`${Base_URL}/api/property/${e.target.value}`, {
-			method: "POST",
-			headers: {
-				"Content-Type": "application/json"
-			}
-		})
-		.then(response => response.json())
-		setOpportunities(res.data)
+		if(e.target.value!='')
+		{
+			let res = await fetch(`${Base_URL}/api/property/${e.target.value}`, {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json"
+				}
+			})
+			.then(response => response.json())
+			setOpportunities(res.data)
+		}
 	}
 
 	const searchSubmit = async (e: any) => {
@@ -115,7 +118,7 @@ const Properties: NextPage = ({data, query}: any) => {
 			<div className="width py-10 mx-auto">
 				<div className="flex flex-wrap">
 					{/* Left Side Advance Search */}
-					<div className="sidebar w-full lg:w-1/3">
+					{/* <div className="sidebar w-full lg:w-1/3">
 						<div className="adv-search p-5 shadow-xl rounded">
 							<h2 className="text-center font-medium text-xl mb-5">Advanced Search</h2>
 							<form onSubmit={(e) => searchSubmit(e)}>
@@ -145,43 +148,22 @@ const Properties: NextPage = ({data, query}: any) => {
 								</div>
 							</form>
 						</div>
-					</div>
+					</div> */}
 
 					{/* Opportunities List */}
-					<div className="content-area w-full lg:w-2/3">
+					<div className="content-area w-full">
 						<div className="pt-3 ml-0 lg:ml-5 mt-5 lg:mt-0">
-							<div className="listing-filters w-full mb-5 flex flex-wrap justify-between">
-								<h3 className="listing-title text-3xl text-blue-900">All Listings</h3>
-								<select name="" id="" className="p-2 px-4 text-sm shadow rounded-lg hover:shadow-lg" onChange={(e)=>changeOrder(e)}>
-									<option value="desc">Sort by desc</option>
-									<option value="asc">Sort by asc</option>
+							<div className="listing-filters w-full mb-5">
+								<h3 className="listing-title text-3xl theme-color font-semibold">All Listings</h3>
+							</div>
+							<div className='py-5'>
+								<select name="" id="" className="p-2 px-4 text-sm rounded-full border border-solid" onChange={(e)=>changeOrder(e)}>
+									<option value="">Sort by</option>
+									<option value="desc">Desc</option>
+									<option value="asc">Asc</option>
 								</select>
 							</div>
-							<div className="listing-cont grid grid-cols-1 md:grid-cols-2 gap-5">
-								{
-									opportunities?.length > 0 && (
-										opportunities.map((property: any, index: any)=> {
-											return (
-												<Link href={'/opportunity/'+property._id} key={index}>
-													<a className="list-item shadow-box rounded-xl overflow-hidden relative" style={{ backgroundImage: `url("${property.images[0]}")`, backgroundSize: 'cover', backgroundPosition: 'center', height: 300 }}>
-														<div className="detail-box p-5 bg-gray-800 text-white rounded-t-xl absolute bottom-0 w-full">
-															<div className="box-title w-full">{property.propertyTitle}</div>
-															<div className="box-location text-gray-500 text-sm">{property.location.city}</div>
-															<ul className="grid grid-cols-3 gap-2 text-sm text-gray-500 w-full">
-																<li><span className="mdi mdi-vector-square-plus" /> {property.area} sqft</li>
-																<li><span className="mdi mdi-bed-king-outline" /> {property.bedrooms} Beds</li>
-																<li><span className="mdi mdi-bathtub-outline" /> {property.bathrooms} Baths</li>
-																{/* <li><span className="mdi mdi-cached" /> 4 Days ago</li> */}
-															</ul>
-															<div className="box-price">AED {property.priceDemand}</div>
-														</div>
-													</a>
-												</Link>
-											)
-										})
-									)
-								}
-							</div>
+							<Opportunities opportunities={opportunities} />
 						</div>
 					</div>
 				</div>
