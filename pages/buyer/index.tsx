@@ -1,6 +1,6 @@
 import type { NextPage } from 'next'
+import Link from 'next/link'
 import React, {useEffect} from 'react'
-import image from "../../public/assets/img/bg-home.jpg"
 
 const Buyer: NextPage = (props: any) => {
 
@@ -10,7 +10,11 @@ const Buyer: NextPage = (props: any) => {
                 <div className="container-fluid w-full flex flex-wrap items-center justify-between px-6">
                     <nav className="bg-grey-light rounded-md w-full" aria-label="breadcrumb">
                         <ol className="list-reset flex">
-                            <li><a href="/buyer" className="text-black">Dashboard</a></li>
+                            <li>
+                                <Link href="/buyer">
+                                    <a className="text-black">Dashboard</a>
+                                </Link>
+                            </li>
                         </ol>
                     </nav>
                 </div>

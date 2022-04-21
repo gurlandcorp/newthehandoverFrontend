@@ -26,8 +26,12 @@ const Index = (props: any) => {
 		<>
 			<div className="bg-gray-50 p-3">
 				<div className="text-sm">
-					<a href="/" className="mr-1">Home</a>&gt;
-					<a href="/opportunities" className="mx-1">Opportunities</a> &gt;
+					<Link href={'/'}>
+						<a className="mr-1">Home</a>
+					</Link>&gt;
+					<Link href="/opportunities">
+						<a className="mx-1">Opportunities</a>
+					</Link>&gt;
 					<span className="text-gray-600 mx-1">{props.property.propertyTitle}</span>
 				</div>
 			</div>

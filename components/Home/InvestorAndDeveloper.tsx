@@ -9,7 +9,7 @@ const InvestorAndDeveloper = () => {
             <div className='grid grid-cols-1 md:grid-cols-2 gap-20'>
                 <div className='bg-white shadow-box rounded-lg overflow-hidden'>
                     <div className='relative bg-black bg-opacity-20' style={{width: '100%', height:'300px'}}>
-                        <Image src={DubaiImage.src} layout="fill" className="object-cover" />
+                        <Image src={DubaiImage.src} layout="fill" className="object-cover" alt={'Investor'} />
                         <div className='absolute bottom-0 left-0 right-0 top-0 bg-black bg-opacity-20 flex items-end'>
                             <div className='text-white ml-6 mb-6 text-2xl font-medium'>For Investors</div>
                         </div>
@@ -23,14 +23,14 @@ const InvestorAndDeveloper = () => {
                 </div>
                 <div className='bg-white shadow-box rounded-lg overflow-hidden'>
                     <div className='relative bg-black bg-opacity-20' style={{width: '100%', height:'300px'}}>
-                        <Image src={DubaiImage.src} layout="fill" className="object-cover" />
+                        <Image src={DubaiImage.src} layout="fill" className="object-cover" alt={'Developer'} />
                         <div className='absolute bottom-0 left-0 right-0 top-0 bg-black bg-opacity-20 flex items-end'>
                             <div className='text-white ml-6 mb-6 text-2xl font-medium'>For Developers</div>
                         </div>
                     </div>
                     <div className='py-8 px-6 text-sm'>
-                        <p className='mb-1'>The UAE's real estate sector has witnessed sustained growth in the last two decades, and the recent developments in Dubai have put this emirate on the global map. The UAE offers ample opportunities for investors and developers alike to impact its real estate industry.</p>
-                        <p>We have several strategically selected real estate development projects in UAE that offer various opportunities to the developers. You can buy offplan investment properties for sale in Dubai. As a developer, you can purchase off-plan property of your choice from our portal and develop it to earn a lucrative income. We take care of the entire process from start to finish, ensuring you don't have to worry about anything.</p>
+                        <p className='mb-1'>The UAE&lsquo;s real estate sector has witnessed sustained growth in the last two decades, and the recent developments in Dubai have put this emirate on the global map. The UAE offers ample opportunities for investors and developers alike to impact its real estate industry.</p>
+                        <p>We have several strategically selected real estate development projects in UAE that offer various opportunities to the developers. You can buy offplan investment properties for sale in Dubai. As a developer, you can purchase off-plan property of your choice from our portal and develop it to earn a lucrative income. We take care of the entire process from start to finish, ensuring you don&lsquo;t have to worry about anything.</p>
                         <LinkButton href={'/sign-in'}>Developer</LinkButton>
                     </div>
                 </div>

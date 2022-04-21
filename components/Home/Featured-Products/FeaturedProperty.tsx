@@ -3,6 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import styles from "./FeaturedProperty.module.css"
 import { LinkButton } from "../../Shares/Buttons";
+import SqFtImage from "/public/img/property-icons/select.png"
 
 const FeaturedProperty = (props: any) => {
 
@@ -19,7 +20,7 @@ const FeaturedProperty = (props: any) => {
                 </div>
             </div>
             <div className="relative" style={{height: '40rem'}}>
-                <Image src={props.data[2].images[0]} layout="fill" className="object-cover" />
+                <Image src={props.data[2].images[0]} layout="fill" className="object-cover" alt={props.data[2].propertyTitle} />
                 <div className="absolute bottom-0 top-0 w-full" style={{background: "linear-gradient(0deg, #000000a6, #ffffff4d, transparent, transparent)"}}>
                     <div className="width mx-auto h-full">
                         <div className="flex flex-wrap justify-between items-end py-16 h-full">
@@ -27,7 +28,7 @@ const FeaturedProperty = (props: any) => {
                                 <h3 className="text-white text-2xl font-semibold pb-4">{props.data[2].propertyTitle}</h3>
                                 <p className="text-white text-sm pb-2">{props.data[2].location.address}, {props.data[2].location.city} {props.data[2].location.zip}</p>
                                 <div className="grid grid-cols-4 text-gray-300 text-xs">
-                                    <span>{props.data[2].area} sq.ft</span>
+                                    <span><Image src={SqFtImage} width={15} height={15} alt={'area sq.ft'} /> {props.data[2].area} sq.ft</span>
                                     <span>{props.data[2].bedrooms} bed</span>
                                     <span>{props.data[2].bathrooms} bath</span>
                                     <span>3 hours left</span>

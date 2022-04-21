@@ -9,9 +9,9 @@ const index = ({ opportunities }: any) => {
                 opportunities?.length > 0 && (
                     opportunities.map((property: any, index: any)=> {
                         return (
-                            <Link href={'/'}>
-                                <a key={index} className="relative rounded-lg overflow-hidden" style={{height: '16rem'}}>
-                                    <Image src={property.images[0]} layout="fill" className="object-cover" />
+                            <Link href={'/'} key={index}>
+                                <a className="relative rounded-lg overflow-hidden" style={{height: '16rem'}}>
+                                    <Image src={property.images[0]} layout="fill" className="object-cover" alt={property.propertyTitle} />
                                     <div className="absolute bottom-0 top-0 w-full" style={{background: "linear-gradient(0deg, rgba(0, 0, 0,0.8), rgba(255, 255, 255, 0.2), transparent)"}}>
                                         <div className='h-full flex flex-col justify-end px-5 py-3'>
                                             <div className="flex flex-wrap justify-between w-full border-b-2 border-solid border-white pb-2">

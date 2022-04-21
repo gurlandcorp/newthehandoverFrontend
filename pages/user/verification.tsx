@@ -24,16 +24,18 @@ const Verification = ({ verify }: any) => {
         {
             router.push('/404')
         }
-    },[])
+    },[verify, router])
   
     return (
         <div className='width mx-auto py-10'>
-        <Lottie 
-            options={defaultOptions}
-            height={300}
-            width={600}
-        />
-        <div className='text-center'>Your account is verified successfully. Please click <Link href={'/sign-in'}><a className='text-blue-900'>here</a></Link> to Sign In your account</div>
+            <Lottie 
+                options={defaultOptions}
+                height={300}
+                width={600}
+            />
+            <div className='text-center w-full'>
+                <div className='px-2 py-1 bg-green-50 text-xl w-max mx-auto'>Your account is verified successfully. Please click <Link href={'/sign-in'}><a className='text-blue-900'>here</a></Link> to Sign In your account</div>
+            </div>
         </div>
     )
 }

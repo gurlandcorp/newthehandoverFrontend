@@ -77,7 +77,7 @@ const Property = (props:any) => {
                         <div className="bg-white p-4 shadow-lg rounded w-full">
                             <div style={{width: "100%", height: "400px"}} className="overflow-hidden">
                                 <div className="position-relative">
-                                    <Image src={props.property.images[0]} width={300} height={300} layout="responsive" />
+                                    <Image src={props.property.images[0]} width={300} height={300} layout="responsive" alt={props.property.propertyTitle} />
                                 </div>
                             </div>
                             <div className="flex flex-wrap justify-between items-center">

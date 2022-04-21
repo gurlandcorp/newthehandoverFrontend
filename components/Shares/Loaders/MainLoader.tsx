@@ -27,7 +27,7 @@ const MainLoader = () => {
 
     return (
         <div className={`loader fixed top-0 left-0 bottom-0 right-0 bg-white z-50 md:z-10 justify-center transition-all duration-500 hidden opacity-0`}>
-            <Image src={Loader} className="delay-100" />
+            <Image src={Loader} className="delay-100" alt='loader' />
         </div>
     )
 }

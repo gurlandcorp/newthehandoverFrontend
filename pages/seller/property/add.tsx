@@ -255,7 +255,7 @@ const PropertyAdd: NextPage = () => {
                                             Array.from(multiImages).map((link:any, i: any) => {
                                                 return (
                                                     <div className="relative border border-solid mr-2 rounded" style={{width:"200px", height:"200px"}} key={i}>
-                                                        <Image src={URL.createObjectURL(link)} layout="fill" className="object-contain" />
+                                                        <Image src={URL.createObjectURL(link)} layout="fill" className="object-contain" alt='Multiple Images' />
                                                     </div>
                                                 )
                                             })
