@@ -7,7 +7,7 @@ const About: NextPage = () => {
     return (
         <>
         <AboutPage />
-        <PropertyBanner />
+        {/* <PropertyBanner /> */}
         </>
     )
 }
