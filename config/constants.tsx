@@ -14,4 +14,9 @@ const Stripe_Keys = {
         Publishable_Key : process.env.STRIPE_TEST_PUBLISHABLE_KEY
     },
 }
-export { API_LINK, Base_URL, Stripe_Keys }
+
+// reusable constants
+
+const currency_symbol = 'AED'
+
+export { API_LINK, Base_URL, Stripe_Keys, currency_symbol }

@@ -2,7 +2,6 @@ import Image from 'next/image';
 import React from 'react'
 import About08 from "../../public/assets/img/about/about08.jpg";
 import About09 from "../../public/assets/img/about/about09.jpg";
-import SearchSection from '../Includes/SearchSection';
 import styles from "./About.module.css"
 import BackgroundImage from "/public/img/image-box-2.jpg"
 

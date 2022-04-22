@@ -1,6 +1,5 @@
 import { NextPage } from 'next'
 import React, { useContext, useState } from 'react'
-import SearchSection from '../components/Includes/SearchSection';
 import { Base_URL } from '../config/constants';
 import { MainContext } from '../context/MainContext';
 import styles from "./styles/Contact.module.css"
