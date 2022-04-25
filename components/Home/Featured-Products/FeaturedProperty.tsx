@@ -23,9 +23,9 @@ const FeaturedProperty = (props: any) => {
             </div>
             <div className="relative" style={{height: '40rem'}}>
                 <Image src={props.data[2].images[0]} layout="fill" className="object-cover" alt={props.data[2].propertyTitle} />
-                <div className="absolute bottom-0 top-0 w-full" style={{background: "linear-gradient(0deg, #000000a6, #ffffff4d, transparent, transparent)"}}>
+                <div className="absolute bottom-0 top-0 w-full" style={{background: "linear-gradient(0deg, #000000a6, #000000a6, #ffffff4d, transparent, transparent)"}}>
                     <div className="width mx-auto h-full">
-                        <div className="flex flex-wrap justify-between items-end py-16 h-full">
+                        <div className="flex flex-wrap justify-between items-end py-16 absolute bottom-0 width">
                             <div>
                                 <h3 className="text-white text-2xl font-semibold pb-4">{props.data[2].propertyTitle}</h3>
                                 <p className="text-white text-sm pb-2">{props.data[2].location.address}, {props.data[2].location.city} {props.data[2].location.zip}</p>
@@ -38,7 +38,7 @@ const FeaturedProperty = (props: any) => {
                             </div>
                             <div>
                                 <Link href={"/opportunity/" + props.data[2]._id}>
-                                    <a className="text-black text-sm bg-white font-semibold py-3 px-8 rounded-full block">View Detail</a>
+                                    <a className="text-black text-sm bg-white font-semibold py-3 px-8 rounded-full block mt-10">View Detail</a>
                                 </Link>
                             </div>
                         </div>

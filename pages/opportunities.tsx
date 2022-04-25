@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import Blog4 from "../public/assets/img/blog/now.jpg";
 import { Base_URL } from '../config/constants';
 import { useRouter } from 'next/router';
-import BackgroundImage from "/public/img/image-box-2.jpg"
+import BackgroundImage from "/public/img/breadcrumd.svg"
 import Image from 'next/image';
 import Opportunities from "../components/Opportunities"
 
@@ -109,9 +109,14 @@ const Properties: NextPage = ({data, query}: any) => {
     return (
         <>
 			{/* Start of page heading  */}
-			<div className="" style={{ backgroundImage: `linear-gradient(178deg, #00000059, rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 1), white), url(${BackgroundImage.src})`, backgroundRepeat: 'no-repeat' }}>
+			{/* <div className="" style={{ backgroundImage: `linear-gradient(178deg, #00000059, rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 1), white), url(${BackgroundImage.src})`, backgroundRepeat: 'no-repeat' }}>
 				<div className="font-semibold py-32 text-3xl text-center">
 					<h3 className="uppercase theme-color text-4xl">Opportunities</h3>
+				</div>
+			</div> */}
+			<div className="" style={{ backgroundImage: `linear-gradient(178deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.2)), url(${BackgroundImage.src})`, backgroundRepeat: 'no-repeat' }}>
+				<div className="font-semibold py-32 text-3xl text-center">
+					<h3 className="uppercase text-white font-semibold text-4xl">Opportunities</h3>
 				</div>
 			</div>
 

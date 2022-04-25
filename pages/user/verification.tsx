@@ -11,9 +11,6 @@ const Verification = ({ verify }: any) => {
         loop: true,
         autoplay: true,
         animationData: ThankYou,
-        rendererSettings: {
-          preserveAspectRatio: "xMidYMid slice"
-        }
     };
 
     const router = useRouter()
@@ -28,14 +25,13 @@ const Verification = ({ verify }: any) => {
   
     return (
         <div className='width mx-auto py-10'>
+        <div className='text-center'>
+            <p className='px-2 py-2 rounded-xl text-blue-700 mx-auto'>Your account is verified successfully. Please click <Link href={'/sign-in'}><a className='text-blue-800 font-medium'>here</a></Link> to Sign In your account.</p>
+        </div>
             <Lottie 
                 options={defaultOptions}
-                height={300}
-                width={600}
+                height={500}
             />
-            <div className='text-center w-full'>
-                <div className='px-2 py-1 bg-green-50 text-xl w-max mx-auto'>Your account is verified successfully. Please click <Link href={'/sign-in'}><a className='text-blue-900'>here</a></Link> to Sign In your account</div>
-            </div>
         </div>
     )
 }

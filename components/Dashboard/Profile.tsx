@@ -1,21 +1,18 @@
-import { Box, Button, Chip, Grid, IconButton, TextField, Typography } from '@mui/material'
-import { NextPage } from 'next'
-import Link from 'next/link'
 import React, { useState } from 'react'
-import BreadCrumb from '../../components/Shares/Components/user/BreadCrumb'
 import Cookies from "js-cookie"
-import { API_LINK, Base_URL } from '../../config/constants'
+import BreadCrumb from '../../components/Shares/Components/user/BreadCrumb'
+import { Base_URL } from '../../config/constants'
 import Alert from '../../components/Shares/Components/Alert'
 
-const Profile: NextPage = (props: any) => {
+const DashboardProfile = ({user}: any) => {
 
     const [alert, setAlert] = useState(false)
     const [message, setMessage] = useState('')
 
     const [editable, setEditable] = useState(false)
-    const [name, setName] = useState(props.user.name)
-    const [email, setEmail] = useState(props.user.email)
-    const [phone, setPhone] = useState(props.user.phone)
+    const [name, setName] = useState(user.name)
+    const [email, setEmail] = useState(user.email)
+    const [phone, setPhone] = useState(user.phone)
 
     const [isChangePass, setIsChangePass] = useState(false)
     const [currentPassword, setCurrentPassword] = useState('')
@@ -23,9 +20,9 @@ const Profile: NextPage = (props: any) => {
     const [confirmNewPassword, setConfirmNewPassword] = useState('')
 
     const Cancel = async () => {
-        await setName(props.user.name)
-        await setEmail(props.user.email)
-        await setPhone(props.user.phone)
+        await setName(user.name)
+        await setEmail(user.email)
+        await setPhone(user.phone)
         await setEditable(false)
     }
 
@@ -90,14 +87,14 @@ const Profile: NextPage = (props: any) => {
 
     const Links = [
         {
-            href: props.user.userType=='Buyer' ? '/buyer' : '/seller',
+            href: user.userType=='Buyer' ? '/buyer' : '/seller',
             text: "Dashboard"
         },
         {
             text: "Profile"
         }
     ]
-    
+
     return (
         <>
             <BreadCrumb Links={Links} />
@@ -185,22 +182,4 @@ const Profile: NextPage = (props: any) => {
     )
 }
 
-export default Profile
-
-export async function getServerSideProps(context: any) {
-    // Fetch data from external API
-    const res: any = await fetch(`${API_LINK}/user`, {
-        method: 'GET',
-        headers: {
-            "Content-Type" : "application/json",
-            "Authorization": `Bearer ${context.req.cookies.token}`
-        }
-    }).then(response => response.json())
-
-    // Pass data to the page via props
-    return {
-        props: {
-            user: res
-        }
-    }
-}
+export default DashboardProfile

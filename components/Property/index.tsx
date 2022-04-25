@@ -41,16 +41,16 @@ const Index = (props: any) => {
 
 			<div className="width py-10 mx-auto">
 				
-				<div className="grid grid-cols-2 gap-4">
+				<div className="grid grid-cols-1 md:grid-cols-2 gap-4">
 					<div className='relative rounded-lg overflow-hidden' style={{width:'100%',height:'300px'}}>
 						<Image src={props.property.images[0]} layout="fill" alt={props.property.propertyTitle} className="object-cover" />
 					</div>
 					<div>
-						<div className="grid grid-cols-2 gap-4 h-full">
+						<div className="grid grid-cols-1 sm:grid-cols-2 gap-4 h-full">
 							{
 								props.property.images.map((image: any, index: any) => {
 									return (
-										<div className='relative rounded-lg overflow-hidden' style={{width:'100%',height:"100%"}} key={index}>
+										<div className='relative rounded-lg overflow-hidden h-36 md:h-auto' style={{width:'100%',maxHeight:"150px"}} key={index}>
 											<Image src={image} layout="fill" alt={props.property.propertyTitle} className="object-cover" />
 										</div>
 									)
@@ -59,8 +59,8 @@ const Index = (props: any) => {
 						</div>
 					</div>
 				</div>
-				<div className='grid grid-cols-6 mt-5 gap-4'>
-					<div className='col-span-4'>
+				<div className='grid grid-cols-1 md:grid-cols-6 mt-5 gap-4'>
+					<div className='md:col-span-4'>
 						<h2 className="text-3xl my-2 theme-color capitalize font-bold">{props.property.propertyTitle}</h2>
 						<div>
 							<p className="font-semibold text-gray-500 border-b-2 border-solid border-gray-500 w-max">{props.property.location.address}, {props.property.location.city}, {props.property.location.zip} </p>
@@ -175,8 +175,7 @@ const Index = (props: any) => {
 						</div>
 					</div>
 
-
-					<div className='col-span-2'>
+					<div className='md:col-span-2'>
 						<div className='py-2 px-4 shadow-box rounded-lg sticky top-24'>
 							<div className='flex flex-wrap justify-between border-b-2 border-solid border-gray-200 pb-3'>
 								<div className="prices">

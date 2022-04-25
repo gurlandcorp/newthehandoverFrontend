@@ -50,11 +50,6 @@ nav ul li a {
 .container-search .search-wrapper {
     width: 100%;
     margin: auto;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    align-content: center;
-    justify-content: center;
     align-items: center;
     background-color: #f7f7f7;
 }

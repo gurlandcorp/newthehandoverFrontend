@@ -28,6 +28,9 @@ const Header = (props: any) => {
 	}
 
 	useEffect(()=>{
+		setTimeout(() => {
+			document.querySelector('#mobile-menu')?.classList.remove('hidden');
+		}, 100);
 	},[])
 
 	return (
@@ -36,13 +39,11 @@ const Header = (props: any) => {
 			<div className="bg-white sticky top-0 w-full p-2 z-10">
 				<div className="flex flex-wrap items-center justify-between px-5">
 					<div className="logo hidden lg:block">
-                        <div style={{ width: 200 }}>
-							<Link href={'/'}>
-								<a>
-									<Image src={Logo} alt="Logo" className="w-full" />
-								</a>
-							</Link>
-                        </div>
+						<Link href={'/'}>
+							<a>
+								<Image src={Logo} alt="Logo" width={350} height={40} className="w-full" />
+							</a>
+						</Link>
                     </div>
 					<nav className="menu-center col-span-2 hidden lg:block">
 						<ul className="flex flex-wrap items-center ml-5">
@@ -105,14 +106,14 @@ const Header = (props: any) => {
 										<SellerDropDown />
 									)
 								) : (
-									<div>
-										<Link href={'/sign-up'} passHref>
+									<>
+										<Link href={'/sign-up'}>
 											<a className={"bg-white border border-black border-solid duration-300 ease-in-out hover:bg-black hover:text-white inline-block m-1 px-4 py-1 rounded-3xl text-black mr-2"}>Register</a>
 										</Link>
-										<Link href={'/sign-in'} passHref>
+										<Link href={'/sign-in'}>
 											<a className={"bg-white border border-black border-solid duration-300 ease-in-out hover:bg-black hover:text-white inline-block m-1 px-4 py-1 rounded-3xl text-black"}>Login</a>
 										</Link>
-									</div>
+									</>
 								)
 							)
 						}
@@ -122,7 +123,7 @@ const Header = (props: any) => {
 			{/* ENd of Site Header  */}
 
 			{/* Mobile Responsive Header */}
-			<div className="bg-white duration-500 fixed h-screen w-full sm:w-10/12 md:w-2/6 p-4 top-0 transition-all z-40 translate-x--100" id="mobile-menu">
+			<div className="bg-white duration-500 fixed h-screen w-full sm:w-10/12 md:w-2/6 p-4 top-0 transition-all z-40 translate-x--100 hidden" id="mobile-menu">
 				<div className="close-icon absolute close-icon h-5 text-red-500 w-5" style={{right: '1rem'}}>
 					<svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" id="close-menu-icon" fill="#f56565" viewBox="0 0 24 24" stroke="#f56565" strokeWidth="{2}" onClick={(e)=>closeMobileMenu()}>
 						<path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />

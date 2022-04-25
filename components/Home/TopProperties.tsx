@@ -10,11 +10,11 @@ const TopProperties = ({properties}: any) => {
         <div className="m-auto py-20 width">
             <div className="my-4">
                 <div className="title-box">
-                    <h2 className="title">Explore the latest properties listings</h2>
+                    <h2 className="title overflow-hidden">Explore the latest properties listings</h2>
                 </div>
             </div>
             <LandscapeCards properties={properties} />
-            <div className="text-center">
+            <div className="text-center overflow-hidden">
                 <LinkButton href={'/opportunities'}>
                     Go to Properties
                 </LinkButton>

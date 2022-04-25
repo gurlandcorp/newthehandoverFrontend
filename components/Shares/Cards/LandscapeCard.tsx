@@ -4,7 +4,7 @@ import styles from "./LandscapeCard.module.css"
 
 const LandscapeCard = ({property}: any) => {
     return (
-        <div className={`${styles.propBox} flex flex-wrap`}>
+        <div className={`${styles.propBox} flex flex-wrap bg-white overflow-hidden`}>
             <div className="w-full md:w-2/5 flex justify-center md:block mb-2 md:mb-0">
                 <div style={{ background: `url(${property.images[0]})`,backgroundSize: "cover", backgroundPosition: "center" }} className={`${styles.imgSide}`}>
                 </div>

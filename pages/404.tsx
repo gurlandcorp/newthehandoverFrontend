@@ -8,18 +8,14 @@ const ErrorPage = () => {
         loop: true,
         autoplay: true,
         animationData: Error404,
-        rendererSettings: {
-          preserveAspectRatio: "xMidYMid slice"
-        }
     };
 
     return (
         <>
-        <div className='width mx-auto py-28'>
+        <div className='width mx-auto py-10'>
             <Lottie 
                 options={defaultOptions}
-                height={300}
-                width={600}
+                height={600}
             />
         </div>
         </>
