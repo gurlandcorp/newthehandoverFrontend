@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import AddItemButton from '../../../components/Shares/Dashboard/Button'
 import { parseCookies } from 'nookies'
 import axios from 'axios'
@@ -7,6 +7,10 @@ import { NextPage } from 'next'
 import { MainContext } from '../../../context/MainContext'
 import Link from 'next/link'
 import Image from 'next/image'
+import propertyTypes from "../../../database/property_types.json"
+import Countries from "../../../database/countries.json"
+import States from "../../../database/states.json"
+import { sortAsc } from '../../../helpers/functions'
 
 const PropertyAdd: NextPage = () => {
 
@@ -31,6 +35,8 @@ const PropertyAdd: NextPage = () => {
 	const [countrySate, setCountrySate] = useState("");
 	const [multiImages, setMultiImages] = useState([]);
     const [loading, setLoading] = useState(false)
+    const [states, setStates] = useState<any>([])
+    const [countries, setCountries] = useState<any>([])
 
 	const handleInputs = (e: any) => {
 		setUser({
@@ -133,14 +139,21 @@ const PropertyAdd: NextPage = () => {
 		  value: 'Non Constructed',
 		  label: 'Non Constructed',
 		}
-	];
+	]
 
-	const states = [
-		{
-		  value: 'Dubai',
-		  label: 'Dubai',
-		}
-	];
+    const getStates = async (id: any) => {
+        let mystates: any = States.filter((state: any) => state.country_id==id);
+        await sortAsc(mystates, "name")
+        await setStates(mystates)
+    }
+
+    useEffect(() => {
+        const defaultFunc = async () => {
+            let sortedCountries = await sortAsc(Countries, 'name');
+            await setCountries(sortedCountries)
+        }
+        defaultFunc()
+    }, [countries])
 
     return (
         <>
@@ -179,7 +192,7 @@ const PropertyAdd: NextPage = () => {
                             </div>
                             <div className="grid grid-cols-1 gap-2">
                                 <label htmlFor="area" className="text-gray-500">Area <span className="text-red-500">*</span></label>
-                                <input type="text" className="px-3 py-1 rounded-full bg-white border border-solid focus:border-1 focus:border-blue-500 transition-all duration-300" id="area" name="area" placeholder="Area" value={user.area} onChange={(e)=>handleInputs(e)} />
+                                <input type="text" className="px-3 py-1 rounded-full bg-white border border-solid focus:border-1 focus:border-blue-500 transition-all duration-300" id="area" name="area" placeholder="Area in sq.ft" value={user.area} onChange={(e)=>handleInputs(e)} />
                             </div>
                             <div className="grid grid-cols-2 gap-4 gap-x-10 col-span-2">
                                 <div className="flex flex-col">
@@ -202,8 +215,8 @@ const PropertyAdd: NextPage = () => {
                                 <input type="text" className="px-3 py-1 rounded-full bg-white border border-solid focus:border-1 focus:border-blue-500 transition-all duration-300" id="bathrooms" name="bathrooms" placeholder="Bathrooms" value={user.bathrooms} onChange={(e)=>handleInputs(e)} />
                             </div>
                             <div className="grid grid-cols-1 gap-2">
-                                <label htmlFor="priceDemand" className="text-gray-500">Price Demand <span className="text-red-500">*</span></label>
-                                <input type="text" className="px-3 py-1 rounded-full bg-white border border-solid focus:border-1 focus:border-blue-500 transition-all duration-300" id="priceDemand" name="priceDemand" placeholder="Price Demand" value={user.priceDemand} onChange={(e)=>handleInputs(e)} />
+                                <label htmlFor="priceDemand" className="text-gray-500">Price <span className="text-red-500">*</span></label>
+                                <input type="text" className="px-3 py-1 rounded-full bg-white border border-solid focus:border-1 focus:border-blue-500 transition-all duration-300" id="priceDemand" name="priceDemand" placeholder="Price" value={user.priceDemand} onChange={(e)=>handleInputs(e)} />
                             </div>
                             <div className="grid grid-cols-1 gap-2">
                                 <label htmlFor="biddingEnd" className="text-gray-500">Bid End <span className="text-red-500">*</span></label>
@@ -214,39 +227,60 @@ const PropertyAdd: NextPage = () => {
                                 <select className="px-3 py-1 rounded-full bg-white border border-solid focus:border-1 focus:border-blue-500 transition-all duration-300" id="type" name="type" defaultValue={propertyType} onChange={(e) => setpropertyType(e.target.value)}>
                                     <option value="">Select property type</option>
                                     {
-                                        property_types.map((option) => (
-                                            <option key={option.value} value={option.value}>{option.label}</option>
+                                        propertyTypes.map((option: any) => (
+                                            <option key={option.id} value={option.name}>{option.name}</option>
                                         ))
                                     }
                                 </select>
+                            </div>
+                            <div className="grid grid-cols-1 gap-2">
+                                <label htmlFor="biddingEnd" className="text-gray-500">Est Completion <span className="text-red-500">*</span></label>
+                                <input type="text" className="px-3 py-1 rounded-full bg-white border border-solid focus:border-1 focus:border-blue-500 transition-all duration-300" id="Est Completion" name="Est Completion" placeholder='e.g. __ years | __ months | __ days' />
                             </div>
                             <div className="grid grid-cols-1 gap-2">
                                 <label htmlFor="address" className="text-gray-500">Address <span className="text-red-500">*</span></label>
                                 <input type="text" className="px-3 py-1 rounded-full bg-white border border-solid focus:border-1 focus:border-blue-500 transition-all duration-300" id="address" name="address" placeholder="Address" value={user.address} onChange={(e)=>handleInputs(e)} />
                             </div>
+
+                            <div className="grid grid-cols-1 gap-2">
+                                <label htmlFor="country" className="text-gray-500">Select country <span className="text-red-500">*</span></label>
+                                <select className="px-3 py-1 rounded-full bg-white border border-solid focus:border-1 focus:border-blue-500 transition-all duration-300" id="country" name="country" onChange={(e)=>getStates(e.target.value)}>
+                                    <option value="">Select country</option>
+                                    {
+                                        countries.map((option: any) => (
+                                            <option key={option.id} value={option.id}>{option.name + ' - ' + option.iso2}</option>
+                                        ))
+                                    }
+                                </select>
+                            </div>
+
                             <div className="grid grid-cols-1 gap-2">
                                 <label htmlFor="city" className="text-gray-500">City <span className="text-red-500">*</span></label>
                                 <input type="text" className="px-3 py-1 rounded-full bg-white border border-solid focus:border-1 focus:border-blue-500 transition-all duration-300" id="city" name="city" placeholder="City" value={user.city} onChange={(e)=>handleInputs(e)} />
                             </div>
+
                             <div className="grid grid-cols-1 gap-2">
                                 <label htmlFor="state" className="text-gray-500">Select state <span className="text-red-500">*</span></label>
                                 <select className="px-3 py-1 rounded-full bg-white border border-solid focus:border-1 focus:border-blue-500 transition-all duration-300" id="state" name="state" defaultValue={countrySate} onChange={(e) => setCountrySate(e.target.value)}>
                                     <option value="">Select state</option>
                                     {
-                                        states.map((option) => (
-                                            <option key={option.value} value={option.value}>{option.label}</option>
+                                        states.map((option: any) => (
+                                            <option key={option.id} value={option.name}>{option.name}</option>
                                         ))
                                     }
                                 </select>
                             </div>
+
                             <div className="grid grid-cols-1 gap-2">
                                 <label htmlFor="zip" className="text-gray-500">Zip Code <span className="text-red-500">*</span></label>
                                 <input type="text" className="px-3 py-1 rounded-full bg-white border border-solid focus:border-1 focus:border-blue-500 transition-all duration-300" id="zip" name="zip" placeholder="Zip Code" value={user.zip} onChange={(e)=>handleInputs(e)} />
                             </div>
+
                             <div className="grid grid-cols-1 gap-2 col-span-2">
                                 <label htmlFor="images" className="text-black font-medium border border-solid border-gray-500 px-10 py-1 w-max rounded-full cursor-pointer">Upload property images</label>
                                 <input type="file" className="hidden px-3 py-1 rounded-full bg-white border border-solid focus:border-1 focus:border-blue-500 transition-all duration-300" id="images" name="images" multiple onChange={(e) => multiImagesChange(e)} />
                             </div>
+
                             {
                                 multiImages.length > 0 && (
                                     <div className="grid grid-cols-1 gap-2 col-span-2">
@@ -265,12 +299,17 @@ const PropertyAdd: NextPage = () => {
                                 )
                             }
                         </div>
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 gap-x-10 pb-6 border-solid border-b shadow mt-4 p-4 rounded">
+                            <div className="grid grid-cols-1 gap-2">
+                                <label htmlFor="">Amineties</label>
+                            </div>
+                        </div>
                         <div className="mt-4">
                             <button className="btn bg-black text-white rounded-full px-4 py-1 mr-4" disabled={loading ? true : false}>Save {
                             loading &&
                                 <svg xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" width="20px" height="20px" viewBox="0 0 128 128" xmlSpace="preserve" style={{marginLeft: '1rem'}}><g><path d="M64 9.75A54.25 54.25 0 0 0 9.75 64H0a64 64 0 0 1 128 0h-9.75A54.25 54.25 0 0 0 64 9.75z" fill="#252153" /><animateTransform attributeName="transform" type="rotate" from="0 64 64" to="360 64 64" dur="1200ms" repeatCount="indefinite" /></g></svg>
                             }
-                        </button>
+                            </button>
                             <Link href={'/seller/properties'}>
                                 <a className="btn bg-red-100 hover:bg-red-500 text-red-500 hover:text-white rounded-full px-4 py-1 mr-4 transition-all duration-300">Cancel</a>
                             </Link>
