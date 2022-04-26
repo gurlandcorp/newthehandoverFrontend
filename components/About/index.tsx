@@ -4,7 +4,7 @@ import About08 from "../../public/assets/img/about/about08.jpg";
 import About09 from "../../public/assets/img/about/about09.jpg";
 import styles from "./About.module.css"
 import BackgroundImage from "/public/img/image-box-2.jpg"
-import CoverImage from "/public/img/cover-img.png"
+import CoverImage from "/public/img/about/phone.png"
 import OurCompanyImg from "/public/img/about/Peninsula-Five-The-Signature.jpg"
 import PeninsulaImg2 from "/public/img/about/Peninsula-Five-The-Signature-2.jpg"
 import VisionIcon1 from "/public/img/about/honesty.png"
@@ -26,7 +26,7 @@ const About = () => {
                     <p className="tagline text-gray-500 mt-5">Buy or sell off-plan properties in the UAE: a single platform for investors and developers featuring comprehensive, up-to-date property investment data, insights, and listings on thousands of projects across Dubai and the UAE.</p>
                 </div>
                 <div className="mt-10 lg:mt-0 text-center">
-                    <Image src={CoverImage.src} width={CoverImage.width} height={CoverImage.height} className="cover-img mx-auto" alt={'cover-image'} />
+                    <Image src={CoverImage.src} width={CoverImage.width} height={CoverImage.height} placeholder="blur" blurDataURL={CoverImage.blurDataURL} className="cover-img mx-auto" alt={'cover-image'} />
                 </div>
             </div>
         </div>

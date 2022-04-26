@@ -34,3 +34,12 @@
     color: #252153;
     margin-top: 10px;
 }
+
+.featuredWrapper .featuredDetail {
+    transform: translateY(100%);
+    transition: all 0.5s ease-in-out;
+}
+
+.featuredWrapper:hover .featuredDetail {
+    transform: translateY(0%);
+}

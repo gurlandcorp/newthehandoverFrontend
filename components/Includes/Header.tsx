@@ -36,12 +36,12 @@ const Header = (props: any) => {
 	return (
 		<>
 			{/* Start of Site Header  */}
-			<div className="bg-white sticky top-0 w-full p-2 z-10">
+			<div className="bg-white sticky top-0 w-full p-2 z-10 shadow-sm">
 				<div className="flex flex-wrap items-center justify-between px-5">
 					<div className="logo hidden lg:block">
 						<Link href={'/'}>
-							<a>
-								<Image src={Logo} alt="Logo" width={350} height={40} className="w-full" />
+							<a className="relative inline-block" style={{width: "200px"}}>
+								<Image src={Logo} alt="Logo" className="w-full" />
 							</a>
 						</Link>
                     </div>

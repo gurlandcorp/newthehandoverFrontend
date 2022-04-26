@@ -237,44 +237,6 @@ const PropertyAdd: NextPage = () => {
                                 <label htmlFor="biddingEnd" className="text-gray-500">Est Completion <span className="text-red-500">*</span></label>
                                 <input type="text" className="px-3 py-1 rounded-full bg-white border border-solid focus:border-1 focus:border-blue-500 transition-all duration-300" id="Est Completion" name="Est Completion" placeholder='e.g. __ years | __ months | __ days' />
                             </div>
-                            <div className="grid grid-cols-1 gap-2">
-                                <label htmlFor="address" className="text-gray-500">Address <span className="text-red-500">*</span></label>
-                                <input type="text" className="px-3 py-1 rounded-full bg-white border border-solid focus:border-1 focus:border-blue-500 transition-all duration-300" id="address" name="address" placeholder="Address" value={user.address} onChange={(e)=>handleInputs(e)} />
-                            </div>
-
-                            <div className="grid grid-cols-1 gap-2">
-                                <label htmlFor="country" className="text-gray-500">Select country <span className="text-red-500">*</span></label>
-                                <select className="px-3 py-1 rounded-full bg-white border border-solid focus:border-1 focus:border-blue-500 transition-all duration-300" id="country" name="country" onChange={(e)=>getStates(e.target.value)}>
-                                    <option value="">Select country</option>
-                                    {
-                                        countries.map((option: any) => (
-                                            <option key={option.id} value={option.id}>{option.name + ' - ' + option.iso2}</option>
-                                        ))
-                                    }
-                                </select>
-                            </div>
-
-                            <div className="grid grid-cols-1 gap-2">
-                                <label htmlFor="city" className="text-gray-500">City <span className="text-red-500">*</span></label>
-                                <input type="text" className="px-3 py-1 rounded-full bg-white border border-solid focus:border-1 focus:border-blue-500 transition-all duration-300" id="city" name="city" placeholder="City" value={user.city} onChange={(e)=>handleInputs(e)} />
-                            </div>
-
-                            <div className="grid grid-cols-1 gap-2">
-                                <label htmlFor="state" className="text-gray-500">Select state <span className="text-red-500">*</span></label>
-                                <select className="px-3 py-1 rounded-full bg-white border border-solid focus:border-1 focus:border-blue-500 transition-all duration-300" id="state" name="state" defaultValue={countrySate} onChange={(e) => setCountrySate(e.target.value)}>
-                                    <option value="">Select state</option>
-                                    {
-                                        states.map((option: any) => (
-                                            <option key={option.id} value={option.name}>{option.name}</option>
-                                        ))
-                                    }
-                                </select>
-                            </div>
-
-                            <div className="grid grid-cols-1 gap-2">
-                                <label htmlFor="zip" className="text-gray-500">Zip Code <span className="text-red-500">*</span></label>
-                                <input type="text" className="px-3 py-1 rounded-full bg-white border border-solid focus:border-1 focus:border-blue-500 transition-all duration-300" id="zip" name="zip" placeholder="Zip Code" value={user.zip} onChange={(e)=>handleInputs(e)} />
-                            </div>
 
                             <div className="grid grid-cols-1 gap-2 col-span-2">
                                 <label htmlFor="images" className="text-black font-medium border border-solid border-gray-500 px-10 py-1 w-max rounded-full cursor-pointer">Upload property images</label>
@@ -298,11 +260,64 @@ const PropertyAdd: NextPage = () => {
                                     </div>
                                 )
                             }
-                        </div>
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 gap-x-10 pb-6 border-solid border-b shadow mt-4 p-4 rounded">
-                            <div className="grid grid-cols-1 gap-2">
-                                <label htmlFor="">Amineties</label>
+
+                            {/* Location Fields */}
+                            <div className="pb-6 border-solid border-b shadow mt-4 rounded-xl overflow-hidden col-span-2">
+                                <div className="p-4 bg-gray-900 w-full text-white">
+                                    <label htmlFor="">Location</label>
+                                </div>
+                                <div className="p-4 grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div className="grid grid-cols-1 gap-2">
+                                        <label htmlFor="address" className="text-gray-500">Address <span className="text-red-500">*</span></label>
+                                        <input type="text" className="px-3 py-1 rounded-full bg-white border border-solid focus:border-1 focus:border-blue-500 transition-all duration-300" id="address" name="address" placeholder="Address" value={user.address} onChange={(e)=>handleInputs(e)} />
+                                    </div>
+
+                                    <div className="grid grid-cols-1 gap-2">
+                                        <label htmlFor="country" className="text-gray-500">Select country <span className="text-red-500">*</span></label>
+                                        <select className="px-3 py-1 rounded-full bg-white border border-solid focus:border-1 focus:border-blue-500 transition-all duration-300" id="country" name="country" onChange={(e)=>getStates(e.target.value)}>
+                                            <option value="">Select country</option>
+                                            {
+                                                countries.map((option: any) => (
+                                                    <option key={option.id} value={option.id}>{option.name + ' - ' + option.iso2}</option>
+                                                ))
+                                            }
+                                        </select>
+                                    </div>
+
+                                    <div className="grid grid-cols-1 gap-2">
+                                        <label htmlFor="city" className="text-gray-500">City <span className="text-red-500">*</span></label>
+                                        <input type="text" className="px-3 py-1 rounded-full bg-white border border-solid focus:border-1 focus:border-blue-500 transition-all duration-300" id="city" name="city" placeholder="City" value={user.city} onChange={(e)=>handleInputs(e)} />
+                                    </div>
+
+                                    <div className="grid grid-cols-1 gap-2">
+                                        <label htmlFor="state" className="text-gray-500">Select state <span className="text-red-500">*</span></label>
+                                        <select className="px-3 py-1 rounded-full bg-white border border-solid focus:border-1 focus:border-blue-500 transition-all duration-300" id="state" name="state" defaultValue={countrySate} onChange={(e) => setCountrySate(e.target.value)}>
+                                            <option value="">Select state</option>
+                                            {
+                                                states.map((option: any) => (
+                                                    <option key={option.id} value={option.name}>{option.name}</option>
+                                                ))
+                                            }
+                                        </select>
+                                    </div>
+
+                                    <div className="grid grid-cols-1 gap-2">
+                                        <label htmlFor="zip" className="text-gray-500">Zip Code <span className="text-red-500">*</span></label>
+                                        <input type="text" className="px-3 py-1 rounded-full bg-white border border-solid focus:border-1 focus:border-blue-500 transition-all duration-300" id="zip" name="zip" placeholder="Zip Code" value={user.zip} onChange={(e)=>handleInputs(e)} />
+                                    </div>
+                                </div>
                             </div>
+
+                            <div className="pb-6 border-solid border-b shadow mt-4 rounded-xl overflow-hidden col-span-2">
+                                <div className="p-4 bg-gray-900 w-full text-white">
+                                    <label htmlFor="">Amineties <small className='text-gray-100'>(optional)</small></label>
+                                </div>
+                                <div className="grid grid-cols-1 gap-2 p-4">
+                                    <input type="text" className="px-3 py-1 rounded-full bg-white border border-solid focus:border-1 focus:border-blue-500 transition-all duration-300" id="zip" name="zip" placeholder="Amineties" />
+                                    <button className='btn bg-gray-900 w-max px-4 py-1 text-white rounded-full'>Add New</button>
+                                </div>
+                            </div>
+
                         </div>
                         <div className="mt-4">
                             <button className="btn bg-black text-white rounded-full px-4 py-1 mr-4" disabled={loading ? true : false}>Save {

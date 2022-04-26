@@ -21,9 +21,9 @@ const FeaturedProperty = (props: any) => {
                     <h2 className="theme-color text-lg sm:text-3xl md:text-4xl font-semibold">Featured Listings For Investors</h2>
                 </div>
             </div>
-            <div className="relative" style={{height: '40rem'}}>
+            <div className={`${styles.featuredWrapper} relative overflow-hidden`} style={{height: '40rem'}}>
                 <Image src={props.data[2].images[0]} layout="fill" className="object-cover" alt={props.data[2].propertyTitle} />
-                <div className="absolute bottom-0 top-0 w-full" style={{background: "linear-gradient(0deg, #000000a6, #000000a6, #ffffff4d, transparent, transparent)"}}>
+                <div className={`${styles.featuredDetail} absolute bottom-0 top-0 w-full`} style={{background: "linear-gradient(0deg, #000000a6, #000000a6, #ffffff4d, transparent, transparent)"}}>
                     <div className="width mx-auto h-full">
                         <div className="flex flex-wrap justify-between items-end py-16 absolute bottom-0 width">
                             <div>
