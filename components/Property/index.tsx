@@ -1,10 +1,6 @@
 import React from 'react'
 import Image from 'next/image'
 import { parseCookies } from 'nookies'
-import { Swiper, SwiperSlide } from "swiper/react"
-import "swiper/css";
-import "swiper/css/pagination";
-import { Pagination } from "swiper";
 import Link from 'next/link'
 import { WhiteButton, SlimButton } from '../Shares/Buttons'
 import { currency_symbol } from '../../config/constants'
@@ -12,6 +8,11 @@ import TownerImage from "/public/img/property-icons/tower-block.png"
 import SqFtImage from "/public/img/property-icons/select_1.png"
 import BedImage from "/public/img/property-icons/bed_1.png"
 import LocationImage from "/public/img/property-icons/maps-and-flags.png"
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Scrollbar, Autoplay } from "swiper";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
 
 const Index = (props: any) => {
 
@@ -40,30 +41,45 @@ const Index = (props: any) => {
 			</div>
 
 			<div className="width py-10 mx-auto">
-				
 				<div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-					<div className='relative rounded-lg overflow-hidden' style={{width:'100%',height:'300px'}}>
-						<Image src={props.property.images[0]} layout="fill" alt={props.property.propertyTitle} className="object-cover" />
-					</div>
-					<div>
-						<div className="grid grid-cols-1 sm:grid-cols-2 gap-4 h-full">
-							{
-								props.property.images.map((image: any, index: any) => {
-									return (
-										<div className='relative rounded-lg overflow-hidden h-36 md:h-auto' style={{width:'100%',maxHeight:"150px"}} key={index}>
+					<Swiper scrollbar={{ hide: true, }} autoplay={{ delay: 3000, disableOnInteraction: false, }} modules={[Autoplay, Scrollbar]} className="mySwiper rounded-lg overflow-hidden" style={{width:"100%",height:"100%"}}>
+						{
+							props.property.images.slice(0,4).map((image: any, index: any) => {
+								return (
+									<SwiperSlide>
+										<div className='relative' style={{width:'100%',height:'300px'}}>
 											<Image src={image} layout="fill" alt={props.property.propertyTitle} className="object-cover" />
 										</div>
-									)
-								})
-							}
-						</div>
+									</SwiperSlide>
+								)
+							})
+						}
+					</Swiper>
+					<div className="grid grid-cols-1 sm:grid-cols-2 gap-4 h-full">
+						{
+							props.property.images.map((image: any, index: any) => {
+								return (
+									<div className='relative rounded-lg overflow-hidden h-36 md:h-auto' style={{width:'100%',maxHeight:"150px"}} key={index}>
+										<Image src={image} layout="fill" alt={props.property.propertyTitle} className="object-cover" />
+									</div>
+								)
+							})
+						}
 					</div>
 				</div>
 				<div className='grid grid-cols-1 md:grid-cols-6 mt-5 gap-4'>
 					<div className='md:col-span-4'>
 						<h2 className="text-3xl my-2 theme-color capitalize font-bold">{props.property.propertyTitle}</h2>
-						<div>
-							<p className="font-semibold text-gray-500 border-b-2 border-solid border-gray-500 w-max">{props.property.location.address}, {props.property.location.city}, {props.property.location.zip} </p>
+						<div className='flex flex-wrap'>
+							<span className='flex font-semibold text-gray-600 mr-5'>
+								<svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-blue-700 mr-2" viewBox="0 0 20 20" fill="currentColor">
+								<path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+								</svg> 4.56
+							</span>
+							<ol className='list-disc flex flex-wrap'>
+								<li className="font-semibold text-gray-600 border-b-2 border-solid border-gray-600 w-max ml-5 mr-5">25 reviews</li>
+								<li className="font-semibold text-gray-600 border-b-2 border-solid border-gray-600 w-max ml-5">{props.property.location.address}, {props.property.location.city}, {props.property.location.zip} </li>
+							</ol>
 						</div>
 						<div className="quick-summary">
 							<h4 className='theme-color text-lg font-semibold my-5'>Quick Summary</h4>
@@ -177,14 +193,9 @@ const Index = (props: any) => {
 
 					<div className='md:col-span-2'>
 						<div className='py-2 px-4 shadow-box rounded-lg sticky top-24'>
-							<div className='flex flex-wrap justify-between border-b-2 border-solid border-gray-200 pb-3'>
-								<div className="prices">
-									<span className='text-xs theme-color font-medium'>Total price</span>
-									<p className="text-lg font-semibold theme-color">{currency_symbol} {props.property.priceDemand}</p>
-								</div>
-								<div className='buy-btn'>
-									<SlimButton href={'/'}>Buy</SlimButton>
-								</div>
+							<div className='flex flex-wrap justify-between items-center border-b-2 border-solid border-gray-200 pb-3'>
+								<span className='theme-color font-semibold text-lg'>Total price</span>
+								<p className="text-sm font-semibold text-blue-900">{currency_symbol} {props.property.priceDemand}</p>
 							</div>
 							<div>
 								<div className='text-center pb-5'>
