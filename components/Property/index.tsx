@@ -7,7 +7,6 @@ import { currency_symbol } from '../../config/constants'
 import TownerImage from "/public/img/property-icons/tower-block.png"
 import SqFtImage from "/public/img/property-icons/select_1.png"
 import BedImage from "/public/img/property-icons/bed_1.png"
-import LocationImage from "/public/img/property-icons/maps-and-flags.png"
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Scrollbar, Autoplay } from "swiper";
 import "swiper/css";

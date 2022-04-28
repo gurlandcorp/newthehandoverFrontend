@@ -10,8 +10,10 @@ import propertyTypes from "../../../database/property_types.json"
 import Countries from "../../../database/countries.json"
 import States from "../../../database/states.json"
 import { sortAsc } from '../../../helpers/functions'
+import { Editor } from '@tinymce/tinymce-react';
+import { currency_symbol } from '../../../config/constants'
 
-const PropertyAdd: NextPage = () => {
+const PropertyAdd: NextPage = ({textEditorApiKey}: any) => {
 
     const initialState = {
 		propertyTitle: "",
@@ -51,7 +53,6 @@ const PropertyAdd: NextPage = () => {
         await Array.from(e.target.files).forEach((file:any) => {
             files.push(URL.createObjectURL(file))
         })
-        console.log(files)
 	};
 
 	const handleSubmit = async (e: any) => {
@@ -129,21 +130,18 @@ const PropertyAdd: NextPage = () => {
         setLoading(false)
 	};
 
-	const property_types = [
-		{
-		  value: 'Constructed',
-		  label: 'Constructed',
-		},
-		{
-		  value: 'Non Constructed',
-		  label: 'Non Constructed',
-		}
-	]
-
     const getStates = async (id: any) => {
         let mystates: any = States.filter((state: any) => state.country_id==id);
         await sortAsc(mystates, "name")
         await setStates(mystates)
+    }
+
+    const setInNumber = async (e: any) => {
+        const re = /^[0-9\b]+$/;
+        // if value is not blank, then test the regex
+        if (e.target.value === '' || re.test(e.target.value)) {
+            handleInputs(e)
+        }
     }
 
     useEffect(() => {
@@ -189,33 +187,36 @@ const PropertyAdd: NextPage = () => {
                                 <label htmlFor="propertyTitle" className="text-gray-500">Property title <span className="text-red-500">*</span></label>
                                 <input type="text" className="px-3 py-1 rounded-full bg-white border border-solid focus:border-1 focus:border-blue-500 transition-all duration-300" id="propertyTitle" name="propertyTitle" placeholder="Property title" value={user.propertyTitle} onChange={(e)=>handleInputs(e)} />
                             </div>
+
                             <div className="grid grid-cols-1 gap-2">
                                 <label htmlFor="area" className="text-gray-500">Area <span className="text-red-500">*</span></label>
-                                <input type="text" className="px-3 py-1 rounded-full bg-white border border-solid focus:border-1 focus:border-blue-500 transition-all duration-300" id="area" name="area" placeholder="Area in sq.ft" value={user.area} onChange={(e)=>handleInputs(e)} />
-                            </div>
-                            <div className="grid grid-cols-2 gap-4 gap-x-10 col-span-2">
-                                <div className="flex flex-col">
-                                    <label htmlFor="description" className="text-gray-500">Description</label>
-                                    <textarea className="px-3 py-1 rounded-lg bg-white border border-solid focus:border-1 focus:border-blue-500 transition-all duration-300" id="description" name="description" placeholder="Description" value={user.description} onChange={(e)=>handleInputs(e)} rows={5}></textarea>
-                                </div>
-                                <div>
-                                    <div className="grid grid-cols-1 gap-2 mb-4">
-                                        <label htmlFor="bedrooms" className="text-gray-500">Bedrooms <span className="text-red-500">*</span></label>
-                                        <input type="text" className="px-3 py-1 rounded-full bg-white border border-solid focus:border-1 focus:border-blue-500 transition-all duration-300" id="bedrooms" name="bedrooms" placeholder="Bedrooms" value={user.bedrooms} onChange={(e)=>handleInputs(e)} />
-                                    </div>
-                                    <div className="grid grid-cols-1 gap-2">
-                                        <label htmlFor="floors" className="text-gray-500">Floors <span className="text-red-500">*</span></label>
-                                        <input type="text" className="px-3 py-1 rounded-full bg-white border border-solid focus:border-1 focus:border-blue-500 transition-all duration-300" id="floors" name="floors" placeholder="Floors" value={user.floors} onChange={(e)=>handleInputs(e)} />
-                                    </div>
+                                <div className='relative overflow-hidden rounded-full border border-solid focus:border-1 focus:border-blue-500'>
+                                    <input type="text" className="px-3 py-1 rounded-full bg-white transition-all duration-300 w-full" id="area" name="area" placeholder="Area in sq.ft" value={user.area} onChange={(e)=>setInNumber(e)} />
+                                    <span className='absolute right-0 bottom-0 top-0 bg-gray-50 text-sm text-gray-500 px-2 flex items-center'>sq.ft</span>
                                 </div>
                             </div>
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div className="grid grid-cols-1 gap-2">
+                                    <label htmlFor="bedrooms" className="text-gray-500">Bedrooms <span className="text-red-500">*</span></label>
+                                    <input type="number" className="px-3 py-1 rounded-full bg-white border border-solid focus:border-1 focus:border-blue-500 transition-all duration-300" id="bedrooms" name="bedrooms" placeholder="Bedrooms" value={user.bedrooms} onChange={(e)=>handleInputs(e)} />
+                                </div>
+                                <div className="grid grid-cols-1 gap-2">
+                                    <label htmlFor="bathrooms" className="text-gray-500">Bathrooms <span className="text-red-500">*</span></label>
+                                    <input type="number" className="px-3 py-1 rounded-full bg-white border border-solid focus:border-1 focus:border-blue-500 transition-all duration-300" id="bathrooms" name="bathrooms" placeholder="Bathrooms" value={user.bathrooms} onChange={(e)=>handleInputs(e)} />
+                                </div>
+                            </div>
+
                             <div className="grid grid-cols-1 gap-2">
-                                <label htmlFor="bathrooms" className="text-gray-500">Bathrooms <span className="text-red-500">*</span></label>
-                                <input type="text" className="px-3 py-1 rounded-full bg-white border border-solid focus:border-1 focus:border-blue-500 transition-all duration-300" id="bathrooms" name="bathrooms" placeholder="Bathrooms" value={user.bathrooms} onChange={(e)=>handleInputs(e)} />
+                                <label htmlFor="floors" className="text-gray-500">Floors <span className="text-red-500">*</span></label>
+                                <input type="number" className="px-3 py-1 rounded-full bg-white border border-solid focus:border-1 focus:border-blue-500 transition-all duration-300" id="floors" name="floors" placeholder="Floors" value={user.floors} onChange={(e)=>handleInputs(e)} />
                             </div>
+
                             <div className="grid grid-cols-1 gap-2">
                                 <label htmlFor="priceDemand" className="text-gray-500">Price <span className="text-red-500">*</span></label>
-                                <input type="text" className="px-3 py-1 rounded-full bg-white border border-solid focus:border-1 focus:border-blue-500 transition-all duration-300" id="priceDemand" name="priceDemand" placeholder="Price" value={user.priceDemand} onChange={(e)=>handleInputs(e)} />
+                                <div className='relative overflow-hidden rounded-full border border-solid focus:border-1 focus:border-blue-500'>
+                                    <input type="text" className="px-3 py-1 rounded-full bg-white transition-all duration-300 w-full" id="priceDemand" name="priceDemand" placeholder="Price" value={user.priceDemand} onChange={(e)=>setInNumber(e)} />
+                                    <span className='absolute right-0 bottom-0 top-0 bg-gray-50 text-sm text-gray-500 px-2 flex items-center'>{currency_symbol}</span>
+                                </div>
                             </div>
                             <div className="grid grid-cols-1 gap-2">
                                 <label htmlFor="biddingEnd" className="text-gray-500">Bid End <span className="text-red-500">*</span></label>
@@ -235,6 +236,11 @@ const PropertyAdd: NextPage = () => {
                             <div className="grid grid-cols-1 gap-2">
                                 <label htmlFor="biddingEnd" className="text-gray-500">Est Completion <span className="text-red-500">*</span></label>
                                 <input type="text" className="px-3 py-1 rounded-full bg-white border border-solid focus:border-1 focus:border-blue-500 transition-all duration-300" id="Est Completion" name="Est Completion" placeholder='e.g. __ years | __ months | __ days' />
+                            </div>
+
+                            <div className="grid grid-cols-1 gap-2 col-span-2">
+                                <label htmlFor="description" className="text-gray-500">Description</label>
+                                <Editor apiKey={textEditorApiKey} id="description" textareaName='description' value={user.description} onEditorChange={(text: any) => setUser({...user, description: text})} />
                             </div>
 
                             <div className="grid grid-cols-1 gap-2 col-span-2">
@@ -265,7 +271,7 @@ const PropertyAdd: NextPage = () => {
                                 <div className="p-4 bg-gray-900 w-full text-white">
                                     <label htmlFor="">Location</label>
                                 </div>
-                                <div className="p-4 grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div className="p-4 grid grid-cols-1 md:grid-cols-2 gap-6 gap-x-10">
                                     <div className="grid grid-cols-1 gap-2">
                                         <label htmlFor="address" className="text-gray-500">Address <span className="text-red-500">*</span></label>
                                         <input type="text" className="px-3 py-1 rounded-full bg-white border border-solid focus:border-1 focus:border-blue-500 transition-all duration-300" id="address" name="address" placeholder="Address" value={user.address} onChange={(e)=>handleInputs(e)} />
@@ -302,7 +308,7 @@ const PropertyAdd: NextPage = () => {
 
                                     <div className="grid grid-cols-1 gap-2">
                                         <label htmlFor="zip" className="text-gray-500">Zip Code <span className="text-red-500">*</span></label>
-                                        <input type="text" className="px-3 py-1 rounded-full bg-white border border-solid focus:border-1 focus:border-blue-500 transition-all duration-300" id="zip" name="zip" placeholder="Zip Code" value={user.zip} onChange={(e)=>handleInputs(e)} />
+                                        <input type="text" className="px-3 py-1 rounded-full bg-white border border-solid focus:border-1 focus:border-blue-500 transition-all duration-300" id="zip" name="zip" placeholder="Zip Code" value={user.zip} onChange={(e)=>setInNumber(e)} />
                                     </div>
                                 </div>
                             </div>
@@ -313,13 +319,13 @@ const PropertyAdd: NextPage = () => {
                                 </div>
                                 <div className="grid grid-cols-1 gap-2 p-4">
                                     <input type="text" className="px-3 py-1 rounded-full bg-white border border-solid focus:border-1 focus:border-blue-500 transition-all duration-300" id="zip" name="zip" placeholder="Amineties" />
-                                    <button className='btn bg-gray-900 w-max px-4 py-1 text-white rounded-full'>Add New</button>
+                                    <button type='button' className='btn bg-gray-900 w-max px-4 py-1 text-white rounded-full'>Add New</button>
                                 </div>
                             </div>
 
                         </div>
-                        <div className="mt-4">
-                            <button className="btn bg-black text-white rounded-full px-4 py-1 mr-4" disabled={loading ? true : false}>Save {
+                        <div className="mt-4 flex">
+                            <button className="btn bg-black text-white rounded-full px-4 py-1 mr-4 flex flex-wrap" disabled={loading ? true : false}>Save {
                             loading &&
                                 <svg xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" width="20px" height="20px" viewBox="0 0 128 128" xmlSpace="preserve" style={{marginLeft: '1rem'}}><g><path d="M64 9.75A54.25 54.25 0 0 0 9.75 64H0a64 64 0 0 1 128 0h-9.75A54.25 54.25 0 0 0 64 9.75z" fill="#252153" /><animateTransform attributeName="transform" type="rotate" from="0 64 64" to="360 64 64" dur="1200ms" repeatCount="indefinite" /></g></svg>
                             }
@@ -331,105 +337,6 @@ const PropertyAdd: NextPage = () => {
                     </form>
                 </div>
             </div>
-
-
-        {/* <Grid container className="hidden">
-            <Grid item py={2} width={'100%'} className={`flex flex-wrap justify-between`}>
-                <h4 className="text-xl font-medium">Add new property</h4>
-                <AddItemButton href="/seller/properties" startIcon={<ListAltSharp />}>Properties list</AddItemButton>
-            </Grid>
-            <CustomPaper>
-                <Grid container component="form" spacing={4} columns={12} className="p-4" onSubmit={(e: any)=>handleSubmit(e)}>
-                    <Grid item xs={6}>
-                        <TextField fullWidth id="propertyTitle" size="small" name="propertyTitle" label="Property Title" color="primary" variant="standard" value={user.propertyTitle} onChange={(e)=>handleInputs(e)} required />
-                    </Grid>
-                    <Grid item xs={6}>
-                        <TextField fullWidth type="number" id="area" size="small" name="area" label="Area" color="primary" variant="standard" value={user.area} onChange={(e)=>handleInputs(e)} required />
-                    </Grid>
-                    <Grid item xs={6}>
-                        <TextField fullWidth type="number" id="bedrooms" size="small" name="bedrooms" label="Bed Rooms" color="primary" variant="standard" value={user.bedrooms} onChange={(e)=>handleInputs(e)} required />
-                    </Grid>
-                    <Grid item xs={6}>
-                        <TextField fullWidth type="number" id="floors" size="small" name="floors" label="Floors" color="primary" variant="standard" value={user.floors} onChange={(e)=>handleInputs(e)} required />
-                    </Grid>
-                    <Grid item xs={6}>
-                        <TextField fullWidth
-                        id="standard-select-property-type"
-                        select
-                        label="Please select property type"
-                        value={propertyType}
-                        onChange={(e) => setpropertyType(e.target.value)}
-                        variant="standard"
-                        color="primary"
-                        required
-                        >
-                        {property_types.map((option) => (
-                            <MenuItem key={option.value} value={option.value}>
-                            {option.label}
-                            </MenuItem>
-                        ))}
-                        </TextField>
-                    </Grid>
-                    <Grid item xs={6}>
-                        <TextField fullWidth type="number" id="bathrooms" size="small" name="bathrooms" label="Bathrooms" color="primary" variant="standard" value={user.bathrooms} onChange={(e)=>handleInputs(e)} required />
-                    </Grid>
-                    <Grid item xs={6}>
-                        <TextField fullWidth type="number" id="priceDemand" size="small" name="priceDemand" label="Demand Price" color="primary" variant="standard" value={user.priceDemand} onChange={(e)=>handleInputs(e)} required />
-                    </Grid>
-                    <Grid item xs={6}>
-                        <TextField fullWidth type="date" id="biddingEnd" size="small" name="biddingEnd" label="Bidding End" color="primary" variant="standard" value={user.biddingEnd} onChange={(e)=>handleInputs(e)} InputLabelProps={{ shrink: true, }} required />
-                    </Grid>
-                    <Grid item xs={6}>
-                        <TextField fullWidth id="address" size="small" name="address" label="Address" color="primary" variant="standard" value={user.address} onChange={(e)=>handleInputs(e)} required />
-                    </Grid>
-                    <Grid item xs={6}>
-                        <TextField fullWidth id="city" size="small" name="city" label="City" color="primary" variant="standard" value={user.city} onChange={(e)=>handleInputs(e)} required />
-                    </Grid>
-                    <Grid item xs={6}>
-                        <TextField fullWidth
-                        id="state"
-                        name="state"
-                        select
-                        label="Please select state"
-                        value={countrySate}
-                        onChange={(e) => setCountrySate(e.target.value)}
-                        variant="standard"
-                        color="primary"
-                        required
-                        >
-                        {states.map((option) => (
-                            <MenuItem key={option.value} value={option.value}>
-                            {option.label}
-                            </MenuItem>
-                        ))}
-                        </TextField>
-                    </Grid>
-                    <Grid item xs={6}>
-                        <TextField fullWidth id="zip" size="small" name="zip" label="Zip" color="primary" variant="standard" value={user.zip} onChange={(e)=>handleInputs(e)} required />
-                    </Grid>
-                    <Grid item xs={12}>
-                        <TextField fullWidth multiline rows={4} id="description" size="small" name="description" label="Description" color="info" variant="standard" value={user.description} onChange={(e)=>handleInputs(e)} required />
-                    </Grid>
-                    
-                    <Grid item xs={12}>
-                        <input
-                            type="file"
-                            className="custom-style"
-                            name="images"
-                            id="images"
-                            accept="image/*"
-                            multiple
-                            onChange={(e) => multiImagesChange(e)}
-                            style={{ marginLeft: "0px" }}
-                            // hidden
-                        />
-                    </Grid>
-                    <Grid item xs={12}>
-                        <AddItemButton loading={loading} startIcon={<Add />}>Add Property</AddItemButton>
-                    </Grid>
-                </Grid>
-            </CustomPaper>
-        </Grid> */}
         </>
     )
 }
@@ -438,9 +345,11 @@ export default PropertyAdd
 
 export async function getServerSideProps(context: any) {
     let user = JSON.parse(context.req.cookies.user)
+    let textEditorApiKey = process.env.TextEditorApiKey
     return {
       props: {
-        user: user
+        user: user,
+        textEditorApiKey
       },
     }
 }

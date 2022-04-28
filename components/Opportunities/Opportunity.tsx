@@ -3,13 +3,14 @@ import Link from 'next/link'
 import React from 'react'
 import SqFtImage from "/public/img/property-icons/select.png"
 import BedImage from "/public/img/property-icons/bed.png"
+import styles from "./Opportunity.module.css"
 
 const Opportunity = ({property}: any) => {
     return (
         <Link href={`/opportunity/${property._id}`}>
-            <a className="relative rounded-lg overflow-hidden" style={{height: '16rem'}}>
+            <a className={`relative rounded-lg overflow-hidden ${styles.propertySection}`} style={{height: '16rem'}}>
                 <Image src={property.images[0]} layout="fill" className="object-cover" alt={property.propertyTitle} />
-                <div className="absolute bottom-0 top-0 w-full" style={{background: "linear-gradient(0deg, rgba(0, 0, 0,0.8), rgba(0, 0, 0,0.7), rgba(255, 255, 255, 0.2), transparent)"}}>
+                <div className={`absolute bottom-0 top-0 w-full ${styles.propertyContent}`} style={{background: "linear-gradient(0deg, rgba(0, 0, 0,0.8), rgba(0, 0, 0,0.7), rgba(255, 255, 255, 0.2), transparent)"}}>
                     <div className='h-full flex flex-col justify-end px-5 py-3'>
                         <div className="flex flex-wrap justify-between w-full border-b-2 border-solid border-white pb-2">
                             <div style={{flex: 3}}>
