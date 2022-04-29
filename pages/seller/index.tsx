@@ -105,10 +105,24 @@ export async function getServerSideProps(context: any) {
         console.log("error in opportunties filter request", err.response);
     });
 
+    const graph_res: any = await axios({
+        method: "POST",
+        url: `${API_LINK}/property/sellergraph`,
+        headers: {
+            "Authorization": `Bearer ${context.req.cookies.token}`
+        }
+    })
+    .then(response => {
+        return response.data
+    }).catch(err => {
+        console.log("error in opportunties filter request", err.response);
+    });
+
     return {
         props: {
             user: user,
-            data: res
+            data: res,
+            graph: graph_res,
         },
     }
 }

@@ -21,7 +21,7 @@ const Home: NextPage = ({data}: any) => {
                 <div className={`relative ${styles.banner}`}>
                     <Banner />
                 </div>
-                <div className={`relative ${styles.properties}`}>
+                <div className={`relative ${styles.properties} overflow-hidden`}>
                 <TopProperties properties={data.latest_properties} />
                 </div>
                 {/* <div className='absolute z-0'>
