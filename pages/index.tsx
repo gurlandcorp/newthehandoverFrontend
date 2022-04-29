@@ -6,9 +6,6 @@ import FeaturedProperty from '../components/Home/Featured-Products/FeaturedPrope
 import TopProperties from '../components/Home/TopProperties'
 import InvestContent from '../components/Home/InvestContent'
 import InvestorAndDeveloper from '../components/Home/InvestorAndDeveloper'
-import elementImg from "/public/img/home/Element.svg"
-import elementImg2 from "/public/img/home/Element-2.svg"
-import Image from 'next/image'
 import styles from "/styles/Home.module.css"
 
 const Home: NextPage = ({data}: any) => {
@@ -40,7 +37,6 @@ const Home: NextPage = ({data}: any) => {
             
             { data.latest_properties != null && <FeaturedProperty data={data.latest_properties} /> }
             
-            {/* <BlogSection /> */}
         </>
     )
 }

@@ -25,10 +25,12 @@ const PropertyAdd: NextPage = ({textEditorApiKey}: any) => {
 		priceDemand: "",
 		biddingEnd: "",
 		address: "",
+        country: "",
 		city: "",
 		state: "",
 		zip: "",
 		description: "",
+        estCompletion: ""
 	};
     const {setAlert, setAlertMessage} = useContext(MainContext)
 	const [user, setUser] = useState(initialState);
@@ -71,6 +73,7 @@ const PropertyAdd: NextPage = ({textEditorApiKey}: any) => {
 			city,
 			zip,
 			description,
+            country
 		} = user;
 
 		let myHeaders = new Headers();
@@ -91,19 +94,11 @@ const PropertyAdd: NextPage = ({textEditorApiKey}: any) => {
 		formdata.append("priceDemand", priceDemand);
 		formdata.append("biddingEnd", biddingEnd);
 		formdata.append("images", multiImages[0]);
+		formdata.append("country", country);
 		formdata.append("city", city);
 		formdata.append("state", countrySate);
 		formdata.append("zip", zip);
-
-		// let requestOptions: any = {
-		// 	method: "POST",
-		// 	headers: myHeaders,
-		// 	body: formdata,
-		// };
-
-        // let res = await fetch(`${Base_URL}/api/seller/properties/add`, requestOptions)
-		// .then((response) => response.json())
-		// .catch((error) => console.log("error", error));
+		formdata.append("paymentPlan", 'down payment');
 
         let result = await axios({
             method: "POST",
@@ -185,57 +180,63 @@ const PropertyAdd: NextPage = ({textEditorApiKey}: any) => {
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 gap-x-10 pb-6 border-solid border-b">
                             <div className="grid grid-cols-1 gap-2">
                                 <label htmlFor="propertyTitle" className="text-gray-500">Property title <span className="text-red-500">*</span></label>
-                                <input type="text" className="px-3 py-1 rounded-full bg-white border border-solid focus:border-1 focus:border-blue-500 transition-all duration-300" id="propertyTitle" name="propertyTitle" placeholder="Property title" value={user.propertyTitle} onChange={(e)=>handleInputs(e)} />
+                                <input type="text" className="px-3 py-1 rounded-full bg-white border border-solid focus:border-1 focus:border-blue-500 transition-all duration-300" id="propertyTitle" name="propertyTitle" placeholder="Property title" required value={user.propertyTitle} onChange={(e)=>handleInputs(e)} />
                             </div>
 
                             <div className="grid grid-cols-1 gap-2">
                                 <label htmlFor="area" className="text-gray-500">Area <span className="text-red-500">*</span></label>
                                 <div className='relative overflow-hidden rounded-full border border-solid focus:border-1 focus:border-blue-500'>
-                                    <input type="text" className="px-3 py-1 rounded-full bg-white transition-all duration-300 w-full" id="area" name="area" placeholder="Area in sq.ft" value={user.area} onChange={(e)=>setInNumber(e)} />
+                                    <input type="text" className="px-3 py-1 rounded-full bg-white transition-all duration-300 w-full" id="area" name="area" placeholder="Area in sq.ft" value={user.area} onChange={(e)=>setInNumber(e)} required />
                                     <span className='absolute right-0 bottom-0 top-0 bg-gray-50 text-sm text-gray-500 px-2 flex items-center'>sq.ft</span>
                                 </div>
                             </div>
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                <div className="grid grid-cols-1 gap-2">
-                                    <label htmlFor="bedrooms" className="text-gray-500">Bedrooms <span className="text-red-500">*</span></label>
-                                    <input type="number" className="px-3 py-1 rounded-full bg-white border border-solid focus:border-1 focus:border-blue-500 transition-all duration-300" id="bedrooms" name="bedrooms" placeholder="Bedrooms" value={user.bedrooms} onChange={(e)=>handleInputs(e)} />
-                                </div>
-                                <div className="grid grid-cols-1 gap-2">
-                                    <label htmlFor="bathrooms" className="text-gray-500">Bathrooms <span className="text-red-500">*</span></label>
-                                    <input type="number" className="px-3 py-1 rounded-full bg-white border border-solid focus:border-1 focus:border-blue-500 transition-all duration-300" id="bathrooms" name="bathrooms" placeholder="Bathrooms" value={user.bathrooms} onChange={(e)=>handleInputs(e)} />
-                                </div>
-                            </div>
-
                             <div className="grid grid-cols-1 gap-2">
-                                <label htmlFor="floors" className="text-gray-500">Floors <span className="text-red-500">*</span></label>
-                                <input type="number" className="px-3 py-1 rounded-full bg-white border border-solid focus:border-1 focus:border-blue-500 transition-all duration-300" id="floors" name="floors" placeholder="Floors" value={user.floors} onChange={(e)=>handleInputs(e)} />
+                                <label htmlFor="type" className="text-gray-500">Select property type <span className="text-red-500">*</span></label>
+                                <select className="px-3 py-1 rounded-full bg-white border border-solid focus:border-1 focus:border-blue-500 transition-all duration-300" id="type" name="type" defaultValue={propertyType} onChange={(e) => setpropertyType(e.target.value)} required>
+                                    <option value="">Select property type</option>
+                                    {
+                                        propertyTypes.map((option: any) => (
+                                            <option key={option.id} value={option.id}>{option.name}</option>
+                                        ))
+                                    }
+                                </select>
                             </div>
+                            {
+                                propertyType == '2' && (
+                                    <>
+                                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                            <div className="grid grid-cols-1 gap-2">
+                                                <label htmlFor="bedrooms" className="text-gray-500">Bedrooms <span className="text-red-500">*</span></label>
+                                                <input type="number" className="px-3 py-1 rounded-full bg-white border border-solid focus:border-1 focus:border-blue-500 transition-all duration-300" id="bedrooms" name="bedrooms" placeholder="Bedrooms" value={user.bedrooms} onChange={(e)=>handleInputs(e)} />
+                                            </div>
+                                            <div className="grid grid-cols-1 gap-2">
+                                                <label htmlFor="bathrooms" className="text-gray-500">Bathrooms <span className="text-red-500">*</span></label>
+                                                <input type="number" className="px-3 py-1 rounded-full bg-white border border-solid focus:border-1 focus:border-blue-500 transition-all duration-300" id="bathrooms" name="bathrooms" placeholder="Bathrooms" value={user.bathrooms} onChange={(e)=>handleInputs(e)} />
+                                            </div>
+                                        </div>
+
+                                        <div className="grid grid-cols-1 gap-2">
+                                            <label htmlFor="floors" className="text-gray-500">Floors <span className="text-red-500">*</span></label>
+                                            <input type="number" className="px-3 py-1 rounded-full bg-white border border-solid focus:border-1 focus:border-blue-500 transition-all duration-300" id="floors" name="floors" placeholder="Floors" value={user.floors} onChange={(e)=>handleInputs(e)} />
+                                        </div>
+                                    </>
+                                )
+                            }
 
                             <div className="grid grid-cols-1 gap-2">
                                 <label htmlFor="priceDemand" className="text-gray-500">Price <span className="text-red-500">*</span></label>
                                 <div className='relative overflow-hidden rounded-full border border-solid focus:border-1 focus:border-blue-500'>
-                                    <input type="text" className="px-3 py-1 rounded-full bg-white transition-all duration-300 w-full" id="priceDemand" name="priceDemand" placeholder="Price" value={user.priceDemand} onChange={(e)=>setInNumber(e)} />
+                                    <input type="text" className="px-3 py-1 rounded-full bg-white transition-all duration-300 w-full" id="priceDemand" name="priceDemand" placeholder="Price" value={user.priceDemand} onChange={(e)=>setInNumber(e)} required />
                                     <span className='absolute right-0 bottom-0 top-0 bg-gray-50 text-sm text-gray-500 px-2 flex items-center'>{currency_symbol}</span>
                                 </div>
                             </div>
                             <div className="grid grid-cols-1 gap-2">
                                 <label htmlFor="biddingEnd" className="text-gray-500">Bid End <span className="text-red-500">*</span></label>
-                                <input type="date" className="px-3 py-1 rounded-full bg-white border border-solid focus:border-1 focus:border-blue-500 transition-all duration-300" id="biddingEnd" name="biddingEnd" value={user.biddingEnd} onChange={(e)=>handleInputs(e)} />
-                            </div>
-                            <div className="grid grid-cols-1 gap-2">
-                                <label htmlFor="type" className="text-gray-500">Select property type <span className="text-red-500">*</span></label>
-                                <select className="px-3 py-1 rounded-full bg-white border border-solid focus:border-1 focus:border-blue-500 transition-all duration-300" id="type" name="type" defaultValue={propertyType} onChange={(e) => setpropertyType(e.target.value)}>
-                                    <option value="">Select property type</option>
-                                    {
-                                        propertyTypes.map((option: any) => (
-                                            <option key={option.id} value={option.name}>{option.name}</option>
-                                        ))
-                                    }
-                                </select>
+                                <input type="date" className="px-3 py-1 rounded-full bg-white border border-solid focus:border-1 focus:border-blue-500 transition-all duration-300" id="biddingEnd" name="biddingEnd" value={user.biddingEnd} onChange={(e)=>handleInputs(e)} required />
                             </div>
                             <div className="grid grid-cols-1 gap-2">
                                 <label htmlFor="biddingEnd" className="text-gray-500">Est Completion <span className="text-red-500">*</span></label>
-                                <input type="text" className="px-3 py-1 rounded-full bg-white border border-solid focus:border-1 focus:border-blue-500 transition-all duration-300" id="Est Completion" name="Est Completion" placeholder='e.g. __ years | __ months | __ days' />
+                                <input type="text" className="px-3 py-1 rounded-full bg-white border border-solid focus:border-1 focus:border-blue-500 transition-all duration-300" id="estCompletion" name="estCompletion" placeholder='e.g. __ years | __ months | __ days' required />
                             </div>
 
                             <div className="grid grid-cols-1 gap-2 col-span-2">
@@ -274,12 +275,15 @@ const PropertyAdd: NextPage = ({textEditorApiKey}: any) => {
                                 <div className="p-4 grid grid-cols-1 md:grid-cols-2 gap-6 gap-x-10">
                                     <div className="grid grid-cols-1 gap-2">
                                         <label htmlFor="address" className="text-gray-500">Address <span className="text-red-500">*</span></label>
-                                        <input type="text" className="px-3 py-1 rounded-full bg-white border border-solid focus:border-1 focus:border-blue-500 transition-all duration-300" id="address" name="address" placeholder="Address" value={user.address} onChange={(e)=>handleInputs(e)} />
+                                        <input type="text" className="px-3 py-1 rounded-full bg-white border border-solid focus:border-1 focus:border-blue-500 transition-all duration-300" id="address" name="address" placeholder="Address" value={user.address} onChange={(e)=>handleInputs(e)} required />
                                     </div>
 
                                     <div className="grid grid-cols-1 gap-2">
                                         <label htmlFor="country" className="text-gray-500">Select country <span className="text-red-500">*</span></label>
-                                        <select className="px-3 py-1 rounded-full bg-white border border-solid focus:border-1 focus:border-blue-500 transition-all duration-300" id="country" name="country" onChange={(e)=>getStates(e.target.value)}>
+                                        <select className="px-3 py-1 rounded-full bg-white border border-solid focus:border-1 focus:border-blue-500 transition-all duration-300" id="country" name="country" onChange={(e)=>{
+                                            handleInputs(e)
+                                            getStates(e.target.value)
+                                        }} required>
                                             <option value="">Select country</option>
                                             {
                                                 countries.map((option: any) => (
@@ -291,12 +295,12 @@ const PropertyAdd: NextPage = ({textEditorApiKey}: any) => {
 
                                     <div className="grid grid-cols-1 gap-2">
                                         <label htmlFor="city" className="text-gray-500">City <span className="text-red-500">*</span></label>
-                                        <input type="text" className="px-3 py-1 rounded-full bg-white border border-solid focus:border-1 focus:border-blue-500 transition-all duration-300" id="city" name="city" placeholder="City" value={user.city} onChange={(e)=>handleInputs(e)} />
+                                        <input type="text" className="px-3 py-1 rounded-full bg-white border border-solid focus:border-1 focus:border-blue-500 transition-all duration-300" id="city" name="city" placeholder="City" value={user.city} onChange={(e)=>handleInputs(e)} required />
                                     </div>
 
                                     <div className="grid grid-cols-1 gap-2">
                                         <label htmlFor="state" className="text-gray-500">Select state <span className="text-red-500">*</span></label>
-                                        <select className="px-3 py-1 rounded-full bg-white border border-solid focus:border-1 focus:border-blue-500 transition-all duration-300" id="state" name="state" defaultValue={countrySate} onChange={(e) => setCountrySate(e.target.value)}>
+                                        <select className="px-3 py-1 rounded-full bg-white border border-solid focus:border-1 focus:border-blue-500 transition-all duration-300" id="state" name="state" defaultValue={countrySate} onChange={(e) => setCountrySate(e.target.value)} required>
                                             <option value="">Select state</option>
                                             {
                                                 states.map((option: any) => (
@@ -308,7 +312,7 @@ const PropertyAdd: NextPage = ({textEditorApiKey}: any) => {
 
                                     <div className="grid grid-cols-1 gap-2">
                                         <label htmlFor="zip" className="text-gray-500">Zip Code <span className="text-red-500">*</span></label>
-                                        <input type="text" className="px-3 py-1 rounded-full bg-white border border-solid focus:border-1 focus:border-blue-500 transition-all duration-300" id="zip" name="zip" placeholder="Zip Code" value={user.zip} onChange={(e)=>setInNumber(e)} />
+                                        <input type="text" className="px-3 py-1 rounded-full bg-white border border-solid focus:border-1 focus:border-blue-500 transition-all duration-300" id="zip" name="zip" placeholder="Zip Code" value={user.zip} onChange={(e)=>setInNumber(e)} required />
                                     </div>
                                 </div>
                             </div>

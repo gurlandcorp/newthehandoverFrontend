@@ -1,11 +1,8 @@
 import React, { useState } from 'react'
 import type { NextPage } from 'next';
-import { Box, ButtonBase, Card, CardContent, CardMedia, Grid, Paper, Typography } from '@mui/material'
 import { makeStyles } from '@mui/styles'
-import AddItemButton from '../../components/Shares/Dashboard/Button';
 import { Base_URL } from '../../config/constants';
 import PropertiesList from '../../components/Dashboard/Seller/Properties/PropertiesList';
-import Image from "next/image"
 import Link from 'next/link';
 
 const useStyles = makeStyles(({ breakpoints }: any) => ({

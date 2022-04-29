@@ -45,7 +45,7 @@ const Index = (props: any) => {
 						{
 							props.property.images.slice(0,4).map((image: any, index: any) => {
 								return (
-									<SwiperSlide>
+									<SwiperSlide key={index}>
 										<div className='relative' style={{width:'100%',height:'300px'}}>
 											<Image src={image} layout="fill" alt={props.property.propertyTitle} className="object-cover" />
 										</div>
