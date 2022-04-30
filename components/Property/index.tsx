@@ -126,6 +126,7 @@ const Index = (props: any) => {
 						</div>
 						<div className='my-5 text-sm' dangerouslySetInnerHTML={{ __html: props.property.description }}>
 						</div>
+
 						<div className='bg-white shadow-box rounded-lg'>
 							<h3 className='font-semibold theme-color p-4 border-b-2 border-solid w-max mb-4'>Key Selling Features</h3>
 							<ul className="list-disc block ml-10 pb-5">
@@ -186,6 +187,36 @@ const Index = (props: any) => {
 									</div>
 								</div>
 							</div>
+						</div>
+
+						{
+							props.property.amenities.length > 0 && (
+								<div className='bg-white shadow-box rounded-lg mb-5'>
+									<h3 className='font-semibold theme-color p-4 border-b-2 border-solid w-max mb-4'>Aminities</h3>
+									<div className='py-4 px-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4'>
+										{
+											props.property.amenities.map((aminity: any, index: any) => {
+												return <div key={index} className="border border-solid border-gray-300 rounded p-4 py-2 theme-color font-medium capitalize">
+													{aminity}
+												</div>
+											})
+										}
+									</div>
+								</div>
+							)
+						}
+						
+						<div className='bg-white shadow-box rounded-lg'>
+							<h3 className='font-semibold theme-color p-4 border-b-2 border-solid w-max mb-4'>Payment Terms</h3>
+							<p className='text-xs ml-5 pb-2'>Payment terms for this development with be outlined as follows.</p>
+							<ul className="list-disc block ml-10 pb-5">
+								<li className="text-xs py-1"><strong>5%</strong> up front as a reservation fee</li>
+								<li className="text-xs py-1"><strong>10%</strong> to be paid within 30 days (SPA is issued)</li>
+								<li className="text-xs py-1"><strong>15%</strong> to be paid within 6 months of initial payment</li>
+								<li className="text-xs py-1"><strong>10%</strong> to be paid within 9 months after initial payment</li>
+								<li className="text-xs py-1"><strong>60%</strong> on completion of project</li>
+								<li className="text-xs py-1">DLD Registration fee to be covered Select Group</li>
+							</ul>
 						</div>
 					</div>
 

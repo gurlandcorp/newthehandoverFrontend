@@ -78,6 +78,7 @@ nav ul li a {
 
 .shadow-box {
     box-shadow: 0px 10px 70px -15px #9ebee778;
+    z-index: -1;
 }
 .width {
     width: 80vw;
