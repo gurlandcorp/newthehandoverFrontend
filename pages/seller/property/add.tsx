@@ -7,6 +7,7 @@ import { MainContext } from '../../../context/MainContext'
 import Link from 'next/link'
 import Image from 'next/image'
 import propertyTypes from "../../../database/property_types.json"
+import paymentPlans from "../../../database/payment_plan.json"
 import Countries from "../../../database/countries.json"
 import States from "../../../database/states.json"
 import { sortAsc } from '../../../helpers/functions'
@@ -35,11 +36,13 @@ const PropertyAdd: NextPage = ({textEditorApiKey}: any) => {
     const {setAlert, setAlertMessage} = useContext(MainContext)
 	const [user, setUser] = useState(initialState);
 	const [propertyType, setpropertyType] = useState("");
+	const [paymentPlan, setpaymentPlan] = useState("");
 	const [countrySate, setCountrySate] = useState("");
 	const [multiImages, setMultiImages] = useState([]);
     const [loading, setLoading] = useState(false)
     const [states, setStates] = useState<any>([])
     const [countries, setCountries] = useState<any>([])
+    const [aminitiesList, setAminitiesList] = useState([{aminity: ""}])
 
 	const handleInputs = (e: any) => {
 		setUser({
@@ -47,6 +50,24 @@ const PropertyAdd: NextPage = ({textEditorApiKey}: any) => {
 			[e.target.name]: e.target.value,
 		});
 	};
+
+    const addNewAnimity = () => {
+        setAminitiesList([...aminitiesList, {aminity: ""}])
+    }
+
+    const removeNewAnimity = (index: any) => {
+        let aminities_list = [...aminitiesList]
+        aminities_list.splice(index, 1)
+        setAminitiesList(aminities_list)
+    }
+
+    const changeAminityValue = (e: any, index:any) => {
+        const {name, value} = e.target
+        let aminities_list: any = [...aminitiesList]
+        aminities_list[index][name] = value
+        setAminitiesList(aminities_list)
+    }
+
     const route = useRouter()
 
     const multiImagesChange = async (e: any) => {
@@ -98,7 +119,10 @@ const PropertyAdd: NextPage = ({textEditorApiKey}: any) => {
 		formdata.append("city", city);
 		formdata.append("state", countrySate);
 		formdata.append("zip", zip);
-		formdata.append("paymentPlan", 'down payment');
+		formdata.append("paymentPlan", paymentPlan);
+        await aminitiesList.map((aminity: any, index) => {
+            formdata.append(`amenities[${index}]`, aminity.aminity);
+        })
 
         let result = await axios({
             method: "POST",
@@ -239,6 +263,18 @@ const PropertyAdd: NextPage = ({textEditorApiKey}: any) => {
                                 <input type="text" className="px-3 py-1 rounded-full bg-white border border-solid focus:border-1 focus:border-blue-500 transition-all duration-300" id="estCompletion" name="estCompletion" placeholder='e.g. __ years | __ months | __ days' required />
                             </div>
 
+                            <div className="grid grid-cols-1 gap-2">
+                                <label htmlFor="type" className="text-gray-500">Select payment plan <span className="text-red-500">*</span></label>
+                                <select className="px-3 py-1 rounded-full bg-white border border-solid focus:border-1 focus:border-blue-500 transition-all duration-300" id="type" name="type" defaultValue={paymentPlan} onChange={(e) => setpaymentPlan(e.target.value)} required>
+                                    <option value="">Select payment plan</option>
+                                    {
+                                        paymentPlans.map((option: any) => (
+                                            <option key={option.id} value={option.name}>{option.name}</option>
+                                        ))
+                                    }
+                                </select>
+                            </div>
+
                             <div className="grid grid-cols-1 gap-2 col-span-2">
                                 <label htmlFor="description" className="text-gray-500">Description</label>
                                 <Editor apiKey={textEditorApiKey} id="description" textareaName='description' value={user.description} onEditorChange={(text: any) => setUser({...user, description: text})} />
@@ -322,8 +358,27 @@ const PropertyAdd: NextPage = ({textEditorApiKey}: any) => {
                                     <label htmlFor="">Amineties <small className='text-gray-100'>(optional)</small></label>
                                 </div>
                                 <div className="grid grid-cols-1 gap-2 p-4">
-                                    <input type="text" className="px-3 py-1 rounded-full bg-white border border-solid focus:border-1 focus:border-blue-500 transition-all duration-300" id="zip" name="zip" placeholder="Amineties" />
-                                    <button type='button' className='btn bg-gray-900 w-max px-4 py-1 text-white rounded-full'>Add New</button>
+                                    {
+                                        aminitiesList.map((aminity: any, index: any) => {
+                                            return <div key={index}>
+                                                <div className='flex pb-2'>
+                                                    <input type="text" className="px-3 py-1 rounded-full bg-white border border-solid focus:border-1 focus:border-blue-500 transition-all duration-300" id="aminity" name="aminity" placeholder="Amineties" value={aminity.aminity} style={{flex:8}} onChange={(e) => changeAminityValue(e, index) } />
+                                                    {
+                                                        index > 0 && (
+                                                            <button type='button' className='btn bg-red-500 w-max px-4 py-1 text-white rounded-full ml-2' onClick={()=>removeNewAnimity(index)} style={{flex:1}} >Remove</button>
+                                                        )
+                                                    }
+                                                </div>
+                                                {
+                                                    aminitiesList.length - 1 === index && (
+                                                        <div className='mt-2'>
+                                                            <button type='button' className='btn bg-gray-900 w-max px-4 py-1 text-white rounded-full' onClick={() => addNewAnimity()} >Add New</button>
+                                                        </div>
+                                                    )
+                                                }
+                                            </div>
+                                        })
+                                    }
                                 </div>
                             </div>
 

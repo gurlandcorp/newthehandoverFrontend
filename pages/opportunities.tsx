@@ -117,7 +117,7 @@ const Properties: NextPage = ({data, query, highest_res}: any) => {
 			{/* Start of page heading  */}
 			<div className={`${styles.featuredWrapper} relative overflow-hidden`} style={{height: '20rem'}}>
 				<div className='absolute top-0 w-full h-full' style={{zIndex: 1}}>
-					<div className='text-3xl font-semibold text-white flex justify-center items-center'>
+					<div className='text-3xl font-semibold text-white flex justify-center items-center h-full'>
 						<h1>Auctions</h1>
 					</div>
 				</div>
