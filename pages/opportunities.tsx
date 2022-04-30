@@ -115,14 +115,14 @@ const Properties: NextPage = ({data, query, highest_res}: any) => {
     return (
         <>
 			{/* Start of page heading  */}
-			<div className={`${styles.featuredWrapper} relative overflow-hidden`} style={{height: '20rem'}}>
-				<div className='absolute top-0 w-full h-full' style={{zIndex: 1}}>
-					<div className='text-3xl font-semibold text-white flex justify-center items-center h-full'>
+			<div className={`relative overflow-hidden`} style={{height: '20rem'}}>
+				<div className='absolute top-10 w-full' style={{zIndex: 1}}>
+					<div className='text-3xl font-semibold text-gray-50 flex justify-center'>
 						<h1>Auctions</h1>
 					</div>
 				</div>
 				<Image src={data[0].images[0]} layout="fill" className="object-cover" alt={data[0].propertyTitle} />
-				<div className={`${styles.featuredDetail} absolute bottom-0 top-0 w-full`} style={{background: "linear-gradient(0deg, #000000a6, #000000a6, #ffffff4d, transparent, transparent)"}}>
+				<div className={`absolute bottom-0 top-0 w-full`} style={{background: "linear-gradient(0deg, rgba(0,0,0,0.3), rgba(0,0,0,0.3))"}}>
 					<div className="width mx-auto h-full">
 						<div className="flex flex-wrap justify-between items-end py-16 absolute bottom-0 width">
 							<div>
