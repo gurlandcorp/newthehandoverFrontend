@@ -1,8 +1,9 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import BreadCrumb from '../../components/Shares/Components/user/BreadCrumb'
 import MyBiddings from '../../components/Dashboard/Buyer/MyBiddings'
 import MyBids from '../../components/Dashboard/Buyer/MyBids'
 import { Base_URL } from '../../config/constants'
+import Cleave from "cleave.js"
 
 const Biddings = (props: any) => {
 
@@ -73,6 +74,14 @@ const Biddings = (props: any) => {
         // console.log('result:', res.result.id)
     }
 
+    useEffect(()=>{
+        var cleave = new Cleave('#card_number', {
+            creditCard: true,
+            onCreditCardTypeChanged: function (type: any) {
+            }
+        });        
+    })
+
     return (
         <>
             <BreadCrumb Links={Links} />
@@ -107,7 +116,7 @@ const Biddings = (props: any) => {
                         <div className="mb-5 bg-gray-50 p-2 rounded">
                             <div className="mb-5">
                                 <label htmlFor="">Card Number</label>
-                                <input className="border border-solid border-white focus:border-blue-700 w-full rounded py-1 px-2" placeholder="Enter 16 digit card number" value={cardNumber} onChange={(e)=>setCardNumber(e.target.value)} />
+                                <input className="border border-solid border-white focus:border-blue-700 w-full rounded py-1 px-2" id='card_number' placeholder="Enter 16 digit card number" value={cardNumber} onChange={(e)=>setCardNumber(e.target.value)} />
                             </div>
                             <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 justify-center">
                                 <div className="">

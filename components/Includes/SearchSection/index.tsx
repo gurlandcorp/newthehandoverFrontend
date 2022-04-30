@@ -3,13 +3,9 @@ import { useRouter } from "next/router";
 import { useContext, useState } from "react";
 import { MainContext } from "../../../context/MainContext";
 import styles from "./SearchSection.module.css"
+import propertyTypes from "../../../database/property_types.json"
 
 const SearchSection = () => {
-
-    const propertyType = [
-		"Constructed",
-		"Non-Constructed",
-	]
 
     const {search, setSearch} = useContext(MainContext)
     const [isAdvanceSearch, setIsAdvanceSearch] = useState(false)
@@ -31,8 +27,8 @@ const SearchSection = () => {
                         <select className="px-3 py-1 w-full lg:col-span-2 rounded-full" onChange={(e)=>setSearch({...search, property_type: e.target.value})}>
                             <option value="">Property Type</option>
                             {
-                                propertyType.map((type: any, index: any) => {
-                                    return <option key={index} value={type}>{type}</option>
+                                propertyTypes.map((type: any, index: any) => {
+                                    return <option key={index} value={type.name}>{type.name}</option>
                                 })
                             }
                         </select>

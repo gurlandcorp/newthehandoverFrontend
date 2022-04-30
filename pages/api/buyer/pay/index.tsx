@@ -36,6 +36,8 @@ async function handler(req:NextApiRequest, res: NextApiResponse) {
                 },
             });
             let token_id = token_result.id
+
+            console.log('token', token_id);
             let result: any = await axios({
                 method: "POST",
                 url: `${process.env.API_URL}/payment/paytest`,
