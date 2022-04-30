@@ -124,8 +124,7 @@ const Index = (props: any) => {
 								</div>
 							</div>
 						</div>
-						<div className='my-5 text-sm'>
-							{props.property.description}
+						<div className='my-5 text-sm' dangerouslySetInnerHTML={{ __html: props.property.description }}>
 						</div>
 						<div className='bg-white shadow-box rounded-lg'>
 							<h3 className='font-semibold theme-color p-4 border-b-2 border-solid w-max mb-4'>Key Selling Features</h3>

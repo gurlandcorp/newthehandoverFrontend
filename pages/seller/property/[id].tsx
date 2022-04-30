@@ -143,7 +143,7 @@ const Property = (props:any) => {
                             </div>
 
                             <h4 className="text-lg theme-color my-2">Description</h4>
-                            <p className="p-2 bg-gray-50 rounded">{props.property.description}</p>
+                            <p className="p-2 bg-gray-50 rounded" dangerouslySetInnerHTML={{ __html: props.property.description }}></p>
                         </div>
                     </div>
                     <div className="col-span-12 md:col-span-4 order-1">
@@ -179,38 +179,42 @@ const Property = (props:any) => {
                 </div>
             </div>
             
-            <div className="shadow-lg rounded">
-                <div className={`p-4 ${classes.biddings}`}>
-                    <h4 className="text-lg font-medium">Buyer Biddings</h4>
-                    {
-                        props.bidding.map((bid:any, index: any) => {
-                            return (
-                                <div key={index} className="mb-3 bg-gray-50 p-2 rounded-md flex flex-wrap justify-between">
-                                    <div className='bg-gray-100 p-2 rounded-lg'>
-                                        <p><strong>User Name:</strong> {bid.Bidder[0].name}</p>
-                                        <p><strong>Email:</strong> {bid.Bidder[0].email}</p>
-                                        <p><strong>Status:</strong> {bid.winner===true ? <span className="text-xs bg-blue-100 text-blue-500 px-2 rounded-md">Winner</span> : <span className="text-xs bg-red-100 text-red-500 px-2 rounded-md">Not-approved</span> }</p>
-                                    </div>
-                                    <div className="flex flex-col mt-2 sm:mt-0">
-                                        <p className="bg-blue-100 text-blue-500 font-medium px-2 rounded-md text-center">{'AED '+bid.bidAmount}</p>
-                                        {
-                                            bid.winner == true ? (
-                                                <span className="bg-green-900 text-green-100 px-2 rounded-md shadow-lg text-center">Accepted</span>
-                                            ) : (
-                                                <button className="bg-gray-900 text-gray-100 px-2 py-1 rounded-md shadow-lg" onClick={()=>{
-                                                    setSelectedBidId(bid._id)
-                                                    setDisplayAlert(true)
-                                                }}>Accept Bid</button>
-                                            )
-                                        }
-                                    </div>
-                                </div>
-                            )
-                        })
-                    }
-                    
-                </div>
-            </div>
+            {
+                props.bidding.length > 0 && (
+                    <div className="shadow-lg rounded">
+                        <div className={`p-4 ${classes.biddings}`}>
+                            <h4 className="text-lg font-medium">Buyer Biddings</h4>
+                            {
+                                props.bidding.map((bid:any, index: any) => {
+                                    return (
+                                        <div key={index} className="mb-3 bg-gray-50 p-2 rounded-md flex flex-wrap justify-between">
+                                            <div className='bg-gray-100 p-2 rounded-lg'>
+                                                <p><strong>User Name:</strong> {bid.Bidder[0].name}</p>
+                                                <p><strong>Email:</strong> {bid.Bidder[0].email}</p>
+                                                <p><strong>Status:</strong> {bid.winner===true ? <span className="text-xs bg-blue-100 text-blue-500 px-2 rounded-md">Winner</span> : <span className="text-xs bg-red-100 text-red-500 px-2 rounded-md">Not-approved</span> }</p>
+                                            </div>
+                                            <div className="flex flex-col mt-2 sm:mt-0">
+                                                <p className="bg-blue-100 text-blue-500 font-medium px-2 rounded-md text-center">{'AED '+bid.bidAmount}</p>
+                                                {
+                                                    bid.winner == true ? (
+                                                        <span className="bg-green-900 text-green-100 px-2 rounded-md shadow-lg text-center">Accepted</span>
+                                                    ) : (
+                                                        <button className="bg-gray-900 text-gray-100 px-2 py-1 rounded-md shadow-lg" onClick={()=>{
+                                                            setSelectedBidId(bid._id)
+                                                            setDisplayAlert(true)
+                                                        }}>Accept Bid</button>
+                                                    )
+                                                }
+                                            </div>
+                                        </div>
+                                    )
+                                })
+                            }
+                            
+                        </div>
+                    </div>
+                )
+            }
             <ConfirmAlert display={displayAlert} setDisplay={setDisplayAlert} text={'Are you sure! Do you want to accept bid?'} onSubmit={onSubmitAcceptBid} />
         </>
     )

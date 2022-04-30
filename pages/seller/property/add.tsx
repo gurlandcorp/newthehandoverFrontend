@@ -107,7 +107,7 @@ const PropertyAdd: NextPage = ({textEditorApiKey}: any) => {
 		formdata.append("propertyTitle", propertyTitle);
 		formdata.append("description", description);
 		formdata.append("area", area);
-		formdata.append("propertyType", "Constructed");
+		formdata.append("propertyType", propertyType);
 		formdata.append("address", address);
 		formdata.append("bedrooms", bedrooms);
 		formdata.append("bathrooms", bathrooms);
@@ -220,13 +220,13 @@ const PropertyAdd: NextPage = ({textEditorApiKey}: any) => {
                                     <option value="">Select property type</option>
                                     {
                                         propertyTypes.map((option: any) => (
-                                            <option key={option.id} value={option.id}>{option.name}</option>
+                                            <option key={option.id} value={option.name}>{option.name}</option>
                                         ))
                                     }
                                 </select>
                             </div>
                             {
-                                propertyType == '2' && (
+                                propertyType != 'OffPlan' && (
                                     <>
                                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                             <div className="grid grid-cols-1 gap-2">
