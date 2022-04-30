@@ -6,8 +6,14 @@ import { useRouter } from 'next/router';
 import BackgroundImage from "/public/img/breadcrumd.svg"
 import Image from 'next/image';
 import Opportunities from "../components/Opportunities"
+import FeaturedProperty from '../components/Home/Featured-Products/FeaturedProperty';
+import Link from 'next/link';
+import styles from "../styles/Opportunities.module.css"
+import SqFtImage from "/public/img/property-icons/select.png"
+import BedImage from "/public/img/property-icons/bed.png"
+import RegreshImage from "/public/img/property-icons/refresh.png"
 
-const Properties: NextPage = ({data, query}: any) => {
+const Properties: NextPage = ({data, query, highest_res}: any) => {
 
     const [images, setImages] = useState([
 		Blog4,
@@ -109,51 +115,44 @@ const Properties: NextPage = ({data, query}: any) => {
     return (
         <>
 			{/* Start of page heading  */}
-			{/* <div className="" style={{ backgroundImage: `linear-gradient(178deg, #00000059, rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 1), white), url(${BackgroundImage.src})`, backgroundRepeat: 'no-repeat' }}>
-				<div className="font-semibold py-32 text-3xl text-center">
-					<h3 className="uppercase theme-color text-4xl">Opportunities</h3>
+			<div className={`${styles.featuredWrapper} relative overflow-hidden`} style={{height: '20rem'}}>
+				<div className='absolute top-0 w-full h-full' style={{zIndex: 1}}>
+					<div className='text-3xl font-semibold text-white flex justify-center items-center'>
+						<h1>Auctions</h1>
+					</div>
 				</div>
-			</div> */}
-			<div className="" style={{ backgroundImage: `linear-gradient(178deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.2)), url(${BackgroundImage.src})`, backgroundRepeat: 'no-repeat' }}>
+				<Image src={data[0].images[0]} layout="fill" className="object-cover" alt={data[0].propertyTitle} />
+				<div className={`${styles.featuredDetail} absolute bottom-0 top-0 w-full`} style={{background: "linear-gradient(0deg, #000000a6, #000000a6, #ffffff4d, transparent, transparent)"}}>
+					<div className="width mx-auto h-full">
+						<div className="flex flex-wrap justify-between items-end py-16 absolute bottom-0 width">
+							<div>
+								<h3 className="text-white text-2xl font-semibold pb-4">{data[0].propertyTitle}</h3>
+								<p className="text-white text-sm pb-2">{data[0].location.address}, {data[0].location.city} {data[0].location.zip}</p>
+								<div className="grid grid-cols-4 text-gray-300 text-xs items-center">
+									<span className="flex justify-center"><Image src={SqFtImage} width={15} height={15} alt={'area sq.ft'} /> <span className="ml-1">{data[0].area} sq.ft</span></span>
+									<span className="flex justify-center"><Image src={BedImage} width={15} height={15} alt={'area sq.ft'} /> <span className="ml-1">{data[0].bedrooms} bed</span></span>
+									<span className="flex justify-center"><Image src={BedImage} width={15} height={15} alt={'area sq.ft'} /> <span className="ml-1">{data[0].bathrooms} bath</span></span>
+									<span className="flex justify-center"><Image src={RegreshImage} width={15} height={15} alt={'area sq.ft'} /> <span className="ml-1">3 hours left</span></span>
+								</div>
+							</div>
+							<div>
+								<Link href={"/opportunity/" + data[0]._id}>
+									<a className="text-black text-sm bg-white font-semibold py-3 px-8 rounded-full block mt-10">View Detail</a>
+								</Link>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			{/* <div className="" style={{ backgroundImage: `linear-gradient(178deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.2)), url(${BackgroundImage.src})`, backgroundRepeat: 'no-repeat' }}>
 				<div className="font-semibold py-32 text-3xl text-center">
 					<h3 className="uppercase text-white font-semibold text-4xl">Opportunities</h3>
 				</div>
-			</div>
+			</div> */}
 
 			<div className="width py-10 mx-auto">
 				<div className="flex flex-wrap">
 					{/* Left Side Advance Search */}
-					{/* <div className="sidebar w-full lg:w-1/3">
-						<div className="adv-search p-5 shadow-xl rounded">
-							<h2 className="text-center font-medium text-xl mb-5">Advanced Search</h2>
-							<form onSubmit={(e) => searchSubmit(e)}>
-								<input type="text" className="w-full border border-solid rounded p-2 mb-4" placeholder="What are you looking for ?" />
-								<div className="grid grid-cols-2 gap-5">
-									<input type="text" className="w-full border border-solid rounded p-2 mb-4" placeholder="Rooms" />
-									<input type="text" className="w-full border border-solid rounded p-2 mb-4" placeholder="Bathrooms" />
-								</div>
-								<select name="" id="" className="w-full border border-solid rounded p-2 mb-4" onChange={(e) => setType(e.target.value)}>
-									<option value="">Property Type</option>
-									{
-										propertyType.map((type: any, index: any) => {
-											return <option key={index} value={type}>{type}</option>
-										})
-									}
-								</select>
-								<select name="" id="" className="w-full border border-solid rounded p-2 mb-4">
-									<option value="">All Cities</option>
-								</select>
-								<p className="mb-4">Price Range</p>
-								<div className="grid grid-cols-2 gap-5">
-									<input type="text" className="w-full border border-solid rounded p-2 mb-4" placeholder="Min" />
-									<input type="text" className="w-full border border-solid rounded p-2 mb-4" placeholder="Max" />
-								</div>
-								<div className="text-center">
-									<button type="submit" className="bg-black text-white py-2 px-5 rounded-3xl shadow hover:bg-white hover:text-black transition-all duration-300"><span className="mdi mdi-magnify" /> Search </button>
-								</div>
-							</form>
-						</div>
-					</div> */}
 
 					{/* Opportunities List */}
 					<div className="content-area w-full">
@@ -212,11 +211,21 @@ export async function getServerSideProps(context: any) {
 			data = res
 		}
 	}
+
+	// let highest_res: any = await fetch(`${Base_URL}/api/property/highest`, {
+	// 	method: "POST",
+	// 	headers: {
+	// 		"Content-Type": "application/json"
+	// 	}
+	// }).then(response => response.json())
+
+	// console.log(highest_res)
+
     // Pass data to the page via props
     return { 
         props: { 
             data,
-			query: context.query
+			query: context.query,
         }
     }
 }
