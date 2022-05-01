@@ -4,6 +4,7 @@ import EditProperty from './EditProperty';
 import styles from "./Properties.module.css"
 import { MainContext } from '../../../../context/MainContext';
 import Property from './Property';
+import PropertyForm from './PropertyForm';
 
 const PropertiesList = (props: any) => {
 
@@ -42,9 +43,10 @@ const PropertiesList = (props: any) => {
                 }
             </div>
         ) : (
-            <div className="mt-4 bg-white rounded-xl">
-                <EditProperty property={property} setProperty={setProperty} setProperties={setProperties} />
-            </div>
+            <PropertyForm property={property} setProperty={setProperty} setProperties={setProperties} />
+            // <div className="mt-4 bg-white rounded-xl">
+            //     <EditProperty property={property} setProperty={setProperty} setProperties={setProperties} />
+            // </div>
         )
     )
 }

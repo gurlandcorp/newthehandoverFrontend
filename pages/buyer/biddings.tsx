@@ -79,7 +79,7 @@ const Biddings = (props: any) => {
             creditCard: true,
             onCreditCardTypeChanged: function (type: any) {
             }
-        });        
+        });
     })
 
     return (

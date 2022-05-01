@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import React from 'react'
-import { Button } from "../Shares/Buttons"
+import { LinkButton } from "../Shares/Buttons"
 import MarketAnalysisImage from "/public/img/dashboard.png"
 import loanImage from "/public/img/loan.png"
 import villageImage from "/public/img/village.png"
@@ -52,7 +52,7 @@ const InvestContent = () => {
                     </div>
                 </div>
                 <div className='text-center'>
-                    <Button>Bid Now</Button>
+                    <LinkButton href={'/'}>Bid Now</LinkButton>
                 </div>
             </div>
         </div>
