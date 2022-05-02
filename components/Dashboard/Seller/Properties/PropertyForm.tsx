@@ -248,12 +248,20 @@ const PropertyForm = ({textEditorApiKey, property="", setProperty = () => {}, se
             if(property)
             {
                 window.scrollTo(0, 0)
+                if(property.amenities.length > 0)
+                {
+                    let aminity_list: any = []
+                    property.amenities.map((aminity: any) => {
+                        aminity_list.push({aminity: aminity})
+                    })
+                    setAminitiesList(aminity_list)
+                }
             }
             let sortedCountries = await sortAsc(Countries, 'name');
             await setCountries(sortedCountries)
         }
         defaultFunc()
-    }, [countries])
+    }, [countries, property, ])
 
     return (
         <div className="mt-4 bg-white rounded-xl">

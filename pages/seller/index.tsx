@@ -44,7 +44,7 @@ const SellerDashboard: NextPage = (props: any) => {
         <div className="w-full p-10 shadow-xl rounded-xl">
             <ProgressGraph />
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+        {/* <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
             <div className="px-4 mt-20 overflow-hidden rounded-xl shadow-xl bg-white">
                 <h3 className="theme-color font-medium pb-4">Bidder Activities</h3>
                 <table className={`${styles.table} table-auto w-full`}>
@@ -78,7 +78,7 @@ const SellerDashboard: NextPage = (props: any) => {
                     </tbody>
                 </table>
             </div>
-        </div>
+        </div> */}
         </>
     )
 }
