@@ -14,7 +14,7 @@ const SearchSection = () => {
 
     const searchSubmit = (e: any) => {
         e.preventDefault()
-        router.push(`/opportunities?propertyType=${search.property_type}&city=${search.city}&text=${search.text}&bedrooms=${search.bedrooms}&payment_plan=${search.payment_plan}&minPrice=${search.minPrice}&maxPrice=${search.maxPrice}`)
+        router.push(`/opportunities?propertyType=${search.property_type}&city=${search.city}&text=${search.text}&payment_plan=${search.payment_plan}&minPrice=${search.minPrice}&maxPrice=${search.maxPrice}`)
     }
 
     return (
