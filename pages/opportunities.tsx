@@ -3,10 +3,8 @@ import React, { useEffect, useState } from 'react'
 import Blog4 from "../public/assets/img/blog/now.jpg";
 import { Base_URL } from '../config/constants';
 import { useRouter } from 'next/router';
-import BackgroundImage from "/public/img/breadcrumd.svg"
 import Image from 'next/image';
 import Opportunities from "../components/Opportunities"
-import FeaturedProperty from '../components/Home/Featured-Products/FeaturedProperty';
 import Link from 'next/link';
 import styles from "../styles/Opportunities.module.css"
 import SqFtImage from "/public/img/property-icons/select.png"
@@ -27,29 +25,9 @@ const Properties: NextPage = ({data, query, highest_res}: any) => {
 		price: '',
 	})
 	const [text, setText] = useState('')
-	const [rooms, setRooms] = useState('')
-	const [bathRooms, setBathRooms] = useState('')
 	const [type, setType] = useState('')
 	const [city, setCity] = useState('')
-	const [category, setCategory] = useState('')
 	const[opportunities, setOpportunities] = useState(data);
-
-	const propertyType = [
-		"Constructed",
-		"Non Constructed",
-	]
-
-	const categories = [
-		"Rent",
-		"Sell",
-		"Buy"
-	]
-	const cities = [
-		"Dubai",
-		"Los Angeles",
-		"Chicago",
-		"Philadelphia"
-	]
 
     const router = useRouter()
 
@@ -72,8 +50,6 @@ const Properties: NextPage = ({data, query, highest_res}: any) => {
 
 		let filters: any = {
 		}
-		rooms!='' && (filters.bedrooms = rooms);
-		bathRooms!='' && (filters.bathrooms = bathRooms);
 		type!='' && (filters.propertyType = type)
 		if(text!='' || city!='')
 		{
@@ -187,8 +163,8 @@ export async function getServerSideProps(context: any) {
 		let filter: any = {
 			propertyType : context.query.propertyType
 		}
-		context.query.rooms != undefined && (filter.bedrooms = context.query.rooms);
-		context.query.bathrooms != undefined && (filter.bathrooms = context.query.bathrooms);
+		// context.query.rooms != undefined && (filter.bedrooms = context.query.rooms);
+		context.query.payment_plan != undefined && (filter.paymentPlan = context.query.payment_plan);
 		
 		res = await fetch(`${Base_URL}/api/property/filter`, {
 			method: "POST",

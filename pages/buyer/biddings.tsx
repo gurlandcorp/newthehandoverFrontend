@@ -77,6 +77,9 @@ const Biddings = (props: any) => {
     useEffect(()=>{
         var cleave = new Cleave('#card_number', {
             creditCard: true,
+            onValueChanged: function (e) {
+                setCardNumber(e.target.rawValue)
+            },
             onCreditCardTypeChanged: function (type: any) {
             }
         });

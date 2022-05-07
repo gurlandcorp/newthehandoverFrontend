@@ -4,6 +4,7 @@ import { useContext, useState } from "react";
 import { MainContext } from "../../../context/MainContext";
 import styles from "./SearchSection.module.css"
 import propertyTypes from "../../../database/property_types.json"
+import paymentPlan from "../../../database/payment_plan.json"
 
 const SearchSection = () => {
 
@@ -13,7 +14,7 @@ const SearchSection = () => {
 
     const searchSubmit = (e: any) => {
         e.preventDefault()
-        router.push(`/opportunities?propertyType=${search.property_type}&city=${search.city}&text=${search.text}&bedrooms=${search.bedrooms}&bathrooms=${search.bathrooms}&minPrice=${search.minPrice}&maxPrice=${search.maxPrice}`)
+        router.push(`/opportunities?propertyType=${search.property_type}&city=${search.city}&text=${search.text}&bedrooms=${search.bedrooms}&payment_plan=${search.payment_plan}&minPrice=${search.minPrice}&maxPrice=${search.maxPrice}`)
     }
 
     return (
@@ -40,8 +41,16 @@ const SearchSection = () => {
                             isAdvanceSearch != false && (
                                 <>
                                 <div className="w-full lg:col-span-3 grid grid-cols-2 gap-4">
-                                    <input type="text" placeholder="Bed rooms" className="px-3 py-1 rounded-full" value={search.text} onChange={(e)=>setSearch({...search, bedrooms: e.target.value})} />
-                                    <input type="text" placeholder="Bath rooms" className="px-3 py-1 rounded-full" value={search.text} onChange={(e)=>setSearch({...search, bathrooms: e.target.value})} />
+                                    {/* <input type="text" placeholder="Bed rooms" className="px-3 py-1 rounded-full" value={search.text} onChange={(e)=>setSearch({...search, bedrooms: e.target.value})} />
+                                    <input type="text" placeholder="Bath rooms" className="px-3 py-1 rounded-full" value={search.text} onChange={(e)=>setSearch({...search, bathrooms: e.target.value})} /> */}
+                                    <select className="px-3 py-1 lg:col-span-2 w-full rounded-full" onChange={(e)=>setSearch({...search, payment_plan: e.target.value})}>
+                                        <option value="">Select payment plan</option>
+                                        {
+                                            paymentPlan.map((type: any, index: any) => {
+                                                return <option key={index} value={type.name}>{type.name}</option>
+                                            })
+                                        }
+                                    </select>
                                 </div>
                                 <input type="text" placeholder="Min price" className="px-3 py-1 rounded-full lg:col-span-2" value={search.text} onChange={(e)=>setSearch({...search, minPrice: e.target.value})} />
                                 <input type="text" placeholder="Max price" className="px-3 py-1 rounded-full lg:col-span-2" value={search.text} onChange={(e)=>setSearch({...search, maxPrice: e.target.value})} />

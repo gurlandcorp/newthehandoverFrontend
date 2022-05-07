@@ -32,7 +32,7 @@ const MainContext = createContext<contextType>(context);
 const MainProvider = ({children}: any) => {
 
     const [search, setSearch] = useState({
-        text: '', city: '', property_type: '', bedrooms: '', bathrooms: '', minPrice: 0, maxPrice: 0
+        text: '', city: '', property_type: '', bedrooms: '', payment_plan: '', minPrice: 0, maxPrice: 0
     })
     const [alert, setAlert] = useState(false)
     const [alertMessage, setAlertMessage] = useState('')

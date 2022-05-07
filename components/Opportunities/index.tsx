@@ -1,5 +1,3 @@
-import Image from 'next/image'
-import Link from 'next/link'
 import React from 'react'
 import SqFtImage from "/public/img/property-icons/select.png"
 import BedImage from "/public/img/property-icons/bed.png"
