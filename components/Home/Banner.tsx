@@ -1,25 +1,9 @@
-import { useContext } from "react"
-import { MainContext } from "../../context/MainContext";
-import { useRouter } from "next/router";
 import Image from "next/image";
 import CoverImage from "/public/img/cover-img.png"
 import SearchSection from "../Includes/SearchSection";
 import Link from "next/link";
 
-const Banner = (props: any) => {
-
-    const {search, setSearch} = useContext(MainContext)
-
-    const router = useRouter()
-
-    const searchSubmit = (e: any) => {
-        e.preventDefault()
-        router.push(`/opportunities?propertyType=${search.property_type}&city=${search.city}&text=${search.text}`)
-    }
-
-    const learnMore = () => {
-        document.querySelector('.Home_topPropertyContainer__zEQHi')?.scrollIntoView()
-    }
+const Banner = () => {
 
     return (
         <>

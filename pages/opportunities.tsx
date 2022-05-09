@@ -9,15 +9,7 @@ import SqFtImage from "/public/img/property-icons/select.png"
 import BedImage from "/public/img/property-icons/bed.png"
 import RegreshImage from "/public/img/property-icons/refresh.png"
 
-const Properties: NextPage = ({data, query, highest_res}: any) => {
-
-	const [filter, setFilter] = useState({
-		text: '',
-		propertyType: '',
-		categories: '',
-		city: '',
-		price: '',
-	})
+const Properties: NextPage = ({data, query}: any) => {
 	const [text, setText] = useState('')
 	const [type, setType] = useState('')
 	const [city, setCity] = useState('')
@@ -26,7 +18,7 @@ const Properties: NextPage = ({data, query, highest_res}: any) => {
 	const changeOrder = async (e: any) => {
 		if(e.target.value!='')
 		{
-			let res = await fetch(`${Base_URL}/api/property/${e.target.value}`, {
+			let res = await fetch(`${Base_URL}/api/property/sort/${e.target.value}`, {
 				method: "POST",
 				headers: {
 					"Content-Type": "application/json"
@@ -36,30 +28,6 @@ const Properties: NextPage = ({data, query, highest_res}: any) => {
 			setOpportunities(res.data)
 		}
 	}
-
-	const searchSubmit = async (e: any) => {
-        e.preventDefault()
-
-		let filters: any = {
-		}
-		type!='' && (filters.propertyType = type)
-		if(text!='' || city!='')
-		{
-			filters.location = {
-				address: text,
-				city: city,
-			}
-		}
-		let res = await fetch(`${Base_URL}/api/property/filter`, {
-			method: "POST",
-			body: JSON.stringify(filters),
-			headers: {
-				"Content-Type": "application/json"
-			}
-		})
-		.then(response => response.json())
-		setOpportunities(res.data)
-    }
 
 	useEffect(() => {
 		if(query.text!=undefined)
@@ -156,13 +124,27 @@ export async function getServerSideProps(context: any) {
     // Fetch data from external API
 	let res: any;
 	let data = []
-	if(context.query.propertyType!=undefined)
+
+	if(context.query.minPrice!= undefined && context.query.maxPrice!= undefined) // for min max filter
 	{
 		let filter: any = {
-			propertyType : context.query.propertyType
+			startPrice : context.query.minPrice,
+			endPrice : context.query.maxPrice
 		}
-		context.query.payment_plan != undefined && (filter.paymentPlan = context.query.payment_plan);
-		
+		res = await fetch(`${Base_URL}/api/property/filter/pricerange`, {
+			method: "POST",
+			body: JSON.stringify(filter),
+			headers: {
+				"Content-Type": "application/json"
+			}
+		}).then(response => response.json());
+	}
+	else if(context.query.propertyType!=undefined) // for text and city and property type filter
+	{
+		let filter: any = {}
+		if(context.query.propertyType!=undefined && context.query.propertyType!='') {filter.propertyType=context.query.propertyType}
+		if(context.query.text!=undefined && context.query.text!='') {filter.propertyTitle=context.query.text}
+		if(context.query.city!=undefined && context.query.city!='') {filter.location.city=context.query.city}
 		res = await fetch(`${Base_URL}/api/property/filter`, {
 			method: "POST",
 			body: JSON.stringify(filter),
@@ -170,29 +152,23 @@ export async function getServerSideProps(context: any) {
 				"Content-Type": "application/json"
 			}
 		}).then(response => response.json())
-		if(res.data!=undefined)
-		{
-			data = res.data
-		}
 	}
-	else
+	else // for default opportunities
 	{
-    	res = await fetch(`${process.env.API_URL}/property/sort/desc`);
-		if(res.status==200)
-		{
-			res = await res.json()
-			data = res
-		}
+    	res = await fetch(`${Base_URL}/api/property/sort/desc`, {
+			method: "POST",
+			body: JSON.stringify({}),
+			headers: {
+				"Content-Type": "application/json"
+			}
+		}).then(response => response.json());
 	}
 
-	// let highest_res: any = await fetch(`${Base_URL}/api/property/highest`, {
-	// 	method: "POST",
-	// 	headers: {
-	// 		"Content-Type": "application/json"
-	// 	}
-	// }).then(response => response.json())
+	if(res.data!=undefined)
+	{
+		data = await res.data
+	}
 
-    // Pass data to the page via props
     return { 
         props: {
             data,

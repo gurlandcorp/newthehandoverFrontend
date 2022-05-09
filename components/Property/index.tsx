@@ -124,22 +124,24 @@ const Index = (props: any) => {
 								</div>
 							</div>
 						</div>
-						<div className='my-5 text-sm' dangerouslySetInnerHTML={{ __html: props.property.description }}>
-						</div>
+						{/* <div className='my-5 text-sm' dangerouslySetInnerHTML={{ __html: props.property.description }}>
+						</div> */}
 
-						<div className='bg-white shadow-box rounded-lg'>
-							<h3 className='font-semibold theme-color p-4 border-b-2 border-solid w-max mb-4'>Key Selling Features</h3>
-							<ul className="list-disc block ml-10 pb-5">
+						<div className='bg-white shadow-box rounded-lg my-5'>
+							<h3 className='font-semibold theme-color p-4 border-b-2 border-solid w-max mb-4'>Description</h3>
+							<div className='ml-5 pb-5' dangerouslySetInnerHTML={{ __html: props.property.description }}>
+							</div>
+							{/* <ul className="list-disc block ml-10 pb-5">
 								<li className="text-xs">Abundance of sqaure feet</li>
 								<li className="text-xs">180°of unobstructed waterviews</li>
 								<li className="text-xs">Ceiling heights of 2.9m</li>
 								<li className="text-xs">Elevated finishes – Emulating</li>
 								<li className="text-xs">Marina Gate</li>
 								<li className="text-xs">Premium lifestyle facilties</li>
-							</ul>
+							</ul> */}
 						</div>
 
-						<div className='grid grid-cols-1 lg:grid-cols-2 gap-4'>
+						{/* <div className='grid grid-cols-1 lg:grid-cols-2 gap-4'>
 							<div className='bg-white shadow-box rounded-lg my-5'>
 								<div className='grid grid-cols-2'>
 									<h3 className='font-semibold theme-color p-4 border-b-2 border-solid w-max mb-4'>Apartment Type</h3>
@@ -187,7 +189,7 @@ const Index = (props: any) => {
 									</div>
 								</div>
 							</div>
-						</div>
+						</div> */}
 
 						{
 							props.property.amenities.length > 0 && (

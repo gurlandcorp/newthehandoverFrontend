@@ -1,10 +1,8 @@
 .slideBox {
     position: relative;
     height: 400px;
-    background-position: center center !important;
-    background-repeat: no-repeat !important;
-    background-size: cover !important;
     border-radius: 15px;
+    margin-bottom: 3rem;
 }
 .slideContent {
     width: 100%;
@@ -15,6 +13,17 @@
     color: white;
     vertical-align: bottom;
     text-align: left;
+    position: relative;
+    overflow: hidden;
+}
+.slideContent::after {
+    content: '';
+    position: absolute;
+    background: rgb(0 0 0 / 15%);
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
 }
 .slideContent .arrow {
     width: 60px;

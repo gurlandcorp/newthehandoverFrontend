@@ -15,6 +15,14 @@ import { Pagination } from "swiper";
 import { LinkButton } from "../../Shares/Buttons";
 
 const LocationSection = () => {
+
+    const pagination = {
+        clickable: true,
+        renderBullet: function (index: any, className: any) {
+          return '<span class="' + className + '">' + "</span>";
+        },
+    };
+
     return (
         <>
         {/* Start Neighbourhood Section  */}
@@ -25,14 +33,12 @@ const LocationSection = () => {
                     <h2 className="theme-color text-lg sm:text-3xl md:text-4xl font-semibold">Find Your Project</h2>
                 </div>
             </div>
-            <div className="width mx-auto my-10">
+            <div className="width mx-auto pt-10 pb-5">
                 {/* Swiper */}
                 <Swiper
                 slidesPerView={3}
                 spaceBetween={10}
-                pagination={{
-                  clickable: true,
-                }}
+                pagination={pagination}
                 breakpoints= {{
                     "@0.00": {
                       slidesPerView: 1,
@@ -54,9 +60,10 @@ const LocationSection = () => {
                 modules={[Pagination]}
                 className="mySwiper">
                     <SwiperSlide>
-                        <div style={{ background: 'url('+UmmAlQuwain.src+')' }} className={styles.slideBox}>
+                        <div className={styles.slideBox}>
                             <div className={styles.slideContent}>
-                                <div className={styles.propCount}>02 Properties <br /><div className="location">Umm al-Quwain</div></div>
+                                <Image src={UmmAlQuwain.src} layout="fill" placeholder="blur" blurDataURL={UmmAlQuwain.blurDataURL} className="object-cover bg-gray-900 bg-opacity-50" alt={'Umm al-Quwain'} />
+                                <div className={styles.propCount}>02 Properties <br /><div className={styles.location}>Umm al-Quwain</div></div>
                                 <div className="arrow">
                                     {/* <Image src={UmmAlQuwain.src} width={UmmAlQuwain.width} height={UmmAlQuwain.height} alt={'Umm al-Quwain'} /> */}
                                 </div>
@@ -65,9 +72,10 @@ const LocationSection = () => {
                     </SwiperSlide>
                     <SwiperSlide>
                         <div className="swiper-slide">
-                            <div style={{ background: `url(${Fujairah.src})` }} className={styles.slideBox}>
+                            <div className={styles.slideBox}>
                                 <div className={styles.slideContent}>
-                                    <div className={styles.propCount}>02 Properties <br /><div className="location">Fujairah</div></div>
+                                    <Image src={Fujairah.src} layout="fill" placeholder="blur" blurDataURL={Fujairah.blurDataURL} className="object-cover" alt={'Fujairah'} />
+                                    <div className={styles.propCount}>02 Properties <br /><div className={styles.location}>Fujairah</div></div>
                                     <div className="arrow">
                                         {/* <Image src={Fujairah.src} width={Fujairah.width} height={Fujairah.height} alt={'Fujairah'} /> */}
                                     </div>
@@ -78,6 +86,7 @@ const LocationSection = () => {
                     <SwiperSlide>
                         <div style={{ background: `url(${Dubai.src})` }} className={styles.slideBox}>
                             <div className={styles.slideContent}>
+                                <Image src={Dubai.src} layout="fill" placeholder="blur" blurDataURL={Dubai.blurDataURL} className="object-cover" alt={'Dubai'} />
                                 <div className={styles.propCount}>02 Properties <br /><div className={styles.location}>Dubai</div></div>
                                 <div className="arrow">
                                     {/* <Image src={Dubai.src} width={Dubai.width} height={Dubai.height} alt={'Dubai'} /> */}
@@ -89,6 +98,7 @@ const LocationSection = () => {
                         <div className="swiper-slide">
                             <div style={{ background: `url(${AbuDhabi.src})` }} className={styles.slideBox}>
                                 <div className={styles.slideContent}>
+                                    <Image src={AbuDhabi.src} layout="fill" placeholder="blur" blurDataURL={AbuDhabi.blurDataURL} className="object-cover" alt={'Abu Dhabi'} />
                                     <div className={styles.propCount}>02 Properties <br /><div className={styles.location}>Abu Dhabi</div></div>
                                     <div className="arrow">
                                         {/* <Image src={AbuDhabi.src} width={AbuDhabi.width} height={AbuDhabi.height} alt={'Abu Dhabi'} /> */}
@@ -100,6 +110,7 @@ const LocationSection = () => {
                     <SwiperSlide>
                         <div style={{ background: `url(${Ajman.src})` }} className={styles.slideBox}>
                             <div className={styles.slideContent}>
+                                <Image src={Ajman.src} layout="fill" placeholder="blur" blurDataURL={Ajman.blurDataURL} className="object-cover" alt={'Ajman'} />
                                 <div className={styles.propCount}>02 Properties <br /><div className={styles.location}>Ajman</div></div>
                                 <div className="arrow">
                                     {/* <Image src={Ajman.src} width={Ajman.width} height={Ajman.height} alt={'Ajman'} /> */}
@@ -110,6 +121,7 @@ const LocationSection = () => {
                     <SwiperSlide>
                         <div style={{ background: `url(${Sharjah.src})` }} className={styles.slideBox}>
                             <div className={styles.slideContent}>
+                                <Image src={Sharjah.src}layout="fill" placeholder="blur" blurDataURL={Sharjah.blurDataURL} className="object-cover" alt={'Sharjah'} />
                                 <div className={styles.propCount}>02 Properties <br /><div className={styles.location}>Sharjah</div></div>
                                 <div className="arrow">
                                     {/* <Image src={Sharjah.src} width={Sharjah.width} height={Sharjah.height} alt={'Sharjah'} /> */}

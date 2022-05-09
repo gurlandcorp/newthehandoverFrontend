@@ -38,11 +38,3 @@
 .activeAdvanceSearchIcon:hover .line3::after {
     left: 65%;
 }
-
-.advanceSearchWraper {
-    height: 0;
-    overflow: hidden;
-}
-.openAdvanceSearch {
-    height: 100%;
-}

@@ -19,13 +19,15 @@ function runMiddleware(req: NextApiRequest, res: NextApiResponse, fn: any) {
 }
 
 export default async function handler(req:NextApiRequest, res: NextApiResponse) {
-
+    let Types: any = req.query.type
+    let uri_string = Types.join('/')
     await runMiddleware(req, res, cors)
     if(req.method=="POST")
     {
         let result = await axios({
             method: "GET",
-            url: `${process.env.API_URL}/property/sort/${req.query.type}`,
+            url: `${process.env.API_URL}/property/${uri_string}`,
+            data: req.body,
             headers: {
                 "Content-Type": "application/json"
             },
