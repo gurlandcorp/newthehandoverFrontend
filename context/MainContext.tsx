@@ -1,4 +1,5 @@
 import Cookies from "js-cookie";
+import Head from "next/head";
 import { useRouter } from "next/router";
 import { createContext, useState } from "react";
 import Alert from "../components/Shares/Components/Alert";
@@ -57,6 +58,10 @@ const MainProvider = ({children}: any) => {
             setLoading,
             logout
         }}>
+            <Head>
+                <link rel="icon" href="/icon.png" />
+                <link rel="shortcut icon" href="/icon.png" />
+            </Head>
             {children}
             <Alert open={alert} setAlert={setAlert} message={alertMessage} />
         </MainContext.Provider>

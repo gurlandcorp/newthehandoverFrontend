@@ -1,5 +1,4 @@
-import Head from 'next/head'
-import React, { useContext, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import Footer from '../Includes/Footer/Footer'
 import Header from '../Includes/Header'
 import MainLoader from '../Shares/Loaders/MainLoader'
@@ -22,9 +21,6 @@ const Default = ({children}: any) => {
 
     return (
         <>
-            <Head>
-                <link rel="shortcut icon" href="/favicon-homlisti.svg" />
-            </Head>
             <MainLoader />
             <Header />
             {children}
