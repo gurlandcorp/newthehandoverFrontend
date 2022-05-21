@@ -351,7 +351,7 @@ const PropertyForm = ({textEditorApiKey, property="", setProperty = () => {}, se
 
                     <div className="grid grid-cols-1 gap-2 col-span-2">
                         <label htmlFor="description" className="text-gray-500">Description</label>
-                        {/* <Editor apiKey={textEditorApiKey} id="description" textareaName='description' value={user.description} onEditorChange={(text: any) => setUser({...user, description: text})} /> */}
+                        <Editor apiKey={textEditorApiKey} id="description" textareaName='description' value={user.description} onEditorChange={(text: any) => setUser({...user, description: text})} />
                     </div>
 
                     <div className="grid grid-cols-1 gap-2 col-span-2">
