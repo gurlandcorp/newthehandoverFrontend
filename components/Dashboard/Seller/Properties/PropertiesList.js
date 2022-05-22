@@ -6,13 +6,13 @@ import { MainContext } from '../../../../context/MainContext';
 import Property from './Property';
 import PropertyForm from './PropertyForm';
 
-const PropertiesList = (props: any) => {
+const PropertiesList = (props) => {
 
     const {setAlert, setAlertMessage} = useContext(MainContext)
     const [property, setProperty] = useState(null)
     const [properties, setProperties] = useState(props.properties)
 
-    const delProperty = async (id: any) => {
+    const delProperty = async (id) => {
         let res = await fetch(`${Base_URL}/api/seller/properties/delete`, {
             method: "POST",
             body: JSON.stringify({
@@ -21,13 +21,13 @@ const PropertiesList = (props: any) => {
         }).then(response => response.json())
         if(res.status!=0)
         {
-            setProperties(properties.filter((property: any) => property._id !== id))
+            setProperties(properties.filter((property) => property._id !== id))
             setAlert(true)
             setAlertMessage(res.data.Message)
         }
     }
 
-    const editProperty = async (property_data: any) => {
+    const editProperty = async (property_data) => {
         setProperty(property_data)
     }
 
@@ -35,7 +35,7 @@ const PropertiesList = (props: any) => {
         property == null ? (
             <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-5">
                 {
-                    properties.map((property: any, index: any) => {
+                    properties.map((property, index) => {
                         return (
                             <Property key={index} property={property} delProperty={delProperty} editProperty={editProperty} />
                         )

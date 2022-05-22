@@ -13,7 +13,7 @@ import { Editor } from '@tinymce/tinymce-react';
 import Image from 'next/image';
 import Link from 'next/link';
 
-const PropertyForm = ({textEditorApiKey, property="", setProperty = () => {}, setProperties = () => {} }: any) => {
+const PropertyForm = ({textEditorApiKey, property="", setProperty = () => {}, setProperties = () => {} }) => {
 
     const initialState = {
 		propertyTitle: property ? property.propertyTitle : "",
@@ -39,11 +39,11 @@ const PropertyForm = ({textEditorApiKey, property="", setProperty = () => {}, se
 	const [countrySate, setCountrySate] = useState("");
 	const [multiImages, setMultiImages] = useState([]);
     const [loading, setLoading] = useState(false)
-    const [states, setStates] = useState<any>([])
-    const [countries, setCountries] = useState<any>([])
+    const [states, setStates] = useState([])
+    const [countries, setCountries] = useState([])
     const [aminitiesList, setAminitiesList] = useState([{aminity: ""}])
 
-	const handleInputs = (e: any) => {
+	const handleInputs = (e) => {
 		setUser({
 			...user,
 			[e.target.name]: e.target.value,
@@ -54,36 +54,36 @@ const PropertyForm = ({textEditorApiKey, property="", setProperty = () => {}, se
         setAminitiesList([...aminitiesList, {aminity: ""}])
     }
 
-    const removeNewAnimity = (index: any) => {
+    const removeNewAnimity = (index) => {
         let aminities_list = [...aminitiesList]
         aminities_list.splice(index, 1)
         setAminitiesList(aminities_list)
     }
 
-    const changeAminityValue = (e: any, index:any) => {
+    const changeAminityValue = (e, index) => {
         const {name, value} = e.target
-        let aminities_list: any = [...aminitiesList]
+        let aminities_list = [...aminitiesList]
         aminities_list[index][name] = value
         setAminitiesList(aminities_list)
     }
 
     const route = useRouter()
 
-    const multiImagesChange = async (e: any) => {
+    const multiImagesChange = async (e) => {
 		await setMultiImages(e.target.files);
-        let files:any = [];
-        await Array.from(e.target.files).forEach((file:any) => {
+        let files = [];
+        await Array.from(e.target.files).forEach((file) => {
             files.push(URL.createObjectURL(file))
         })
 	};
 
-    const getStates = async (id: any) => {
-        let mystates: any = States.filter((state: any) => state.country_id==id);
+    const getStates = async (id) => {
+        let mystates = States.filter((state) => state.country_id==id);
         await sortAsc(mystates, "name")
         await setStates(mystates)
     }
 
-    const setInNumber = async (e: any) => {
+    const setInNumber = async (e) => {
         const re = /^[0-9\b]+$/;
         // if value is not blank, then test the regex
         if (e.target.value === '' || re.test(e.target.value)) {
@@ -92,10 +92,10 @@ const PropertyForm = ({textEditorApiKey, property="", setProperty = () => {}, se
     }
 
     // Add property
-    const handleSubmit = async (e: any) => {
+    const handleSubmit = async (e) => {
 		e.preventDefault();
         await setLoading(true)
-        const {token}: any = parseCookies()
+        const {token} = parseCookies()
 		const {
 			propertyTitle,
 			area,
@@ -134,7 +134,7 @@ const PropertyForm = ({textEditorApiKey, property="", setProperty = () => {}, se
 		formdata.append("state", countrySate);
 		formdata.append("zip", zip);
 		formdata.append("paymentPlan", paymentPlan);
-        await aminitiesList.map((aminity: any, index) => {
+        await aminitiesList.map((aminity, index) => {
             formdata.append(`amenities[${index}]`, aminity.aminity);
         })
 
@@ -146,9 +146,9 @@ const PropertyForm = ({textEditorApiKey, property="", setProperty = () => {}, se
                 "Authorization": `Bearer ${token}`
             },
             data: formdata
-        }).then((response: any) => {
+        }).then((response) => {
             return response
-        }).catch((err: any) => {
+        }).catch((err) => {
             console.log("error in opportunties filter request", err.response);
         });
 
@@ -164,7 +164,7 @@ const PropertyForm = ({textEditorApiKey, property="", setProperty = () => {}, se
 	};
 
     // Update property
-    const {token}: any = parseCookies()
+    const {token} = parseCookies()
     const propertyLists = async () => {
         let res = await fetch(`${Base_URL}/api/seller/properties`,{
             method: "GET",
@@ -174,7 +174,7 @@ const PropertyForm = ({textEditorApiKey, property="", setProperty = () => {}, se
         }).then(response => response.json())
         return res
     }
-    const handleSubmitUpdate = async (e: any) => {
+    const handleSubmitUpdate = async (e) => {
 		e.preventDefault();
         await setLoading(true)
         
@@ -224,9 +224,9 @@ const PropertyForm = ({textEditorApiKey, property="", setProperty = () => {}, se
                 "Authorization": `Bearer ${token}`
             },
             data: formdata
-        }).then((response: any) => {
+        }).then((response) => {
             return response
-        }).catch((err: any) => {
+        }).catch((err) => {
             console.log("error in opportunties filter request", err.response);
         });
 
@@ -237,7 +237,7 @@ const PropertyForm = ({textEditorApiKey, property="", setProperty = () => {}, se
             setAlertMessage('Property updated successfully')
             setCountrySate('')
             setProperty(null)
-            let properties: any = await propertyLists()
+            let properties = await propertyLists()
             setProperties(properties.data)
         }
         setLoading(false)
@@ -250,8 +250,8 @@ const PropertyForm = ({textEditorApiKey, property="", setProperty = () => {}, se
                 window.scrollTo(0, 0)
                 if(property.amenities.length > 0)
                 {
-                    let aminity_list: any = []
-                    property.amenities.map((aminity: any) => {
+                    let aminity_list = []
+                    property.amenities.map((aminity) => {
                         aminity_list.push({aminity: aminity})
                     })
                     setAminitiesList(aminity_list)
@@ -265,7 +265,7 @@ const PropertyForm = ({textEditorApiKey, property="", setProperty = () => {}, se
 
     return (
         <div className="mt-4 bg-white rounded-xl">
-            <form onSubmit={(e: any)=>{
+            <form onSubmit={(e)=>{
                 if(property)
                 {
                     handleSubmitUpdate(e)
@@ -293,7 +293,7 @@ const PropertyForm = ({textEditorApiKey, property="", setProperty = () => {}, se
                         <select className="px-3 py-1 rounded-full bg-white border border-solid focus:border-1 focus:border-blue-500 transition-all duration-300" id="type" name="type" defaultValue={propertyType} onChange={(e) => setpropertyType(e.target.value)} required>
                             <option value="">Select property type</option>
                             {
-                                propertyTypes.map((option: any) => (
+                                propertyTypes.map((option) => (
                                     <option key={option.id} value={option.name}>{option.name}</option>
                                 ))
                             }
@@ -342,7 +342,7 @@ const PropertyForm = ({textEditorApiKey, property="", setProperty = () => {}, se
                         <select className="px-3 py-1 rounded-full bg-white border border-solid focus:border-1 focus:border-blue-500 transition-all duration-300" id="type" name="type" defaultValue={paymentPlan} onChange={(e) => setpaymentPlan(e.target.value)} required>
                             <option value="">Select payment plan</option>
                             {
-                                paymentPlans.map((option: any) => (
+                                paymentPlans.map((option) => (
                                     <option key={option.id} value={option.name}>{option.name}</option>
                                 ))
                             }
@@ -351,7 +351,7 @@ const PropertyForm = ({textEditorApiKey, property="", setProperty = () => {}, se
 
                     <div className="grid grid-cols-1 gap-2 col-span-2">
                         <label htmlFor="description" className="text-gray-500">Description</label>
-                        <Editor apiKey={textEditorApiKey} id="description" textareaName='description' value={user.description} onEditorChange={(text: any) => setUser({...user, description: text})} />
+                        <Editor apiKey={textEditorApiKey} id="description" textareaName='description' value={user.description} onEditorChange={(text) => setUser({...user, description: text})} />
                     </div>
 
                     <div className="grid grid-cols-1 gap-2 col-span-2">
@@ -364,7 +364,7 @@ const PropertyForm = ({textEditorApiKey, property="", setProperty = () => {}, se
                             <div className="grid grid-cols-1 gap-2 col-span-2">
                                 <div className="flex flex-wrap">
                                 {
-                                    Array.from(multiImages).map((link:any, i: any) => {
+                                    Array.from(multiImages).map((link, i) => {
                                         return (
                                             <div className="relative border border-solid mr-2 rounded" style={{width:"200px", height:"200px"}} key={i}>
                                                 <Image src={URL.createObjectURL(link)} layout="fill" className="object-contain" alt='Multiple Images' />
@@ -396,7 +396,7 @@ const PropertyForm = ({textEditorApiKey, property="", setProperty = () => {}, se
                                 }} required>
                                     <option value="">Select country</option>
                                     {
-                                        countries.map((option: any) => (
+                                        countries.map((option) => (
                                             <option key={option.id} value={option.id}>{option.name + ' - ' + option.iso2}</option>
                                         ))
                                     }
@@ -413,7 +413,7 @@ const PropertyForm = ({textEditorApiKey, property="", setProperty = () => {}, se
                                 <select className="px-3 py-1 rounded-full bg-white border border-solid focus:border-1 focus:border-blue-500 transition-all duration-300" id="state" name="state" defaultValue={countrySate} onChange={(e) => setCountrySate(e.target.value)} required>
                                     <option value="">Select state</option>
                                     {
-                                        states.map((option: any) => (
+                                        states.map((option) => (
                                             <option key={option.id} value={option.name}>{option.name}</option>
                                         ))
                                     }
@@ -433,7 +433,7 @@ const PropertyForm = ({textEditorApiKey, property="", setProperty = () => {}, se
                         </div>
                         <div className="grid grid-cols-1 gap-2 p-4">
                             {
-                                aminitiesList.map((aminity: any, index: any) => {
+                                aminitiesList.map((aminity, index) => {
                                     return <div key={index}>
                                         <div className='flex pb-2'>
                                             <input type="text" className="px-3 py-1 rounded-full bg-white border border-solid focus:border-1 focus:border-blue-500 transition-all duration-300" id="aminity" name="aminity" placeholder="Amineties" value={aminity.aminity} style={{flex:8}} onChange={(e) => changeAminityValue(e, index) } />
