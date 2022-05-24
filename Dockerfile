@@ -12,17 +12,6 @@ COPY ["package.json", "package-lock.json*", "./"]
 RUN npm cache clear --force
 
 RUN npm install --legacy-peer-deps --production
-# RUN npm install --legacy-peer-deps
-
-# COPY next.config.js ./next.config.js
-# COPY components ./components
-# COPY config ./config
-# COPY context ./context
-# COPY database ./database
-# COPY helpers ./helpers
-# COPY pages ./pages
-# COPY public ./public
-# COPY styles ./styles
 COPY .env.local ./env.local
 COPY . .
 
